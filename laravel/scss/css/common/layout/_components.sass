@@ -1,0 +1,87 @@
+@charset "UTF-8"
+
+@import "../../../_import.sass"
+main
+	.editBtn
+		@include btn-btn($color-main,#fff)
+		width: 100%
+		max-width: initial
+	.deleteBtn
+		@include btn-btn(#aaa,#fff)
+		width: 100%
+		max-width: initial
+	.searchBtn
+		@include btn-btn($color-accent,#fff)
+		width: 100%
+		height: 100%
+		max-width: initial
+	.cloneBtn
+		@include btn-btn(#000,#fff)
+		width: 100%
+		max-width: 200px
+		height: 100%
+
+	.detailBtn
+		@include btn-btn(#fff,$color-main)
+		width: 100%
+		a
+			border: 1px solid $color-main
+			color: $color-main
+			line-height: 1em
+			padding: 4px
+
+			@include tabup
+				&:hover
+					/* style */
+					color: #fff
+
+
+
+.addBtnBlock
+	margin-top: $pad
+
+	.addbtnWrap
+		display: flex
+	.addbtn
+		@include btn(#fff,$color-main)
+		margin-right: 16px
+		a
+			border: 1px solid $color-main
+			max-width: 150px
+			padding: 8px 16px
+
+
+
+
+.searchBlock
+	margin-top: $pad
+	form
+		border: 1px solid #ddd
+		padding: 16px
+		background-color: #eee
+	.flex
+		.flex4
+			width: 100px
+			margin-right: 8px
+	select
+		width: 100%
+		background-color: #fff
+
+.cloneBlock
+	margin-top: 50px
+	border-top: 1px solid #aaa
+	padding-top: 50px
+	
+	form
+		justify-content: flex-end
+		display: flex
+		.flex3
+			margin-right: 8px
+			display: flex
+			align-items: center
+
+		input
+			background-color: #fff
+			max-width: 70px
+
+

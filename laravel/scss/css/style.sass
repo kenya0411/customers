@@ -1,0 +1,684 @@
+@charset "UTF-8"
+@import "../import.sass"
+
+@include matissem
+@include matisseb
+@include rodinb
+
+/*--------------------------------------------------- */
+/* mainimg
+/*--------------------------------------------------- */
+
+.mainimg
+	$height: 558px
+	height: $height
+	position: relative
+
+	.slider
+		.headingWrap
+			position: absolute
+			top: 0
+			left: 0
+			right: -571px
+			bottom: 0
+			margin: auto
+			height: 115px
+			width: 380px
+			.heading
+				display: flex
+				flex-direction: column
+				background-color: #1B8EE4
+				width: 100%
+				height: 100%
+				align-items: center
+				justify-content: center
+				h2
+					margin-bottom: 12px
+					position: relative
+					left: -7px
+					img
+						max-width: 311px
+				p
+					position: relative
+					left: -7px
+					img
+						max-width: 315px	
+		.no2
+			.headingWrap
+				@include tabup
+					left: -500px
+					right: 0
+		.slideImg
+			height: $height
+			object-fit: cover
+
+@include tab
+	.mainimg
+		$height: 400px
+		height: $height
+		position: relative
+
+		.slider
+			.headingWrap
+				position: absolute
+				top: auto
+				left: auto
+				right: 20px
+				bottom: 80px
+				margin: auto
+				height: 80px
+				width: 300px
+				.heading
+					display: flex
+					flex-direction: column
+					background-color: #1B8EE4
+					width: 100%
+					height: 100%
+					align-items: center
+					justify-content: center
+					h2
+						margin-bottom: 12px
+						left: 22px
+						position: relative
+						img
+							width: 80%
+					p
+						left: 22px
+						position: relative
+						img
+							width: 80%
+			.no2
+				.slideImg
+
+					object-position: right
+				.headingWrap
+					left: 20px
+					right: auto
+			.slideImg
+				height: $height
+				object-fit: cover
+
+@include mb
+	.mainimg
+		$height: 250px
+		height: $height
+		position: relative
+
+		.slider
+			.headingWrap
+				position: absolute
+				top: auto
+				left: auto
+				right: 20px
+				bottom: 20px
+				margin: auto
+				height: 70px
+				width: 200px
+				.heading
+					display: flex
+					flex-direction: column
+					background-color: #1B8EE4
+					width: 100%
+					height: 100%
+					align-items: center
+					justify-content: center
+					h2
+						margin-bottom: 12px
+						left: 0
+						position: relative
+						img
+							width: 80%
+							margin: auto
+					p
+						left: 0
+						position: relative
+						img
+							margin: auto
+							width: 80%
+			.no2
+				.headingWrap
+					left: 20px
+					right: auto
+			.slideImg
+				height: $height
+				object-fit: cover
+/*--------------------------------------------------- */
+/* news
+/*--------------------------------------------------- */
+.news
+	margin-top: 30px
+	.wrap
+		border: 2px solid #CCCCCC
+	.flex
+		padding: 20px 0
+
+		.num1
+			width: 155px
+			display: flex
+			align-items: center
+			justify-content: center
+			position: relative
+			padding: 0 12px
+
+			&:after
+				content: ""
+				content: ""
+				border-right: 1px solid #ccc
+				width: 1px
+				height: calc(100%)
+				position: absolute
+				top: 0
+				right: 0
+				bottom: 0
+				margin: auto
+				/* style */
+			h3
+				@include rem(21)
+				@include matissemFont
+				color: #1B8EE4
+				font-weight: 400
+		.num2
+			padding: 0 22px
+
+			width: calc(100% - 200px)
+			li
+				margin: 12px 0
+				a
+					@include rem(14)
+					display: flex
+
+					color: #000
+					&:visited
+						color: #000
+					@include tabup
+					
+						&:hover
+							color: $color-accent
+							transition-duration: 0.5s
+					
+
+				.date
+					padding-right: 24px
+
+@include tab
+
+	.news
+		// margin-top: 30px
+		// .wrap
+			// border: 2px solid #CCCCCC
+		.flex
+			padding: 20px 0
+			flex-wrap: wrap
+
+			.num1
+				width: 100%
+				display: flex
+				padding: 0 12px 8px
+
+				&:after
+					display: none
+				h3
+					@include rem(21)
+			.num2
+				padding: 0 22px
+
+				width: 100%
+				li
+					margin: 16px 0
+					&:nth-last-of-type(1)
+						margin-bottom: 0
+					a
+						&:visited
+							color: #000
+						@include tabup
+						
+							&:hover
+								color: $color-accent
+								transition-duration: 0.5s
+						
+
+					.date
+						padding-right: 8px
+@include mb
+
+	.news
+		// margin-top: 30px
+		// .wrap
+			// border: 2px solid #CCCCCC
+		.flex
+			padding: 20px 0
+			flex-wrap: wrap
+
+			.num1
+				width: 100%
+				display: flex
+				padding: 0 12px 8px
+
+				&:after
+					display: none
+				h3
+					@include rem(21)
+			.num2
+				padding: 0 22px
+
+				width: 100%
+				li
+					margin: 16px 0
+					&:nth-last-of-type(1)
+						margin-bottom: 0
+					a
+						flex-wrap: wrap
+
+					.date
+						@include rem(12)
+						width: 100%
+
+/*--------------------------------------------------- */
+/* menu
+/*--------------------------------------------------- */
+.menus
+	margin-top: 120px
+	.wrap
+		margin-top: 32px
+		position: relative
+		background-color: #fff
+		img
+			@include tabup
+				&:hover
+					opacity: 0.5
+					transition-duration: 0.5s
+					/* style */
+		&:before
+			content: ""
+			content: ''/*何も入れない*/
+			display: inline-block/*忘れずに！*/
+			width: 146px/*画像の幅*/
+			height: 132px/*画像の高さ*/
+			background-image: url(img/left.png)
+			background-size: contain
+			vertical-align: middle
+			background-repeat: no-repeat
+			/* style */
+			position: absolute
+			top: -80px
+			left: -60px
+			margin: auto
+			z-index: 2
+			@include pcsmall
+				top: -70px
+				left: -20px
+				width: 104px/*画像の幅*/
+				height: 95px/*画像の高さ*/
+		@include mbup
+			.pcInvi
+				display: none
+			.mbInvi
+				display: block
+@include tab
+	.menus
+
+		.wrap
+			&:before
+				top: -50px
+				width: 71px/*画像の幅*/
+				height: 64px/*画像の高さ*/
+				left: -15px
+
+	// .flex
+	// 	justify-content: space-between
+// 	.flex2
+// 		position: relative
+// 		width: 49%
+// 		.wrap
+// 			border: 1px solid #ccc
+// 			padding: 1px
+// 			position: relative
+// 			a:visited,a
+// 				color: #000
+// 			&:hover
+// 				transition-duration: 0.5s
+// 				opacity: 0.7
+
+
+// 			.heading
+// 				width: 100%
+// 				background-color: rgba(255, 255, 255, 0.7)
+// 				position: absolute
+// 				left: 0
+// 				right: 0
+// 				bottom: 0
+// 				margin: auto
+// 				z-index: 1
+// 				padding: 20px 8px
+// 			h3
+// 				@include rem(28)
+// 				@include matissemFont
+// 				text-align: center
+// 				margin-bottom: 8px
+// 			p
+// 				@include rem(15)
+// 				font-weight: 500
+// 				padding-left: 20px
+// 				padding-right: 20px
+// @include tab
+// 	.menus
+// 		// margin-top: 35px
+// 		.flex2
+// 			position: relative
+// 			.wrap
+// 				height: 280px
+// 				img
+// 					height: 100%
+// 					object-fit: cover
+// 				.heading
+// 					width: 100%
+		
+// 					padding: 20px 8px
+// 				h3
+// 					@include rem(22)
+// 					// margin-bottom: 8px
+// 				p
+// 					@include rem(14)
+// @include mb
+// 	.menus
+// 		// margin-top: 35px
+// 		.flex
+// 			flex-wrap: wrap
+// 		.flex2
+// 			position: relative
+// 			width: 100%
+// 			margin-bottom: 20px
+// 			&:nth-last-of-type(1)
+// 				margin-bottom: 0
+// 			.wrap
+// 				height: 200px
+// 				img
+// 					height: 100%
+// 					object-fit: cover
+// 				.heading
+// 					width: 100%
+		
+// 					padding: 12px 8px
+// 				h3
+// 					@include rem(16)
+// 				p
+// 					@include rem(12)
+
+/*--------------------------------------------------- */
+/* description
+/*--------------------------------------------------- */
+.description
+	margin-top: 109px
+	h3
+		@include rem(31)
+		@include matissemFont
+		text-align: center
+		margin-bottom: 38px
+	p
+		@include rem(14)
+		max-width: 660px
+		line-height: 1.42
+		margin: auto
+@include tab
+	.description
+		// margin-top: 109px
+		h3
+			@include rem(28)
+			text-align: left
+			max-width: 320px
+			line-height: 1.2em
+			margin: auto
+
+			margin-bottom: 38px
+		p
+			@include rem(14)
+			max-width: 660px
+			line-height: 1.42
+			margin: auto
+
+@include mb
+	.description
+		h3
+			@include rem(22)
+			text-align: left
+			margin-bottom: 38px
+/*--------------------------------------------------- */
+/* nayami
+/*--------------------------------------------------- */
+
+.nayami
+	margin-top: 120px
+	background-color: #DDEDFD
+	padding-top: 46px
+	padding-bottom: 44px
+	z-index: 1
+	.heading
+		text-align: center
+		margin-bottom: 32px
+	h3
+		@include rem(24)
+		padding: 16px 22px
+		display: inline-block
+		margin: auto
+		border: 1px solid #000
+
+	.wrap
+		max-width: 607px
+		margin: auto
+		position: relative
+		z-index: 3
+
+	.list
+		z-index: 2
+		margin-top: 49px
+
+		li
+			@include rem(20)
+			@include matissemFont
+			font-weight: 400
+			line-height: 1.46
+			padding-left: 0.8em
+			position: relative
+			&:before
+				content: "・"
+				position: absolute
+				top: 0
+				left: 0
+				bottom: 0
+				margin: auto
+				/* style */
+	h4
+		margin-top: 32px
+		z-index: 2
+		position: relative
+		img
+			max-width: 642px
+			@include pcsmallup
+				width: 642px
+				left: -12px
+				position: relative
+			// max-width: 535px
+	.bgimg
+		position: absolute
+		right: -43px
+		// bottom: 20px
+		top: 100px
+		margin: auto
+		z-index: 1
+
+		img
+			max-width: 253px
+	.addWrap
+		margin-top: 30px
+		.hoken
+			@include rem(16)
+			@include matissebFont
+			font-weight: 700
+			position: relative
+			left: -10px
+			margin-bottom: 8px
+		ul
+			li
+				@include rem(16)
+				padding-left: 1em
+				@include matissemFont
+				line-height: 1.1em
+				margin-bottom: 6px
+				position: relative
+				&:before
+					content: ""
+					content: ''/*何も入れない*/
+					display: inline-block/*忘れずに！*/
+					width: 11px/*画像の幅*/
+					height: 11px/*画像の高さ*/
+					background-image: url(/img/list-icon.png)
+					background-size: contain
+					vertical-align: middle
+					background-repeat: no-repeat
+					position: absolute
+					top: 0
+					left: 0
+					bottom: 0
+					margin: auto
+					/* style */
+	.btnWrap
+		text-align: center
+		margin-top: 56px
+		margin-bottom: 32px
+	.btn
+		background-color: #71BB15
+		display: inline-block
+		padding: 19px 22px
+		position: relative
+		left: 10px
+		margin: auto
+		position: relative
+		z-index: 2
+		@include rem(20)
+		@include tabup
+			&:hover
+				opacity: 0.8
+				transition-duration: 0.5s
+		a
+			color: #fff
+			display: flex
+			align-items: center
+			img
+				max-width: 24px
+@include tab
+	.nayami
+		// margin-top: 120px
+		// padding-top: 46px
+		// padding-bottom: 44px
+		// z-index: 1
+		.heading
+			text-align: center
+			margin-bottom: 32px
+		h3
+			@include rem(22)
+			padding: 16px 22px
+			display: inline-block
+			margin: auto
+			border: 1px solid #000
+
+		.wrap
+			max-width: 607px
+			margin: auto
+			position: relative
+			z-index: 3
+
+		.list
+			z-index: 2
+			margin-top: 49px
+
+			li
+				@include rem(20)
+				@include mb
+					@include rem(16)
+				font-weight: 400
+				line-height: 1.46
+				padding-left: 0.8em
+				position: relative
+				&:before
+					content: "・"
+					position: absolute
+					top: 0
+					left: 0
+					bottom: 0
+					margin: auto
+					/* style */
+		h4
+			margin-top: 32px
+			z-index: 2
+			position: relative
+			img
+				max-width: 535px
+		.bgimg
+			display: none
+		.btnWrap
+			text-align: center
+			margin-top: 33px
+		.btn
+			background-color: #71BB15
+			display: inline-block
+			padding: 19px 22px
+			position: relative
+			left: 0
+			margin: auto
+			position: relative
+			z-index: 2
+			@include rem(18)
+
+			a
+				color: #fff
+				display: flex
+				align-items: center
+				img
+					max-width: 24px
+
+
+
+@include mb
+	.nayami
+		// margin-top: 120px
+		// padding-top: 46px
+		// padding-bottom: 44px
+		// z-index: 1
+		.heading
+			text-align: center
+			margin-bottom: 0
+		h3
+			@include rem(20)
+			padding: 12px 16px
+			text-align: left
+
+		.wrap
+			max-width: initial
+			margin: auto
+			position: relative
+			z-index: 3
+
+		.list
+			margin-top: 24px
+
+			li
+				font-weight: 400
+	
+		h4
+			margin-top: 32px
+			z-index: 2
+			position: relative
+			img
+				max-width: 535px
+		.bgimg
+			display: none
+		.btnWrap
+			text-align: center
+			margin-top: 33px
+		.btn
+			padding: 12px 16px
+			@include rem(16)
+
+			a
+				img
+					max-width: 16px

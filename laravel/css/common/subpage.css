@@ -1,0 +1,309 @@
+@charset "UTF-8";
+@font-face {
+  font-family: "matissem";
+  font-display: swap;
+  src: url("/common/font/matisse-m.woff") format("woff"), url("/common/font/matisse-m.otf") format("truetype");
+}
+main {
+  margin-bottom: 60px;
+  border-bottom: 1px solid #DDDDDD;
+}
+
+.mainImg {
+  background-color: #1B8EE4;
+  position: relative;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 130px;
+}
+@media all and (-ms-high-contrast: none) {
+  .mainImg {
+    justify-content: space-around;
+  }
+}
+.mainImg:after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 31px 31px 0 31px;
+  border-color: #1B8EE4 transparent transparent transparent;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -31px;
+  margin: auto;
+}
+.mainImg .mainHeading {
+  color: white;
+  position: relative;
+  text-align: center;
+}
+@media (min-width: 769px) {
+  .mainImg .mainHeading {
+    top: 4px;
+  }
+}
+.mainImg .mainHeading h2 {
+  font-family: "matissem", "游明朝体", "Yu Mincho", YuMincho, "ヒラギノ明朝 Pro", "Hiragino Mincho Pro", "Noto Serif JP", "MS P明朝", "MS PMincho", serif;
+  font-display: swap;
+  font-weight: 500;
+  font-size: 29px;
+  font-size: 2.9rem;
+}
+.mainImg .mainHeading .eng {
+  font-family: helvetica, sans-serif;
+  font-size: 16px;
+  font-size: 1.6rem;
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  .mainImg {
+    height: auto;
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+  .mainImg:after {
+    border-width: 21px 21px 0 21px;
+    bottom: -21px;
+  }
+  .mainImg .mainHeading h2 {
+    font-size: 26px;
+    font-size: 2.6rem;
+  }
+  .mainImg .mainHeading .eng {
+    margin-top: 8px;
+  }
+}
+@media (max-width: 480px) {
+  .mainImg {
+    height: auto;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    margin-bottom: 80px;
+  }
+  .mainImg .mainHeading {
+    line-height: 1em;
+  }
+  .mainImg .mainHeading h2 {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+  .mainImg .mainHeading .eng {
+    font-size: 14px;
+    font-size: 1.4rem;
+    margin-top: 4px;
+  }
+}
+section .heading {
+  margin-bottom: 31px;
+}
+section .heading h3 {
+  text-align: center;
+  font-size: 31px;
+  font-size: 3.1rem;
+  color: #000;
+  font-family: "matissem", "游明朝体", "Yu Mincho", YuMincho, "ヒラギノ明朝 Pro", "Hiragino Mincho Pro", "Noto Serif JP", "MS P明朝", "MS PMincho", serif;
+  font-display: swap;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  section .heading {
+    margin-bottom: 2em;
+  }
+  section .heading h3 {
+    font-size: 24px;
+    font-size: 2.4rem;
+  }
+}
+@media (max-width: 480px) {
+  section .heading {
+    margin-bottom: 16px;
+  }
+  section .heading h3 {
+    font-size: 22px;
+    font-size: 2.2rem;
+  }
+}
+@media (max-width: 768px) {
+  main section:not(.mainImg) {
+    margin-top: 100px;
+  }
+  main section:not(.mainImg):nth-of-type(2) {
+    margin-top: 0;
+    /* style */
+  }
+}
+/*--------------------------------------------------- */
+/* btnGroup */
+/*--------------------------------------------------- */
+.btnGroup {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+.btnGroup .btnFlex {
+  display: flex;
+  justify-content: space-between;
+}
+.btnGroup .btnFlex .flex2 {
+  width: calc(50% - 20px);
+}
+.btnGroup .btnFlex .btn1 a {
+  border: 1px solid #CCCCCC;
+  color: #000;
+}
+@media (min-width: 769px) {
+  .btnGroup .btnFlex .btn1 a:hover {
+    /* style */
+    background-color: #aaa;
+    border: 1px solid #aaa;
+    color: #fff;
+  }
+}
+.btnGroup .btnFlex .btn2 a {
+  border: 1px solid #71BB15;
+  color: #fff;
+  background-color: #71BB15;
+}
+@media (min-width: 769px) {
+  .btnGroup .btnFlex .btn2 a:hover {
+    /* style */
+    background-color: #fff;
+    border: 1px solid #71BB15;
+    color: #71BB15;
+  }
+}
+.btnGroup .btnFlex .colorPink a {
+  border: 1px solid #F8A0A9;
+  color: #fff;
+  background-color: #F8A0A9;
+}
+@media (min-width: 769px) {
+  .btnGroup .btnFlex .colorPink a:hover {
+    /* style */
+    background-color: #fff;
+    border: 1px solid #F8A0A9;
+    color: #F8A0A9;
+  }
+}
+.btnGroup .btnFlex .btn {
+  height: 141px;
+  width: 100%;
+}
+.btnGroup .btnFlex .btn a, .btnGroup .btnFlex .btn a:visited {
+  width: 100%;
+  height: 100%;
+  font-size: 25px;
+  font-size: 2.5rem;
+  font-weight: "游明朝体", "Yu Mincho", YuMincho, "ヒラギノ明朝 Pro", "Hiragino Mincho Pro", "Noto Serif JP", "MS P明朝", "MS PMincho", serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 769px) {
+  .btnGroup .btnFlex .btn a:hover, .btnGroup .btnFlex .btn a:visited:hover {
+    /* style */
+    transition-duration: 0.5s;
+  }
+}
+.btnGroup .btnFlex .btn a > span, .btnGroup .btnFlex .btn a:visited > span {
+  position: relative;
+}
+.btnGroup .btnFlex .btn a > span:after, .btnGroup .btnFlex .btn a:visited > span:after {
+  content: "";
+  /* style */
+  content: "";
+  border-bottom: 1px solid;
+  width: 24px;
+  height: 1px;
+  position: absolute;
+  top: 0;
+  right: -36px;
+  bottom: 0;
+  margin: auto;
+}
+.btnGroup .btnFlex .btn a > span > span:after, .btnGroup .btnFlex .btn a > span > span:before, .btnGroup .btnFlex .btn a:visited > span > span:after, .btnGroup .btnFlex .btn a:visited > span > span:before {
+  content: "";
+  /* style */
+  content: "";
+  border-bottom: 1px solid;
+  width: 17px;
+  height: 1px;
+  position: absolute;
+  right: -38px;
+  bottom: 0;
+  margin: auto;
+}
+.btnGroup .btnFlex .btn a > span > span:after, .btnGroup .btnFlex .btn a:visited > span > span:after {
+  top: -9px;
+  transform: rotate(30deg);
+}
+.btnGroup .btnFlex .btn a > span > span:before, .btnGroup .btnFlex .btn a:visited > span > span:before {
+  top: 8px;
+  transform: rotate(-30deg);
+}
+
+@media (max-width: 768px) {
+  .btnGroup .btnFlex {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .btnGroup .btnFlex .flex2 {
+    width: calc(100%);
+  }
+  .btnGroup .btnFlex .btn2 {
+    margin-top: 20px;
+  }
+  .btnGroup .btnFlex .btn {
+    width: 100%;
+    height: auto;
+  }
+  .btnGroup .btnFlex .btn a, .btnGroup .btnFlex .btn a:visited {
+    padding: 40px;
+    font-size: 24px;
+    font-size: 2.4rem;
+  }
+}
+@media (max-width: 480px) {
+  .btnGroup .btnFlex .btn {
+    width: 100%;
+    height: auto;
+  }
+  .btnGroup .btnFlex .btn a, .btnGroup .btnFlex .btn a:visited {
+    padding: 32px;
+    font-size: 18px;
+    font-size: 1.8rem;
+  }
+  .btnGroup .btnFlex .btn a > span, .btnGroup .btnFlex .btn a:visited > span {
+    position: relative;
+    right: 8px;
+  }
+}
+/*--------------------------------------------------- */
+/* アンカーリンク用 */
+/*--------------------------------------------------- */
+#pointIntro {
+  margin-top: -100px;
+  padding-top: 100px;
+}
+@media (max-width: 768px) {
+  #pointIntro {
+    margin-top: -80px;
+    padding-top: 80px;
+  }
+}
+
+#pointAccess {
+  margin-top: -80px;
+  padding-top: 80px;
+}
+@media (max-width: 480px) {
+  #pointAccess {
+    margin-top: -50px;
+    padding-top: 50px;
+  }
+}

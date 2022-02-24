@@ -1,0 +1,131 @@
+@charset "UTF-8"
+
+@import "../../../_import.sass"
+
+@include tabup
+	.listSection 
+		.flexWrap 
+			.wid30
+				width: 30px
+			.wid50
+				width: 50px
+			.wid100
+				width: 100px
+
+			.wid40
+				width: 40px
+			.wid60
+				width: 60px
+			.wid80
+				width: 80px
+			.wid200
+				width: 200px
+			.wid250
+				width: 250px
+
+
+
+.listSection
+	margin-top: $pad2
+	$bcolor: #aaa
+	[type="text"]
+		height: 100%
+	.longtext
+		overflow: scroll
+		max-height: 100px
+	.flexHead
+		display: flex
+
+		>div
+			background-color: #ddd
+			border-top: 1px solid $bcolor
+	.flexBody
+		display: flex
+	.flexWrap
+		>div
+			padding: 8px 12px
+			border: 1px solid $bcolor
+			margin-top: -1px
+			margin-left: -1px
+			display: flex
+			line-height: 1.2em
+			align-items: center
+			&:nth-of-type(1)
+				margin-left: 0
+				/* style */
+	.flexWrap6
+		.no1,.no2,.no3,.no4,.no5,.no6
+			width: 18%
+	.flexWrap7
+		>div
+			width: 17%
+
+			&:nth-of-type(1)
+				/* style */
+				width: 10%
+
+			&:nth-last-of-type(1),&:nth-last-of-type(2)
+				width: 10%
+
+
+	.editBtn
+		@include btn-btn($color-main,#fff)
+		width: 100%
+		max-width: initial
+	.deleteBtn
+		@include btn-btn(#aaa,#fff)
+		width: 100%
+		max-width: initial
+	.heading
+		@include rem(20)
+		margin-bottom: 12px
+		position: relative
+		padding-left: 0.5em
+		&:before
+			content: ""
+			content: ""
+			border-left: 3px solid $color-main
+			width: 3px
+			height: 100%
+			position: absolute
+			top: 0
+			left: 0
+			bottom: 0
+			margin: auto
+			/* style */
+
+
+
+
+
+
+
+.customerList
+	overflow: scroll
+	.flexWrap
+		width: fit-content
+		>div
+			width: 150px
+		input,select
+			width: 100%
+
+@include tab
+	.customerList
+		.flexBody
+			display: flex
+			flex-wrap: wrap
+			.no1
+				width: 20%
+				display: block
+
+			.no2
+				width: 80%
+				display: block
+
+			>div
+				width: 100%
+				display: none
+		.flexWrap
+			width: 100%
+		// 	>div
+		// 		display: flex

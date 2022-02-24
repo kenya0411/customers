@@ -1,0 +1,257 @@
+@charset "UTF-8"
+@import "../../_import.sass"
+@include matissem
+
+
+main
+	margin-bottom: 60px
+	border-bottom: 1px solid #DDDDDD
+
+
+
+.mainImg
+	background-color: #1B8EE4
+	position: relative
+	height: 140px
+	display: flex
+	align-items: center
+	justify-content: center
+	margin-bottom: 130px
+	@include ie11
+		justify-content: space-around
+	&:after
+		content: ""
+		width: 0
+		height: 0
+		border-style: solid
+		border-width: 31px 31px 0 31px
+		border-color: #1B8EE4 transparent transparent transparent
+		position: absolute
+		left: 0
+		right: 0
+		bottom: -31px
+		margin: auto
+	.mainHeading
+		color: white
+		position: relative
+		text-align: center
+		@include tabup
+			top: 4px
+
+		h2
+			@include matissemFont
+			@include rem(29)	
+		.eng
+			font-family: helvetica,sans-serif
+			@include rem(16)
+			margin-top: 8px
+
+
+@include tab
+	.mainImg
+		height: auto
+		padding-top: 32px
+		padding-bottom: 32px
+		// margin-bottom: 130px
+		&:after
+			border-width: 21px 21px 0 21px
+			bottom: -21px
+		.mainHeading
+			h2
+				@include rem(26)	
+			.eng
+				// @include rem(16)
+				margin-top: 8px
+@include mb
+	.mainImg
+		height: auto
+		padding-top: 24px
+		padding-bottom: 24px
+		margin-bottom: 80px
+		// &:after
+			// border-width: 21px 21px 0 21px
+			// bottom: -21px
+		.mainHeading
+			line-height: 1em
+			h2
+				@include rem(22)	
+			.eng
+				@include rem(14)
+				margin-top: 4px
+section
+	.heading
+		margin-bottom: 31px
+
+		h3
+			text-align: center
+			@include rem(31)
+			color: #000
+			@include matissemFont
+@include tab
+
+	section
+		.heading
+			margin-bottom: 2em
+
+			h3
+				@include rem(24)
+
+@include mb
+
+	section
+		.heading
+			margin-bottom: 16px
+
+			h3
+				@include rem(22)
+
+@include tab
+	main
+		section:not(.mainImg)
+			&:nth-of-type(2)
+				margin-top: 0
+				/* style */
+			margin-top: 100px
+/*--------------------------------------------------- */
+/* btnGroup
+/*--------------------------------------------------- */
+.btnGroup
+	margin-top: 100px
+	margin-bottom: 100px
+	.btnFlex
+		display: flex
+		justify-content: space-between
+		.flex2
+			width: calc(50% - 20px)
+		.btn1 a
+			border: 1px solid #CCCCCC
+			color: #000
+			@include tabup
+				&:hover
+					/* style */
+					background-color: #aaa
+					border: 1px solid #aaa
+					color: #fff
+		.btn2 a
+			border: 1px solid #71BB15
+			color: #fff
+			background-color: #71BB15
+			@include tabup
+				&:hover
+					/* style */
+					background-color: #fff
+					border: 1px solid #71BB15
+					color: #71BB15		
+		.colorPink a
+			border: 1px solid #F8A0A9
+			color: #fff
+			background-color: #F8A0A9
+			@include tabup
+				&:hover
+					/* style */
+					background-color: #fff
+					border: 1px solid #F8A0A9
+					color: #F8A0A9			
+		.btn
+			height: 141px
+			width: 100%
+
+			a,a:visited
+				width: 100%
+				height: 100%
+				@include rem(25)
+				font-weight: $font-family-yumincho
+
+				display: flex
+				justify-content: center
+				align-items: center
+				@include tabup
+					&:hover
+						/* style */
+						transition-duration: 0.5s
+
+
+				>span
+					position: relative
+
+					&:after
+						content: ""
+						/* style */
+						content: ""
+						border-bottom: 1px solid 
+
+						width: 24px
+						height: 1px
+						position: absolute
+						top: 0
+						right: -36px
+						bottom: 0
+						margin: auto
+					>span
+						&:after,&:before
+							content: ""
+							/* style */
+							content: ""
+							border-bottom: 1px solid 
+
+							width: 17px
+							height: 1px
+							position: absolute
+							right: -38px
+							bottom: 0
+							margin: auto
+						&:after
+							top: -9px
+							transform: rotate(30deg)
+						&:before
+							top: 8px
+							transform: rotate(-30deg)
+@include tab
+
+	.btnGroup
+		.btnFlex
+			display: flex
+			flex-wrap: wrap
+			.flex2
+				width: calc(100%)
+			.btn2
+				margin-top: 20px
+			.btn
+				width: 100%
+				height: auto
+
+				a,a:visited
+					padding: 40px
+					@include rem(24)
+@include mb
+	.btnGroup
+		.btnFlex
+			.btn
+				width: 100%
+				height: auto
+
+				a,a:visited
+					padding: 32px
+					@include rem(18)
+					>span
+						position: relative
+						right: 8px
+
+
+/*--------------------------------------------------- */
+/* アンカーリンク用
+/*--------------------------------------------------- */
+//院長紹介
+#pointIntro
+	margin-top: -100px
+	padding-top: 100px
+	@include tab
+		margin-top: -80px
+		padding-top: 80px
+//アクセス
+#pointAccess
+	margin-top: -80px
+	padding-top: 80px
+	@include mb
+		margin-top: -50px
+		padding-top: 50px

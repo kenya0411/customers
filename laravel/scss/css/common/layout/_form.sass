@@ -1,0 +1,69 @@
+@charset "UTF-8"
+
+@import "../../../_import.sass"
+.formSection
+	dl
+		display: flex
+		flex-wrap: wrap
+	dt,dd
+		padding: 16px
+
+	dt
+		width: 200px
+		border-bottom: 1px solid $color-main
+		display: flex
+		align-items: center
+	dd
+		border-bottom: 1px solid #ddd
+		width: calc(100% - 200px)
+	.btnWrap
+		margin-top: 50px
+	.sendBtn
+		@include btn-btn($color-main,#fff)
+		margin: auto
+		width: 200px
+		max-width: initial
+		padding: 16px
+	.errorMessage
+		@include rem(14)
+		color: red
+		margin-top: 0.2em
+	.inputFlex
+		display: flex
+		align-items: center
+		input
+			width: auto
+			margin-right: 2px
+	.checkBoxWrap
+		input,label
+			cursor: pointer
+	.dateBlock
+		[name="date_year"]
+			max-width: 100px
+			margin-right: 4px
+		[name="date_month"]
+			max-width: 80px
+			margin-right: 4px
+			margin-left: 16px
+		[name="date_day"]
+			margin-right: 4px
+			margin-left: 16px
+			max-width: 80px
+
+
+
+
+@include tab
+
+	.formSection
+		dt,dd
+			padding: 12px 0
+
+		dt
+			width: 100%
+			border-bottom: 0
+			padding-bottom: 0
+		dd
+			border-bottom: 1px solid #ddd
+			width: calc(100%)
+			padding-top: 8px

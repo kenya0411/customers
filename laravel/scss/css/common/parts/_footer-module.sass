@@ -1,0 +1,51 @@
+@charset "UTF-8"
+
+@import "../../../_import.sass"
+#footGoto 
+	position: fixed
+	right: 8px
+	bottom: 8px
+	z-index: 100
+	a 
+		display: flex
+		justify-content: center
+		align-items: center
+		color: $color-main
+		background: #fff
+		@include rem(12)
+		text-decoration: none
+		opacity: 0.9
+		padding: 1.7em 0 0
+		width: 80px/*幅*/
+		height: 80px/*高さ*/
+		border-radius: 50%/*角丸*/
+		transition-duration: 1s
+		font-family: $font-family-yumincho
+		border: 1px solid #eee
+
+		&:before
+			font-family: "Font Awesome 5 Free"
+			content: '\f102'
+			font-weight: 700
+			position: absolute
+			top: 0.5em
+			@include rem(28)
+			@media all and (-ms-high-contrast: none)
+				// margin: auto
+				left: 50%
+				transform: translate(-50%, 0)
+		&:hover 
+			opacity: 0.7
+			transition-duration: 0.5s
+
+
+	@include tab
+		a
+			width: 50px/*幅*/
+			height: 50px/*高さ*/
+			span
+				display: none
+
+			&:before
+				top: 0.5em
+				@include rem(24)

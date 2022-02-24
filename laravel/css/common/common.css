@@ -1,0 +1,320 @@
+@font-face {
+  font-family: "rodinb";
+  font-display: swap;
+  src: url("/common/font/rodin-b.woff") format("woff"), url("/common/font/rodin-b.otf") format("truetype");
+}
+.inner_pad {
+  padding: 8px 16px;
+}
+
+main {
+  margin-top: 70px;
+  margin-bottom: 70px;
+}
+main .strong {
+  color: #ef7520;
+  font-weight: 700;
+}
+main input, main textarea {
+  width: 100%;
+  font-size: 16px;
+  font-size: 1.6rem;
+  border: 1px solid #ddd;
+  padding: 4px 8px;
+  line-height: 1em;
+  background-color: #eee;
+}
+main select {
+  border: 1px solid #ddd;
+  padding: 4px 8px;
+  line-height: 1em;
+  cursor: pointer;
+}
+
+.mainHeading {
+  background-color: #1B8EE4;
+  padding: 16px 16px;
+  margin-bottom: 32px;
+}
+.mainHeading h2 {
+  color: #fff;
+  font-size: 24px;
+  font-size: 2.4rem;
+  line-height: 1em;
+}
+
+.listSection {
+  margin-top: 48px;
+}
+.listSection [type="text"] {
+  height: 100%;
+}
+.listSection .flexHead {
+  display: flex;
+}
+.listSection .flexHead > div {
+  background-color: #ddd;
+  border-top: 1px solid #aaa;
+}
+.listSection .flexBody {
+  display: flex;
+}
+.listSection .flexWrap > div {
+  padding: 8px 12px;
+  border: 1px solid #aaa;
+  margin-top: -1px;
+  margin-left: -1px;
+  display: flex;
+  line-height: 1.2em;
+  align-items: center;
+}
+.listSection .flexWrap6 .no1, .listSection .flexWrap6 .no2, .listSection .flexWrap6 .no3, .listSection .flexWrap6 .no4, .listSection .flexWrap6 .no5, .listSection .flexWrap6 .no6 {
+  width: 18%;
+}
+.listSection .flexWrap7 > div {
+  width: 17%;
+}
+.listSection .flexWrap7 > div:nth-of-type(1) {
+  /* style */
+  width: 10%;
+}
+.listSection .flexWrap7 > div:nth-last-of-type(1), .listSection .flexWrap7 > div:nth-last-of-type(2) {
+  width: 10%;
+}
+.listSection .editBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  word-break: break-all;
+  text-decoration: none;
+  background: #1B8EE4;
+  text-align: center;
+  border: 1px solid #1B8EE4;
+  color: #fff;
+  transition: all 0.5s ease;
+  max-width: fit-content;
+  width: 100%;
+  max-width: initial;
+}
+@media (min-width: 769px) {
+  .listSection .editBtn:hover {
+    background: #fff;
+    color: #1B8EE4;
+    border: 1px solid #1B8EE4;
+    box-shadow: none;
+  }
+}
+.listSection .deleteBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  word-break: break-all;
+  text-decoration: none;
+  background: #aaa;
+  text-align: center;
+  border: 1px solid #aaa;
+  color: #fff;
+  transition: all 0.5s ease;
+  max-width: fit-content;
+  width: 100%;
+  max-width: initial;
+}
+@media (min-width: 769px) {
+  .listSection .deleteBtn:hover {
+    background: #fff;
+    color: #aaa;
+    border: 1px solid #aaa;
+    box-shadow: none;
+  }
+}
+.listSection .heading {
+  font-size: 20px;
+  font-size: 2rem;
+  margin-bottom: 12px;
+  position: relative;
+  padding-left: 0.5em;
+}
+.listSection .heading:before {
+  content: "";
+  content: "";
+  border-left: 3px solid #1B8EE4;
+  width: 3px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  /* style */
+}
+
+.addBtnBlock {
+  margin-top: 32px;
+}
+.addBtnBlock .addbtnWrap {
+  display: flex;
+}
+.addBtnBlock .addbtn {
+  margin-right: 16px;
+}
+.addBtnBlock .addbtn a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  word-break: break-all;
+  text-decoration: none;
+  background: #fff;
+  text-align: center;
+  border: 1px solid #fff;
+  color: #1B8EE4;
+  transition: all 0.5s ease;
+}
+@media (min-width: 769px) {
+  .addBtnBlock .addbtn a:hover {
+    background: #1B8EE4;
+    color: #fff;
+    border: 1px solid #fff;
+    box-shadow: none;
+  }
+}
+.addBtnBlock .addbtn a {
+  border: 1px solid #1B8EE4;
+  max-width: 150px;
+  padding: 8px 16px;
+}
+
+.formSection dl {
+  display: flex;
+  flex-wrap: wrap;
+}
+.formSection dt, .formSection dd {
+  padding: 16px;
+}
+.formSection dt {
+  width: 200px;
+  border-bottom: 1px solid #1B8EE4;
+  display: flex;
+  align-items: center;
+}
+.formSection dd {
+  border-bottom: 1px solid #ddd;
+  width: calc(100% - 200px);
+}
+.formSection .btnWrap {
+  margin-top: 50px;
+}
+.formSection .sendBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  word-break: break-all;
+  text-decoration: none;
+  background: #1B8EE4;
+  text-align: center;
+  border: 1px solid #1B8EE4;
+  color: #fff;
+  transition: all 0.5s ease;
+  max-width: fit-content;
+  margin: auto;
+  width: 200px;
+  max-width: initial;
+  padding: 16px;
+}
+@media (min-width: 769px) {
+  .formSection .sendBtn:hover {
+    background: #fff;
+    color: #1B8EE4;
+    border: 1px solid #1B8EE4;
+    box-shadow: none;
+  }
+}
+.formSection .errorMessage {
+  font-size: 14px;
+  font-size: 1.4rem;
+  color: red;
+  margin-top: 0.2em;
+}
+
+.searchBlock {
+  margin-top: 32px;
+}
+.searchBlock form {
+  border: 1px solid #ddd;
+  padding: 16px;
+  background-color: #eee;
+}
+.searchBlock .flex .flex4 {
+  width: 100px;
+  margin-right: 8px;
+}
+.searchBlock select {
+  width: 100%;
+  background-color: #fff;
+}
+.searchBlock .searchBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  word-break: break-all;
+  text-decoration: none;
+  background: #71BB15;
+  text-align: center;
+  border: 1px solid #71BB15;
+  color: #fff;
+  transition: all 0.5s ease;
+  max-width: fit-content;
+  width: 100%;
+  height: 100%;
+  max-width: initial;
+}
+@media (min-width: 769px) {
+  .searchBlock .searchBtn:hover {
+    background: #fff;
+    color: #71BB15;
+    border: 1px solid #71BB15;
+    box-shadow: none;
+  }
+}
+
+.cloneBlock {
+  margin-top: 50px;
+  border-top: 1px solid #aaa;
+  padding-top: 50px;
+}
+.cloneBlock form {
+  justify-content: flex-end;
+  display: flex;
+}
+.cloneBlock form .flex3 {
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+.cloneBlock form input {
+  background-color: #fff;
+  max-width: 70px;
+}
+.cloneBlock .cloneBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  word-break: break-all;
+  text-decoration: none;
+  background: #000;
+  text-align: center;
+  border: 1px solid #000;
+  color: #fff;
+  transition: all 0.5s ease;
+  max-width: fit-content;
+  width: 100%;
+  max-width: 200px;
+  height: 100%;
+}
+@media (min-width: 769px) {
+  .cloneBlock .cloneBtn:hover {
+    background: #fff;
+    color: #000;
+    border: 1px solid #000;
+    box-shadow: none;
+  }
+}

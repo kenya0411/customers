@@ -1,0 +1,61 @@
+
+@charset "UTF-8"
+
+@import "../../../_import.sass"
+
+
+header.fixed
+
+	display: block
+	position: fixed
+	background-color: rgba(255,255,255,0.9)
+	margin: 0
+	padding: 20px 0
+	width: 100%
+	max-width: initial
+	z-index: 100
+	.whiteLogo
+		display: none
+	.none
+		display: block
+	// @include tab
+	// 	padding: 22px 0
+	// @include mb
+	// 	padding: 19px 0
+	.flex .flex2.no3
+		margin-top: 24px
+	// h1
+	// 	display: inline-block
+	// 	img
+	// 		max-width: 180px
+	// nav
+	// 	a
+	// 		@include link-color-hover (#333,#aaa)
+
+	// .navi > ul > li:before
+		// color: #fff
+	// .btnFlex .loginBtn
+		// border: 1px solid $color-accent
+	// .navi
+	// 	.navContact
+	// 		border-bottom: 1px solid #ccc
+	// 		&:hover
+	// 			border-bottom: 1px solid $color-accent
+			// a
+			// 	@include link-color-hover ($color-main,#fff)
+			// 	&:hover
+			// 		transition-duration: 0s
+
+
+
+@include tab
+	header.fixed
+		.btnFlex 
+			display: none
+		.flex .flex2.no3
+			margin-top: 0
+@include mb
+	header.fixed
+		h1
+			img
+				max-width: 120px

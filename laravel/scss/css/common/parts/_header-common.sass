@@ -1,0 +1,188 @@
+@charset "UTF-8"
+
+@import "../../../_import.sass"
+/* -------------------------------------------------- */
+/* 共通ヘッダー 
+/*-------------------------------------------------- */
+
+header
+	margin: 18px auto
+	// height: 82px
+	left: 0
+	right: 0
+	top: 0
+	z-index: 20
+	width: 100%
+	// position: absolute
+	.none
+		display: none
+
+	a
+		@include link-color-hover(#222,#888)
+		font-weight: 500
+	@include tabup
+
+		@include tab
+			margin: 16px auto 16px
+		h1
+			display: inline-block
+			img
+				max-width: 310px
+				top: 5px
+				// max-width: 247px
+				height: auto
+				width: 100%
+				object-fit: contain
+				position: relative
+				@include pcsmall
+					max-width: 260px
+				@include ie11
+					width: 310px
+					height: 50px
+
+
+		.flex
+			display: flex
+			justify-content: space-between
+			height: 100%
+			align-items: center
+			flex-wrap: wrap
+			.flex2
+				height: 100%
+
+				&.no1
+					display: flex
+					align-items: center
+					/* style */
+				&.no2
+					@include tab
+					z-index: 1
+					// width: calc(100% - 280px)
+					// position: absolute
+					right: 0
+					margin-left: auto
+					// width: calc(100% - 31vw)
+					@include ie11
+						top: 0
+					/* style */
+				nav
+					>ul
+						display: flex
+						>li
+							@include rem(16)
+							position: relative
+							display: flex
+							align-items: flex-end
+							margin-right: 12px
+							padding-right: 17px
+							&:after
+								content: ""
+								content: ""
+								border-right: 1px solid #aaa
+								width: 1px
+								height: 22px
+								position: absolute
+								right: 0
+								bottom: 0
+								top: 0
+
+								margin: auto
+								/* style */
+							&:nth-last-of-type(1)
+								margin-right: 0
+								padding-right: 0
+								&:after
+									content: ""
+									display: none
+									/* style */
+				
+
+				&.no3
+					width: 100%
+					margin-top: 44px
+		//navi
+		.navi
+			font-weight: 500
+			height: 100%
+
+
+			>ul
+				display: flex
+				height: 100%
+				justify-content: space-between
+				align-content: space-between
+				align-items: center
+				>li
+					position: relative
+					@include rem(16)
+					line-height: 1.1em
+					// width: calc(16.6% - 10px)
+					padding-left: 40px
+					padding-right: 40px
+					$pad: 16px
+					z-index: 1
+					height: 100%
+					display: flex
+					align-items: center
+					justify-content: center
+					@include pcsmall
+						// width: calc(16.6% - 10px)
+						margin: auto
+						padding-left: 30px
+						padding-right: 30px
+					&:before
+						content: ""
+						content: ""
+						border-left: 1px solid #aaa
+						width: 1px
+						height: 22px
+						position: absolute
+						top: 0
+						left: 0
+						bottom: 0
+						margin: auto
+						/* style */
+							
+					@include tabup
+						&.pcInvi
+							display: none
+
+	
+
+		
+
+
+			
+@include tabup
+	#nav_toggle
+		display: none
+
+
+/*--------------------------------------------------- */
+/* レスポンシブ
+/*--------------------------------------------------- */
+
+header
+	@include tab
+		width: 100%
+		// position: absolute
+		margin-top: 0
+		margin-bottom: 0
+		padding-top: 20px
+		padding-bottom: 20px
+		.flex
+			justify-content: space-between
+		.no1
+			display: flex
+			align-items: center
+		h1
+			img
+				max-width: 160px
+		#nav_toggle
+			margin-top: 0px
+
+	
+	@include mb
+		h1
+			img
+				max-width: 120px

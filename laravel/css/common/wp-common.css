@@ -1,0 +1,122 @@
+@charset "UTF-8";
+/* -------------------------------------------------- */
+/* ページネーション */
+/*--------------------------------------------------- */
+.pageInner {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0 40px;
+  position: relative;
+}
+.pageInner .pager {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: auto;
+  margin-left: -1px;
+  padding: 4px 4px 2px;
+  border: 1px solid #1B8EE4;
+  background-color: #fff;
+  text-decoration: none;
+  text-align: center;
+  font-size: 16px;
+  font-size: 1.6rem;
+  font-family: "游明朝体", "Yu Mincho", YuMincho, "ヒラギノ明朝 Pro", "Hiragino Mincho Pro", "Noto Serif JP", "MS P明朝", "MS PMincho", serif;
+  line-height: 1em;
+  min-width: 28px;
+  min-height: 28px;
+}
+.pageInner .current {
+  background-color: #666666;
+  color: #fff;
+  border-color: #666666;
+}
+.pageInner a, .pageInner a:visited {
+  color: #1B8EE4;
+  transition-duration: 0.3s;
+}
+.pageInner a:hover, .pageInner a:visited:hover {
+  color: #fff;
+  transition-duration: 0.3s;
+  border-color: #1B8EE4;
+  background-color: #1B8EE4;
+}
+.pageInner .first {
+  margin-right: 8px;
+}
+.pageInner .last {
+  margin-left: 8px;
+}
+
+.loadingImg {
+  background-image: url("img/common/loading.gif");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.commonPage {
+  padding-bottom: 100px;
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+.commonPage .btn {
+  font-size: 16px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-top: 48px;
+}
+.commonPage .btn a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  word-break: break-all;
+  text-decoration: none;
+  background: #1B8EE4;
+  text-align: center;
+  border: 1px solid #1B8EE4;
+  color: #fff;
+  transition: all 0.5s ease;
+}
+@media (min-width: 769px) {
+  .commonPage .btn a:hover {
+    background: #fff;
+    color: #1B8EE4;
+    border: 1px solid #1B8EE4;
+    box-shadow: none;
+  }
+}
+.commonPage .btn a {
+  padding: 10px 21px;
+  width: fit-content;
+  border-radius: 30px;
+}
+.commonPage .btn i {
+  margin-right: 10px;
+}
+
+.noPage {
+  text-align: center;
+}
+.noPage p {
+  font-size: 20px;
+  font-size: 2rem;
+  line-height: 1.5em;
+}
+.noPage .btn {
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  display: flex;
+}
+
+.single main .aligncenter {
+  margin-left: auto;
+  margin-right: auto;
+}
+.single main .alignleft {
+  margin-right: auto;
+}
+.single main .alignright {
+  margin-left: auto;
+}

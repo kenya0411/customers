@@ -1,0 +1,47 @@
+@charset "UTF-8"
+@import "../../import.sass"
+
+/*--------------------------------------------------- */
+/* 記事のCSS
+/*--------------------------------------------------- */
+
+article
+	.entry-content
+		overflow: hidden
+		img
+			object-fit: contain
+			width: auto
+			height: auto
+			margin-top: 16px
+			margin-bottom: 16px
+			max-width: 100%
+			display: inline-block
+			clear: both
+		.alignnone
+			clear: none
+		.aligncenter
+			clear: both
+			display: block
+			margin-left: auto
+			margin-right: auto
+		.alignright
+			clear: none
+
+			display: inline
+			float: right
+			margin-left: 1.5em
+		.alignleft
+		
+			clear: none
+			display: inline
+			float: left
+			margin-right: 1.5em
+		figure
+			img
+				margin-bottom: 4px
+			figcaption
+				font-weight: 700
+		p,span
+			line-height: 1.7
+	.entry-footer
+		clear: both

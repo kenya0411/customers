@@ -1,0 +1,77 @@
+@charset "UTF-8"
+
+@import "../../../_import.sass"
+
+
+@include tabup
+
+.menu
+	display: flex
+	position: relative
+
+	.menu_list
+
+		> a
+			display: block
+			padding: 10px
+			text-align: center
+			transition: .3s
+
+			&:hover
+				color: #fff
+				background: #000
+
+
+	.menu_contents
+		background: #000
+		display: none
+		position: absolute
+		top: 100%
+		left: 0
+		width: 150%
+		>ul
+			flex-direction: column
+		li
+			width: 100%
+			margin-top: 8px
+			&:nth-last-of-type(1)
+				margin-bottom: 8px
+
+
+			a
+				color: #fff
+				padding: 4px 8px
+				line-height: 1.1em
+
+
+@include tab
+
+	.menu
+		display: flex
+		position: relative
+		.menu_list
+			position: relative
+
+		.menu_list
+
+			> a
+				&:hover
+					background: #888
+		.menu_contents
+			background: #000
+			display: none
+			position: relative
+			top: 100%
+			left: 0
+			width: 100%
+			>ul
+				flex-direction: column
+			li
+				width: 100%
+				margin: 0px
+
+
+				a
+					color: #fff
+					padding: 12px
+					line-height: 1.1em

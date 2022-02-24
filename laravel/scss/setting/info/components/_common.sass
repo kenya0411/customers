@@ -1,0 +1,46 @@
+
+@charset "UTF-8"
+// @import "../../import.sass"
+// .subHead:not(.fixed) .navi .navContact span:before
+	// background-image: url(../../../../common/img/mail-white.png)
+.loadingImg
+	background-image: url("img/common/loading.gif")
+	background-repeat: no-repeat
+	background-position: center center
+
+.commonPage
+	// padding-top: 150px
+	padding-bottom: 100px
+	@include rem(16)
+	.btn
+		@include btn($color-main,#fff)
+		@include rem(16)
+		font-weight: 700
+		margin-top: 48px
+		a
+			padding: 10px 21px
+			width: fit-content
+			border-radius: 30px
+		i
+			margin-right: 10px
+.noPage
+	text-align: center
+	p
+		@include rem(20)
+		line-height: 1.5em
+	.btn
+		margin-left: auto
+		margin-right: auto
+		justify-content: center
+		display: flex
+
+
+.single
+	main
+		.aligncenter
+			margin-left: auto
+			margin-right: auto
+		.alignleft
+			margin-right: auto
+		.alignright
+			margin-left: auto

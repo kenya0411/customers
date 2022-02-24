@@ -1,0 +1,54 @@
+@charset "UTF-8"
+// @import "../../import.sass"
+/* -------------------------------------------------- */
+/* ページネーション
+/*--------------------------------------------------- */
+
+.pageInner
+	display: flex
+	justify-content: center
+	margin: 100px 0 40px
+	position: relative
+
+	.pager
+		display: flex
+		justify-content: center
+		align-items: center
+		width: auto
+		height: auto
+		margin-left: -1px
+		padding: 4px 4px 2px
+		border: 1px solid $color-main
+		background-color: #fff
+		text-decoration: none
+		text-align: center
+		@include rem(16)
+		font-family: $font-family-yumincho
+		line-height: 1em
+		min-width: 28px
+		min-height: 28px
+	.current
+		background-color: #666666
+		color: #fff
+		border-color: #666666
+
+	a,a:visited
+		color: $color-main
+		transition-duration: 0.3s
+		&:hover
+			color: #fff
+			transition-duration: 0.3s
+
+			border-color: $color-main
+			background-color: $color-main
+	.first
+		margin-right: 8px 
+	.last
+		margin-left: 8px	
+	// a
+	// 	&.prev
+	// 		margin-right: 16px
+	// 	&.next
+	// 		margin-left: 16px
+
+
