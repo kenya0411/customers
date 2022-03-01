@@ -25,7 +25,7 @@ $d = '?'.now();
 <!-- css -->
 <link rel="stylesheet" href="/css/common/ress.css{{ $d }}">
 <link rel="stylesheet" href="/css/common/base.css{{ $d }}">
-<link rel="stylesheet" href="{{ secure_asset('/css/common/header.css') }}{{ $d }}">
+<link rel="stylesheet" href="/css/common/header.css{{ $d }}">
 <link rel="stylesheet" href="/css/common/footer.css{{ $d }}">
 <link rel="stylesheet" href="/css/common/common.css{{ $d }}">
 
