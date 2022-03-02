@@ -1,0 +1,65 @@
+@charset "UTF-8"
+
+
+@import "../../_import.sass"
+
+
+aside
+	background-color: #fff
+	border-right: 1px solid #aaa
+	height: 100vh
+	li
+		position: relative
+		@include rem(16)
+	.hover
+
+		background: #000
+		a,a:visited
+			color: #fff
+
+	.menu_side
+		position: relative
+
+		.menu_list
+
+			> a
+				display: block
+				transition: .3s
+				padding: 8px 8px
+
+				// &:hover
+				// 	color: #fff
+				// 	background: #000
+
+
+		.menu_contents
+			background: #333
+			// display: none
+			width: 100%
+			position: absolute
+			top: 0
+			right: -100%
+			&:before
+				content: ""
+				width: 0
+				height: 0
+				border-style: solid
+				border-width: 10px 17px 10px 0
+				border-color: transparent #333 transparent transparent
+				position: absolute
+				top: 10px
+				left: -17px
+				/* style */
+			>ul
+				flex-direction: column
+			li
+				width: 100%
+				margin-top: 8px
+				&:nth-last-of-type(1)
+					margin-bottom: 8px
+
+
+				a
+					color: #fff
+					padding: 4px 8px
+					line-height: 1.1em

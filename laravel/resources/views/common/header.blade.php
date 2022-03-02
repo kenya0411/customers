@@ -27,6 +27,7 @@ $d = '?'.now();
 <link rel="stylesheet" href="/css/common/base.css{{ $d }}">
 <link rel="stylesheet" href="/css/common/header.css{{ $d }}">
 <link rel="stylesheet" href="/css/common/footer.css{{ $d }}">
+<link rel="stylesheet" href="/css/common/side.css{{ $d }}">
 <link rel="stylesheet" href="/css/common/common.css{{ $d }}">
 
 <!-- font -->

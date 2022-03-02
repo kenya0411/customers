@@ -14,14 +14,20 @@
 <body class="frontPage">
 @include('common.nav')
 
+<div class="main_wrap">
+  
+@include('common.side')
+
   <main>
-    <section class="mainHeading">
-      <div class="maxWid mbPad">
+    <section class="mainHeading common_padding" >
         <h2>@yield('heading')</h2>
-      </div>
     </section>
+    <section class="main_content common_padding" >
     @yield('content')
+    </section>
+    
     </main>
+</div>
 
 
 

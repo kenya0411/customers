@@ -1,25 +1,6 @@
-
-
-<header>
-    <div class="flex maxWid mbPad">
-        <div class="flex2 no1"> 
-            <a href="/">   
-                <h1>
-                 ロゴ
-             </h1>
-         </a>
-     </div>
-        <div class="flex2 no2 navi"> 
-
-   {{--          <div id="nav_toggle">
-                <div>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div> --}}
-            {{-- <nav> --}}
- {{--  <ul class="menu" id="menu">
+<aside class="common_padding">
+    
+<ul class="menu_side" id="menu">
  
   <li class="menu_list">
     <a href="/persons">人材管理</a>
@@ -51,27 +32,13 @@
   </li>
  
 </ul>
-</nav> --}}
-                        @guest
-                        @else
-                        <ul>
-                            <li>{{ Auth::user()->name }}様</li>
-                            <li>
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>
-                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                
-                            </li>
-                        </ul>
-                        
-                        
-                        @endguest
+   
 
-     </div>
 
-</div>
-</header>
+
+
+
+
 
 
 
@@ -85,15 +52,23 @@
  
     // ②乗せたボタンに連動したメガメニューをスライドで表示させる
     $(this).find('.menu_contents').stop().slideDown("fast");
+    $(this).addClass('hover');
  
   // ③マウスをボタンから離した際のイベントを設定
   }, function() {
  
     // ④マウスを離したらメガメニューをスライドで非表示にする
     $(this).find('.menu_contents').stop().slideUp("fast");
+    $(this).removeClass('hover');
  
   });
  
 });
 </script>
+
+
+</aside>
+
+
+
 
