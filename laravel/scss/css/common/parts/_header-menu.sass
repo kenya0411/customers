@@ -3,8 +3,44 @@
 @import "../../../_import.sass"
 
 
-@include tabup
+@include tab
+	header
+		
+		li
+			position: relative
+		a,a:visited
+		// 	color: #000
+		.hover
 
+			background: #000
+			a,a:visited
+				color: #fff
+
+		.menu_side
+			position: relative
+
+			.menu_list
+
+				> a,a:visited
+					display: block
+
+					
+
+
+			.menu_contents
+				background: #333
+				display: none
+				width: auto
+				min-width: 100%
+				position: relative
+	
+				>ul
+					flex-direction: column
+				li
+					width: 100%
+					a,a:visited
+						color: #fff
+						line-height: 1.1em
 .menu
 	display: flex
 	position: relative

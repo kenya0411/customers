@@ -6,11 +6,15 @@
 
 aside
 	background-color: #fff
-	border-right: 1px solid #aaa
+	border-right: 1px solid #e3e4e6
 	height: 100vh
+	@include tab
+		display: none
 	li
 		position: relative
 		@include rem(16)
+	a,a:visited
+		color: #000
 	.hover
 
 		background: #000
@@ -22,20 +26,21 @@ aside
 
 		.menu_list
 
-			> a
+			> a,a:visited
 				display: block
 				transition: .3s
 				padding: 8px 8px
 
-				// &:hover
-				// 	color: #fff
+				&:hover
+					color: #fff
 				// 	background: #000
 
 
 		.menu_contents
 			background: #333
-			// display: none
-			width: 100%
+			display: none
+			width: auto
+			min-width: 100%
 			position: absolute
 			top: 0
 			right: -100%
@@ -59,7 +64,7 @@ aside
 					margin-bottom: 8px
 
 
-				a
+				a,a:visited
 					color: #fff
 					padding: 4px 8px
 					line-height: 1.1em

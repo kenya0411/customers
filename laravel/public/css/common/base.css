@@ -2,138 +2,183 @@
 html {
   font-size: 62.5%;
   font-family: "游明朝体", "Yu Mincho", YuMincho, "ヒラギノ明朝 Pro", "Hiragino Mincho Pro", "Noto Serif JP", "MS P明朝", "MS PMincho", serif;
-  color: #000; }
-  html body {
-    font-family: "游ゴシック体", "Yu Gothic", YuGothic, "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "MS Pゴシック", "MS PGothic", sans-serif; }
+  color: #000;
+}
+html body {
+  font-family: "游ゴシック体", "Yu Gothic", YuGothic, "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, "MS Pゴシック", "MS PGothic", sans-serif;
+}
 
 body {
   margin: 0;
-  background-color: #eff4f9; }
-
-.main_wrap {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex; }
+  background-color: #eff3f6;
+  display: flex;
+  flex-wrap: wrap;
+}
 
 aside {
-  width: 200px; }
+  width: 200px;
+}
+@media (max-width: 1000px) {
+  aside {
+    width: 150px;
+  }
+}
 
 main {
   line-height: 1.5em;
   overflow: hidden;
   font-size: 16px;
   font-size: 1.6rem;
-  width: calc(100% - 200px); }
+  width: calc(100% - 200px);
+}
+@media (max-width: 768px) {
+  main {
+    width: 100%;
+  }
+}
 
 a {
   text-decoration: none;
-  color: #707070; }
-  a:visited {
-    color: #707070; }
+  color: #004fc6;
+}
+a:visited {
+  color: #004fc6;
+}
+a:hover {
+  color: #9F855A;
+}
+@media (min-width: 769px) {
   a:hover {
-    color: #9F855A; }
-  a:hover {
-    -webkit-transition-duration: 0.5s;
-    transition-duration: 0.5s; }
+    transition-duration: 0.5s;
+  }
+}
 
 .tel a, .tel a:visited, .tel2 a, .tel2 a:visited {
-  color: #1B8EE4; }
+  color: #1B8EE4;
+}
 
 *, *::before, *::after {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
 li {
-  list-style: none; }
+  list-style: none;
+}
 
 img {
   display: block;
   margin: 0;
   padding: 0;
   font-family: "object-fit: cover;"/9;
-  width: 100%; }
+  width: auto;
+}
 
 @media all and (-ms-high-contrast: none) {
   img {
-    font-family: "object-fit: cover;"; } }
-
+    font-family: "object-fit: cover;";
+  }
+}
 @supports (-ms-ime-align: auto) {
   img {
-    font-family: "object-fit: cover;"; } }
-
+    font-family: "object-fit: cover;";
+  }
+}
 h2, h3, h4, h5 {
-  font-weight: 700; }
+  font-weight: 700;
+}
 
 /*--------------------------------------------------- */
 /* アニメーション */
 /*--------------------------------------------------- */
-@-webkit-keyframes fade-in {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
 @keyframes fade-in {
   0% {
-    opacity: 0; }
+    opacity: 0;
+  }
   100% {
-    opacity: 1; } }
+    opacity: 1;
+  }
+}
+input.font-awesome {
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+}
 
 /*--------------------------------------------------- */
 /* ユーティリティタグ */
 /*--------------------------------------------------- */
 .flex {
+  display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flex;
   display: -o-flex;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex; }
+  display: flex;
+}
 
 .flexChild {
+  display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flex;
   display: -o-flex;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex; }
+  display: flex;
+}
 
 .maxWid {
   max-width: 1000px;
   width: 100%;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+}
 
 .common_padding {
-  padding: 20px; }
+  padding: 20px;
+}
+
+.common_padding_wide {
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
 @media (max-width: 1000px) {
   .mbPad {
     padding-left: 20px;
-    padding-right: 20px; } }
-
+    padding-right: 20px;
+  }
+}
 @media (max-width: 768px) {
   .maxWid {
-    max-width: initial; }
-  .mbInvi {
-    display: none; }
-  .tabInvi {
-    display: none; } }
+    max-width: initial;
+  }
 
+  .mbInvi {
+    display: none;
+  }
+
+  .tabInvi {
+    display: none;
+  }
+}
 @media (min-width: 769px) {
   .pcInvi {
-    display: none; } }
-
+    display: none;
+  }
+}
 @media (min-width: 481px) {
   .pcInvi2 {
-    display: none; } }
-
+    display: none;
+  }
+}
 @media (max-width: 1000px) {
   .pcInvi3 {
-    display: none; } }
-
+    display: none;
+  }
+}
 @media (max-width: 480px) {
   .mbInvi2 {
-    display: none; } }
-
+    display: none;
+  }
+}
 .width100 {
-  width: 100%; }
+  width: 100%;
+}

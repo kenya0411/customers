@@ -124,6 +124,10 @@ header a:hover {
 }
 
 @media (min-width: 769px) {
+  header nav {
+    display: none;
+  }
+
   #nav_toggle {
     display: none;
   }
@@ -134,10 +138,6 @@ header a:hover {
 @media (max-width: 768px) {
   header {
     width: 100%;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding-top: 20px;
-    padding-bottom: 20px;
   }
   header .flex {
     justify-content: space-between;
@@ -149,8 +149,39 @@ header a:hover {
   header h1 img {
     max-width: 160px;
   }
-  header #nav_toggle {
+  header .nav_toggle {
+    order: 1;
     margin-top: 0px;
+  }
+  header .navi {
+    display: flex;
+  }
+  header .navi > ul {
+    order: 0;
+    display: flex;
+    align-items: center;
+  }
+  header .navi > ul > li {
+    font-size: 14px;
+    font-size: 1.4rem;
+    color: #fff;
+    margin-right: 4px;
+    position: relative;
+    padding-right: 16px;
+  }
+  header .navi > ul > li:nth-of-type(1):after {
+    content: "";
+    /* style */
+    content: "｜";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    /* style */
+  }
+  header .navi > ul > li a, header .navi > ul > li a:visited {
+    color: #fff;
   }
 }
 @media (max-width: 480px) {
@@ -190,6 +221,40 @@ header.fixed .flex .flex2.no3 {
 @media (max-width: 480px) {
   header.fixed h1 img {
     max-width: 120px;
+  }
+}
+@media (max-width: 768px) {
+  header li {
+    position: relative;
+  }
+  header .hover {
+    background: #000;
+  }
+  header .hover a, header .hover a:visited {
+    color: #fff;
+  }
+  header .menu_side {
+    position: relative;
+  }
+  header .menu_side .menu_list > a, header .menu_side .menu_list a:visited {
+    display: block;
+  }
+  header .menu_side .menu_contents {
+    background: #333;
+    display: none;
+    width: auto;
+    min-width: 100%;
+    position: relative;
+  }
+  header .menu_side .menu_contents > ul {
+    flex-direction: column;
+  }
+  header .menu_side .menu_contents li {
+    width: 100%;
+  }
+  header .menu_side .menu_contents li a, header .menu_side .menu_contents li a:visited {
+    color: #fff;
+    line-height: 1.1em;
   }
 }
 .menu {
@@ -279,6 +344,9 @@ header.fixed .flex .flex2.no3 {
 }
 
 @media (max-width: 768px) {
+  header a, header a:visited {
+    color: #000;
+  }
   header nav {
     display: none;
     position: absolute;
@@ -306,13 +374,12 @@ header.fixed .flex .flex2.no3 {
   header nav li {
     text-align: center;
     border-bottom: 1px solid #eee;
-    padding: 6px 0 6px 0;
     width: 100%;
     margin: 0 auto;
   }
   header nav li a {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 16px;
+    padding-bottom: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -323,15 +390,6 @@ header.fixed .flex .flex2.no3 {
     border: none;
     font-size: 16px;
     font-size: 1.6rem;
-  }
-  header nav li.navContact {
-    background-color: #71BB15;
-  }
-  header nav li.navContact a {
-    color: #fff;
-  }
-  header nav li.navContact a:visited {
-    color: #fff;
   }
 
   #nav_toggle {
@@ -350,7 +408,7 @@ header.fixed .flex .flex2.no3 {
   #nav_toggle span {
     display: block;
     height: 3px;
-    background: #111;
+    background: #fff;
     position: absolute;
     width: 100%;
     transition: 0.5s ease-in-out;
@@ -402,10 +460,4 @@ header.fixed .flex .flex2.no3 {
   -webkit-transform: rotate(-135deg);
   -moz-transform: rotate(-135deg);
   transform: rotate(-135deg);
-}
-
-@media (min-width: 769px) {
-  header nav {
-    display: block !important;
-  }
 }

@@ -12,21 +12,28 @@ html
 
 body
 	margin: 0
-	background-color: #eff4f9
-.main_wrap
+	background-color: #eff3f6
 	display: flex
+	flex-wrap: wrap
+
+
 aside
 	width: 200px
+	@include pcsmall
+		width: 150px
 main
 	line-height: 1.5em
 	overflow: hidden
 	@include rem(16)
 	width: calc(100% - 200px)
+	@include tab
+		width: 100%
 a
 	text-decoration: none
 	@include color-link
 	&:hover
-		transition-duration: 0.5s	
+		@include tabup
+			transition-duration: 0.5s	
 .tel,.tel2
 	a,a:visited
 		color: $color-tel
@@ -43,7 +50,7 @@ img
 	margin: 0
 	padding: 0
 	font-family: 'object-fit: cover;'/9 /*IE対策*/
-	width: 100%
+	width: auto
 	//次から
 	// width: auto
 	// max-width: 100%
@@ -62,6 +69,14 @@ h2,h3,h4,h5
 		opacity: 0
 	100% 
 		opacity: 1
+
+
+
+input.font-awesome 
+	font-family: FontAwesome
+	font-style: normal
+	font-weight: normal
+	text-decoration: inherit
 
 /*--------------------------------------------------- */
 /* ユーティリティタグ
@@ -85,6 +100,10 @@ h2,h3,h4,h5
 	margin-right: auto
 .common_padding
 	padding: $mbPad
+.common_padding_wide
+	padding-left: $mbPad
+	padding-right: $mbPad
+
 @include pcsmall
 	.mbPad
 		padding-left: $mbPad

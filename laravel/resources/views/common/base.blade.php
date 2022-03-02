@@ -14,7 +14,6 @@
 <body class="frontPage">
 @include('common.nav')
 
-<div class="main_wrap">
   
 @include('common.side')
 
@@ -27,7 +26,6 @@
     </section>
     
     </main>
-</div>
 
 
 

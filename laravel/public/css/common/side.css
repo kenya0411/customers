@@ -1,50 +1,71 @@
 aside {
   background-color: #fff;
-  border-right: 1px solid #aaa;
-  height: 100vh; }
-  aside li {
-    position: relative;
-    font-size: 16px;
-    font-size: 1.6rem; }
-  aside .hover {
-    background: #000; }
-    aside .hover a, aside .hover a:visited {
-      color: #fff; }
-  aside .menu_side {
-    position: relative; }
-    aside .menu_side .menu_list > a {
-      display: block;
-      -webkit-transition: .3s;
-      transition: .3s;
-      padding: 8px 8px; }
-    aside .menu_side .menu_contents {
-      background: #333;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      right: -100%; }
-      aside .menu_side .menu_contents:before {
-        content: "";
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 10px 17px 10px 0;
-        border-color: transparent #333 transparent transparent;
-        position: absolute;
-        top: 10px;
-        left: -17px;
-        /* style */ }
-      aside .menu_side .menu_contents > ul {
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-        flex-direction: column; }
-      aside .menu_side .menu_contents li {
-        width: 100%;
-        margin-top: 8px; }
-        aside .menu_side .menu_contents li:nth-last-of-type(1) {
-          margin-bottom: 8px; }
-        aside .menu_side .menu_contents li a {
-          color: #fff;
-          padding: 4px 8px;
-          line-height: 1.1em; }
+  border-right: 1px solid #e3e4e6;
+  height: 100vh;
+}
+@media (max-width: 768px) {
+  aside {
+    display: none;
+  }
+}
+aside li {
+  position: relative;
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+aside a, aside a:visited {
+  color: #000;
+}
+aside .hover {
+  background: #000;
+}
+aside .hover a, aside .hover a:visited {
+  color: #fff;
+}
+aside .menu_side {
+  position: relative;
+}
+aside .menu_side .menu_list > a, aside .menu_side .menu_list a:visited {
+  display: block;
+  transition: 0.3s;
+  padding: 8px 8px;
+}
+aside .menu_side .menu_list > a:hover, aside .menu_side .menu_list a:visited:hover {
+  color: #fff;
+}
+aside .menu_side .menu_contents {
+  background: #333;
+  display: none;
+  width: auto;
+  min-width: 100%;
+  position: absolute;
+  top: 0;
+  right: -100%;
+}
+aside .menu_side .menu_contents:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 17px 10px 0;
+  border-color: transparent #333 transparent transparent;
+  position: absolute;
+  top: 10px;
+  left: -17px;
+  /* style */
+}
+aside .menu_side .menu_contents > ul {
+  flex-direction: column;
+}
+aside .menu_side .menu_contents li {
+  width: 100%;
+  margin-top: 8px;
+}
+aside .menu_side .menu_contents li:nth-last-of-type(1) {
+  margin-bottom: 8px;
+}
+aside .menu_side .menu_contents li a, aside .menu_side .menu_contents li a:visited {
+  color: #fff;
+  padding: 4px 8px;
+  line-height: 1.1em;
+}

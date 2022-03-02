@@ -1,11 +1,11 @@
 
 @extends('common.base'){{-- 継承元 --}}
-@section('title','add'){{-- タイトル --}}
-@section('heading','Customers登録画面'){{-- 見出し --}}
+@section('title','新規注文'){{-- タイトル --}}
+@section('heading','新規注文'){{-- 見出し --}}
 
 
 @section('content')
-    <section class="CustomerFrom maxWid mbPad formSection" id="app">   
+    <div class="orderFrom formSection" id="app">   
 
         <form action="./add" method="post">
             @csrf
@@ -135,7 +135,7 @@
         </div>
 
     </form>
-</section>
+</div>
 
 
 

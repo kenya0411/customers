@@ -112,6 +112,9 @@ header
 
 			
 @include tabup
+	header
+		nav
+			display: none
 	#nav_toggle
 		display: none
 
@@ -123,11 +126,7 @@ header
 header
 	@include tab
 		width: 100%
-		// position: absolute
-		margin-top: 0
-		margin-bottom: 0
-		padding-top: 20px
-		padding-bottom: 20px
+
 		.flex
 			justify-content: space-between
 		.no1
@@ -136,8 +135,35 @@ header
 		h1
 			img
 				max-width: 160px
-		#nav_toggle
+		.nav_toggle
+			order: 1
 			margin-top: 0px
+		.navi
+			display: flex
+			>ul
+				order: 0
+				display: flex
+				align-items: center
+				>li
+					@include rem(14)
+					color: #fff
+					margin-right: 4px
+					position: relative
+					padding-right: 16px
+					&:nth-of-type(1)
+						&:after
+							content: ""
+							/* style */
+							content: "｜"
+							position: absolute
+							top: 0
+							right: 0
+							bottom: 0
+							margin: auto
+							/* style */
+					a,a:visited
+						color: #fff
+
 
 	
 	@include mb

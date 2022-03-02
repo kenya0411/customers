@@ -1,11 +1,11 @@
     
 @extends('common.base'){{-- 継承元 --}}
-@section('title','customers'){{-- タイトル --}}
-@section('heading','customersリスト'){{-- 見出し --}}
+@section('title','注文一覧'){{-- タイトル --}}
+@section('heading','注文一覧'){{-- 見出し --}}
 
 
 @section('content')
-<section class="maxWid mbPad addBtnBlock"> 
+{{-- <div class="addBtnBlock"> 
 
 
     <div class="addbtnWrap">
@@ -16,7 +16,7 @@
 
 
     </div>
-</section>
+</div> --}}
 <div id="app">
   
 @include('customers.components.search')
@@ -112,19 +112,19 @@ Vue.createApp(hoge).mount('#app')
 
 
 <script>
-  if (window.matchMedia( "(max-width: 768px)" ).matches) {
+//   if (window.matchMedia( "(max-width: 768px)" ).matches) {
   
-   // $(function(){]
+//    // $(function(){]
    
-   $(window).on('load',function(){
+//    $(window).on('load',function(){
        
-  $("[data-name='click-open']").on("click", function() {
+//   $("[data-name='click-open']").on("click", function() {
 
-    $(this).siblings('div').not('.no1').slideToggle("fast");
+//     $(this).siblings('div').not('.no1').slideToggle("fast");
 
-  });
-});
- }
+//   });
+// });
+//  }
  
 //     jQuery(function($){
 //  console.log('test')

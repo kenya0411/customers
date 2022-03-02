@@ -1,11 +1,18 @@
 
 @extends('common.base'){{-- 継承元 --}}
-@section('title','edit'){{-- タイトル --}}
-@section('heading','Customers詳細画面'){{-- 見出し --}}
+@section('title','注文編集'){{-- タイトル --}}
+@section('heading','注文編集'){{-- 見出し --}}
 
 
 @section('content')
-<section class="CustomerFrom maxWid mbPad formSection" id="app">   
+<div class="backBlock">
+    
+<div class="backBtn">
+    <a href="../"><i class="fa-solid fa-caret-left"></i>戻る</a>
+</div>
+</div>
+
+<div class="orderFrom formSection" id="app">   
 
     <form action="./edit" method="post">
         @csrf
@@ -158,7 +165,7 @@
 </div>
 
 </form>
-</section>
+</div>
 
 
 <script>

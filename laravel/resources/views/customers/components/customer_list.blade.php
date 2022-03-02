@@ -1,42 +1,49 @@
-<section class="customerList maxWid mbPad listSection" > 
-<div class="heading">
-    <h3>productリスト</h3>
-</div>
-    <div class="flexHead flexWrap">
-        <div class="wid80">詳細</div>
-
+<div class="orderList listSection" > 
+<ul>
+    <li class="flexHead flexWrap">
+        <div >商品ID</div>
         <div>顧客情報</div>
         <div>商品情報</div>
-        <div class="wid100">追加料金</div>
-        <div class="wid250">悩み</div>
-        <div class="wid250">鑑定結果</div>
-        <div class="wid80">鑑定者</div>
+        <div>金額</div>
+        <div>鑑定・発送</div>
+        <div>外注</div>
+        <div>日付</div>
+        <div></div>
+        
+    </li>
 
-        <div class="wid80">鑑定</div>
-        <div class="wid80">発送</div>
-        <div>備考</div>
-        <div>住所</div>
-
-        <div class="wid80">削除</div>
-    </div>
-    <div class="flexBodyWrap "v-for="customer in customers">  
+    <li class="flexBodyWrap flexWrap" v-for="customer in customers">
         {{-- @foreach ($customers as $customer) --}}
 
-        <div class="flexWrap flexBody">
-
+{{-- 
 
             <div class="wid80 no1">
                 <div class="detailBtn">
                 <a :href='`/customers/detail/?id=${customer.id}&date_year=${customer.date_year}&date_month=${customer.date_month}`'>view</a></div>
                     
-                </div>
+                </div> --}}
+            <div>
+                <a href="">
+                    <div class="icon_wrap">
+                        
+                    <span>
+                       @{{customer.customers_product_id }} 
+                    </span>
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                
+                </a>
 
-            <div class="no2" data-name="click-open">
+</div>
+            <div >
+                <a href="">
+                    
                 <ul>
-                    <li>@{{customer.customers_product_id }}</li>
                     <li>@{{customer.customers_nickname }}</li>
                     <li>@{{customer.customers_name }}</li>
                 </ul>
+                </a>
+
             </div>
             <div>
                 <ul>
@@ -47,32 +54,19 @@
 
              
             </div>
-            <div class="wid100">@{{customer.customers_etc_price}}円
+            <div>@{{customer.customers_etc_price}}円
 
             </div>
-            <div class="wid250">
-                <textarea name="customers_worry" id="" cols="30" rows="10">@{{customer.customers_worry }}</textarea>
-                </div>
-            <div  class="wid250">
-                <textarea name="customers_answer" id="" cols="30" rows="10">@{{ customer.customers_answer }}</textarea>
+           
+         
 
-            </div>
-            <div class="wid80">@{{ customer.users_name }}様</div>
-            <div class="wid80">
+     <div>
 <span v-if="customer.customers_fortune_is_finished == 'true'">鑑定済み</span>
-</div>
-            <div class="wid80">
 <span v-if="customer.customers_ship_is_finished == 'true'">発送済み</span>
-            </div>
 
-            <div>
-@{{ customer.customers_note }}
-
-            </div>
-
-            <div>
-@{{ customer.customers_address }}
-            </div>
+</div>
+            <div >@{{ customer.users_name }}様</div>
+            <div >2022年</div>
 
 
             {{-- <div><input type="text" name="customers_deliver_notice" v-bind:value="customer.customers_deliver_notice"></div> --}}
@@ -89,14 +83,32 @@
          </form>
  --}}
                 {{-- </div> --}}
-            <div class="wid80">
-      <form action="/customers/delete"  method="post">
+            <div>
+                <ul class="icon_list">
+                    <li>
+                  <div class="worry">
+                      <img src="/img/common/icon/order_icon1.png" class="retina" alt="鑑定">
+                  </div>   
+                    </li>
+                    <li>
+                                        <a :href='`/customers/detail/?id=${customer.id}&date_year=${customer.date_year}&date_month=${customer.date_month}`'><img src="/img/common/icon/order_icon2.png" class="retina" alt="編集"></a>
+
+                    </li>
+                    <li>
+                        
+                <form action="/customers/delete"  method="post">
             @csrf
              <input type="hidden" name="id" v-bind:value="customer.id">
              <input type="hidden" name="customers_id" v-bind:value="customer.customers_id">
              <input type="hidden" name="date_day" v-bind:value="customer.date_day">
-                <input class="submit deleteBtn" type="submit" value="削除">
-         </form>
+             <button type="submit">
+                 <img src="/img/common/icon/order_icon3.png" class="retina" alt="削除">
+             </button>
+                {{-- <input class="submit deleteBtn" type="submit" value="削除"> --}}
+         </form>             
+                    </li>
+                </ul>
+ 
 
             </div>
 
@@ -104,9 +116,9 @@
 
 
         {{-- @endforeach --}}
-    </div>
 {{-- <script src="{{ asset('js/components/customers_select_product_list.js') }}"></script> --}}
 
-
-</section>
+</li>
+</ul>
+</div>
 

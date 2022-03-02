@@ -26,47 +26,21 @@
 
 
 .listSection
-	margin-top: $pad2
-	$bcolor: #aaa
+	margin-top: $mbPad
+	>ul
+		width: auto
+		>li
+			line-height: 1.3em
 	[type="text"]
 		height: 100%
-	.longtext
-		overflow: scroll
-		max-height: 100px
-	.flexHead
-		display: flex
 
-		>div
-			background-color: #ddd
-			border-top: 1px solid $bcolor
-	.flexBody
-		display: flex
 	.flexWrap
-		>div
-			padding: 8px 12px
-			border: 1px solid $bcolor
-			margin-top: -1px
-			margin-left: -1px
-			display: flex
-			line-height: 1.2em
-			align-items: center
-			&:nth-of-type(1)
-				margin-left: 0
-				/* style */
-	.flexWrap6
-		.no1,.no2,.no3,.no4,.no5,.no6
-			width: 18%
-	.flexWrap7
-		>div
-			width: 17%
-
-			&:nth-of-type(1)
-				/* style */
-				width: 10%
-
-			&:nth-last-of-type(1),&:nth-last-of-type(2)
-				width: 10%
-
+		display: flex
+		background-color: #fff
+		padding: 24px
+		align-items: center
+	.flexBodyWrap
+		border-top: 1px solid $color-bg
 
 	.editBtn
 		@include btn-btn($color-main,#fff)
@@ -93,6 +67,26 @@
 			bottom: 0
 			margin: auto
 			/* style */
+	.icon_wrap
+		display: flex
+		align-items: center
+		span
+			margin-right: 4px
+		i
+			position: relative
+			top: -1px
+
+	a,a:visited
+
+		color: $color-link
+		&:visited
+			color: $color-link
+		@include tabup
+		
+			&:hover
+				color: #888
+				transition-duration: 0.5s
+		
 
 
 
@@ -100,32 +94,68 @@
 
 
 
-.customerList
-	overflow: scroll
+// .customerList
+	// overflow: scroll
+	// .flexWrap
+	// 	width: fit-content
+	// 	>div
+	// 		width: 150px
+	// 	input,select
+	// 		width: 100%
+
+// @include tab
+// 	.customerList
+// 		.flexBody
+// 			display: flex
+// 			flex-wrap: wrap
+// 			.no1
+// 				width: 20%
+// 				display: block
+
+// 			.no2
+// 				width: 80%
+// 				display: block
+
+// 			>div
+// 				width: 100%
+// 				display: none
+// 		.flexWrap
+// 			width: 100%
+// 		// 	>div
+// 		// 		display: flex
+// 		
+// 		
+// 		
+.orderList
 	.flexWrap
-		width: fit-content
 		>div
-			width: 150px
-		input,select
-			width: 100%
-
-@include tab
-	.customerList
-		.flexBody
-			display: flex
-			flex-wrap: wrap
-			.no1
+			padding-right: 12px
+			&:nth-last-of-type(1)
+				padding-right: 0
+			&:nth-of-type(1)
 				width: 20%
-				display: block
-
-			.no2
-				width: 80%
-				display: block
-
-			>div
-				width: 100%
-				display: none
-		.flexWrap
-			width: 100%
-		// 	>div
-		// 		display: flex
+			&:nth-of-type(2)
+				width: 15%
+			&:nth-of-type(3)
+				width: 15%
+			&:nth-of-type(4)
+				width: 10%
+			&:nth-of-type(5)
+				width: 10%
+			&:nth-of-type(6)
+				width: 10%
+			&:nth-of-type(7)
+				width: 10%
+			&:nth-of-type(8)
+				width: 10%
+	.icon_list
+		display: flex
+		align-items: center
+		justify-content: flex-end
+		>li
+			margin-left: 16px
+			&:nth-last-of-type(1)
+				margin-right: 0
+		button
+			display: flex
+			align-items: center

@@ -3,65 +3,69 @@
   position: fixed;
   right: 8px;
   bottom: 8px;
-  z-index: 100; }
+  z-index: 100;
+}
+#footGoto a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #1B8EE4;
+  background: #fff;
+  font-size: 12px;
+  font-size: 1.2rem;
+  text-decoration: none;
+  opacity: 0.9;
+  padding: 1.7em 0 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  transition-duration: 1s;
+  font-family: "游明朝体", "Yu Mincho", YuMincho, "ヒラギノ明朝 Pro", "Hiragino Mincho Pro", "Noto Serif JP", "MS P明朝", "MS PMincho", serif;
+  border: 1px solid #eee;
+}
+#footGoto a:before {
+  font-family: "Font Awesome 5 Free";
+  content: "";
+  font-weight: 700;
+  position: absolute;
+  top: 0.5em;
+  font-size: 28px;
+  font-size: 2.8rem;
+}
+@media all and (-ms-high-contrast: none) {
+  #footGoto a:before {
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+}
+#footGoto a:hover {
+  opacity: 0.7;
+  transition-duration: 0.5s;
+}
+@media (max-width: 768px) {
   #footGoto a {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    color: #1B8EE4;
-    background: #fff;
-    font-size: 12px;
-    font-size: 1.2rem;
-    text-decoration: none;
-    opacity: 0.9;
-    padding: 1.7em 0 0;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    -webkit-transition-duration: 1s;
-    transition-duration: 1s;
-    font-family: "游明朝体", "Yu Mincho", YuMincho, "ヒラギノ明朝 Pro", "Hiragino Mincho Pro", "Noto Serif JP", "MS P明朝", "MS PMincho", serif;
-    border: 1px solid #eee; }
-    #footGoto a:before {
-      font-family: "Font Awesome 5 Free";
-      content: '\f102';
-      font-weight: 700;
-      position: absolute;
-      top: 0.5em;
-      font-size: 28px;
-      font-size: 2.8rem; }
-      @media all and (-ms-high-contrast: none) {
-        #footGoto a:before {
-          left: 50%;
-          -webkit-transform: translate(-50%, 0);
-          transform: translate(-50%, 0); } }
-    #footGoto a:hover {
-      opacity: 0.7;
-      -webkit-transition-duration: 0.5s;
-      transition-duration: 0.5s; }
-  @media (max-width: 768px) {
-    #footGoto a {
-      width: 50px;
-      height: 50px; }
-      #footGoto a span {
-        display: none; }
-      #footGoto a:before {
-        top: 0.5em;
-        font-size: 24px;
-        font-size: 2.4rem; } }
+    width: 50px;
+    height: 50px;
+  }
+  #footGoto a span {
+    display: none;
+  }
+  #footGoto a:before {
+    top: 0.5em;
+    font-size: 24px;
+    font-size: 2.4rem;
+  }
+}
 
 /*--------------------------------------------------- */
 /* footer */
 /*--------------------------------------------------- */
 footer a {
-  color: #fff; }
-  footer a:visited {
-    color: #fff; }
-  footer a:hover {
-    color: #aaa; }
+  color: #fff;
+}
+footer a:visited {
+  color: #fff;
+}
+footer a:hover {
+  color: #aaa;
+}

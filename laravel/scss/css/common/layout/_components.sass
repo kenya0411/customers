@@ -10,6 +10,7 @@ main
 		@include btn-btn(#aaa,#fff)
 		width: 100%
 		max-width: initial
+		
 	.searchBtn
 		@include btn-btn($color-accent,#fff)
 		width: 100%
@@ -34,7 +35,13 @@ main
 				&:hover
 					/* style */
 					color: #fff
-
+	.backBlock
+		margin-bottom: $mbPad
+	.backBtn
+		@include btn(#fff,$color-main)
+		a
+			padding: 6px 24px
+			border: 1px solid $color-main
 
 
 .addBtnBlock
@@ -54,18 +61,23 @@ main
 
 
 .searchBlock
-	margin-top: $pad
-	form
-		border: 1px solid #ddd
-		padding: 16px
-		background-color: #eee
 	.flex
 		.flex4
-			width: 100px
 			margin-right: 8px
-	select
+	select,[type="text"]
 		width: 100%
 		background-color: #fff
+		height: 36px
+		padding: 8px
+
+	.search_input
+		[type="text"]
+			width: 200px
+
+			&::placeholder
+				color: #949494
+				text-align: right
+
 
 .cloneBlock
 	margin-top: 50px
