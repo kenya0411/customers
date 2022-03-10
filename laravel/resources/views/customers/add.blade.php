@@ -11,7 +11,7 @@
             @csrf
 
             <dl>
-                <dt>date:</dt>
+                <dt>日付</dt>
                 <dd class="dateBlock">      
 
 
@@ -36,7 +36,7 @@
                     @endfor
                 </select>
                 </dd>
-                 <dt>customers_product_id</dt>
+                 <dt>商品ID</dt>
                 <dd>
                     <input type="text" name="customers_product_id" value="{{ old('customers_product_id') }} " >
                     @error('customers_product_id')
@@ -45,7 +45,7 @@
                     </div>
                     @enderror
                 </dd>
-                 <dt>customers_nickname</dt>
+                 <dt>ニックネーム</dt>
                 <dd>
                    <input type="text" name="customers_nickname"  value="{{ old('customers_nickname') }} " >
                     @error('customers_nickname')
@@ -55,7 +55,7 @@
                     @enderror
                 </dd>
 
-                 <dt>customers_name</dt>
+                 <dt>名前</dt>
                 <dd>
                    <input type="text" name="customers_name"  value="{{ old('customers_name') }} " >
                     @error('customers_name')
@@ -67,7 +67,7 @@
 
   
 
-                <dt>persons_name</dt>
+                <dt>鑑定士</dt>
                 <dd>
                     <select name="persons_id" v-model="v_persons" id="">
 
@@ -78,7 +78,7 @@
                 </dd>
      
 
-                   <dt> products_name:</dt>
+                   <dt>商品名</dt>
                 <dd>            
                         <select name="products_id" v-model="v_products" id="">
       <option v-for="product in products"  v-bind:value="product.products_id" >@{{ product.products_name }}</option>
@@ -87,7 +87,7 @@
 
                 </dd>
     
-                       <dt> products_options_name:</dt>
+                       <dt>オプション名</dt>
                 <dd class="flex">            
            <select name="products_options_id" v-model="v_products_options" id="">
       <option value="" ></option>
@@ -98,7 +98,7 @@
 
                   
                 </dd>
-                 <dt> customers_etc_price:</dt>
+                 <dt> 料金</dt>
                 <dd>            
                         <input type="number" name="customers_etc_price" inputmode="numeric" value="{{ old('customers_etc_price') }} " >
                     @error('customers_etc_price')
@@ -107,7 +107,7 @@
                     </div>
                     @enderror
                 </dd>
-                 <dt> customers_address:</dt>
+                 <dt> 住所</dt>
                 <dd>            
                     <textarea name="customers_address" id="" cols="30" rows="10" value="{{ old('customers_name') }} "></textarea>
                     @error('customers_address')
@@ -117,7 +117,7 @@
                     @enderror
                 </dd>
 
-                 <dt> customers_worry:</dt>
+                 <dt> 悩み</dt>
                 <dd>            
                         <textarea name="customers_worry" id="" cols="30" rows="10" value="{{ old('customers_worry') }} "></textarea>
                     @error('customers_worry')

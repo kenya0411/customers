@@ -18,10 +18,12 @@
     </div>
 </div> --}}
 <div id="app">
-  
-@include('customers.components.search')
 
+
+@include('customers.components.search')
 @include('customers.components.customer_list')
+
+
 </div>
 
 
@@ -29,6 +31,18 @@
 
 {{-- @include('products.components.product_option_list') --}}
     
+
+<script>
+$(window).on('load',function(){
+    $(document).on('click','.flexBodyWrap .mbBlock',function(){
+    // $(".flexBodyWrap .mbBlock").on('click',function () {
+  $(this).next('.pcBlock').slideToggle('fast');
+  $(this).toggleClass('selected_mb');
+  $(this).next('.pcBlock').toggleClass('selected_pc');
+});
+    });
+
+</script>
 
 
 <script>

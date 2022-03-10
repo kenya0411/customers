@@ -19,7 +19,7 @@
         <input type="hidden" name="id" value="{{ $customers[0]->id }} " >
 
         <dl>
-         <dt>date</dt>
+         <dt>日付</dt>
          <dd>
            <div class="inputFlex dateBlock">
             <select name="date_year" v-model="customers.date_year" id="">
@@ -40,7 +40,7 @@
 
             </div>
         </dd>
-        <dt>customers_product_id</dt>
+        <dt>商品ID</dt>
         <dd>
             <input type="text" name="customers_product_id" v-bind:value="customers.customers_product_id" >
             @error('customers_product_id')
@@ -51,7 +51,7 @@
         </dd>
 
 
-        <dt>customers_nickname</dt>
+        <dt>ニックネーム</dt>
         <dd>
             <input type="text" name="customers_nickname" v-bind:value="customers.customers_nickname" >
             @error('customers_nickname')
@@ -62,7 +62,7 @@
         </dd>
 
 
-        <dt>customers_name</dt>
+        <dt>名前</dt>
         <dd>
             <input type="text" name="customers_name"  v-bind:value="customers.customers_name" >
             @error('customers_name')
@@ -71,7 +71,7 @@
             </div>
             @enderror
         </dd>
-        <dt>persons_name</dt>
+        <dt>鑑定士</dt>
         <dd>
             <select name="persons_id" v-model="customers.persons_id" id="">
               <option v-for="person in persons"  v-bind:value="person.persons_id" >@{{ person.persons_name }}</option>
@@ -79,7 +79,7 @@
 
           </select>
       </dd>
-      <dt>products_name</dt>
+      <dt>商品名</dt>
       <dd>
         <select name="products_id" v-model="customers.products_id" id="">
 
@@ -88,14 +88,14 @@
       </select>
   </dd>
 
-  <dt> products_options_name:</dt>
+  <dt> オプション名</dt>
   <dd>            
      <select name="products_options_id" v-model="customers.products_options_is" id="">
       <option v-for="product_option in products_options"  v-bind:value="product_option.products_options_id" >@{{ product_option.products_options_name }}</option>
 
   </select>
 </dd>
-<dt> customers_etc_price:</dt>
+<dt> 料金</dt>
 <dd>            
     <input type="number" name="customers_etc_price" inputmode="numeric" value="{{ old('customers_etc_price') }} " >
     @error('customers_etc_price')
@@ -104,22 +104,22 @@
     </div>
     @enderror
 </dd>             
-<dt> customers_worry:</dt>
+<dt> 悩み</dt>
 
 <dd> 
     <textarea name="customers_worry" id="" cols="30" rows="10" v-bind:value="customers.customers_worry"></textarea>           
 </dd>          
-<dt> customers_answer:</dt>
+<dt> 鑑定結果</dt>
 <dd> 
     <textarea name="customers_answer" id="" cols="30" rows="10" v-bind:value="customers.customers_answer"></textarea>           
 </dd>             
-<dt> users_id:</dt>
+<dt> 外注者</dt>
 <dd>    
    <select name="users_id" v-model="customers.users_id" id="">
        <option v-for="user in users"  v-bind:value="user.id" >@{{ user.name }}</option>
    </select>        
 </dd>             
-<dt> ship_is_finished:<br>fortune_is_finished</dt>
+<dt> 鑑定・発送</dt>
 <dd>    
    <div class="inputFlex checkBoxWrap">
     <input type="checkbox" name="customers_fortune_is_finished" id="customers_fortune_is_finished" v-model="customers.customers_fortune_is_finished" value="true" checked>
@@ -137,12 +137,12 @@
     </label>    
 </div>
 </dd>             
-<dt> customers_note:</dt>
+<dt> 備考</dt>
 <dd>  
     <textarea name="customers_note" id="" cols="30" rows="10"  v-bind:value="customers.customers_note"></textarea>           
 
 </dd>                
-<dt> customers_address:</dt>
+<dt> 住所</dt>
 <dd>    
     <textarea name="customers_address" id="" cols="30" rows="10"  v-bind:value="customers.customers_address"></textarea>           
 

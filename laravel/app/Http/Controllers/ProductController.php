@@ -65,7 +65,7 @@ public function show($request,$dates,$redirect){
             'persons_id' => '',
 
         );
-$data = $this->show($request,$dates,'products.index');
+$data = $this->show($request,$dates,'products.list_product');
 return $data;
     }
 
@@ -77,7 +77,7 @@ return $data;
         //     'persons_id' => $request->persons_id,
 
         // );
-$data = $this->show($request,'','products.index');
+$data = $this->show($request,'','products.list_product');
 
 return $data;
 
@@ -88,7 +88,7 @@ return $data;
     public function search(Request $request)
     {
    
-$data = $this->show($request,'','products.index');
+$data = $this->show($request,'','products.list_product');
   
 
 return $data;

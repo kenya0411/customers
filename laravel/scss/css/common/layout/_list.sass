@@ -1,27 +1,9 @@
 @charset "UTF-8"
+@import "diff/_product.sass"
+@import "diff/_order.sass"
 
 @import "../../../_import.sass"
 
-@include tabup
-	.listSection 
-		.flexWrap 
-			.wid30
-				width: 30px
-			.wid50
-				width: 50px
-			.wid100
-				width: 100px
-
-			.wid40
-				width: 40px
-			.wid60
-				width: 60px
-			.wid80
-				width: 80px
-			.wid200
-				width: 200px
-			.wid250
-				width: 250px
 
 
 
@@ -35,17 +17,32 @@
 		height: 100%
 
 	.flexWrap
-		display: flex
-		background-color: #fff
-		padding: 24px
-		align-items: center
+		.pcBlock
+			display: flex
+			background-color: #fff
+			padding: 24px
+			align-items: center
+			.hiddenName
+				@include tabup
+					display: none
+		.mbBlock
+			@include tabup
+				display: none
 	.flexBodyWrap
 		border-top: 1px solid $color-bg
 
 	.editBtn
 		@include btn-btn($color-main,#fff)
-		width: 100%
+		width: fit-content
+		padding: 8px 12px
+		line-height: 1em
 		max-width: initial
+		a,a:visited
+
+			color: #fff!important
+
+			
+
 	.deleteBtn
 		@include btn-btn(#aaa,#fff)
 		width: 100%
@@ -77,6 +74,7 @@
 			top: -1px
 
 	a,a:visited
+		display: inline-block
 
 		color: $color-link
 		&:visited
@@ -90,6 +88,60 @@
 
 
 
+
+
+
+@include tab
+
+	.listSection
+		
+		.flexWrap
+			.tabInvi
+				display: none!important
+			
+			.mbBlock
+				cursor: pointer
+				display: flex
+				background-color: #fff
+				padding: 24px
+				align-items: center
+				.fa-circle-chevron-up
+					display: none
+
+				>div,>ul
+
+					
+					width: 33.33%
+				.no3
+					text-align: right
+
+		.flexWrap
+
+			.selected_mb
+				background-color: #333
+				color: #fff
+				.fa-circle-chevron-down
+					display: none
+				.fa-circle-chevron-up
+					display: block
+					color: #fff
+
+			.pcBlock
+				background-color: #eeeeee
+				border: 1px solid #ddd
+				>div
+					margin-bottom: 16px
+					padding-bottom: 16px
+					border-bottom: 1px dotted #aaa
+					&:nth-last-of-type(1)
+						border-bottom: 0
+						margin-bottom: 0
+						padding-bottom: 0
+
+				.hiddenName
+
+					font-weight: 700
+					margin-bottom: 4px
 
 
 
@@ -125,37 +177,4 @@
 // 		// 		display: flex
 // 		
 // 		
-// 		
-.orderList
-	.flexWrap
-		>div
-			padding-right: 12px
-			&:nth-last-of-type(1)
-				padding-right: 0
-			&:nth-of-type(1)
-				width: 20%
-			&:nth-of-type(2)
-				width: 15%
-			&:nth-of-type(3)
-				width: 15%
-			&:nth-of-type(4)
-				width: 10%
-			&:nth-of-type(5)
-				width: 10%
-			&:nth-of-type(6)
-				width: 10%
-			&:nth-of-type(7)
-				width: 10%
-			&:nth-of-type(8)
-				width: 10%
-	.icon_list
-		display: flex
-		align-items: center
-		justify-content: flex-end
-		>li
-			margin-left: 16px
-			&:nth-last-of-type(1)
-				margin-right: 0
-		button
-			display: flex
-			align-items: center
+// 
