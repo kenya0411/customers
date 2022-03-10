@@ -20,12 +20,15 @@ body
 aside
 	width: 200px
 	@include pcsmall
-		width: 150px
+		width: 130px
 main
 	line-height: 1.5em
 	overflow: hidden
 	@include rem(16)
 	width: calc(100% - 200px)
+	@include pcsmall
+		width: calc(100% - 130px)
+
 	@include tab
 		width: 100%
 a
