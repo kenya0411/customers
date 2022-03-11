@@ -14,8 +14,8 @@ class CreateFortunesTable extends Migration
     public function up()
     {
         Schema::create('fortunes', function (Blueprint $table) {
-            $table->bigIncrements('fortunes_id');
-            $table->integer('orders_id')->nullable();
+            $table->integer('fortunes_id');
+            $table->string('orders_id')->nullable();
             $table->text('fortunes_worry')->nullable();
             $table->text('fortunes_answer')->nullable();
             $table->text('fortunes_reply1')->nullable();

@@ -1,0 +1,43 @@
+@charset "UTF-8"
+
+@import "../../../../_import.sass"
+.personList
+	.flexWrap
+
+		.pcBlock
+			input,textarea
+				padding: 4px 8px
+				height: 100%
+				width: 100%
+			textarea
+				height: 80px
+			@include tab
+				display: none
+			@include tabup
+				>div
+					display: flex
+
+					padding-right: 12px
+					&:nth-last-of-type(1)
+						padding-right: 0
+					&:nth-of-type(1)
+						width: 20%
+					&:nth-of-type(2)
+						width: 15%
+					&:nth-of-type(3)
+						width: 20%
+					&:nth-of-type(4)
+						width: 10%
+					&:nth-of-type(5)
+						width: 10%
+					&:nth-of-type(6)
+						width: 10%
+@include tab
+	.personList 
+		.flexWrap 
+			.pcBlock 
+				[type="text"]
+					background-color: #fff
+
+				[type="submit"]
+					width: auto

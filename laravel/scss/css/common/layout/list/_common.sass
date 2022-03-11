@@ -1,0 +1,81 @@
+@charset "UTF-8"
+
+@import "../../../../_import.sass"
+.listSection
+	margin-top: $mbPad
+	>ul
+		width: auto
+		>li
+			line-height: 1.3em
+	[type="text"]
+		height: 100%
+
+	.flexWrap
+		.pcBlock
+			display: flex
+			background-color: #fff
+			padding: 24px
+			align-items: center
+			.hiddenName
+				@include tabup
+					display: none
+		.mbBlock
+			@include tabup
+				display: none
+	.flexBodyWrap
+		border-top: 1px solid $color-bg
+
+	.editBtn
+		@include btn-btn($color-main,#fff)
+		width: fit-content
+		padding: 8px 12px
+		line-height: 1em
+		max-width: initial
+		a,a:visited
+
+			color: #fff!important
+
+			
+
+	.deleteBtn
+		@include btn-btn(#aaa,#fff)
+		width: 100%
+		max-width: initial
+	.heading
+		@include rem(20)
+		margin-bottom: 12px
+		position: relative
+		padding-left: 0.5em
+		&:before
+			content: ""
+			content: ""
+			border-left: 3px solid $color-main
+			width: 3px
+			height: 100%
+			position: absolute
+			top: 0
+			left: 0
+			bottom: 0
+			margin: auto
+			/* style */
+	.icon_wrap
+		display: flex
+		align-items: center
+		span
+			margin-right: 4px
+		i
+			position: relative
+			top: -1px
+
+	a,a:visited
+		display: inline-block
+
+		color: $color-link
+		&:visited
+			color: $color-link
+		@include tabup
+		
+			&:hover
+				color: #888
+				transition-duration: 0.5s
+		

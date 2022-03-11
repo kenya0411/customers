@@ -15,12 +15,21 @@ class PersonTableSeeder extends Seeder
             [
             'persons_name'  => '慧蘭(けいらん)',
             'persons_platform_name' => 'メルカリ',
-            'persons_platform_url' => 'https://jp.mercari.com/',
+            'persons_platform_url' => 'https://jp.mercari.com/transaction/',
             'persons_platform_fee' => 10,
-            // 'created_at' => now(),
-            // 'updated_at' => now(),
             ],
-
+            [
+            'persons_name'  => '恋霊(れんれい)',
+            'persons_platform_name' => 'ココナラ',
+            'persons_platform_url' => 'https://coconala.com/talkrooms/',
+            'persons_platform_fee' => 20,
+            ],
+            [
+            'persons_name'  => 'フェアリース',
+            'persons_platform_name' => 'メルカリ',
+            'persons_platform_url' => 'https://jp.mercari.com/transaction/',
+            'persons_platform_fee' => 10,
+            ],
         ]);
 
 

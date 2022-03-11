@@ -1,6 +1,6 @@
 @extends('common.base'){{-- 継承元 --}}
-@section('title','persons_add'){{-- タイトル --}}
-@section('heading','person登録画面'){{-- 見出し --}}
+@section('title','鑑定士登録画面'){{-- タイトル --}}
+@section('heading','鑑定士登録画面'){{-- 見出し --}}
 
 
 @section('content')
@@ -9,7 +9,7 @@
         <form action="./add" method="post">
             @csrf
             <dl>
-                <dt>persons_name:</dt>
+                <dt>鑑定士の名前</dt>
                 <dd>            
                     <input type="text" name="persons_name" id="persons_name" value="{{ old('persons_name') }} " >
                     @error('persons_name')
@@ -19,7 +19,7 @@
                     </div>
                     @enderror
                 </dd>
-                <dt>persons_platform_name</dt>
+                <dt>プラットフォーム名</dt>
                 <dd>
 
                     <input type="text" name="persons_platform_name" id="persons_platform_name" value="{{ old('persons_platform_name') }}">
@@ -30,7 +30,7 @@
                     </div>
                     @enderror
                 </dd>
-                <dt>persons_platform_url</dt>
+                <dt>URL</dt>
                 <dd>           
 
                     <input type="text" name="persons_platform_url" id="persons_platform_url" value="{{ old('persons_platform_url') }}">
@@ -41,7 +41,7 @@
                     </div>
                     @enderror
                 </dd>
-                <dt>persons_platform_fee</dt>
+                <dt>手数料</dt>
                 <dd>     @error('persons_platform_fee')
                   <div class="errorMessage">
                     {{ $message }}<br>
