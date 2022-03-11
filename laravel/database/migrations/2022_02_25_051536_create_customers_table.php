@@ -16,10 +16,8 @@ class CreateCustomersTable extends Migration
         Schema::create('customers', function (Blueprint $table) {
             // $table->bigIncrements('id');
             // $table->timestamps();
-            $table->integer('customers_id', true);
-            $table->string('customers_product_id')->nullable();
+            $table->bigIncrements('customers_id');
             $table->string('customers_nickname')->nullable();
-            $table->string('customers_name')->nullable();
             $table->string('customers_name')->nullable();
             $table->text('customers_address')->nullable();
             $table->text('customers_note')->nullable();
@@ -27,6 +25,7 @@ class CreateCustomersTable extends Migration
             $table->string('customers_prefecture')->nullable();
             $table->timestamps('created_at')->nullable();
             $table->timestamps('updated_at')->nullable();
+            $table->boolean('is_delete');
         });
     }
 
