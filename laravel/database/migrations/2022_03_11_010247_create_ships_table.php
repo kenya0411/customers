@@ -24,10 +24,9 @@ class CreateShipsTable extends Migration
             $table->string('ships_add_product1')->nullable();
             $table->string('ships_add_product2')->nullable();
             $table->string('ships_add_product3')->nullable();
-
-            $table->timestamps('created_at')->nullable();
-            $table->timestamps('updated_at')->nullable();
-            $table->boolean('is_delete');
+            $table->timestamp('updated_at')->useCurrent()->nullable();
+            $table->timestamp('created_at')->useCurrent()->nullable();
+            $table->boolean('is_delete')->default(0);
         });
     }
 

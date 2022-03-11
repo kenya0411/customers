@@ -20,9 +20,9 @@ class CreateProductsOptionsMultipleTable extends Migration
             $table->text('products_options_multiple_detail')->nullable();
             $table->integer('products_id')->nullable();
             $table->string('products_options_name')->nullable();
-            $table->timestamps('created_at')->nullable();
-            $table->timestamps('updated_at')->nullable();
-            $table->boolean('is_delete');
+            $table->timestamp('updated_at')->useCurrent()->nullable();
+            $table->timestamp('created_at')->useCurrent()->nullable();
+            $table->boolean('is_delete')->default(0);
         });
     }
 

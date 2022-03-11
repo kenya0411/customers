@@ -25,9 +25,9 @@ class CreateFortunesTable extends Migration
             $table->text('fortunes_reply3')->nullable();
             $table->text('fortunes_reply_answer3')->nullable();
 
-            $table->timestamps('created_at')->nullable();
-            $table->timestamps('updated_at')->nullable();
-            $table->boolean('is_delete');
+            $table->timestamp('updated_at')->useCurrent()->nullable();
+            $table->timestamp('created_at')->useCurrent()->nullable();
+            $table->boolean('is_delete')->default(0);
         });
     }
 

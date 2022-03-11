@@ -19,9 +19,9 @@ class CreatePersonsTable extends Migration
             $table->string('persons_platform_name')->nullable();
             $table->text('persons_platform_url')->nullable();
             $table->integer('persons_platform_fee')->nullable();
-            $table->timestamps('created_at')->nullable();
-            $table->timestamps('updated_at')->nullable();
-            $table->boolean('is_delete');
+            $table->timestamp('updated_at')->useCurrent()->nullable();
+            $table->timestamp('created_at')->useCurrent()->nullable();
+            $table->boolean('is_delete')->default(0);
 
 
         });

@@ -21,9 +21,9 @@ class CreateProductsOptionsTable extends Migration
             $table->integer('products_id')->nullable();
             $table->boolean('products_options_is_multiple');
             $table->integer('products_options_multiple_id')->nullable();
-            $table->timestamps('created_at')->nullable();
-            $table->timestamps('updated_at')->nullable();
-            $table->boolean('is_delete');
+            $table->timestamp('updated_at')->useCurrent()->nullable();
+            $table->timestamp('created_at')->useCurrent()->nullable();
+            $table->boolean('is_delete')->default(0);
         });
     }
 
