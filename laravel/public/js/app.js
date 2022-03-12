@@ -50007,8 +50007,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/kenya/Web/local/site/customer/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/kenya/Web/local/site/customer/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/kenya/Web/local/site/customers/laravel/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/kenya/Web/local/site/customers/laravel/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

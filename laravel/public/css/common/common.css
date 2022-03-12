@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "rodinb";
   font-display: swap;
@@ -130,6 +131,14 @@
   }
 }
 
+@media (max-width: 768px) {
+  .listSection .flexWrap .pcBlock [type="text"], .listSection .flexWrap .pcBlock textarea {
+    background-color: #fff;
+  }
+  .listSection .flexWrap .pcBlock [type="submit"] {
+    width: auto;
+  }
+}
 .productList .flexWrap .pcBlock input, .productList .flexWrap .pcBlock textarea {
   padding: 4px 8px;
   height: 100%;
@@ -152,7 +161,7 @@
     padding-right: 0;
   }
   .productList .flexWrap .pcBlock > div:nth-of-type(1) {
-    width: 10%;
+    width: 15%;
   }
   .productList .flexWrap .pcBlock > div:nth-of-type(2) {
     width: 15%;
@@ -164,13 +173,57 @@
     width: 15%;
   }
   .productList .flexWrap .pcBlock > div:nth-of-type(5) {
-    width: 25%;
+    width: 29%;
   }
   .productList .flexWrap .pcBlock > div:nth-of-type(6) {
-    width: 10%;
+    width: 8%;
   }
   .productList .flexWrap .pcBlock > div:nth-of-type(7) {
+    width: 8%;
+  }
+}
+
+.productOptionList .flexWrap .pcBlock input, .productOptionList .flexWrap .pcBlock textarea {
+  padding: 4px 8px;
+  height: 100%;
+  width: 100%;
+}
+.productOptionList .flexWrap .pcBlock textarea {
+  height: 80px;
+}
+@media (max-width: 768px) {
+  .productOptionList .flexWrap .pcBlock {
+    display: none;
+  }
+}
+@media (min-width: 769px) {
+  .productOptionList .flexWrap .pcBlock > div {
+    display: flex;
+    padding-right: 12px;
+  }
+  .productOptionList .flexWrap .pcBlock > div:nth-last-of-type(1) {
+    padding-right: 0;
+  }
+  .productOptionList .flexWrap .pcBlock > div:nth-of-type(1) {
+    width: 15%;
+  }
+  .productOptionList .flexWrap .pcBlock > div:nth-of-type(2) {
+    width: 15%;
+  }
+  .productOptionList .flexWrap .pcBlock > div:nth-of-type(3) {
     width: 10%;
+  }
+  .productOptionList .flexWrap .pcBlock > div:nth-of-type(4) {
+    width: 15%;
+  }
+  .productOptionList .flexWrap .pcBlock > div:nth-of-type(5) {
+    width: 29%;
+  }
+  .productOptionList .flexWrap .pcBlock > div:nth-of-type(6) {
+    width: 8%;
+  }
+  .productOptionList .flexWrap .pcBlock > div:nth-of-type(7) {
+    width: 8%;
   }
 }
 
@@ -281,7 +334,6 @@
     display: none !important;
   }
   .listSection .flexWrap .mbBlock {
-    cursor: pointer;
     display: flex;
     background-color: #fff;
     padding: 24px;
@@ -559,31 +611,40 @@ main .backBtn a {
   word-break: break-all;
   width: fit-content;
   text-decoration: none;
-  background: #fff;
+  background: #888;
   text-align: center;
-  border: 1px solid #fff;
-  color: #1B8EE4;
+  border: 1px solid #888;
+  color: #fff;
   transition: all 0.5s ease;
 }
 @media (min-width: 769px) {
   main .backBtn a:hover {
-    background: #1B8EE4;
-    color: #fff;
-    border: 1px solid #fff;
+    background: #fff;
+    color: #888;
+    border: 1px solid #888;
     box-shadow: none;
   }
 }
 main .backBtn a {
-  padding: 6px 24px;
-  border: 1px solid #1B8EE4;
+  padding: 6px 16px;
+  border: 1px solid #888;
+  position: relative;
 }
-main .addbtnWrap {
+main .backBtn a:before {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  content: "";
+  font-weight: 700;
+  margin-right: 4px;
+  /* style */
+}
+main .addbtnWrap, main .commonBtn {
   display: flex;
 }
-main .addbtn {
+main .addbtn, main .commonBtn {
   margin-right: 16px;
 }
-main .addbtn a {
+main .addbtn a, main .commonBtn a {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -597,24 +658,30 @@ main .addbtn a {
   transition: all 0.5s ease;
 }
 @media (min-width: 769px) {
-  main .addbtn a:hover {
+  main .addbtn a:hover, main .commonBtn a:hover {
     background: #1B8EE4;
     color: #fff;
     border: 1px solid #fff;
     box-shadow: none;
   }
 }
-main .addbtn a {
+main .addbtn a, main .commonBtn a {
   border: 1px solid #1B8EE4;
   max-width: 150px;
   padding: 8px 16px;
 }
 
-.searchBlock .flex .flex4 {
+.searchBlock {
+  margin-top: 20px;
+}
+.searchBlock ul {
+  display: flex;
+}
+.searchBlock ul .li {
   margin-right: 8px;
 }
 .searchBlock select, .searchBlock [type="text"] {
-  width: 100%;
+  width: auto;
   background-color: #fff;
   height: 36px;
   padding: 8px;
@@ -628,10 +695,11 @@ main .addbtn a {
 }
 
 @media (max-width: 768px) {
-  .searchBlock .flex {
+  .searchBlock ul {
+    display: flex;
     flex-wrap: wrap;
   }
-  .searchBlock .flex .flex4:nth-of-type(1) {
+  .searchBlock ul li:nth-of-type(1) {
     width: 100%;
     margin-bottom: 8px;
   }

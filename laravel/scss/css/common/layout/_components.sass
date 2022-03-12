@@ -38,16 +38,24 @@ main
 	.backBlock
 		margin-bottom: $mbPad
 	.backBtn
-		@include btn(#fff,$color-main)
+		@include btn(#888,#fff)
 		a
-			padding: 6px 24px
-			border: 1px solid $color-main
+			padding: 6px 16px
+			border: 1px solid #888
+			position: relative
+			&:before
+				content: ""
+				font-family: "Font Awesome 5 Free"
+				content: '\f0d9'
+				font-weight: 700
+				margin-right: 4px
+				/* style */
 
 
 
-	.addbtnWrap
+	.addbtnWrap,.commonBtn
 		display: flex
-	.addbtn
+	.addbtn,.commonBtn
 		@include btn(#fff,$color-main)
 		margin-right: 16px
 		a
@@ -59,11 +67,13 @@ main
 
 
 .searchBlock
-	.flex
-		.flex4
+	margin-top: $mbPad
+	ul
+		display: flex
+		.li
 			margin-right: 8px
 	select,[type="text"]
-		width: 100%
+		width: auto
 		background-color: #fff
 		height: 36px
 		padding: 8px
@@ -80,9 +90,10 @@ main
 @include tab
 
 	.searchBlock
-		.flex
+		ul
+			display: flex
 			flex-wrap: wrap
-			.flex4
+			li
 				&:nth-of-type(1)
 					width: 100%
 					margin-bottom: 8px

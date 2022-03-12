@@ -1,41 +1,22 @@
     
 @extends('common.base'){{-- 継承元 --}}
-@section('title','add'){{-- タイトル --}}
-@section('heading','product登録画面'){{-- 見出し --}}
+@section('title','商品登録画面'){{-- タイトル --}}
+@section('heading','商品登録画面'){{-- 見出し --}}
 
 
 @section('content')
-    <section class="productFrom maxWid mbPad formSection">   
+    <div class="backBtn">
+        <a href="/products">戻る</a>
+    </div> 
+    <section class="productFrom  formSection">   
 
         <form action="./add" method="post">
             @csrf
 
             <dl>
-                <dt>date:</dt>
-                <dd>      
-
-                    <select name="date_year" id="">
-                        @php
-                        $d = now();
-                        $year = $d->format('Y');
-                        $year_add = $d->addYears(1)->format('Y');
-                        @endphp
-                        <option value="{{ $year }}">{{ $year }}年</option>
-                        <option value="{{ $year_add }}">{{ $year_add }}年</option>
-
-                    </select>
-                    <select name="date_month" id="">
-                        @php
-                        $month = $d->format('n');
-                        $month_add = $d->addMonths(1)->format('n');
-                        @endphp
-                        <option value="{{ $month }}">{{ $month }}月</option>
-                        <option value="{{ $month_add }}">{{ $month_add }}月</option>
-
-                    </select>
-                </dd>
  
-                <dt>persons_name</dt>
+ 
+                <dt>鑑定士名</dt>
                 <dd>
                     <select name="persons_id" id="">
 
@@ -46,7 +27,7 @@
                 </dd>
      
 
-                   <dt> products_name:</dt>
+                   <dt>商品名</dt>
                 <dd>            
                     <input type="text" name="products_name" value="{{ old('products_name') }} " >
                     @error('products_name')
@@ -56,7 +37,7 @@
                     </div>
                     @enderror
                 </dd>
-            <dt> products_price:</dt>
+            <dt>料金</dt>
                 <dd>            
                     <input type="number" name="products_price" inputmode="numeric" value="{{ old('products_price') }} " >
                     @error('products_price')
@@ -66,7 +47,7 @@
                     @enderror
                 </dd>
 
-            <dt> products_method:</dt>
+            <dt>鑑定方法</dt>
                 <dd>            
                     <select name="products_method" id="">
                         <option value="霊感タロット">霊感タロット</option>
@@ -81,7 +62,7 @@
                     @enderror
                 </dd>
 
-            <dt> products_detail:</dt>
+            <dt> 鑑定内容</dt>
                 <dd>            
                     <textarea name="products_detail" id="" cols="30" rows="10"></textarea>
                     @error('products_detail')

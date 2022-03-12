@@ -45,7 +45,7 @@ Route::get('products', 'ProductController@index');
 Route::post('products', 'ProductController@post');
 
 //検索
-Route::get('products/search', 'ProductController@search');
+// Route::get('products/search', 'ProductController@search');
 
 //修正
 Route::post('products/edit', 'ProductController@update');
@@ -60,27 +60,32 @@ Route::get('products/delete', 'ProductController@delete');
 Route::post('products/delete','ProductController@remove');
 
 //複製
-Route::post('products/clone', 'ProductController@clone');
+// Route::post('products/clone', 'ProductController@clone');
+Route::get('products/ajax','ProductController@ajax_index');
+Route::get('products/ajax_search', 'ProductController@ajax_search');
 
 /*--------------------------------------------------- */
 /* products_options
 /*--------------------------------------------------- */
+Route::get('products_options', 'ProductOptionController@index');
+Route::post('products_options', 'ProductOptionController@post');
 
 //追加
-Route::get('products/add_option', 'ProductController@add_option');
-Route::post('products/add_option', 'ProductController@create_option');
-Route::get('products/add_option_ajax', 'ProductController@ajax_products');
+Route::get('products_options/add_option', 'ProductOptionController@add_option');
+Route::post('products_options/add_option', 'ProductOptionController@create_option');
+Route::get('products_options/add_option_ajax', 'ProductOptionController@ajax_products');
 // Route::post('products/add_option_ajax', 'ProductController@ajax_products');
 
 //修正
-Route::post('products/edit_option', 'ProductController@update_option');
-
+Route::post('products_options/edit', 'ProductOptionController@update');
 
 //削除
-Route::get('products/delete_option', 'ProductController@delete_option');
-Route::post('products/delete_option','ProductController@remove_option');
+Route::get('products_options/delete', 'ProductOptionController@delete_option');
+Route::post('products_options/delete','ProductOptionController@remove_option');
 
 
+Route::get('products_options/ajax','ProductOptionController@ajax_index');
+Route::get('products_options/ajax_search', 'ProductOptionController@ajax_search');
 
 
 /*--------------------------------------------------- */

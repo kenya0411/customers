@@ -8,16 +8,17 @@ use App\products_options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ProductController extends Controller
+class ProductOptionController extends Controller
 {
-
+    
 
 public function show_list($request,$redirect){
 
-         $param = ['is_delete' => 0];
+         $param = ['is_delete' => 0];//論理削除されてないものを取得
          $persons = DB::select('select * from persons');
-        $products = DB::select('select * from products where is_delete=:is_delete', $param);
-        return view($redirect)->with('products', $products)->with('persons', $persons);
+         $products = DB::select('select * from products');
+        $products_options = DB::select('select * from products_options where is_delete=:is_delete', $param);
+        return view($redirect)->with('products', $products)->with('persons', $persons)->with('products_options', $products_options);
 }
 
 /*--------------------------------------------------- */
@@ -29,7 +30,7 @@ public function show_list($request,$redirect){
     {
 
 
-$data = $this->show_list($request,'products.list_product');
+$data = $this->show_list($request,'products.list_product_option');
 return $data;
 
     }
@@ -37,7 +38,7 @@ return $data;
     public function post(Request $request)
     {
 
-$data = $this->show_list($request,'products.list_product');
+$data = $this->show_list($request,'products.list_product_option');
 return $data;
 
 
@@ -48,7 +49,7 @@ return $data;
     public function search(Request $request)
     {
    
-$data = $this->show($request,'','products.list_product');
+$data = $this->show($request,'','products.list_product_option');
   
 
 return $data;
@@ -65,14 +66,14 @@ return $data;
 /*--------------------------------------------------- */
     public function delete(Request $request)
     {
-        $validator = Validator::make($request->query(), ['products_id' => 'required'], ['products_id' => 'IDを指定してください。']);
+        $validator = Validator::make($request->query(), ['products_options_id' => 'required'], ['products_options_id' => 'IDを指定してください。']);
         if ($validator->fails()) {
             return redirect('person')->withErrors($validator);
         }
 
-        $param = ['products_id' => $request->products_id];
-        $products = DB::select('select * from products where products_id=:products_id', $param);
-        return view('products.delete', ['form' => $products[0]]);
+        $param = ['products_options_id' => $request->products_options_id];
+        $products_options = DB::select('select * from products where products_options_id=:products_options_id', $param);
+        return view('products_options.delete', ['form' => $products_options[0]]);
     }
 
 
@@ -80,13 +81,13 @@ return $data;
     {
        
         $param = [
-            'products_id' => $request->products_id,
+            'products_options_id' => $request->products_options_id,
             'is_delete' => 1,
         ];
         // DB::delete('delete from persons where persons_id=:persons_id', $param);
-        DB::update('update products set is_delete=:is_delete where products_id=:products_id', $param);
+        DB::update('update products_options set is_delete=:is_delete where products_options_id=:products_options_id', $param);
         // return view('products.list_product');
-        return redirect('products');
+        return redirect('products_options');
 
     }
 
@@ -99,24 +100,22 @@ return $data;
     public function update(Request $request)
     {
         //半角数字のみ出力
-        $products_price = preg_replace('/[^0-9]/', '', $request->products_price);
-        $products_price = mb_convert_kana($products_price, "n");
+        $products_options_price = preg_replace('/[^0-9]/', '', $request->products_options_price);
+        $products_options_price = mb_convert_kana($products_options_price, "n");
         $param = [
-            'products_id' => $request->products_id,
-            'products_name' => $request->products_name,
-            'products_price' => $products_price,
-            'products_method' => $request->products_method,
-            'products_detail' => $request->products_detail,
+            'products_options_id' => $request->products_options_id,
+            'products_options_name' => $request->products_options_name,
+            'products_options_price' => $products_options_price,
+            'products_options_detail' => $request->products_options_detail,
         ];
-        DB::update('update products set 
-            products_name=:products_name, 
-            products_price=:products_price, 
-            products_method=:products_method, 
-            products_detail=:products_detail 
-            where products_id=:products_id'
+        DB::update('update products_options set 
+            products_options_name=:products_options_name, 
+            products_options_price=:products_options_price, 
+            products_options_detail=:products_options_detail 
+            where products_options_id=:products_options_id'
             , $param);            
 
-        return redirect('products');
+        return redirect('products_options');
 
     }
 
@@ -165,10 +164,14 @@ return $data;
 
 $persons = '';
 $products = '';
+$products_options = '';
 
         $persons = DB::table('persons')
         ->get();   
         $products = DB::table('products')
+        ->get();   
+        $products_options = DB::table('products_options')
+        ->where('is_delete','=',0)
         ->get();   
 
 
@@ -177,27 +180,23 @@ $products = '';
         // ->get();   
         
 
-    return ["persons"=>$persons,"products"=>$products];
+    return ["persons"=>$persons,"products"=>$products,"products_options"=>$products_options];
     }
 
 
  public function ajax_search(Request $request) {
-// $persons = '';
-$products = '';
-        // $customers = DB::table('customers')
-        // ->where('date_month','=',$request->date_month)
-        // ->where('date_year','=',$request->date_year)
-        // ->get();   
-        // $persons = DB::table('persons')
-        // ->get();   
-        $products = DB::table('products')
+$products_options = '';
+
+        $products_options = DB::table('products_options')
         ->where('persons_id','=',$request->persons_id)
         ->get();  
  
-    return ["products"=>$products];
+    return ["products_options"=>$products_options];
     // return ["persons"=>$persons,"products"=>$products];
 
     }
+
+
 
 
 

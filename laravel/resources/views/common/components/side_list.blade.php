@@ -24,7 +24,9 @@
       <ul>
         <li><a href="/products">商品一覧</a></li>
         <li><a href="/products/add">新商品追加</a></li>
-        <li><a href="/products/add_option">新規オプション追加</a></li>
+        <li><a href="/products_options">オプション一覧</a></li>
+
+        <li><a href="/products/add_option">新規オプション</a></li>
       </ul>
     </div>
   </li>
@@ -32,8 +34,8 @@
     <a href="#">人材管理</a>
     <div class="menu_contents">
       <ul>
-        <li><a href="/products">人材一覧</a></li>
-        <li><a href="/products/add">新規人材</a></li>
+        <li><a href="/persons">人材一覧</a></li>
+        <li><a href="/persons/add">新規人材</a></li>
       </ul>
     </div>
   </li>

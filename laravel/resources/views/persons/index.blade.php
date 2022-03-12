@@ -6,7 +6,7 @@
         <div class="addbtnWrap">
 
     <div class="addbtn">
-        <a href="/person/add">新規追加</a>
+        <a href="/person/add">新規鑑定士追加</a>
     </div> 
 </div>
     <div class="personList listSection">  

@@ -5,22 +5,14 @@
 
 
 @section('content')
-{{-- <section class="maxWid mbPad addBtnBlock">  --}}
 
+        <div class="addbtnWrap">
 
-{{--     <div class="addbtnWrap">
-
-        <div class="addbtn">
-            <a href="/products/add">新規追加</a>
-        </div> 
- --}}
- {{--        <div class="addbtn">
-            <a href="/products/add_option">オプション追加</a>
-        </div>  --}}
-{{--     </div>
-</section> --}}
-
-{{-- @include('products.components.search') --}}
+    <div class="addbtn">
+        <a href="/products/add">新規商品追加</a>
+    </div> 
+</div>
+@include('products.components.search')
 
 @include('products.components.product')
 
@@ -37,7 +29,7 @@
 
 
 
-
+{{-- 
 <section class="cloneBlock maxWid mbPad">
 
     <form method="POST" action="/products/clone/">
@@ -55,7 +47,7 @@
 
  </form>
 
-</section>
+</section> --}}
 
 
 
@@ -75,22 +67,33 @@
 <script>
 
 
-    $('.cloneBtn').click(function () {
-      if (confirm('複製してもいいですか？')) {
-      } else {
-        return false
-    }
-});
-    $('.deleteBtn').click(function () {
-      if (confirm('削除してもいいですか？')) {
-    // 「OK」をクリックした際の処理を記述
-    $(this).parents('form').attr('action', $(this).data('action'));
-    $(this).parents('form').submit();
-} else {
-    //キャンセルした場合
-    //何も起きない
-    return false
-}
-});
+//     $('.cloneBtn').click(function () {
+//       if (confirm('複製してもいいですか？')) {
+//       } else {
+//         return false
+//     }
+// });
+//     $('.deleteBtn').click(function () {
+//       if (confirm('削除してもいいですか？')) {
+//     // 「OK」をクリックした際の処理を記述
+//     $(this).parents('form').attr('action', $(this).data('action'));
+//     $(this).parents('form').submit();
+// } else {
+//     //キャンセルした場合
+//     //何も起きない
+//     return false
+// }
+// });
+// 
+// 
+
+
+
+// var data = new Date();
+// var year = data.getFullYear();
+// var month = data.getMonth()+ 1 ;
+//     let params = (new URL(document.location)).searchParams//クエリ取得用
+
+
 </script>
 @endsection
