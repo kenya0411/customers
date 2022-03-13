@@ -71,9 +71,9 @@ Route::get('products_options', 'ProductOptionController@index');
 Route::post('products_options', 'ProductOptionController@post');
 
 //追加
-Route::get('products_options/add_option', 'ProductOptionController@add_option');
-Route::post('products_options/add_option', 'ProductOptionController@create_option');
-Route::get('products_options/add_option_ajax', 'ProductOptionController@ajax_products');
+Route::get('products_options/add', 'ProductOptionController@add');
+Route::post('products_options/add', 'ProductOptionController@create');
+// Route::get('products_options/add_option_ajax', 'ProductOptionController@ajax_products');
 // Route::post('products/add_option_ajax', 'ProductController@ajax_products');
 
 //修正

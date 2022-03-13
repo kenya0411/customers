@@ -163,18 +163,15 @@ return $data;
 /*--------------------------------------------------- */
     public function ajax_index(Request $request) {
 
-$persons = '';
-$products = '';
-
         $persons = DB::table('persons')
         ->get();   
+
         $products = DB::table('products')
+        ->where('is_delete','=',0)//論理削除されてないもの
         ->get();   
 
 
-        // $users = DB::table('users')
-        // ->where('permission_id','=',2)
-        // ->get();   
+ 
         
 
     return ["persons"=>$persons,"products"=>$products];
@@ -182,20 +179,14 @@ $products = '';
 
 
  public function ajax_search(Request $request) {
-// $persons = '';
 $products = '';
-        // $customers = DB::table('customers')
-        // ->where('date_month','=',$request->date_month)
-        // ->where('date_year','=',$request->date_year)
-        // ->get();   
-        // $persons = DB::table('persons')
-        // ->get();   
+
         $products = DB::table('products')
-        ->where('persons_id','=',$request->persons_id)
+        ->where('persons_id','=',$request->persons_id)//占い師のID
+        ->where('is_delete','=',0)//論理削除されてないもの
         ->get();  
  
     return ["products"=>$products];
-    // return ["persons"=>$persons,"products"=>$products];
 
     }
 

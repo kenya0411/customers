@@ -23,10 +23,10 @@
     <div class="menu_contents">
       <ul>
         <li><a href="/products">商品一覧</a></li>
-        <li><a href="/products/add">新商品追加</a></li>
+        <li><a href="/products/add">商品追加</a></li>
         <li><a href="/products_options">オプション一覧</a></li>
 
-        <li><a href="/products/add_option">新規オプション</a></li>
+        <li><a href="/products_options/add">オプション追加</a></li>
       </ul>
     </div>
   </li>

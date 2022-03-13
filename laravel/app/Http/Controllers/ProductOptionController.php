@@ -46,16 +46,6 @@ return $data;
     }
 
 
-    public function search(Request $request)
-    {
-   
-$data = $this->show($request,'','products.list_product_option');
-  
-
-return $data;
-
-
-    }
 
 
 
@@ -66,10 +56,10 @@ return $data;
 /*--------------------------------------------------- */
     public function delete(Request $request)
     {
-        $validator = Validator::make($request->query(), ['products_options_id' => 'required'], ['products_options_id' => 'IDを指定してください。']);
-        if ($validator->fails()) {
-            return redirect('person')->withErrors($validator);
-        }
+        // $validator = Validator::make($request->query(), ['products_options_id' => 'required'], ['products_options_id' => 'IDを指定してください。']);
+        // if ($validator->fails()) {
+        //     return redirect('person')->withErrors($validator);
+        // }
 
         $param = ['products_options_id' => $request->products_options_id];
         $products_options = DB::select('select * from products where products_options_id=:products_options_id', $param);
@@ -127,9 +117,10 @@ return $data;
     {
 
 
-         $param = ['is_delete' => 0];
-        $persons = DB::select('select * from persons where is_delete=:is_delete', $param);
-       return view('products.add', ['persons' => $persons]);
+         // $param = ['is_delete' => 0];
+        // $persons = DB::select('select * from persons where is_delete=:is_delete', $param);
+       // return view('products.add_option', ['persons' => $persons]);
+       return view('products.add_option');
    }
 
 
@@ -142,15 +133,15 @@ return $data;
   
     $param = [
         'persons_id' => $request->persons_id,
-        'products_name' => $request->products_name,
-        'products_price' => $request->products_price,
-        'products_method' => $request->products_method,
-        'products_detail' => $request->products_detail,
+        'products_id' => $request->products_id,
+        'products_options_name' => $request->products_options_name,
+        'products_options_price' => $request->products_options_price,
+        'products_options_detail' => $request->products_options_detail,
     ];
-    DB::insert('insert into products 
-        ( persons_id, products_name, products_price, products_method, products_detail) values 
-        (:persons_id,:products_name,:products_price,:products_method,:products_detail)', $param);
-    return redirect('products');
+    DB::insert('insert into products_options 
+        ( persons_id, products_id, products_options_name, products_options_price, products_options_detail) values 
+        (:persons_id,:products_id,:products_options_name,:products_options_price,:products_options_detail)', $param);
+    return redirect('products_options');
  
 }
 

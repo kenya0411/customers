@@ -9,7 +9,7 @@
         <div class="addbtnWrap">
 
     <div class="addbtn">
-        <a href="/products/add">オプション追加</a>
+        <a href="/products_options/add">オプション追加</a>
     </div> 
 </div>
 

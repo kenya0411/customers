@@ -114,7 +114,8 @@ watch: {
 }
 
 Vue.createApp(hoge).mount('.main_content')
-    // mbSlideToggle();
+    mbSlideToggle();
+    deleteBtnConfirm();
 
 
 </script>

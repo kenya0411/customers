@@ -8,7 +8,7 @@
     <div class="backBtn">
         <a href="/products">戻る</a>
     </div> 
-    <section class="productFrom  formSection">   
+    <div class="productFrom  formSection">   
 
         <form action="./add" method="post">
             @csrf
@@ -80,7 +80,7 @@
         </div>
 
     </form>
-</section>
+</div>
 
 
 

@@ -18,15 +18,19 @@
     </div>
     <div class="mbBlock">
         <div>鑑定士</div>
+        <div>商品名</div>
+
         <div>オプション名</div>
+        <div></div>
      </div>
     </li>
 
     <li class="flexBodyWrap flexWrap" v-for="(product_option, index) in products_options">
 
  <div class="mbBlock">
-                {{-- <div class="no0">{{My_func::searchPersonName($persons,$product->persons_id)}}</div> --}}
-            {{-- <div class="no1">{{ $product->products_name }}</div> --}}
+                <div class="no0">@{{ persons[product_option.persons_id - 1].persons_name }}</div>
+                <div class="no0">@{{ products[product_option.products_id - 1].products_name }}</div>
+            <div class="no2">@{{ product_option.products_options_name }}</div>
             <div class="no3">
 <i class="fa-solid fa-circle-chevron-down"></i>    
 <i class="fa-solid fa-circle-chevron-up"></i>    

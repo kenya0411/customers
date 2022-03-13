@@ -1,8 +1,8 @@
 
 
 function deleteBtnConfirm(){
-  
-$('.deleteBtn').click(function () {
+      $(document).on('click','.deleteBtn',function(){
+
   if (confirm('削除してもいいですか？')) {
     // 「OK」をクリックした際の処理を記述
   $(this).parents('form').attr('action', $(this).data('action'));
