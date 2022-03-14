@@ -89,6 +89,29 @@ Route::get('products_options/ajax_search', 'ProductOptionController@ajax_search'
 
 
 /*--------------------------------------------------- */
+/* Orders
+/*--------------------------------------------------- */
+Route::get('orders', 'OrderController@index');
+Route::post('orders', 'OrderController@post');
+
+Route::get('orders/ajax', 'OrderController@ajax_index');
+Route::get('orders/ajax_search', 'OrderController@ajax_search');
+
+
+/*--------------------------------------------------- */
+/* Reserves
+/*--------------------------------------------------- */
+Route::get('reserves', 'ReserveController@index');
+Route::post('reserves', 'ReserveController@post');
+
+Route::get('reserves/ajax', 'ReserveController@ajax_index');
+Route::get('reserves/ajax_search', 'ReserveController@ajax_search');
+
+
+
+
+
+/*--------------------------------------------------- */
 /* Customers
 /*--------------------------------------------------- */
 Route::get('customers', 'CustomerController@index');

@@ -37,7 +37,7 @@ class OrderTableSeeder extends Seeder
                 'orders_id' => '8402616',
                 'customers_id' => 4,
                 'products_id' => 3,
-                'products_options_id' => 6,
+                'products_options_id' => 0,
                 'persons_id' => 1,
                 'users_id' => 3,
                 'orders_price' => 2000,
