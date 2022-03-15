@@ -14,6 +14,8 @@ $d = '?'.now();
 @endphp
                         
  <meta name="csrf-token" content="{{ csrf_token() }}">
+<script src="https://unpkg.com/dayjs"></script>
+<script src="https://unpkg.com/dayjs@1.7.7/locale/ja.js"></script>
 
 <script src="https://unpkg.com/vue@next"></script>
    <script src="https://unpkg.com/vue-router@4.0.5/dist/vue-router.global.js"></script>
@@ -46,7 +48,6 @@ $d = '?'.now();
 
 <!-- osの条件別CSS -->
 {{-- <script type="text/javascript" src="/common/js/css_browser_selector.js"></script> --}}
-<script src="{{ mix('js/app.js') }}"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" async=""></script> --}}
