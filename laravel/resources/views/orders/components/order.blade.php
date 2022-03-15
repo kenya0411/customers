@@ -1,7 +1,11 @@
 <div class="orderList listSection" > 
 <ul>
     <li class="flexHead flexWrap">
+<script>
 
+import apps from '/js/app.vue'
+
+</script>
 <div class="pcBlock">
     
 
