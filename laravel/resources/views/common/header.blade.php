@@ -46,7 +46,7 @@ $d = '?'.now();
 
 <!-- osの条件別CSS -->
 {{-- <script type="text/javascript" src="/common/js/css_browser_selector.js"></script> --}}
-
+<script src="{{ mix('js/app.js') }}"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" async=""></script> --}}
