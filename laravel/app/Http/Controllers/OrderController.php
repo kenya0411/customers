@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Customers;
+use App\Order;
 use App\Products;
 use App\products_options;
 
@@ -645,30 +645,7 @@ if($request->products_id){
         ->whereMonth('created_at','=',date("m"))//今月
         ->get();   
 
-// $year = $request->date_year;
-// $month = $request->date_month;
 
-//        $orders = DB::table('orders')
-//         ->where('is_delete','=',0)//論理削除されてないもの
-//         ->when($year, function ($query) use ($year) {
-//             return $query->whereYear('created_at','=',$year);
-//         })
-//         ->when($month, function ($query) use ($month) {
-//             return $query->whereMonth('created_at','=',$month);
-//         })
-//         // ->whereYear('created_at','=',2022)//西暦
-//         // ->whereMonth('created_at','=',"")//西暦
-//         ->get();   
-
-        // $orders = DB::table('orders')
-        // ->where('is_delete','=',0)//論理削除されてないもの
-        // ->when($role, function ($query) use ($role) {
-        //     return $query->whereYear('created_at','=',2022);
-        // })
-        // // ->whereYear('created_at','=',2022)//西暦
-        // // ->whereMonth('created_at','=',"")//西暦
-        // ->get();   
-        
 
     return ["users"=>$users,"persons"=>$persons,"products"=>$products,"products_options"=>$products_options,"orders"=>$orders,"customers"=>$customers];
     }
@@ -679,12 +656,43 @@ if($request->products_id){
 //検索画面
  public function ajax_search(Request $request) {
 
-        $orders = DB::table('orders')
-        ->where('persons_id','like','%'.$request->persons_id.'%')//論理削除されてないもの
-        ->where('orders_id','like','%'.$request->orders_id.'%')//論理削除されてないもの
-        ->where('is_delete','=',0)//論理削除されてないもの
-        ->get();  
- 
+    $year = '';  
+    $month = '';  
+    $person = '';  
+
+
+
+
+    $orders = Order::query();
+    $orders=$orders->where('is_delete','=',0);//論理削除
+    $orders=$orders->where('orders_id','like','%'.$request->orders_id.'%');//商品ID
+
+    // 鑑定士で絞り込み
+    if(!empty($request->persons_id)){
+    $person = $request->persons_id;
+    $orders->when($person, function($orders, $person) { 
+    return $orders->where('persons_id','=',$person);
+    }) ;
+    }
+
+    // 年で絞り込み
+    if(!empty($request->year)){
+    $year = $request->year;
+    $orders->when($year, function($orders, $year) { 
+    return $orders->whereYear('created_at','=',$year);
+    }) ;
+    }
+
+    // 月で絞り込み
+    if(!empty($request->month)){
+    $month = $request->month;
+    $orders->when($month, function($orders, $month) { 
+    return $orders->whereMonth('created_at','=',$month);
+    }) ;
+    }
+
+    $orders=$orders->get();
+
     return ["orders"=>$orders];
 
     }

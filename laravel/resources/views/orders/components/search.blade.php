@@ -15,7 +15,7 @@
 
 
 {{-- <select aria-label="Default select" name="date_year" v-model="search_year" id=""> --}}
-<select aria-label="Default select" name="date_year" id="">
+<select aria-label="Default select" name="date_year" v-model="search_year"  id="">
 <option value=""></option>
 
 @php
@@ -37,7 +37,7 @@ $year = $d->format('Y');
 <li class=" me-3">
 
 
-<select  aria-label="Default select" name="date_month"  id="">
+<select  aria-label="Default select" name="date_month"  v-model="search_month"  id="">
 <option value=""></option>
 
 @for ($i = 1; $i <= 12; $i++)

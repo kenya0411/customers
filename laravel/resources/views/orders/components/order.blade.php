@@ -1,11 +1,7 @@
 <div class="orderList listSection" > 
 <ul>
     <li class="flexHead flexWrap">
-<script>
-    
-    // console.log(dayjs().format('YYYY年MM月DD日 dddd'))
-    
-</script>
+
 <div class="pcBlock">
     
 
@@ -33,7 +29,7 @@
  <div class="mbBlock">
                    <ul class="no1">
 
-                    <li>@{{ customers[order.customers_id - 1].customers_nickname }}</li>
+                    {{-- <li>@{{ customers[order.customers_id - 1].customers_nickname }}</li> --}}
                     {{-- <li>@{{ customers}}</li> --}}
                     {{-- <li>@{{customer.customers_name }}</li> --}}
                 </ul>
@@ -53,7 +49,8 @@
 
             <div>
                 <div class="hiddenName">商品ID</div>
-                <a :href="persons[order.persons_id - 1].persons_platform_url + order.orders_id " target="_blank">
+                {{-- <a v-bind:href='`${persons[order.persons_id - 1].persons_platform_url + order.orders_id}`'> --}}
+                <a v-bind:href="persons[order.persons_id - 1].persons_platform_url + order.orders_id " target="_blank">
                     <div class="icon_wrap">
                         
                     <span>
@@ -68,10 +65,11 @@
             <div >
                 <div class="hiddenName">顧客情報</div>
 
-                <a :href="">
+                <a >
                     
                 <ul>
                     <li v-if="order.customers_id !== 0">
+                    @{{ order.customers_id}}
                     @{{ customers[order.customers_id - 1].customers_nickname }}
                         
                     </li>
@@ -126,7 +124,7 @@
             <div>
                      <div class="pcInvi">
         <div class="editBtn">
-                                        {{-- <a :href='`/customers/detail/?id=${customer.id}&date_year=${customer.date_year}&date_month=${customer.date_month}`'>商品情報</a> --}}
+                                        {{-- <a v-bind:href='`/customers/detail/?id=${customer.id}&date_year=${customer.date_year}&date_month=${customer.date_month}`'>商品情報</a> --}}
             
         </div>
          
@@ -138,7 +136,7 @@
                   </div>   
                     </li>
                     <li>
-                                        {{-- <a :href='`/customers/detail/?id=${customer.id}&date_year=${customer.date_year}&date_month=${customer.date_month}`'><img src="/img/common/icon/order_icon2.png" class="retina" alt="編集"></a> --}}
+                                        {{-- <a v-bind:href='`/customers/detail/?id=${customer.id}&date_year=${customer.date_year}&date_month=${customer.date_month}`'><img src="/img/common/icon/order_icon2.png" class="retina" alt="編集"></a> --}}
 
                     </li>
                 
@@ -157,83 +155,5 @@
 </li>
 </ul>
 </div>
-<div id="components-demo">
-  <button-counter></button-counter>
-</div>
-
-<script type="application/javascript"> 
-    const hoge = {
-      el: '.main_content',
-      data () {
-        return {
-          persons: '', 
-          products: '',
-          products_options: '',
-          orders: '',
-          users: '',
-          search_persons: '',//検索用
-          search_orders_id: '',//検索用
-          search_year: '',//検索用
-          search_month: '',//検索用
-      }
-  },
-  //ロード時にデータベースから情報を取得
-  created:function(){
-      var url = '/orders/ajax'
-      axios.get(url)
-      .then(response => [
-        //商品データや顧客データを取得
-        this.persons = response.data.persons,
-        this.products = response.data.products,
-        this.products_options = response.data.products_options,
-        this.orders = response.data.orders,
-        this.users = response.data.users,
-        this.customers = response.data.customers,
-        console.log( this.persons)
-        ])
-      .catch(error => console.log(error))
-  },
-  computed:{
-         get_search_data() {
-       return [
-       this.search_persons,
-       this.search_orders_id,
-       this.search_year,
-       this.search_month,
-       ];
-   },
 
 
-},
-watch: {
-    get_search_data(val){
-      let url = '/orders/ajax_search/?persons_id=' + this.search_persons+'&year='+this.search_year+'&month='+this.search_month+'&orders_id='+this.search_orders_id;
-      console.log(url)
-      axios.get(url)
-      .then(response => [
-        // this.persons = response.data.persons,
-        this.orders = response.data.orders,
-        console.log(this.orders),
-        
-        ])
-      .catch(error => console.log(error))
-
-    },
-
-
-}
-}
-
-Vue.createApp(hoge).mount('.main_content')
-    mbSlideToggle();
-    deleteBtnConfirm();
-
-
-</script>
-
-
-<div id="app">
-    
-    <example-component>
-    </example-component>
-</div>

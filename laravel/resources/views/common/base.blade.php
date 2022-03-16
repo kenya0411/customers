@@ -8,7 +8,6 @@
 
   <title>@yield('title')</title>
 
-
 </head>
 
 <body class="frontPage">
@@ -28,6 +27,7 @@
     </main>
 
 
+@yield('vue')
 
 
 @include('common.footer')
