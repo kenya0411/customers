@@ -2,9 +2,9 @@
 <ul>
     <li class="flexHead flexWrap">
 <script>
-
-import apps from '/js/app.vue'
-
+    
+    // console.log(dayjs().format('YYYY年MM月DD日 dddd'))
+    
 </script>
 <div class="pcBlock">
     
@@ -157,11 +157,11 @@ import apps from '/js/app.vue'
 </li>
 </ul>
 </div>
+<div id="components-demo">
+  <button-counter></button-counter>
+</div>
 
-<script>
-</script>
-<script>
-// injectからdayjsを呼び出す
+<script type="application/javascript"> 
     const hoge = {
       el: '.main_content',
       data () {
@@ -228,5 +228,12 @@ Vue.createApp(hoge).mount('.main_content')
     mbSlideToggle();
     deleteBtnConfirm();
 
+
 </script>
 
+
+<div id="app">
+    
+    <example-component>
+    </example-component>
+</div>
