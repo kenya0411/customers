@@ -189,6 +189,7 @@ import apps from '/js/app.vue'
         this.orders = response.data.orders,
         this.users = response.data.users,
         this.customers = response.data.customers,
+        console.log( this.persons)
         ])
       .catch(error => console.log(error))
   },

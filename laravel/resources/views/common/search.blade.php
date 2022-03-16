@@ -14,6 +14,8 @@
                                <li>
                                	
  <select name="search_persons_id" v-model="search_persons" id="">
+      <option value="" >選択してください</option>
+
       <option v-for="person in persons"  v-bind:value="person.persons_id" >@{{ person.persons_name }}</option>
                     
         

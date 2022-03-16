@@ -639,12 +639,35 @@ if($request->products_id){
         ->get(); 
         $products_options = DB::table('products_options')
         ->get();   
-
-       $orders = DB::table('orders')
+        $orders = DB::table('orders')
         ->where('is_delete','=',0)//論理削除されてないもの
+        ->whereYear('created_at','=',date("Y"))//今年
+        ->whereMonth('created_at','=',date("m"))//今月
         ->get();   
 
- 
+// $year = $request->date_year;
+// $month = $request->date_month;
+
+//        $orders = DB::table('orders')
+//         ->where('is_delete','=',0)//論理削除されてないもの
+//         ->when($year, function ($query) use ($year) {
+//             return $query->whereYear('created_at','=',$year);
+//         })
+//         ->when($month, function ($query) use ($month) {
+//             return $query->whereMonth('created_at','=',$month);
+//         })
+//         // ->whereYear('created_at','=',2022)//西暦
+//         // ->whereMonth('created_at','=',"")//西暦
+//         ->get();   
+
+        // $orders = DB::table('orders')
+        // ->where('is_delete','=',0)//論理削除されてないもの
+        // ->when($role, function ($query) use ($role) {
+        //     return $query->whereYear('created_at','=',2022);
+        // })
+        // // ->whereYear('created_at','=',2022)//西暦
+        // // ->whereMonth('created_at','=',"")//西暦
+        // ->get();   
         
 
     return ["users"=>$users,"persons"=>$persons,"products"=>$products,"products_options"=>$products_options,"orders"=>$orders,"customers"=>$customers];

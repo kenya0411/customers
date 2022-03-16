@@ -14,17 +14,22 @@
 <li class=" me-3">
 
 
-<select aria-label="Default select" name="date_year" v-model="search_year" id="">
-<option selected="">年</option>
+{{-- <select aria-label="Default select" name="date_year" v-model="search_year" id=""> --}}
+<select aria-label="Default select" name="date_year" id="">
+<option value=""></option>
 
 @php
 $d = now();
 $year = $d->format('Y');
-$year_add = $d->addYears(1)->format('Y');
-
 @endphp
-@for ($i = 2021; $i <= $year_add ; $i++)
+@for ($i = 2021; $i <= $year ; $i++)
+@if($i == $year)
+<option value="{{ $i}}" selected>{{ $i }}年</option>
+
+@else
 <option value="{{ $i}}">{{ $i }}年</option>
+
+@endif
 @endfor
 
 </select>
@@ -32,9 +37,20 @@ $year_add = $d->addYears(1)->format('Y');
 <li class=" me-3">
 
 
-<select  aria-label="Default select" name="date_month" v-model="search_month" id="">
+<select  aria-label="Default select" name="date_month"  id="">
+<option value=""></option>
+
 @for ($i = 1; $i <= 12; $i++)
+$d = now();
+
+@if($i == $d->format('m'))
+<option value="{{ $i}}" selected>{{ $i }}月</option>
+
+@else
 <option value="{{ $i}}">{{ $i }}月</option>
+
+@endif
+
 @endfor
 </select>
 </li>
