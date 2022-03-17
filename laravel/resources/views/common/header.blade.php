@@ -14,8 +14,6 @@ $d = '?'.now();
 @endphp
                         
  <meta name="csrf-token" content="{{ csrf_token() }}">
-<script src="https://unpkg.com/dayjs"></script>
-<script src="https://unpkg.com/dayjs@1.7.7/locale/ja.js"></script>
 
 <script src="/js/vue.js"></script>
 <script src="/js/moment.min.js"></script>
