@@ -659,13 +659,19 @@ if($request->products_id){
     $year = '';  
     $month = '';  
     $person = '';  
-
-
+        // if(empty($request)){
+        //     $request= '';
+        // }
 
 
     $orders = Order::query();
     $orders=$orders->where('is_delete','=',0);//論理削除
     $orders=$orders->where('orders_id','like','%'.$request->orders_id.'%');//商品ID
+
+
+
+
+
 
     // 鑑定士で絞り込み
     if(!empty($request->persons_id)){

@@ -28,6 +28,7 @@
 
 
 @yield('vue')
+<script src="/js/vue/common.js"></script>
 
 
 @include('common.footer')

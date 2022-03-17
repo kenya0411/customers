@@ -1,6 +1,6 @@
   let d = new Date();
   let year = d.getFullYear();
-let month = d.getMonth();
+let month = d.getMonth() +1;
 
   const hoge = {
       el: '.main_content',
@@ -58,7 +58,12 @@ watch: {
     },
 
 
-}
+},
+  methods: {  // filtersじゃなくmethods
+    moment: function (date) {
+      return moment(date).format('YYYY/MM/DD')
+    }
+  }
 }
 
 Vue.createApp(hoge).mount('.main_content')

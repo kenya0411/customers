@@ -1,7 +1,6 @@
 <div class="orderList listSection" > 
 <ul>
     <li class="flexHead flexWrap">
-
 <div class="pcBlock">
     
 
@@ -29,14 +28,13 @@
  <div class="mbBlock">
                    <ul class="no1">
 
-                    {{-- <li>@{{ customers[order.customers_id - 1].customers_nickname }}</li> --}}
-                    {{-- <li>@{{ customers}}</li> --}}
-                    {{-- <li>@{{customer.customers_name }}</li> --}}
+                    <li>@{{ customers[order.customers_id - 1].customers_nickname }}</li>
+                    <li>@{{ customers[order.customers_id - 1].customers_name }}</li>
                 </ul>
                 <div class="no2">
-                    
-              {{-- <span v-if="customer.customers_fortune_is_finished == 'true'">鑑定済み</span> --}}
-{{-- <span v-if="customer.customers_ship_is_finished == 'true'">発送済み</span> --}}
+<span v-if="order.orders_is_reserve_finished == '1'">鑑定済み</span>
+<span v-if="order.orders_is_ship_finished == '1'">発送済み</span>
+
                 </div>
 <div class="no3">
 <i class="fa-solid fa-circle-chevron-down"></i>    
@@ -46,6 +44,7 @@
  </div>
 
  <div class="pcBlock">
+
 
             <div>
                 <div class="hiddenName">商品ID</div>
@@ -69,7 +68,6 @@
                     
                 <ul>
                     <li v-if="order.customers_id !== 0">
-                    @{{ order.customers_id}}
                     @{{ customers[order.customers_id - 1].customers_nickname }}
                         
                     </li>
@@ -116,7 +114,7 @@
         </div>
             <div >
                 <div class="hiddenName">日付</div>
-        @{{ order.updated_at }} 
+         @{{ moment(order.updated_at ) }}
         </div>
 
 

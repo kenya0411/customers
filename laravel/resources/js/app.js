@@ -27,6 +27,20 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
-});
+// const app = new Vue({
+//     el: '#app',
+// });
+//   const hige = {
+//       el: 'main',
+//       data () {
+//         return {
+//       }
+//   },
+//     methods: {  // filtersじゃなくmethods
+//     moment: function (date) {
+//       return moment(date).format('YYYY年MM日DD日')
+//     }
+//   }
+// }
+
+// Vue.createApp(hige).mount('main')
