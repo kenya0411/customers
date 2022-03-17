@@ -330,6 +330,138 @@
   }
 }
 @media (max-width: 768px) {
+  .reserveList .flexWrap .pcBlock {
+    display: none;
+  }
+}
+@media (min-width: 769px) {
+  .reserveList .flexWrap .pcBlock .flex {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5 {
+    position: relative;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5 .title {
+    width: 100%;
+    display: block;
+    font-size: 14px;
+    font-size: 1.4rem;
+    color: #333;
+    line-height: 1.7em;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5:nth-of-type(1) {
+    width: 15%;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5:nth-of-type(2), .reserveList .flexWrap .pcBlock .flex .flex5:nth-of-type(3) {
+    width: 30%;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5:nth-of-type(2) textarea, .reserveList .flexWrap .pcBlock .flex .flex5:nth-of-type(3) textarea {
+    height: calc(100% - 32px);
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5:nth-of-type(4) {
+    width: 20%;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5:nth-of-type(5) {
+    width: 100%;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5 .flexBlock {
+    margin-bottom: 20px;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5 .flexBlock:nth-last-of-type(1) {
+    margin-bottom: 0;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5 textarea {
+    height: 100%;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5 select {
+    width: 100%;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex {
+    margin-top: 24px;
+    margin-bottom: 24px;
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .btnFlex4 {
+    margin-left: 16px;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number1 a, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number1 a:visited, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number2 a, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number2 a:visited, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number3 a, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number3 a:visited {
+    position: relative;
+    color: #fff;
+    background-color: #1c8ee3;
+    border: 1px solid #1c8ee3;
+    line-height: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number1 a:hover, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number1 a:visited:hover, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number2 a:hover, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number2 a:visited:hover, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number3 a:hover, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number3 a:visited:hover {
+    background-color: #fff;
+    color: #1c8ee3;
+    border: 1px solid #1c8ee3;
+    transition-duration: 0.5s;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number1 a, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number2 a {
+    border-radius: 50px;
+    padding: 8px;
+    width: 45px;
+    height: 45px;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number1 i, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number2 i {
+    font-size: 24px;
+    font-size: 2.4rem;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number3 i, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number4 i {
+    margin-left: 4px;
+    font-size: 14px;
+    font-size: 1.4rem;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number3 a {
+    padding: 12px 16px;
+    margin-left: 16px;
+  }
+  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number4 button {
+    position: relative;
+    color: #fff;
+    background-color: #000;
+    border: 1px solid #000;
+    padding: 12px 16px;
+    line-height: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media (min-width: 769px) and (min-width: 769px) {
+  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number4 button:hover {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+    transition-duration: 0.5s;
+  }
+}
+
+.reserveList .icon_list {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.reserveList .icon_list > li {
+  margin-left: 16px;
+}
+.reserveList .icon_list > li:nth-last-of-type(1) {
+  margin-right: 0;
+}
+.reserveList .icon_list button {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
   .listSection .flexWrap .tabInvi {
     display: none !important;
   }
