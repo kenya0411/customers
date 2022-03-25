@@ -15,7 +15,7 @@
 
 
 @section('vue')
-<script src="/js/vue/customer_list.js"></script>
+<script src="/js/vue/customers_list.js"></script>
 
 
 @endsection
