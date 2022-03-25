@@ -11,17 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('test_db', function () {
-    return view('test_db','TestController@bbs');
-});
-Route::get('hello', 'HelloController@index');
-Route::post('hello', 'HelloController@post');
-Route::get('hello/add', 'HelloController@add');
-Route::post('hello/add', 'HelloController@create');
 
+Route::get('/', function () {
+    // return view('welcome');
+    return view('auth/login');
+});
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/', function () {
+        return redirect('/orders');
+    });
+
+});
+Route::get('/home', function () {
+    // redirect関数にパスを指定する方法
+    return redirect('/orders');
+});
 /*--------------------------------------------------- */
 /* person
 /*--------------------------------------------------- */
@@ -169,18 +173,18 @@ Route::get('vue', 'VueController@index');
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+
+// Auth::routes();
+
+// Route::get('/home', 'OrderController@index')->name('home');

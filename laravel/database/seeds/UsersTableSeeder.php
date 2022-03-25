@@ -15,34 +15,34 @@ class UserTableSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'name' => 'master',
-                'email' => '0',
-                'password' => 'test',
-                'permissions_id' => '1',
+                'nickname' => '管理者',
+                'password' => Hash::make('test'),
+                'permissions_id' => 1,
             ],
 
             [
                 'name' => 'miyakawa',
-                'email' => '1',
-                'password' => 'test',
-                'permissions_id' => '2',
+                'nickname' => '管理者',
+                'password' => Hash::make('test'),
+                'permissions_id' => 2,
             ],
            [
                 'name' => 'rui',
-                'email' => '2',
-                'password' => 'test',
-                'permissions_id' => '2',
+                'nickname' => 'ルイ',
+                'password' => Hash::make('test'),
+                'permissions_id' => 2,
             ],
            [
                 'name' => 'yamashita',
-                'email' => '3',
-                'password' => 'test',
-                'permissions_id' => '3',
+                'nickname' => '山下',
+                'password' => Hash::make('test'),
+                'permissions_id' => 3,
             ],
                        [
                 'name' => 'makino',
-                'email' => '4',
-                'password' => 'test',
-                'permissions_id' => '4',
+                'nickname' => '牧野',
+                'password' => Hash::make('test'),
+                'permissions_id' => 4,
             ],
         ]);
     }
