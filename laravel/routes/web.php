@@ -111,6 +111,17 @@ Route::post('reserves', 'ReserveController@post');
 Route::get('reserves/ajax', 'ReserveController@ajax_index');
 Route::get('reserves/ajax_search', 'ReserveController@ajax_search');
 
+/*--------------------------------------------------- */
+/* Customers
+/*--------------------------------------------------- */
+Route::get('customers', 'CustomerController@index');
+Route::post('customers', 'CustomerController@post');
+
+Route::get('customers/ajax', 'CustomerController@ajax_index');
+Route::get('customers/ajax_search', 'CustomerController@ajax_search');
+
+
+
 
 
 
@@ -118,56 +129,56 @@ Route::get('reserves/ajax_search', 'ReserveController@ajax_search');
 /*--------------------------------------------------- */
 /* Customers
 /*--------------------------------------------------- */
-Route::get('customers', 'CustomerController@index');
-Route::post('customers', 'CustomerController@post');
+// Route::get('customers', 'CustomerController@index');
+// Route::post('customers', 'CustomerController@post');
 
-Route::get('customers/ajax', 'CustomerController@ajax_customers_index');
-Route::get('customers/ajax_search', 'CustomerController@ajax_customers_search');
-
-
-
-
-//検索
-Route::get('customers/search', 'CustomerController@search');
-
-//修正
-Route::post('customers/edit', 'CustomerController@update');
-
-//追加
-Route::get('customers/add', 'CustomerController@add');
-Route::post('customers/add', 'CustomerController@create');
-// Route::post('customers/ajax/add_product_ajax', 'CustomerController@add_product_ajax');
-// Route::post('customers/ajax/add_product_option_ajax', 'CustomerController@add_product_option_ajax');
-Route::get('customers/ajax/add', 'CustomerController@ajax_products');
-Route::get('customers/ajax/add_option', 'CustomerController@ajax_products_options');
-
-//削除
-Route::get('customers/delete', 'CustomerController@delete');
-Route::post('customers/delete','CustomerController@remove');
+// Route::get('customers/ajax', 'CustomerController@ajax_customers_index');
+// Route::get('customers/ajax_search', 'CustomerController@ajax_customers_search');
 
 
 
-//詳細
-Route::get('customers/detail', 'CustomerController@detail');
-Route::post('customers/detail/edit', 'CustomerController@detail_edit');
 
-Route::get('customers/detail/ajax', 'CustomerController@ajax_customers');
-Route::get('customers/detail/ajax_change', 'CustomerController@ajax_change');
+// //検索
+// Route::get('customers/search', 'CustomerController@search');
+
+// //修正
+// Route::post('customers/edit', 'CustomerController@update');
+
+// //追加
+// Route::get('customers/add', 'CustomerController@add');
+// Route::post('customers/add', 'CustomerController@create');
+// // Route::post('customers/ajax/add_product_ajax', 'CustomerController@add_product_ajax');
+// // Route::post('customers/ajax/add_product_option_ajax', 'CustomerController@add_product_option_ajax');
+// Route::get('customers/ajax/add', 'CustomerController@ajax_products');
+// Route::get('customers/ajax/add_option', 'CustomerController@ajax_products_options');
+
+// //削除
+// Route::get('customers/delete', 'CustomerController@delete');
+// Route::post('customers/delete','CustomerController@remove');
 
 
 
-//予約
-//
-Route::get('customers/reserve', 'CustomerController@reserve');
-Route::post('customers/reserve', 'CustomerController@reserve_post');
-Route::get('customers/reserve_ajax', 'CustomerController@reserve_ajax');
-Route::post('customers/reserve_send', 'CustomerController@reserve_send');
+// //詳細
+// Route::get('customers/detail', 'CustomerController@detail');
+// Route::post('customers/detail/edit', 'CustomerController@detail_edit');
+
+// Route::get('customers/detail/ajax', 'CustomerController@ajax_customers');
+// Route::get('customers/detail/ajax_change', 'CustomerController@ajax_change');
 
 
 
-Route::get('ajax/vue', 'VueController@ajax_products');
-Route::get('ajax/vue_option', 'VueController@ajax_products_options');
-Route::get('vue', 'VueController@index');
+// //予約
+// //
+// Route::get('customers/reserve', 'CustomerController@reserve');
+// Route::post('customers/reserve', 'CustomerController@reserve_post');
+// Route::get('customers/reserve_ajax', 'CustomerController@reserve_ajax');
+// Route::post('customers/reserve_send', 'CustomerController@reserve_send');
+
+
+
+// Route::get('ajax/vue', 'VueController@ajax_products');
+// Route::get('ajax/vue_option', 'VueController@ajax_products_options');
+// Route::get('vue', 'VueController@index');
 
 
 
