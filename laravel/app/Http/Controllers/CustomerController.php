@@ -59,10 +59,11 @@ return $data;
 
  
 
-        $customers = DB::table('customers')
-        ->where('is_delete','=',0)//論理削除されてないもの
-        ->get();   
+        // $customers = DB::table('customers')
+        // ->where('is_delete','=',0)//論理削除されてないもの
+        // ->get();   
 
+        $customers = DB::table('customers')->paginate(10);
 
 
     return ["customers"=>$customers];
@@ -73,6 +74,7 @@ return $data;
 
 //検索画面
  public function ajax_search(Request $request) {
+
 
 
     $customers = Customer::query();

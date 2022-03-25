@@ -1,80 +1,52 @@
-@extends('common.base'){{-- 継承元 --}}
-@section('title','add'){{-- タイトル --}}
-@section('heading','product登録画面'){{-- 見出し --}}
-
-
-@section('content')
 <div id="app">
+    <ul>
+      <li v-for="item in getItems">@{{item}}</li>
+    </ul>
+    <paginate
+    :page-count="getPageCount"
+    :page-range="3"
+    :margin-pages="2"
+    :click-handler="clickCallback"
+    :prev-text="'＜'"
+    :next-text="'＞'"
+    :container-class="'pagination'"
+    :page-class="'page-item'">
+  </paginate>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
 
-    <select name="persons" v-model="v_persons" >
-<option disabled value="">鑑定士の選択</option>
-      @foreach ($persons as $person)
-      <option value="{{ $person->persons_id }}" selected>{{ $person->persons_name }}</option>
-        
-      @endforeach
-</select>
-    <select name="products" v-model="v_products" >
-{{-- <option disabled value="">商品の選択</option> --}}
-
-      <option v-for="product in products"  v-bind:value="product.products_id" >@{{ product.products_name }}</option>
-</select>
-    <select name="products_options" v-model="v_products_options">
-{{-- <option disabled value="">オプションの選択</option> --}}
-
-      <option v-for="product_option in products_options" v-bind:value="product_option.products_options_id">@{{ product_option.products_options_name }}</option>
-</select>
-    
-
-    {{-- <button>Submit!</button> --}}
 
 <script>
+    
+    var items = [];
 
-
- const hoge = {
-  el: '#app',
-  data () {
-    return {
-      products: [],
-      v_products: '',
-      persons: [],
-      v_persons: '',
-      products_options: [],
-      v_products_options: '',
-    }
-  },
-
-    watch: {
-v_persons(val){
-      let url = '/ajax/vue?persons_id=' + val
-
-    axios.get(url)
-      .then(response => [
-        this.products = response.data,
-        this.products_options = '',
-        ])
-      .catch(error => console.log(error))
-
-},
-    v_products(val) {
-      let url = '/ajax/vue_option?products_id=' + val
-            axios.get(url)
-           .then(res => {
-             // resで受け取ったコントローラの返り値(商品点数)をitemsに代入します
-             this.products_options = res.data
-
-                })
-    },
-  }
-
+for(var i=1; i<=105; i++){
+  items.push('item-'+i);
 }
 
+Vue.component('paginate', VuejsPaginate)
 
-    Vue.createApp(hoge).mount('#app')
-
-
-
+new Vue({
+   el: '#app',
+   data: {
+     items: items,
+     parPage: 10,
+     currentPage: 1
+   },
+   methods: {
+    clickCallback: function (pageNum) {
+       this.currentPage = Number(pageNum);
+    }
+   },
+   computed: {
+     getItems: function() {
+      let current = this.currentPage * this.parPage;
+      let start = current - this.parPage;
+      return this.items.slice(start, current);
+     },
+     getPageCount: function() {
+      return Math.ceil(this.items.length / this.parPage);
+     }
+   }
+ })
 </script>
-
-
-
-@endsection

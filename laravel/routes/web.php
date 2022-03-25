@@ -178,7 +178,7 @@ Route::get('customers/ajax_search', 'CustomerController@ajax_search');
 
 // Route::get('ajax/vue', 'VueController@ajax_products');
 // Route::get('ajax/vue_option', 'VueController@ajax_products_options');
-// Route::get('vue', 'VueController@index');
+Route::get('vue', 'VueController@index');
 
 
 
