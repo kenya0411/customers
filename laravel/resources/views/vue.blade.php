@@ -1,52 +1,36 @@
-<div id="app">
-    <ul>
-      <li v-for="item in getItems">@{{item}}</li>
-    </ul>
-    <paginate
-    :page-count="getPageCount"
-    :page-range="3"
-    :margin-pages="2"
-    :click-handler="clickCallback"
-    :prev-text="'＜'"
-    :next-text="'＞'"
-    :container-class="'pagination'"
-    :page-class="'page-item'">
-  </paginate>
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+ <meta name="csrf-token" content="{{ csrf_token() }}">
 
+<script src="/js/vue.js"></script>
+{{-- <script src="https://unpkg.com/vuejs-paginate@2.1.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vuejs-paginate/2.1.0/index.js"></script>
+<script src="https://unpkg.com/laravel-vue-pagination@2.3.1/dist/laravel-vue-pagination.umd.min.js"></script>
+ --}}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://unpkg.com/vuejs-paginate-next@latest/dist/vuejs-paginate-next.umd.js"></script>
+<script src="https://unpkg.com/vuejs-paginate@latest"></script>
+
+<template>
+<paginate
+:page-count="20"
+:page-range="3"
+:margin-pages="2"
+:click-handler="clickCallback"
+:prev-text="'Prev'"
+:next-text="'Next'"
+:container-class="'pagination'"
+:page-class="'page-item'"
+>
+</paginate>
+</template>
+<script src="{{ mix('js/app.js') }}"></script>
 
 <script>
-    
-    var items = [];
 
-for(var i=1; i<=105; i++){
-  items.push('item-'+i);
+
+export default {
+  components: {
+    VPagination
+  }
 }
-
-Vue.component('paginate', VuejsPaginate)
-
-new Vue({
-   el: '#app',
-   data: {
-     items: items,
-     parPage: 10,
-     currentPage: 1
-   },
-   methods: {
-    clickCallback: function (pageNum) {
-       this.currentPage = Number(pageNum);
-    }
-   },
-   computed: {
-     getItems: function() {
-      let current = this.currentPage * this.parPage;
-      let start = current - this.parPage;
-      return this.items.slice(start, current);
-     },
-     getPageCount: function() {
-      return Math.ceil(this.items.length / this.parPage);
-     }
-   }
- })
 </script>
+

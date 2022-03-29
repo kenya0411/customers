@@ -1,14 +1,15 @@
-  let d = new Date();
-  let year = d.getFullYear();
-let month = d.getMonth() +1;
+//   let d = new Date();
+//   let year = d.getFullYear();
+// let month = d.getMonth() +1;
 
   const hoge = {
       el: '.main_content',
       data () {
         return {
-          persons: '', 
+          // persons: '', 
           customers: '',
           search_customers_id: '',//検索用
+    
       }
   },
   //ロード時にデータベースから情報を取得
@@ -17,8 +18,10 @@ let month = d.getMonth() +1;
       axios.get(url)
       .then(response => [
         //商品データや顧客データを取得
-        this.persons = response.data.persons,
+        // this.persons = response.data.persons,
         this.customers = response.data.customers,
+        console.log(this.customers)
+        
         ])
       .catch(error => console.log(error))
   },

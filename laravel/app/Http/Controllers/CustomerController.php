@@ -59,11 +59,11 @@ return $data;
 
  
 
-        // $customers = DB::table('customers')
-        // ->where('is_delete','=',0)//論理削除されてないもの
-        // ->get();   
+        $customers = DB::table('customers')
+        ->where('is_delete','=',0)//論理削除されてないもの
+        ->get();   
 
-        $customers = DB::table('customers')->paginate(10);
+        // $customers = DB::table('customers')->paginate(10);
 
 
     return ["customers"=>$customers];

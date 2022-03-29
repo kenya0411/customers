@@ -8,6 +8,10 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+
+import VPagination from "@hennge/vue3-pagination";
+import "@hennge/vue3-pagination/dist/vue3-pagination.css";
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

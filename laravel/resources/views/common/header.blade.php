@@ -18,8 +18,14 @@ $d = '?'.now();
 <script src="/js/vue.js"></script>
 <script src="/js/moment.min.js"></script>
 {{-- <script src="https://unpkg.com/vue@next"></script> --}}
-   <script src="https://unpkg.com/vue-router@4.0.5/dist/vue-router.global.js"></script>
+   {{-- <script src="https://unpkg.com/vue-router@4.0.5/dist/vue-router.global.js"></script> --}}
+
+   
 <script src="https://unpkg.com/vuejs-paginate@2.1.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vuejs-paginate/2.1.0/index.js"></script>
+<script src="https://unpkg.com/laravel-vue-pagination@2.3.1/dist/laravel-vue-pagination.umd.min.js"></script>
+
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
