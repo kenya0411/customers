@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@hennge/vue3-pagination": "^1.0.17",
+    "@ocrv/vue-tailwind-pagination": "^0.0.4",
     "style-loader": "^3.3.1",
     "vue-router": "^4.0.14",
     "webpack": "^5.70.0"
