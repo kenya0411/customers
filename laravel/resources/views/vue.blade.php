@@ -1,6 +1,6 @@
  <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<script src="/js/vue.js"></script>
+{{-- <script src="/js/vue.js"></script> --}}
 
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -8,7 +8,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Laravel</title>
-        <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
     <body>
     <div id="user">
@@ -17,3 +16,5 @@
     </body>
 </html>
       <script src="{{ mix('js/app.js') }}"></script>
+
+      
