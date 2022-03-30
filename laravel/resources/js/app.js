@@ -7,7 +7,7 @@
 require('./bootstrap');
 
 // window.Vue = require('vue');
-
+// sss
 
 // import VPagination from "@hennge/vue3-pagination";
 // import "@hennge/vue3-pagination/dist/vue3-pagination.css";
@@ -18,28 +18,38 @@ require('./bootstrap');
 import vueCounter from "./vueCounter";
 import { createApp } from "vue";
 
-createApp({
-    setup() {
+// createApp({
+//     setup() {
 
-        // カウンターを更新する
-        const { counter } = vueCounter();
+//         // カウンターを更新する
+//         const { counter } = vueCounter();
 
-        return {
-            counter,
-        };
-    },
-}).mount("#counter");
+//         return {
+//             counter,
+//         };
+//     },
+// }).mount("#counter");
 
 /*--------------------------------------------------- */
 /* test
 /*--------------------------------------------------- */
-import ExampleComponent from './components/ExampleComponent.vue'
+// import ExampleComponent from './components/ExampleComponent.vue'
+
+// createApp({
+//     components:{
+//         ExampleComponent
+//     }
+// }).mount('#test')
+
+
+import User from './components/User.vue'
+
 
 createApp({
     components:{
-        ExampleComponent
+        User
     }
-}).mount('#test')
+}).mount('#user')
 
 
 /**

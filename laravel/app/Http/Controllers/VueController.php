@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Products;
 use App\Person;
+use App\Order;
 use App\products_options;
 
 use Illuminate\Http\Request;
@@ -12,36 +13,46 @@ class VueController extends Controller
 {
     
 
-    public function ajax_products(Request $request) {
-    //productの商品ナンバーを取得
-    $value = $request->persons_id;
 
-    // 商品を取得
-    $products = products::where('persons_id', '=', $value)->get();
-    return $products;
 
-    }
-    public function ajax_products_options(Request $request) {
-    //productの商品ナンバーを取得
-    $value = $request->products_id;
-    $products = products::where('products_id', '=', $value)->first();
-    $products_number = $products->products_number;
-
-    // オプションを取得
-    $products_options = products_options::where('products_number', '=', $products_number)->get();
-    return $products_options;
-
-    }
 
     public function index(Request $request) {
-    $persons = Person::all();
-
-        return view('vue')->with('persons', $persons);
-
+    $users = Order::paginate(2);
+    // $users = Order::query()->get();
+// return ["users"=>$users];
+        return view('vue')->with('users', $users);
+// return $users;
     }
 
 
 
+
+/*--------------------------------------------------- */
+/* 一覧画面のajax
+/*--------------------------------------------------- */
+    public function ajax_index(Request $request) {
+
+        $persons = DB::table('persons')
+        ->get();   
+$persons = 'test';
+        $products = DB::table('products')
+        ->get();   
+        $customers = DB::table('customers')
+        ->get();   
+        $users = DB::table('users')
+        ->get(); 
+        $products_options = DB::table('products_options')
+        ->get();   
+        $orders = DB::table('orders')
+        ->where('is_delete','=',0)//論理削除されてないもの
+        ->whereYear('created_at','=',date("Y"))//今年
+        ->whereMonth('created_at','=',date("m"))//今月
+        ->get();   
+
+
+
+    return ["users"=>$users,"persons"=>$persons,"products"=>$products,"products_options"=>$products_options,"orders"=>$orders,"customers"=>$customers];
+    }
 
 
 
