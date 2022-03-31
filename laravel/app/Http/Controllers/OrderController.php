@@ -626,6 +626,7 @@ if($request->products_id){
 /*--------------------------------------------------- */
 /* 一覧画面のajax
 /*--------------------------------------------------- */
+    //order以外の情報を取得
     public function ajax_index(Request $request) {
 
         $persons = DB::table('persons')
@@ -639,21 +640,21 @@ if($request->products_id){
         ->get(); 
         $products_options = DB::table('products_options')
         ->get();   
-        $orders = DB::table('orders')
-        ->where('is_delete','=',0)//論理削除されてないもの
-        ->whereYear('created_at','=',date("Y"))//今年
-        ->whereMonth('created_at','=',date("m"))//今月
-        ->paginate(2);   
+        // $orders = DB::table('orders')
+        // ->where('is_delete','=',0)//論理削除されてないもの
+        // ->whereYear('created_at','=',date("Y"))//今年
+        // ->whereMonth('created_at','=',date("m"))//今月
+        // ->paginate(2);   
 
 
 
-    return ["users"=>$users,"persons"=>$persons,"products"=>$products,"products_options"=>$products_options,"orders"=>$orders,"customers"=>$customers];
+    return ["users"=>$users,"persons"=>$persons,"products"=>$products,"products_options"=>$products_options,"customers"=>$customers];
     }
 
 
 
 
-//検索画面
+//検索画面用（orderのみ）
  public function ajax_search(Request $request) {
 
     $year = '';  
