@@ -885,6 +885,25 @@ main .addbtn a, main .commonBtn a {
   max-width: 70px;
 }
 
+.pagination {
+  margin-top: 20px;
+}
+.pagination li {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  height: 30px;
+  width: 30px;
+  justify-content: center;
+  line-height: 1em;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  margin-right: 1px;
+  font-size: 14px;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
 .inner_pad {
   padding: 8px 16px;
 }

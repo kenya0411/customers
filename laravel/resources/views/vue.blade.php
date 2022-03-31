@@ -1,6 +1,6 @@
  <meta name="csrf-token" content="{{ csrf_token() }}">
 
-{{-- <script src="/js/vue.js"></script> --}}
+<script src="/js/vue.js"></script>
 
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>

@@ -57,11 +57,14 @@ return $data;
 /*--------------------------------------------------- */
     public function ajax_index(Request $request) {
 
- 
-
-        $customers = DB::table('customers')
+         $customers = DB::table('customers')
         ->where('is_delete','=',0)//論理削除されてないもの
-        ->get();   
+        ->paginate(1);   
+
+
+        // $customers = DB::table('customers')
+        // ->where('is_delete','=',0)//論理削除されてないもの
+        // ->get();   
 
         // $customers = DB::table('customers')->paginate(10);
 
