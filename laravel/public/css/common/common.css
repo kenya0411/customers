@@ -898,10 +898,22 @@ main .addbtn a, main .commonBtn a {
   line-height: 1em;
   border: 1px solid #ddd;
   background-color: #fff;
-  margin-right: 1px;
+  margin-right: 4px;
   font-size: 14px;
   font-size: 1.4rem;
   cursor: pointer;
+}
+@media (min-width: 769px) {
+  .pagination li:not(.is_active):hover {
+    border: 1px solid #1B8EE4;
+    color: #1B8EE4;
+    transition-duration: 0.3s;
+    /* style */
+  }
+}
+.pagination .is_active {
+  background-color: #000;
+  color: #fff;
 }
 
 .inner_pad {

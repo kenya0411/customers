@@ -129,6 +129,16 @@ main
 		line-height: 1em
 		border: 1px solid #ddd
 		background-color: #fff
-		margin-right: 1px
+		margin-right: 4px
 		@include rem(14)
 		cursor: pointer
+		@include tabup
+			&:not(.is_active)
+				&:hover
+					border: 1px solid $color-main
+					color: $color-main
+					transition-duration: 0.3s
+					/* style */
+	.is_active
+		background-color: #000
+		color: #fff

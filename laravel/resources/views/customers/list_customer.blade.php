@@ -7,10 +7,10 @@
 @section('content')
 
 @include('customers.components.search')
-@include('customers.components.pagination')
+@include('common.components.pagination')
 
 @include('customers.components.customer')
-@include('customers.components.pagination')
+@include('common.components.pagination')
 
 
 @endsection

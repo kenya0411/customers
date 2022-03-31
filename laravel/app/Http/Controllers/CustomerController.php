@@ -86,7 +86,8 @@ return $data;
     $customers=$customers->where('customers_name','like','%'.$request->customers_name.'%')
     ->orWhere('customers_nickname','like','%'.$request->customers_name.'%');
 
-    $customers=$customers->get();
+    $customers=$customers->paginate(1);
+    // $customers=$customers->get();
 
     return ["customers"=>$customers];
 

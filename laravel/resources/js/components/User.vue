@@ -2,7 +2,7 @@
   <div>
     <ul class="pagination">
       <button
-      v-for="page in last_page" v-on:click="current_page = page">{{ page }}</button>
+      v-for="page in last_page"  v-on:click="current_page = page">{{ page }}</button>
 
     </ul>
     <ul>

@@ -11,7 +11,7 @@
 
    
 
-   <li>
+{{--    <li>
     
      <select name="search_persons_id" v-model="search_persons" id="">
       <option value="0" >選択してください</option>
@@ -20,7 +20,7 @@
       
       
     </select>
-  </li>
+  </li> --}}
 
 </ul>
 

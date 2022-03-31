@@ -7,7 +7,10 @@
 @section('content')
 
 @include('orders.components.search')
+@include('common.components.pagination')
+
 @include('orders.components.order')
+@include('common.components.pagination')
 
 
 @endsection

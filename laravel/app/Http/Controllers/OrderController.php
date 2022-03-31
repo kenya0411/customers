@@ -643,7 +643,7 @@ if($request->products_id){
         ->where('is_delete','=',0)//論理削除されてないもの
         ->whereYear('created_at','=',date("Y"))//今年
         ->whereMonth('created_at','=',date("m"))//今月
-        ->get();   
+        ->paginate(2);   
 
 
 
@@ -659,9 +659,7 @@ if($request->products_id){
     $year = '';  
     $month = '';  
     $person = '';  
-        // if(empty($request)){
-        //     $request= '';
-        // }
+
 
 
     $orders = Order::query();
@@ -697,7 +695,7 @@ if($request->products_id){
     }) ;
     }
 
-    $orders=$orders->get();
+    $orders=$orders->paginate(1);
 
     return ["orders"=>$orders];
 
