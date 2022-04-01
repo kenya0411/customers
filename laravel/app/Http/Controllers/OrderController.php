@@ -696,7 +696,7 @@ if($request->products_id){
     }) ;
     }
 
-    $orders=$orders->paginate(1);
+    $orders=$orders->paginate(30);
 
     return ["orders"=>$orders];
 

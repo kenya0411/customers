@@ -91,57 +91,6 @@
 
 
 <script>
-    mbSlideToggle();
-    
-    const hoge = {
-      el: '.main_content',
-      data () {
-        return {
-          persons: '', 
-          products: '',
-          products_options: '',
-          search_persons: '',//検索用
-      }
-  },
-  //ロード時にデータベースから情報を取得
-  created:function(){
-      var url = '/products_options/ajax'
-      axios.get(url)
-      .then(response => [
-        //商品データや顧客データを取得
-        this.persons = response.data.persons,
-        this.products = response.data.products,
-        this.products_options = response.data.products_options,
-        ])
-      .catch(error => console.log(error))
-  },
-  computed:{
-         get_search_data() {
-       return [
-       this.search_persons,
-       ];
-   },
 
-
-},
-watch: {
-    get_search_data(val){
-      let url = '/products_options/ajax_search/?persons_id=' + this.search_persons;
-      axios.get(url)
-      .then(response => [
-        // this.persons = response.data.persons,
-        // this.products = response.data.products,
-        this.products_options = response.data.products_options,
-        
-        ])
-      .catch(error => console.log(error))
-
-    },
-
-
-}
-}
-
-Vue.createApp(hoge).mount('.main_content')
     
 </script>

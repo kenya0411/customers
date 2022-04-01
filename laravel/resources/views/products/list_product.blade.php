@@ -13,87 +13,17 @@
     </div> 
 </div>
 @include('products.components.search')
+@include('common.components.pagination')
 
 @include('products.components.product')
+@include('common.components.pagination')
 
 
 
 
-
-{{-- @include('products.components.product_option_list') --}}
-    
-
-
+@endsection
+@section('vue')
+<script src="/js/vue/products_list.js"></script>
 
 
-
-
-
-{{-- 
-<section class="cloneBlock maxWid mbPad">
-
-    <form method="POST" action="/products/clone/">
-     @csrf
-     <div class="flex3"><input type="text" name="new_date_year" value="{{$dates['year']}}">年</div>
-     <div class="flex3"><input type="text" name="new_date_month" value="{{$dates['month'] +1}}">月</div>
-     <div class="flex3"><input type="submit"class="cloneBtn" value="複製する"></div>
-
-
-
-
-
-     <input type="hidden" name="clone_date_year" value="{{$dates['year']}}">
-     <input type="hidden" name="clone_date_month" value="{{$dates['month']}}">
-
- </form>
-
-</section> --}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-
-
-//     $('.cloneBtn').click(function () {
-//       if (confirm('複製してもいいですか？')) {
-//       } else {
-//         return false
-//     }
-// });
-//     $('.deleteBtn').click(function () {
-//       if (confirm('削除してもいいですか？')) {
-//     // 「OK」をクリックした際の処理を記述
-//     $(this).parents('form').attr('action', $(this).data('action'));
-//     $(this).parents('form').submit();
-// } else {
-//     //キャンセルした場合
-//     //何も起きない
-//     return false
-// }
-// });
-// 
-// 
-
-
-
-// var data = new Date();
-// var year = data.getFullYear();
-// var month = data.getMonth()+ 1 ;
-//     let params = (new URL(document.location)).searchParams//クエリ取得用
-
-
-</script>
 @endsection

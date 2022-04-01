@@ -166,25 +166,39 @@ return $data;
         $persons = DB::table('persons')
         ->get();   
 
-        $products = DB::table('products')
-        ->where('is_delete','=',0)//論理削除されてないもの
-        ->get();   
+        // $products = DB::table('products')
+        // ->where('is_delete','=',0)//論理削除されてないもの
+        // ->get();   
 
 
  
         
 
-    return ["persons"=>$persons,"products"=>$products];
+    return ["persons"=>$persons];
     }
 
 
  public function ajax_search(Request $request) {
 $products = '';
+    $person = '';  
 
-        $products = DB::table('products')
-        ->where('persons_id','=',$request->persons_id)//占い師のID
-        ->where('is_delete','=',0)//論理削除されてないもの
-        ->get();  
+
+    $products = Product::query();
+    $products=$products->where('is_delete','=',0);//論理削除
+
+    if(!empty($request->persons_id)){
+    $person = $request->persons_id;
+    $products->when($person, function($products, $person) { 
+    return $products->where('persons_id','=',$person);
+    }) ;
+    }
+    $products=$products->paginate(30);
+
+
+        // $products = DB::table('products')
+        // ->where('persons_id','=',$request->persons_id)//占い師のID
+        // ->where('is_delete','=',0)//論理削除されてないもの
+        // ->paginate(1);  
  
     return ["products"=>$products];
 
