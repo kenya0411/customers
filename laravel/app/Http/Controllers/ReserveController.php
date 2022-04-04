@@ -47,12 +47,14 @@ return $data;
 
         $persons = DB::table('persons')
         ->get();   
-
+        $customers = DB::table('customers')
+        ->get();  
         $products = DB::table('products')
         ->get();   
         $customers = DB::table('customers')
         ->get();   
         $users = DB::table('users')
+        ->where('permissions_id','=',2)//論理削除されてないもの
         ->get(); 
         $products_options = DB::table('products_options')
         ->get();   
@@ -74,18 +76,37 @@ return $data;
 
 
 //検索画面
- public function ajax_search(Request $request) {
+ // public function ajax_search(Request $request) {
 
-        $orders = DB::table('orders')
-        ->where('persons_id','like','%'.$request->persons_id.'%')//論理削除されてないもの
-        ->where('orders_id','like','%'.$request->orders_id.'%')//論理削除されてないもの
-        ->where('is_delete','=',0)//論理削除されてないもの
-        ->get();  
+ //        $orders = DB::table('orders')
+ //        ->where('persons_id','like','%'.$request->persons_id.'%')//論理削除されてないもの
+ //        ->where('orders_id','like','%'.$request->orders_id.'%')//論理削除されてないもの
+ //        ->where('is_delete','=',0)//論理削除されてないもの
+ //        ->get();  
  
-    return ["orders"=>$orders];
+ //    return ["orders"=>$orders];
+
+ //    }
+
+
+   public function ajax_update(Request $request)
+    {
+  
+        
+        $param = [
+        'id' => $request->id,
+        'fortunes_worry' => $request->fortunes_worry,
+        ];
+        DB::update('update fortunes set 
+            fortunes_worry=:fortunes_worry
+            where id=:id'
+            , $param); 
+
+       $fortunes = DB::table('fortunes')->get();   
+$test = $request->fortunes_worry;
+
+    return ["fortunes"=>$fortunes,"test"=>$test];
 
     }
-
-
 
 }

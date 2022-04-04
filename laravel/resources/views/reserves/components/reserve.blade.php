@@ -1,12 +1,12 @@
 <div class="reserveList listSection" > 
 <ul>
     <li class="flexHead flexWrap">
-<div class="pcBlock">
+{{-- <div class="pcBlock"> --}}
     
 
-        <div >予約一覧</div>
+        {{-- <div >予約一覧</div> --}}
  
-        </div>
+        {{-- </div> --}}
 
 
 <div class="mbBlock">
@@ -17,13 +17,15 @@
      </div>
     </li>
 
-    <li class="flexBodyWrap flexWrap" v-for="order in orders">
- 
+    <li class="flexBodyWrap flexWrap" v-for="(order, index) in orders">
+    <div class="countHead">
+        No.@{{ index + 1 }}
+    </div>
  <div class="mbBlock">
                    <ul class="no1">
 
-                    <li>@{{ customers[order.customers_id - 1].customers_nickname }}</li>
-                    <li>@{{ customers[order.customers_id - 1].customers_name }}</li>
+                    {{-- <li>@{{ customers[order.customers_id - 1].customers_nickname }}</li> --}}
+                    {{-- <li>@{{ customers[order.customers_id - 1].customers_name }}</li> --}}
                 </ul>
                 <div class="no2">
 <span v-if="order.orders_is_reserve_finished == '1'">鑑定済み</span>
@@ -38,6 +40,7 @@
  </div>
 
  <div class="pcBlock">
+     
 <div class="flex">
     <div class="flex5 no1">
         <div class="flexBlock">
@@ -88,34 +91,36 @@
     </div>
     <div class="flex5 no2">
             <span class="title">[悩み]</span>
-            @{{ fortunes}}
-            {{-- @{{ fortunes[orders.id].fortunes_worry}} --}}
-            <textarea name="" id=""></textarea>
+            
+            <textarea name="test" id="" v-on:keyup.enter="listUpdate('fortunes_worry',order.id,fortunes[order.id - 1].fortunes_worry)" v-on:blur="listUpdate('fortunes_worry',order.id,fortunes[order.id - 1].fortunes_worry)">@{{ fortunes[order.id - 1].fortunes_worry }}</textarea>
 
     </div>
     <div class="flex5 no3">
             <span class="title">[鑑定結果]</span>
 
-            <textarea name="" id=""></textarea>
+            <textarea name="" id="">@{{ fortunes[order.id - 1].fortunes_answer }}</textarea>
     </div>
     <div class="flex5 no4">
           <div class="flexBlock">
             <span class="title">[外注]</span>
-            <select name="" id="">
-                <option value="">aaa</option>
+            <select name="users_id" id=""  v-model="order.users_id">
+      <option value="0" >選択してください</option>
+
+                <option v-for="user in users" v-bind:value="user.id">@{{ user.nickname }}</option>
             </select>
         </div>
          <div class="flexBlock">
             <span class="title">[備考]</span>
-            <textarea name="" id=""></textarea>
+            <textarea name="orders_notice" id="">@{{ order.orders_notice }}</textarea>
 
         </div>
 
                  <div class="flexBlock">
             <span class="title">[発送]</span>
 
-            <select name="" id="">
-                <option value="">aaa</option>
+            <select name="orders_is_ship_finished" id=""  v-model="order.orders_is_ship_finished">
+                <option value="0"></option>
+                <option value="2">発送不要</option>
             </select>
         </div>
 
@@ -123,14 +128,21 @@
     <div class="flex5 no5">
         <div class="btnFlex">
             <div class="btnFlex4 number1">
-                <a href=""><i class="fa-solid fa-clipboard"></i></a>
+                <div class="icon_wrap" v-on:click="copyToClipboard()">
+                    <i class="fa-solid fa-clipboard"></i>
+                </div>
             </div>
             <div class="btnFlex4 number2">
-                <a href=""><i class="fa-solid fa-circle-check"></i></a>
+                <div class="icon_wrap">
+
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
             </div>
 
             <div class="btnFlex4 number3">
-                <a href="">編集ページ<i class="fa-solid fa-pencil"></i></a>
+                <div class="text_wrap">
+
+                    編集<i class="fa-solid fa-pencil"></i></div>
             </div>
             <div class="btnFlex4 number4">
                 <form action="">

@@ -14,7 +14,7 @@ class FortuneTableSeeder extends Seeder
     {
         DB::table('fortunes')->insert([
             [
-                'fortunes_id' => 1,
+                'id' => 1,
                 'orders_id' => 'm59648008140',
                 'fortunes_worry' => "西塔万祐子　サイトウマユコ　1979/7/2
 西塔弘康　　サイトウヒロヤス　1983/12/9
@@ -52,7 +52,7 @@ class FortuneTableSeeder extends Seeder
             ],
 
              [
-                'fortunes_id' => 2,
+                'id' => 2,
                 'orders_id' => 'm66373406825',
                 'fortunes_worry' => "こんばんは
 12月23日にペットの猫が他界した件で鑑定していただいた西塚仁実と申します。
@@ -99,6 +99,24 @@ class FortuneTableSeeder extends Seeder
             ],
 
 
+
+             [
+                'id' => 3,
+                'orders_id' => 'aaaa',
+                'fortunes_worry' => "testtest",
+                'fortunes_answer' => "aaaaa",
+                'fortunes_reply1' => 'おはようございます
+まくらくんと、残された子の2匹の気持ちを伝えていただきましてありがとうございました。
+思い出すとまだ涙が出てしまいますが、まくら君が近くにいて見守っていてくれるんだな、と感じることができました。
+本当にありがとうございました。
+
+本日届きました。
+ありがとうございました。
+早く新しい子を迎えに行きたいと思いました！
+勇気をもらいました。
+ありがとうございました。',
+                'fortunes_reply_answer1' => '',
+            ],
 
         ]);
     }

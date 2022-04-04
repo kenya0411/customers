@@ -25,6 +25,8 @@ class CreateOrdersTable extends Migration
             $table->integer('orders_price')->default(0);
             $table->integer('orders_is_reserve_finished')->default(0);
             $table->integer('orders_is_ship_finished')->default(0);
+            $table->text('orders_notice')->nullable();
+
             $table->timestamp('updated_at')->useCurrent()->nullable();
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->boolean('is_delete')->default(0);

@@ -2,7 +2,16 @@
 
 @import "../../../../_import.sass"
 .reserveList
+	.flexBodyWrap
+		margin-bottom: 32px
 	.flexWrap
+
+		.countHead
+			background-color: #000
+			color: #fff
+			line-height: 1em
+			padding: 16px 24px
+
 
 		.pcBlock
 			@include tab
@@ -51,7 +60,7 @@
 								margin-left: 16px
 							.number1,.number2,.number3
 								
-								a,a:visited
+								.icon_wrap,a,a:visited,.text_wrap
 									$bgcolor: #1c8ee3
 									position: relative
 									
@@ -69,7 +78,7 @@
 										transition-duration: 0.5s
 
 							.number1,.number2,
-								a
+								.icon_wrap
 									border-radius: 50px
 									padding: 8px
 									width: 45px
@@ -82,7 +91,8 @@
 									@include rem(14)
 
 							.number3
-								a
+								.text_wrap
+									cursor: pointer
 									padding: 12px 16px
 									margin-left: 16px
 

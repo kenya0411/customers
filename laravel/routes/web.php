@@ -109,7 +109,8 @@ Route::get('reserves', 'ReserveController@index');
 Route::post('reserves', 'ReserveController@post');
 
 Route::get('reserves/ajax', 'ReserveController@ajax_index');
-Route::get('reserves/ajax_search', 'ReserveController@ajax_search');
+Route::get('reserves/ajax_update', 'ReserveController@ajax_update');
+// Route::get('reserves/ajax_search', 'ReserveController@ajax_search');
 
 /*--------------------------------------------------- */
 /* Customers
