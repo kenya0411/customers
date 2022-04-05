@@ -92,13 +92,13 @@
     <div class="flex5 no2">
             <span class="title">[悩み]</span>
             
-            <textarea id=""v-model="fortunes[order.id - 1].fortunes_worry" v-on:keyup.enter="listUpdate('fortunes_worry',order.id)">@{{ fortunes[order.id - 1].fortunes_worry }}</textarea>
+            <textarea id="" v-model="fortunes[order.id - 1].fortunes_worry" v-on:keyup.enter="listUpdate('fortunes_worry',order.id)">@{{ fortunes[order.id - 1].fortunes_worry }}</textarea>
 
     </div>
     <div class="flex5 no3">
             <span class="title">[鑑定結果]</span>
 
-            <textarea name="" id="">@{{ fortunes[order.id - 1].fortunes_answer }}</textarea>
+            <textarea name="" id="" v-model="fortunes[order.id - 1].fortunes_answer" v-on:keyup.enter="listUpdate('fortunes_answer',order.id)">@{{ fortunes[order.id - 1].fortunes_answer }}</textarea>
     </div>
     <div class="flex5 no4">
           <div class="flexBlock">
