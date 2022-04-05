@@ -92,18 +92,28 @@
     <div class="flex5 no2">
             <span class="title">[悩み]</span>
             
-            <textarea id="" v-model="fortunes[order.id - 1].fortunes_worry" v-on:keyup.enter="listUpdate('fortunes_worry',order.id)">@{{ fortunes[order.id - 1].fortunes_worry }}</textarea>
+            <textarea id="" v-model="fortunes[order.id - 1].fortunes_worry" 
+            v-on:keyup.enter.v.backspace="listUpdate('fortunes_worry',order.id)" 
+            v-on:change="listUpdate('fortunes_worry',order.id)"
+            v-on:mouseleave="listUpdate('fortunes_worry',order.id)"
+            >@{{ fortunes[order.id - 1].fortunes_worry }}</textarea>
 
     </div>
     <div class="flex5 no3">
             <span class="title">[鑑定結果]</span>
 
-            <textarea name="" id="" v-model="fortunes[order.id - 1].fortunes_answer" v-on:keyup.enter="listUpdate('fortunes_answer',order.id)">@{{ fortunes[order.id - 1].fortunes_answer }}</textarea>
+            <textarea name="" id="" v-model="fortunes[order.id - 1].fortunes_answer" 
+            v-on:keyup.enter.v.backspace="listUpdate('fortunes_answer',order.id)" 
+            v-on:change="listUpdate('fortunes_answer',order.id)"
+            v-on:mouseleave="listUpdate('fortunes_answer',order.id)"
+            >@{{ fortunes[order.id - 1].fortunes_answer }}</textarea>
     </div>
     <div class="flex5 no4">
           <div class="flexBlock">
             <span class="title">[外注]</span>
-            <select name="users_id" id=""  v-model="order.users_id">
+            <select name="users_id" id="" 
+            v-model="orders[order.id - 1].users_id"
+            v-on:change="listUpdate('users_id',order.id)">
       <option value="0" >選択してください</option>
 
                 <option v-for="user in users" v-bind:value="user.id">@{{ user.nickname }}</option>
@@ -111,14 +121,22 @@
         </div>
          <div class="flexBlock">
             <span class="title">[備考]</span>
-            <textarea name="orders_notice" id="">@{{ order.orders_notice }}</textarea>
+            <textarea id="" v-model="orders[order.id - 1].orders_notice" 
+            v-on:keyup.enter.v.backspace="listUpdate('orders_notice',order.id)" 
+            v-on:change="listUpdate('orders_notice',order.id)"
+            v-on:mouseleave="listUpdate('orders_notice',order.id)"
+            >
+        </textarea>
 
         </div>
 
                  <div class="flexBlock">
             <span class="title">[発送]</span>
 
-            <select name="orders_is_ship_finished" id=""  v-model="order.orders_is_ship_finished">
+            <select name="orders_is_ship_finished" id="" 
+            v-model="orders[order.id - 1].orders_is_ship_finished"
+            v-on:change="listUpdate('orders_is_ship_finished',order.id)"
+            >
                 <option value="0"></option>
                 <option value="2">発送不要</option>
             </select>
