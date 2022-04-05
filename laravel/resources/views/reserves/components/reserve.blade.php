@@ -92,7 +92,7 @@
     <div class="flex5 no2">
             <span class="title">[悩み]</span>
             
-            <textarea name="test" id="" v-on:keyup.enter="listUpdate('fortunes_worry',order.id,fortunes[order.id - 1].fortunes_worry)" v-on:blur="listUpdate('fortunes_worry',order.id,fortunes[order.id - 1].fortunes_worry)">@{{ fortunes[order.id - 1].fortunes_worry }}</textarea>
+            <textarea id=""v-model="fortunes[order.id - 1].fortunes_worry" v-on:keyup.enter="listUpdate('fortunes_worry',order.id)">@{{ fortunes[order.id - 1].fortunes_worry }}</textarea>
 
     </div>
     <div class="flex5 no3">
