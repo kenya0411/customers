@@ -388,6 +388,9 @@
   .reserveList .flexWrap .pcBlock .flex .flex5 select {
     width: 100%;
   }
+  .reserveList .flexWrap .pcBlock .flex .flex5 .orders_notice {
+    height: 120px;
+  }
   .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex {
     margin-top: 24px;
     margin-bottom: 24px;

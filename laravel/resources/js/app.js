@@ -52,6 +52,17 @@ createApp({
 }).mount('#user')
 
 
+import MyModal from './components/MyModal.vue'
+import index from './components/index.vue'
+
+
+createApp({
+    components:{
+        MyModal
+    }
+}).mount('main')
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

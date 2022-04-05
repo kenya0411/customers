@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Users;
 
 // use App\Http\Requests\HelloRequest;バリデーション用
 use Illuminate\Http\Request;
@@ -63,7 +64,7 @@ public function ajax_index(Request $request) {
 
         $orders = DB::table('orders')
         ->where('is_delete','=',0)//論理削除されてないもの
-        ->where('orders_is_reserve_finished','=',0)//論理削除されてないもの
+        ->where('orders_is_reserve_finished','=',0)
         ->get();   
 
 
@@ -75,20 +76,11 @@ public function ajax_index(Request $request) {
 
 
 
-//検索画面
- // public function ajax_search(Request $request) {
 
- //        $orders = DB::table('orders')
- //        ->where('persons_id','like','%'.$request->persons_id.'%')//論理削除されてないもの
- //        ->where('orders_id','like','%'.$request->orders_id.'%')//論理削除されてないもの
- //        ->where('is_delete','=',0)//論理削除されてないもの
- //        ->get();  
-
- //    return ["orders"=>$orders];
-
- //    }
-
-
+/*--------------------------------------------------- */
+//データベース上書き
+/*--------------------------------------------------- */
+    
     public function ajax_update(Request $request)
     {
 
@@ -130,5 +122,92 @@ public function ajax_index(Request $request) {
         // return ["fortunes"=>$fortunes,"test"=>$test];
 
     }
+
+
+/*--------------------------------------------------- */
+//クリップボードにコピー
+/*--------------------------------------------------- */
+
+public function ajax_clipboard_copy(Request $request) {
+  
+        //注文
+        $orders = DB::table('orders')
+        ->where('is_delete','=',0)//論理削除されてないもの
+        ->where('id','=',$request->id)//論理削除されてないもの
+        ->get();   
+        
+        //鑑定者
+        $users = DB::table('users')
+        ->where('id','=',$orders[0]->users_id)//論理削除されてないもの
+        ->get(); 
+
+        //商品一覧
+        $products = DB::table('products')
+        ->where('products_id','=',$orders[0]->products_id)//論理削除されてないもの
+        ->get();   
+
+        //商品オプション
+        if(!empty($orders[0]->products_options_id)){
+
+        $products_options = DB::table('products_options')
+        ->where('products_options_id','=',$orders[0]->products_options_id)//論理削除されてないもの
+        ->get();   
+        $products_options_detail = $products_options[0]->products_options_detail;
+
+        }else{
+        $products_options_detail = '';
+        }
+
+
+
+        //鑑定結果
+        $fortunes = DB::table('fortunes')
+        ->where('id','=',$orders[0]->id)//論理削除されてないもの
+        ->get(); 
+
+
+//コピー用
+$html = "■鑑定者\n";
+$html .= $users[0]->nickname."\n\n";
+$html .= "■鑑定方法\n";
+$html .= $products[0]->products_method."\n\n";
+$html .= "■商品ID\n";
+$html .= $orders[0]->orders_id."\n\n";
+$html .= "■悩みのジャンル\n";
+$html .= $products[0]->products_name."\n\n";
+$html .= "■ご相談内容\n";
+$html .= $fortunes[0]->fortunes_worry."\n\n";
+$html .= "■鑑定内容\n\n";
+$html .= "■商品自体の内容\n";
+$html .= $products[0]->products_detail."\n";
+$html .= $products_options_detail."\n\n";
+$html .= "■備考\n";
+$html .= $orders[0]->orders_notice."\n\n";
+        
+
+        return ["html"=>$html];
+    }
+
+
+
+/*--------------------------------------------------- */
+/* 発送予約
+/*--------------------------------------------------- */
+    public function ajax_reserve_ship(Request $request)
+    {
+
+        //悩みと鑑定結果の上書き
+
+            $param = [
+                'id' => $request->id,
+                'orders_is_reserve_finished' => 1,
+            ];
+            DB::update('update orders set 
+                orders_is_reserve_finished=:orders_is_reserve_finished
+                where id=:id'
+                , $param); 
+
+    }
+
 
 }

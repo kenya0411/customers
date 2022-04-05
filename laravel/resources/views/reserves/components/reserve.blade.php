@@ -121,7 +121,7 @@
         </div>
          <div class="flexBlock">
             <span class="title">[備考]</span>
-            <textarea id="" v-model="orders[order.id - 1].orders_notice" 
+            <textarea class="orders_notice" id="" v-model="orders[order.id - 1].orders_notice" 
             v-on:keyup.enter.v.backspace="listUpdate('orders_notice',order.id)" 
             v-on:change="listUpdate('orders_notice',order.id)"
             v-on:mouseleave="listUpdate('orders_notice',order.id)"
@@ -146,7 +146,7 @@
     <div class="flex5 no5">
         <div class="btnFlex">
             <div class="btnFlex4 number1">
-                <div class="icon_wrap" v-on:click="copyToClipboard()">
+                <div class="icon_wrap" v-on:click="copyToClipboard(order.id)">
                     <i class="fa-solid fa-clipboard"></i>
                 </div>
             </div>
@@ -163,9 +163,9 @@
                     編集<i class="fa-solid fa-pencil"></i></div>
             </div>
             <div class="btnFlex4 number4">
-                <form action="">
-                    <button>発送予約<i class="fa-solid fa-paper-plane"></i></button>
-                </form>
+                    <button 
+                    v-on:click="reserve_ship(order.id)"
+                    >発送予約<i class="fa-solid fa-paper-plane"></i></button>
             </div>
 
         </div>

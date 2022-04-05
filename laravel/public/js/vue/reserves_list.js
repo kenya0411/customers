@@ -15,20 +15,40 @@
 
         }
       },
-    methods: {  // filtersじゃなくmethods
+    methods: {  
+      //時間のフォーマット用
       moment: function (date) {
         return moment(date).format('YYYY/MM/DD')
       },
-  
-      copyToClipboard(text) {
-        navigator.clipboard.writeText(text)
-        .then(() => {
-          console.log(text)
-        })
-        .catch(e => {
-          console.error(e)
-        })
+      //発送予約
+      reserve_ship(id) {
+        let url = '/reserves/ajax_reserve_ship?id='+id;
+        //発送の確認
+        if(!confirm('発送してもよろしいですか？')){
+          /* キャンセルの時の処理 */
+          return false;
+        }else{
+        axios.get(url)
+        .then(response => [
+          location.reload(),
+          
+          ])
+        .catch(error => console.log(error))
+        } 
+
       },
+      //クリップボードに保存
+      copyToClipboard(id) {
+        let url = '/reserves/ajax_clipboard_copy?id='+id;
+        
+        axios.get(url)
+        .then(response => [
+        navigator.clipboard.writeText(response.data.html)
+          
+          ])
+        .catch(error => console.log(error))
+      },
+      //ロード時にデータベースから情報を取得
       async load_page() {
         let url = '/reserves/ajax';
         axios.get(url)
@@ -46,11 +66,10 @@
 
       },
 
-
-    listUpdate(name,id) {
       //データベースに上書き
+    listUpdate(name,id) {
+      
       let url = '/reserves/ajax_update/';
-      console.log(this.orders[id - 1].orders_notice)
 
       axios.post(url, {
         id: id,
