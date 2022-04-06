@@ -45,7 +45,7 @@ name_check: '',//名前確認用
       reserve_ship(id) {
         let url = '/reserves/ajax_reserve_ship?id='+id;
         //発送の確認
-        if(!confirm('発送してもよろしいですか？')){
+        if(!confirm('鑑定完了しましたか？')){
           /* キャンセルの時の処理 */
           return false;
         }else{

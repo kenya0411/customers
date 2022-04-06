@@ -102,6 +102,12 @@ Route::get('orders/ajax', 'OrderController@ajax_index');
 Route::get('orders/ajax_search', 'OrderController@ajax_search');
 
 
+Route::get('orders/detail', 'OrderController@detail_index');
+Route::get('orders/detail/ajax', 'OrderController@ajax_detail_index');
+Route::post('orders/detail/ajax_update', 'OrderController@ajax_detail_update');
+
+
+
 /*--------------------------------------------------- */
 /* Reserves
 /*--------------------------------------------------- */
@@ -109,9 +115,7 @@ Route::get('reserves', 'ReserveController@index');
 Route::post('reserves', 'ReserveController@post');
 
 Route::get('reserves/ajax', 'ReserveController@ajax_index');
-// Route::get('reserves/ajax_update', 'ReserveController@ajax_update');
 Route::post('reserves/ajax_update', 'ReserveController@ajax_update');
-// Route::get('reserves/ajax_search', 'ReserveController@ajax_search');
 
 Route::get('reserves/ajax_clipboard_copy', 'ReserveController@ajax_clipboard_copy');//クリップボードコピー用
 Route::get('reserves/ajax_reserve_ship', 'ReserveController@ajax_reserve_ship');//発送確認用

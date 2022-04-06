@@ -329,6 +329,73 @@
     width: auto;
   }
 }
+.reserveList .pcBlock .btnFlex {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  justify-content: flex-end;
+  display: flex;
+  align-items: center;
+}
+.reserveList .pcBlock .btnFlex .btnFlex4 {
+  margin-left: 16px;
+}
+.reserveList .pcBlock .btnFlex .number1 .icon_wrap, .reserveList .pcBlock .btnFlex .number1 a, .reserveList .pcBlock .btnFlex .number1 a:visited, .reserveList .pcBlock .btnFlex .number1 .text_wrap, .reserveList .pcBlock .btnFlex .number2 .icon_wrap, .reserveList .pcBlock .btnFlex .number2 a, .reserveList .pcBlock .btnFlex .number2 a:visited, .reserveList .pcBlock .btnFlex .number2 .text_wrap, .reserveList .pcBlock .btnFlex .number3 .icon_wrap, .reserveList .pcBlock .btnFlex .number3 a, .reserveList .pcBlock .btnFlex .number3 a:visited, .reserveList .pcBlock .btnFlex .number3 .text_wrap {
+  position: relative;
+  cursor: pointer;
+  color: #fff;
+  background-color: #1c8ee3;
+  border: 1px solid #1c8ee3;
+  line-height: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.reserveList .pcBlock .btnFlex .number1 .icon_wrap:hover, .reserveList .pcBlock .btnFlex .number1 a:hover, .reserveList .pcBlock .btnFlex .number1 a:visited:hover, .reserveList .pcBlock .btnFlex .number1 .text_wrap:hover, .reserveList .pcBlock .btnFlex .number2 .icon_wrap:hover, .reserveList .pcBlock .btnFlex .number2 a:hover, .reserveList .pcBlock .btnFlex .number2 a:visited:hover, .reserveList .pcBlock .btnFlex .number2 .text_wrap:hover, .reserveList .pcBlock .btnFlex .number3 .icon_wrap:hover, .reserveList .pcBlock .btnFlex .number3 a:hover, .reserveList .pcBlock .btnFlex .number3 a:visited:hover, .reserveList .pcBlock .btnFlex .number3 .text_wrap:hover {
+  background-color: #fff;
+  color: #1c8ee3;
+  border: 1px solid #1c8ee3;
+  transition-duration: 0.5s;
+}
+.reserveList .pcBlock .btnFlex .number1 .icon_wrap, .reserveList .pcBlock .btnFlex .number2 .icon_wrap {
+  border-radius: 50px;
+  padding: 8px;
+  width: 45px;
+  height: 45px;
+}
+.reserveList .pcBlock .btnFlex .number1 i, .reserveList .pcBlock .btnFlex .number2 i {
+  font-size: 24px;
+  font-size: 2.4rem;
+}
+.reserveList .pcBlock .btnFlex .number3 i, .reserveList .pcBlock .btnFlex .number4 i {
+  margin-left: 4px;
+  font-size: 14px;
+  font-size: 1.4rem;
+}
+.reserveList .pcBlock .btnFlex .number3 .text_wrap {
+  cursor: pointer;
+  padding: 12px 16px;
+  margin-left: 16px;
+}
+.reserveList .pcBlock .btnFlex .number4 button {
+  position: relative;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #000;
+  padding: 12px 16px;
+  line-height: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 769px) {
+  .reserveList .pcBlock .btnFlex .number4 button:hover {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+    transition-duration: 0.5s;
+  }
+}
+
 .reserveList .flexBodyWrap {
   margin-bottom: 32px;
 }
@@ -391,73 +458,7 @@
   .reserveList .flexWrap .pcBlock .flex .flex5 .orders_notice {
     height: 120px;
   }
-  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex {
-    margin-top: 24px;
-    margin-bottom: 24px;
-    justify-content: flex-end;
-    display: flex;
-    align-items: center;
-  }
-  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .btnFlex4 {
-    margin-left: 16px;
-  }
-  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number1 .icon_wrap, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number1 a, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number1 a:visited, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number1 .text_wrap, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number2 .icon_wrap, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number2 a, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number2 a:visited, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number2 .text_wrap, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number3 .icon_wrap, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number3 a, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number3 a:visited, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number3 .text_wrap {
-    position: relative;
-    color: #fff;
-    background-color: #1c8ee3;
-    border: 1px solid #1c8ee3;
-    line-height: 1em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number1 .icon_wrap:hover, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number1 a:hover, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number1 a:visited:hover, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number1 .text_wrap:hover, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number2 .icon_wrap:hover, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number2 a:hover, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number2 a:visited:hover, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number2 .text_wrap:hover, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number3 .icon_wrap:hover, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number3 a:hover, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number3 a:visited:hover, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number3 .text_wrap:hover {
-    background-color: #fff;
-    color: #1c8ee3;
-    border: 1px solid #1c8ee3;
-    transition-duration: 0.5s;
-  }
-  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number1 .icon_wrap, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number2 .icon_wrap {
-    border-radius: 50px;
-    padding: 8px;
-    width: 45px;
-    height: 45px;
-  }
-  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number1 i, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number2 i {
-    font-size: 24px;
-    font-size: 2.4rem;
-  }
-  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number3 i, .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number4 i {
-    margin-left: 4px;
-    font-size: 14px;
-    font-size: 1.4rem;
-  }
-  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number3 .text_wrap {
-    cursor: pointer;
-    padding: 12px 16px;
-    margin-left: 16px;
-  }
-  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number4 button {
-    position: relative;
-    color: #fff;
-    background-color: #000;
-    border: 1px solid #000;
-    padding: 12px 16px;
-    line-height: 1em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 }
-@media (min-width: 769px) and (min-width: 769px) {
-  .reserveList .flexWrap .pcBlock .flex .flex5 .btnFlex .number4 button:hover {
-    background-color: #fff;
-    color: #000;
-    border: 1px solid #000;
-    transition-duration: 0.5s;
-  }
-}
-
 .reserveList .icon_list {
   display: flex;
   align-items: center;
@@ -474,6 +475,64 @@
   align-items: center;
 }
 
+@media (max-width: 768px) {
+  .reserveList .pcBlock .flex {
+    flex-wrap: wrap;
+  }
+  .reserveList .pcBlock .flex5 {
+    width: 100%;
+  }
+  .reserveList .pcBlock .flex5 .flexBlock {
+    margin-bottom: 24px;
+  }
+  .reserveList .pcBlock .flex5 select {
+    background: #fff;
+  }
+  .reserveList .pcBlock .no2 textarea, .reserveList .pcBlock .no3 textarea {
+    margin-bottom: 24px;
+    height: 200px;
+  }
+  .reserveList .pcBlock .no4 textarea {
+    height: 130px;
+  }
+  .reserveList .pcBlock .title {
+    width: 100%;
+    font-weight: 700;
+    display: block;
+  }
+  .reserveList .pcBlock a {
+    display: block;
+  }
+}
+@media (max-width: 480px) {
+  .reserveList .pcBlock .btnFlex {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .reserveList .pcBlock .btnFlex .btnFlex4 {
+    width: 100%;
+    margin: 0;
+  }
+  .reserveList .pcBlock .btnFlex .number1, .reserveList .pcBlock .btnFlex .number2 {
+    width: calc(50% - 10px);
+  }
+  .reserveList .pcBlock .btnFlex .number1 .icon_wrap, .reserveList .pcBlock .btnFlex .number2 .icon_wrap {
+    margin: auto;
+  }
+  .reserveList .pcBlock .btnFlex .number4, .reserveList .pcBlock .btnFlex .number3 {
+    margin-top: 32px;
+    width: 100%;
+  }
+  .reserveList .pcBlock .btnFlex .number4 button, .reserveList .pcBlock .btnFlex .number4 .text_wrap, .reserveList .pcBlock .btnFlex .number3 button, .reserveList .pcBlock .btnFlex .number3 .text_wrap {
+    width: 100%;
+    margin: auto;
+    max-width: 200px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-size: 1.4rem;
+  }
+}
 @media (max-width: 768px) {
   .customerList .flexWrap .pcBlock {
     display: none;
@@ -648,21 +707,37 @@
     margin-bottom: 4px;
   }
 }
-.formSection [type="text"], .formSection select, .formSection [type="number"], .formSection textarea {
+.formSection {
   background-color: #fff;
+}
+.formSection > .inner {
+  padding: 0px 20px;
+}
+.formSection [type="text"], .formSection select, .formSection [type="number"], .formSection textarea {
+  background-color: #f5f5f5;
+  border: 1px solid #aaa;
+  padding: 8px;
+  line-height: 1.5em;
+}
+.formSection .textarea1 {
+  height: 300px;
+}
+.formSection .textarea2 {
+  height: 120px;
 }
 .formSection dl {
   display: flex;
   flex-wrap: wrap;
 }
 .formSection dt, .formSection dd {
-  padding: 16px;
+  padding: 20px;
 }
 .formSection dt {
   width: 200px;
   border-bottom: 1px solid #1B8EE4;
   display: flex;
   align-items: center;
+  font-weight: 400;
 }
 .formSection dd {
   border-bottom: 1px solid #ddd;
@@ -743,6 +818,70 @@
     padding-top: 8px;
   }
 }
+.detailFrom .price_dd .flex {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.detailFrom .price_dd .flex .flex4 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+.detailFrom .price_dd .flex .flex4 .title {
+  width: 100%;
+  font-size: 14px;
+  font-size: 1.4rem;
+}
+.detailFrom .price_dd .flex .flex4 input, .detailFrom .price_dd .flex .flex4 select {
+  width: 100%;
+}
+.detailFrom .price_dd .flex .flex4:nth-of-type(1) {
+  width: calc(60% - 100px);
+  /* style */
+}
+.detailFrom .price_dd .flex .flex4:nth-of-type(2) {
+  width: 110px;
+  display: flex;
+  align-items: center;
+}
+.detailFrom .price_dd .flex .flex4:nth-of-type(2) input {
+  width: 100px;
+}
+.detailFrom .price_dd .flex .flex4:nth-of-type(2) span {
+  margin-left: 4px;
+  width: calc(100% - 110px);
+}
+.detailFrom .price_dd .flex .flex4:nth-of-type(3) {
+  width: calc(40% - 80px);
+  /* style */
+}
+.detailFrom .price_dd .flex .flex4:nth-of-type(3) .calcBtn {
+  cursor: pointer;
+  width: 100%;
+  position: relative;
+  color: #fff;
+  background-color: #1B8EE4;
+  border: 1px solid #1B8EE4;
+  padding: 10px 16px;
+  line-height: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 769px) {
+  .detailFrom .price_dd .flex .flex4:nth-of-type(3) .calcBtn:hover {
+    background-color: #fff;
+    color: #1B8EE4;
+    border: 1px solid #1B8EE4;
+    transition-duration: 0.5s;
+  }
+}
+.detailFrom .price_dd .flex .flex4:nth-of-type(4) {
+  width: 100%;
+  margin-top: 16px;
+  /* style */
+}
+
 main .editBtn {
   display: flex;
   justify-content: center;

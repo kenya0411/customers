@@ -307,32 +307,6 @@ if($request->products_options_id){
 
     return redirect('customers');
 }
-    public function detail(Request $request)
-    {
-
-        $customers = DB::table('customers')
-        ->where('id','like','%'.$request->id.'%')
-        ->get(); 
-
-        $persons = DB::select('select * from persons');
-        $products = DB::table('products')
-        ->where('date_year','like','%'.$request->date_year.'%')
-        ->where('date_month','like','%'.$request->date_month.'%')
-        ->get(); 
-        // $products_options = DB::select('select * from products_options');
-        $products_options = DB::table('products_options')
-        ->where('date_year','like','%'.$request->date_year.'%')
-        ->where('date_month','like','%'.$request->date_month.'%')
-        ->get(); 
-
-        $users = DB::table('users')
-        ->where('permission_id','like','%'.'2'.'%')
-        ->get();   
-
-        return view('customers.detail')->with('customers', $customers)->with('persons', $persons)->with('products', $products)->with('products_options', $products_options)->with('users', $users);
-
-       // return view('customers.detail', ['customers' => $customers]);
-   }
 
 
 
@@ -619,7 +593,13 @@ if($request->products_id){
 
 
 
+   public function detail_index(Request $request)
+    {
 
+
+$data = $this->show_list($request,'orders.detail');
+return $data;
+   }
 
 
 
@@ -701,6 +681,74 @@ if($request->products_id){
     return ["orders"=>$orders];
 
     }
+
+
+
+/*--------------------------------------------------- */
+/* 詳細一覧
+/*--------------------------------------------------- */
+   //order以外の情報を取得
+    public function ajax_detail_index(Request $request) {
+        //注文
+        $orders = DB::table('orders')
+        ->where('id','=',$request->id)//今年
+        ->get(); 
+
+        //顧客情報
+        $customers = DB::table('customers')
+        ->where('customers_id','=',$orders[0]->customers_id)//今年
+        ->get();
+
+        //占い師 
+        $persons = DB::table('persons')
+        ->get();
+
+        //商品
+        $products = DB::table('products')
+        ->where('persons_id','=',$orders[0]->persons_id)//占い師
+        ->get();
+
+        //外注
+        $users = DB::table('users')
+        ->where('permissions_id','=',2)//鑑定者の外注のみ表示
+        ->get(); 
+
+        //商品オプション
+        $products_options = DB::table('products_options')
+        ->where('persons_id','=',$orders[0]->persons_id)//占い師
+        ->where('products_id','=',$orders[0]->products_id)//商品
+        ->get();  
+
+        $fortunes = DB::table('fortunes')
+        ->where('id','=',$orders[0]->id)//今年
+        ->get();  
+
+        
+    return ["users"=>$users,"persons"=>$persons,"products"=>$products,"products_options"=>$products_options,"customers"=>$customers,"orders"=>$orders,"fortunes"=>$fortunes];
+    }
+ 
+
+/*--------------------------------------------------- */
+/* 編集用
+/*--------------------------------------------------- */
+   //order以外の情報を取得
+    public function ajax_detail_update(Request $request) {
+             $param = [
+                'id' => $request->id,
+                'orders_id' => $request->orders_id,
+            ];
+            DB::update('update orders set 
+                orders_id=:orders_id,
+                where id=:id'
+                , $param);
+
+                $test =  $request->id;
+    return ["test"=>$test];
+
+    }
+ 
+
+
 
 
 

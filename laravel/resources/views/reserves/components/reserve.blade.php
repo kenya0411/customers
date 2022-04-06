@@ -25,14 +25,14 @@
         {{-- <div >予約一覧</div> --}}
  
         {{-- </div> --}}
-
+{{-- 
 
 <div class="mbBlock">
         <div >顧客情報</div>
         <div>鑑定・発送</div>
     
 
-     </div>
+     </div> --}}
     </li>
 
     <li class="flexBodyWrap flexWrap" v-for="(order, index) in orders">
@@ -42,13 +42,16 @@
  <div class="mbBlock">
                    <ul class="no1">
 
-                    {{-- <li>@{{ customers[order.customers_id - 1].customers_nickname }}</li> --}}
-                    {{-- <li>@{{ customers[order.customers_id - 1].customers_name }}</li> --}}
+                   <li>@{{ customers[order.customers_id - 1].customers_nickname }}</li>
+                    <li>@{{ customers[order.customers_id - 1].customers_name }}</li>
                 </ul>
                 <div class="no2">
-<span v-if="order.orders_is_reserve_finished == '1'">鑑定済み</span>
-<span v-if="order.orders_is_ship_finished == '1'">発送済み</span>
-
+                   <ul>
+                    <li v-if="order.persons_id !== 0">@{{ persons[order.persons_id - 1].persons_name }}</li>
+                    <li v-if="order.products_id !== 0">@{{ products[order.products_id - 1].products_name }}</li>
+                    <li v-if="order.products_options_id !== 0"> @{{ products_options[order.products_options_id - 1].products_options_name}}</li>
+                   
+                </ul>
                 </div>
 <div class="no3">
 <i class="fa-solid fa-circle-chevron-down"></i>    
@@ -180,9 +183,21 @@
                     編集<i class="fa-solid fa-pencil"></i></div>
             </div>
             <div class="btnFlex4 number4">
+<div v-if="orders[orders_id[index].index].orders_is_ship_finished == '0'">
+    
+
                     <button 
                     v-on:click="reserve_ship(order.id)"
                     >発送予約<i class="fa-solid fa-paper-plane"></i></button>
+</div>
+<div v-if="orders[orders_id[index].index].orders_is_ship_finished == '2'">
+    
+
+                    <button 
+                    v-on:click="reserve_ship(order.id)"
+                    >鑑定完了(発送無し)</button>
+</div>
+
             </div>
 
         </div>

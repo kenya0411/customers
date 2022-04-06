@@ -1,0 +1,61 @@
+@charset "UTF-8"
+
+@import "../../../../_import.sass"
+.detailFrom
+	.price_dd
+		.flex
+			justify-content: space-between
+
+			flex-wrap: wrap
+
+			.flex4
+				display: flex
+				flex-wrap: wrap
+				align-items: flex-end
+				.title
+					width: 100%
+					@include rem(14)
+				input,select
+					width: 100%
+
+				&:nth-of-type(1)
+					width: calc(60% - 100px)
+					/* style */
+				&:nth-of-type(2)
+					width: 110px
+					display: flex
+					align-items: center
+					input
+						width: 100px
+					span
+						margin-left: 4px
+						width: calc(100% - 110px)
+
+				&:nth-of-type(3)
+					width: calc(40% - 80px)
+					/* style */
+					.calcBtn
+						cursor: pointer
+						$bgcolor: $color-main
+						width: 100%
+						position: relative
+						color: #fff
+						background-color: $bgcolor
+						border: 1px solid $bgcolor
+						padding: 10px 16px
+						line-height: 1em
+						display: flex
+						justify-content: center
+						align-items: center
+						@include tabup
+							&:hover
+								background-color: #fff
+								color: $bgcolor
+								border: 1px solid $bgcolor
+								transition-duration: 0.5s
+						
+						
+				&:nth-of-type(4)
+					width: 100%
+					margin-top: 16px
+					/* style */

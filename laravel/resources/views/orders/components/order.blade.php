@@ -134,6 +134,8 @@
                   </div>   
                     </li>
                     <li>
+                                        {{-- <a v-bind:href='`/orders/detail/?id=${order.id}&date_year=${customer.date_year}&date_month=${customer.date_month}`'>商品情報</a> --}}
+
                                         {{-- <a v-bind:href='`/customers/detail/?id=${customer.id}&date_year=${customer.date_year}&date_month=${customer.date_month}`'><img src="/img/common/icon/order_icon2.png" class="retina" alt="編集"></a> --}}
 
                     </li>

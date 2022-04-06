@@ -4,9 +4,9 @@
     <a href="#">注文管理</a>
     <div class="menu_contents">
       <ul>
-        <li><a href="/customers">注文一覧</a></li>
-        <li><a href="/customers/reserve">予約一覧</a></li>
-        <li><a href="/customers/add">新規注文</a></li>
+        <li><a href="/orders">注文一覧</a></li>
+        <li><a href="/reserves">予約一覧</a></li>
+        <li><a href="/orders/add">新規注文</a></li>
       </ul>
     </div>
   </li>
