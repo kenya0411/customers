@@ -238,68 +238,62 @@ public function ajax_reserve_ship(Request $request)
 /*--------------------------------------------------- */
 public function ajax_name_check(Request $request)
 {
+     global $str,$name;
 
-        //悩みと鑑定結果の上書き
-        //注文
-        // $orders = DB::table('orders')
-        // ->where('id','=',$request->id)//論理削除されてないもの
-        // ->get();   
+    //鑑定結果の取得
     $fortunes = DB::table('fortunes')
-        ->where('id','=',$request->id)//論理削除されてないもの
-        ->get(); 
-        $html = $fortunes[0]->fortunes_answer;
-        $name= [];
-        $count1 = substr_count( $html, "様" );
-        $count2 = substr_count( $html, "さま" );
-    //     if(!empty($count1)){
-    //         for ($i=0; $i <$count1 ; $i++) { 
-    //           $start = '';
-    //           $start = mb_strpos( $html, '様' );
-    //           if(empty($start)){
-    //             break;
-    //         }
-    //         if($start > 3){
-    //             $start = $start - 3;
-    //         }
-    //         $test = mb_substr( $html, $start, 4 );
-    //         $test = str_replace("。", "", $test);
-    //         $test = str_replace("、", "", $test);
-    //         $html = str_replace($test, "", $html,$n);
-    //         $name.= $test."\n";
-    //     }//for
-    // }//if
-    function test($count,$html,$text,$startNum,$endNum){
-        global $test,$name;
+    ->where('id','=',$request->id)//論理削除されてないもの
+    ->get(); 
+
+    $html = $fortunes[0]->fortunes_answer;//鑑定結果
+    $name= [];
+
+    //取得する文字列（文字がいくつあるか取得）
+    $count1 = substr_count( $html, "様" );
+    $count2 = substr_count( $html, "さま" );
+
+    //文字列取得用の関数
+    function get_name_check($count,$html,$text,$startNum,$endNum){
+        global $str,$name;
+            
             for ($i=0; $i <$count ; $i++) { 
               $start = '';
-              $start = mb_strpos( $html, $text );
+              $start = mb_strpos( $html, $text );//指定の文字の開始数を取得
+
+              //取得する文字列が無くなったらループ終了
               if(empty($start)){
                 break;
             }
+
+            //数がマイナスになるのを防ぐ
             if($start > $startNum){
                 $start = $start - $startNum;
             }
-            $test = mb_substr( $html, $start, $endNum );
-            $test = str_replace("。", "", $test);
-            $test = str_replace("、", "", $test);
-            $html = str_replace($test, "", $html,$n);
-            $name[]= $test;
-        }//for
+
+            //文字を切り取り
+            $str = mb_substr( $html, $start, $endNum );
+            $str = str_replace("。", "", $str);
+            $str = str_replace("、", "", $str);
+            $html = str_replace($str, "", $html,$n);
+
+            //文字列をnameに追加
+            $name[]= $str;
+        }
 
     }
-       if(!empty($count1)){
+    //「様」の文字列を取得
+    if(!empty($count1)){
+        get_name_check($count1,$html,"様",3,4);
+    }
+    
+    //「さま」の文字列を取得
+    if(!empty($count2)){
+        get_name_check($count2,$html,"さま",3,5);
+    }
 
-test($count1,$html,"様",3,4);
-    }//if
-       if(!empty($count2)){
 
-test($count2,$html,"さま",3,5);
-    }//if
-        global $test,$name;
-
-    $test2 = $name;
     $html = $name;
-    return ["html"=>$html,"test"=>$test,"test2"=>$test2];
+    return ["html"=>$html];
 
 }
 
