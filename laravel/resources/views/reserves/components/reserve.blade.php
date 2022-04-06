@@ -1,3 +1,21 @@
+<div class="modalWindow" v-bind:class=' {show:isActive}'>
+    
+<div class="overlay" v-on:click.self="modal_close()">
+    <div class="inner">
+        <div class="title">
+        ■名前確認用
+            
+        </div>
+        <p>名前にミスがないかご確認ください。</p><div class="notice"><span>※</span>鑑定結果の中から「様」or「さま」の単語と、<br>その手前の文字を抽出しております。</div>       
+        <ul class="name_check">
+            <li v-for="val in name_check">@{{ val}}</li>
+            
+        </ul>
+        <div class="closeBtn" v-on:click.self="modal_close()">閉じる</div>
+    </div>
+</div>
+</div>
+
 <div class="reserveList listSection" > 
 <ul>
     <li class="flexHead flexWrap">
@@ -92,28 +110,28 @@
     <div class="flex5 no2">
             <span class="title">[悩み]</span>
             
-            <textarea id="" v-model="fortunes[order.id - 1].fortunes_worry" 
-            v-on:keyup.enter.v.backspace="listUpdate('fortunes_worry',order.id)" 
-            v-on:change="listUpdate('fortunes_worry',order.id)"
-            v-on:mouseleave="listUpdate('fortunes_worry',order.id)"
-            >@{{ fortunes[order.id - 1].fortunes_worry }}</textarea>
+            <textarea id="" v-model="fortunes[orders_id[index].id - 1].fortunes_worry" 
+            v-on:keyup.enter.v.backspace="listUpdate('fortunes_worry',order.id,index)" 
+            v-on:change="listUpdate('fortunes_worry',order.id,index)"
+            v-on:mouseleave="listUpdate('fortunes_worry',order.id,index)"
+            >@{{ fortunes[orders_id[index].index].fortunes_worry }}</textarea>
 
     </div>
     <div class="flex5 no3">
             <span class="title">[鑑定結果]</span>
 
-            <textarea name="" id="" v-model="fortunes[order.id - 1].fortunes_answer" 
-            v-on:keyup.enter.v.backspace="listUpdate('fortunes_answer',order.id)" 
-            v-on:change="listUpdate('fortunes_answer',order.id)"
-            v-on:mouseleave="listUpdate('fortunes_answer',order.id)"
-            >@{{ fortunes[order.id - 1].fortunes_answer }}</textarea>
+            <textarea name="" id="" v-model="fortunes[orders_id[index].id - 1].fortunes_answer" 
+            v-on:keyup.enter.v.backspace="listUpdate('fortunes_answer',order.id,index)" 
+            v-on:change="listUpdate('fortunes_answer',order.id,index)"
+            v-on:mouseleave="listUpdate('fortunes_answer',order.id,index)"
+            >@{{ fortunes[orders_id[index].index].fortunes_answer }}</textarea>
     </div>
-    <div class="flex5 no4">
+<div class="flex5 no4">
           <div class="flexBlock">
             <span class="title">[外注]</span>
             <select name="users_id" id="" 
-            v-model="orders[order.id - 1].users_id"
-            v-on:change="listUpdate('users_id',order.id)">
+            v-model="orders[orders_id[index].index].users_id"
+            v-on:change="listUpdate('users_id',order.id,index)">
       <option value="0" >選択してください</option>
 
                 <option v-for="user in users" v-bind:value="user.id">@{{ user.nickname }}</option>
@@ -121,28 +139,27 @@
         </div>
          <div class="flexBlock">
             <span class="title">[備考]</span>
-            <textarea class="orders_notice" id="" v-model="orders[order.id - 1].orders_notice" 
-            v-on:keyup.enter.v.backspace="listUpdate('orders_notice',order.id)" 
-            v-on:change="listUpdate('orders_notice',order.id)"
-            v-on:mouseleave="listUpdate('orders_notice',order.id)"
+            <textarea class="orders_notice" id="" v-model="orders[orders_id[index].index].orders_notice" 
+            v-on:keyup.enter.v.backspace="listUpdate('orders_notice',order.id,index)" 
+            v-on:change="listUpdate('orders_notice',order.id,index)"
+            v-on:mouseleave="listUpdate('orders_notice',order.id,index)"
             >
         </textarea>
-
         </div>
-
                  <div class="flexBlock">
             <span class="title">[発送]</span>
 
             <select name="orders_is_ship_finished" id="" 
-            v-model="orders[order.id - 1].orders_is_ship_finished"
-            v-on:change="listUpdate('orders_is_ship_finished',order.id)"
+            v-model="orders[orders_id[index].index].orders_is_ship_finished"
+            v-on:change="listUpdate('orders_is_ship_finished',order.id,index)"
             >
                 <option value="0"></option>
                 <option value="2">発送不要</option>
             </select>
         </div>
 
-    </div>
+    </div> 
+
     <div class="flex5 no5">
         <div class="btnFlex">
             <div class="btnFlex4 number1">
@@ -151,7 +168,7 @@
                 </div>
             </div>
             <div class="btnFlex4 number2">
-                <div class="icon_wrap">
+                <div class="icon_wrap" v-on:click="modal_open(order.id)">
 
                 <i class="fa-solid fa-circle-check"></i>
             </div>

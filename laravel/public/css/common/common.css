@@ -504,6 +504,101 @@
   align-items: center;
 }
 
+.modalWindow {
+  display: none;
+}
+.modalWindow.show {
+  display: block;
+}
+.modalWindow .overlay {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modalWindow .inner {
+  padding: 32px;
+  background-color: #fff;
+  max-width: 500px;
+  max-height: 500px;
+  width: 100%;
+  height: 100%;
+}
+.modalWindow .title {
+  font-size: 16px;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.modalWindow .name_check {
+  font-size: 14px;
+  font-size: 1.4rem;
+  padding: 16px;
+  line-height: 1.5em;
+  max-height: 300px;
+  height: calc(100% - 50px);
+  overflow: scroll;
+  border: 1px solid #aaa;
+  background-color: #eee;
+}
+.modalWindow li {
+  list-style: disc;
+  line-height: 1.5em;
+  margin-left: 1em;
+}
+.modalWindow p {
+  line-height: 1.2em;
+}
+.modalWindow .notice {
+  font-size: 13px;
+  font-size: 1.3rem;
+  line-height: 1.3em;
+  position: relative;
+  padding-left: 1em;
+  margin-bottom: 8px;
+}
+.modalWindow .notice span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: auto;
+  /* style */
+}
+.modalWindow .closeBtn {
+  margin: auto;
+  margin-top: 16px;
+  cursor: pointer;
+  position: relative;
+  color: #fff;
+  font-size: 14px;
+  font-size: 1.4rem;
+  background-color: #888;
+  border: 1px solid #888;
+  padding: 8px 12px;
+  line-height: 1em;
+  display: flex;
+  max-width: 150px;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 769px) {
+  .modalWindow .closeBtn:hover {
+    background-color: #fff;
+    color: #888;
+    border: 1px solid #888;
+    transition-duration: 0.5s;
+  }
+}
+
 @media (max-width: 768px) {
   .listSection .flexWrap .tabInvi {
     display: none !important;

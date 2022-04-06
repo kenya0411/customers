@@ -12,7 +12,9 @@
         orders: '',
         fortunes: '',
         users: '',
-
+        orders_id: '',
+isActive: false,//モーダル用
+name_check: '',//名前確認用
         }
       },
     methods: {  
@@ -20,6 +22,25 @@
       moment: function (date) {
         return moment(date).format('YYYY/MM/DD')
       },
+      //時間のフォーマット用
+      modal_open(id) {
+        this.isActive = true
+        let url = '/reserves/ajax_name_check?id='+id;
+
+        axios.get(url)
+        .then(response => [
+          this.name_check = response.data.html,
+          console.log(response.data.html),
+          
+          
+          ])
+        .catch(error => console.log(error))
+      },
+      modal_close(){
+        this.isActive = false
+
+      },
+
       //発送予約
       reserve_ship(id) {
         let url = '/reserves/ajax_reserve_ship?id='+id;
@@ -60,6 +81,7 @@
           this.users = response.data.users,
           this.customers = response.data.customers,
           this.fortunes = response.data.fortunes,
+          this.orders_id = response.data.orders_id,
 
           ])
         .catch(error => console.log(error))
@@ -67,17 +89,17 @@
       },
 
       //データベースに上書き
-    listUpdate(name,id) {
+    listUpdate(name,id,index) {
       
       let url = '/reserves/ajax_update/';
-
+      
       axios.post(url, {
         id: id,
         fortunes_worry: this.fortunes[id - 1].fortunes_worry,
         fortunes_answer: this.fortunes[id - 1].fortunes_answer,
-        orders_notice: this.orders[id - 1].orders_notice,
-        users_id: this.orders[id - 1].users_id,
-        orders_is_ship_finished: this.orders[id - 1].orders_is_ship_finished,
+        orders_notice: this.orders[index].orders_notice,
+        users_id: this.orders[index].users_id,
+        orders_is_ship_finished: this.orders[index].orders_is_ship_finished,
       })
       .then(response => [
         ])
@@ -113,5 +135,4 @@
 
 Vue.createApp(hoge).mount('.main_content')
 mbSlideToggle();
-deleteBtnConfirm();
 
