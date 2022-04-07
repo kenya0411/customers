@@ -105,8 +105,12 @@ Route::get('orders/ajax_search', 'OrderController@ajax_search');
 Route::get('orders/detail', 'OrderController@detail_index');
 Route::get('orders/detail/ajax', 'OrderController@ajax_detail_index');//表示用
 Route::post('orders/detail/ajax_update', 'OrderController@ajax_detail_update');//修正用
-Route::get('orders/detail/ajax_change_products', 'OrderController@ajax_change_products');//占い師や商品の監視用
+Route::get('orders/detail/ajax_change_products', 'OrderController@ajax_change_products');
 Route::post('orders/detail/ajax_change_products', 'OrderController@ajax_change_products');//占い師や商品の監視用
+
+Route::post('orders/detail/ajax_get_temporary_price', 'OrderController@ajax_get_temporary_price');//金額の取得
+
+Route::get('orders/ajax_modal_fortunes', 'OrderController@ajax_modal_fortunes');//鑑定結果の表示用（モーダルウインドウ）
 
 
 

@@ -22,7 +22,7 @@ name_check: '',//名前確認用
       moment: function (date) {
         return moment(date).format('YYYY/MM/DD')
       },
-      //時間のフォーマット用
+      //モーダルウインドウ（名前チェック用）
       modal_open(id) {
         this.isActive = true
         let url = '/reserves/ajax_name_check?id='+id;

@@ -1,4 +1,44 @@
+
+
 <div class="orderList listSection" > 
+<div class="modalWindow" v-bind:class=' {show:isActive}'>
+    
+<div class="overlay" v-on:click.self="modal_close()">
+    <div class="inner">
+        <div class="flex">
+            <div class="flex2">
+         <div class="title">
+        ■相談内容
+            
+        </div> 
+
+        <div class="show_area">
+            @{{ this.modal_fortunes_worry }}
+        </div>
+            </div>
+            <div class="flex2">
+                
+                    <div class="title">
+        ■鑑定結果
+            
+        </div> 
+
+        <div class="show_area">
+            @{{ this.modal_fortunes_answer }}
+            
+        </div>     
+            </div>
+        </div>
+     
+
+
+
+        <div class="closeBtn" v-on:click.self="modal_close()">閉じる</div>
+    </div>
+</div>
+</div>
+
+
 <ul>
     <li class="flexHead flexWrap">
 <div class="pcBlock">
@@ -52,7 +92,7 @@
                 <a v-bind:href="persons[order.persons_id - 1].persons_platform_url + order.orders_id " target="_blank">
                     <div class="icon_wrap">
                         
-                    <span>
+                    <span class="break_all">
                        @{{order.orders_id }} 
                     </span>
                 <i class="fa-solid fa-arrow-up-right-from-square"></i>
@@ -110,11 +150,15 @@
 </div>
             <div v-if="order.users_id !== 0">
                 <div class="hiddenName">外注者</div>
-@{{ users[order.users_id - 1].name }}様
+@{{ users[order.users_id - 1].nickname }}様
         </div>
-            <div >
-                <div class="hiddenName">日付</div>
-         @{{ moment(order.updated_at ) }}
+            <div>
+                <div class="hiddenName">購入日</div>
+                <div class="break_all">
+                    
+         @{{ moment(order.created_at ) }}
+                </div>
+
         </div>
 
 
@@ -129,7 +173,7 @@
      </div>
                 <ul class="icon_list tabInvi">
                     <li>
-                  <div class="worry">
+                  <div class="worry pointer" v-on:click="modal_open(order.id)">
                       <img src="/img/common/icon/order_icon1.png" class="retina" alt="鑑定">
                   </div>   
                     </li>

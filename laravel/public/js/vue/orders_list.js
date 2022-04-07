@@ -17,12 +17,35 @@
           search_month: month,//検索用
           current_page:1,//ページネーション用
           last_page: "",//ページネーション用
+isActive: false,//モーダル用
+modal_fortunes_worry: "",//モーダル用
+modal_fortunes_answer: "",//モーダル用
+
         }
       },
   methods: {  // filtersじゃなくmethods
     moment: function (date) {
-      return moment(date).format('YYYY/MM/DD')
+      return moment(date).format("MM月DD日")
     },
+      //モーダルウインドウ（名前チェック用）
+      modal_open(id) {
+        this.isActive = true
+        let url = '/orders/ajax_modal_fortunes?id='+id;
+
+        axios.get(url)
+        .then(response => [
+          this.modal_fortunes_worry = response.data.modal_fortunes_worry,
+          this.modal_fortunes_answer = response.data.modal_fortunes_answer,
+          
+          
+          
+          ])
+        .catch(error => console.log(error))
+      },
+      modal_close(){
+        this.isActive = false
+
+      },
     //ロード時に各種情報をデータベースから取得
     async load_page() {
       let url = '/orders/ajax';

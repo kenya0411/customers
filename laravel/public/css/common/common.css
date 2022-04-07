@@ -4,6 +4,14 @@
   font-display: swap;
   src: url("/common/font/rodin-b.woff") format("woff"), url("/common/font/rodin-b.otf") format("truetype");
 }
+.break_word {
+  word-wrap: break-word;
+}
+
+.break_all {
+  word-break: break-all;
+}
+
 .listSection {
   margin-top: 20px;
 }
@@ -598,7 +606,7 @@
   font-weight: 700;
   margin-bottom: 8px;
 }
-.modalWindow .name_check {
+.modalWindow .show_area {
   font-size: 14px;
   font-size: 1.4rem;
   padding: 16px;
@@ -656,6 +664,24 @@
     border: 1px solid #888;
     transition-duration: 0.5s;
   }
+}
+
+/*--------------------------------------------------- */
+/* orderList */
+/*--------------------------------------------------- */
+.orderList .modalWindow .inner {
+  max-width: calc(80% - 50px);
+  max-height: calc(80% - 50px);
+}
+.orderList .modalWindow .flex {
+  justify-content: space-between;
+}
+.orderList .modalWindow .flex2 {
+  width: calc(50% - 16px);
+}
+.orderList .modalWindow .show_area {
+  max-height: 300px;
+  height: calc(100% - 50px);
 }
 
 @media (max-width: 768px) {
@@ -882,6 +908,41 @@
   /* style */
 }
 
+@media (max-width: 768px) {
+  .detailFrom.formSection .price_dd .flex {
+    justify-content: space-between;
+  }
+  .detailFrom.formSection .price_dd .flex .flex4 {
+    width: 100%;
+  }
+  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(1) {
+    width: calc(50%);
+  }
+  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(1) input {
+    width: 100%;
+  }
+  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(2) {
+    width: calc(50% - 8px);
+  }
+  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(2) span {
+    width: auto;
+  }
+  .detailFrom.formSection .price_dd .flex .flex4 input, .detailFrom.formSection .price_dd .flex .flex4 select {
+    width: inherit;
+    max-width: 200px;
+  }
+  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(3) {
+    margin-top: 16px;
+    /* style */
+  }
+  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(4) {
+    width: 50%;
+    /* style */
+  }
+  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(4) input {
+    width: 100%;
+  }
+}
 main .editBtn {
   display: flex;
   justify-content: center;

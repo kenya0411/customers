@@ -14,6 +14,7 @@
         users: '',
         fortunes: '',
         persons_selected: '',//選択した占い師
+        temporary_price: '',//仮の金額
         }
       },
   methods: { 
@@ -39,7 +40,9 @@
       .catch(error => console.log(error))
 
     },
-       //データベース修正
+    /*--------------------------------------------------- */
+    /*　商品情報の修正
+    /*--------------------------------------------------- */
       submit_update(id) {
         let url = '/orders/detail/ajax_update';
        axios.post(url, {
@@ -60,14 +63,15 @@
       })
       .then(response => [
           location.reload(),
-          // console.log(response.data.test)
           
         ])
       .catch(error => console.log(error)) 
  
 
       },
-    //占い師や商品を変更時に自動で変更
+    /*--------------------------------------------------- */
+    /*  //占い師や商品を変更時に自動で変更
+    /*--------------------------------------------------- */
     async change_products(id,persons_id,products_id,products_options_id) {
       let url = '/orders/detail/ajax_change_products';
       
@@ -87,6 +91,37 @@
       .catch(error => console.log(error))
 
     },
+    /*--------------------------------------------------- */
+    /* 金額を取得
+    /*--------------------------------------------------- */
+     async get_temporary_price() {
+      let url = '/orders/detail/ajax_get_temporary_price';
+      
+       axios.post(url, {
+        id: params_id,
+        products_id: this.orders.products_id,
+        products_options_id: this.orders.products_options_id,
+      })
+      .then(response => [
+        this.temporary_price = response.data.temporary_price,
+        ])
+      .catch(error => console.log(error))
+
+    },
+    /*--------------------------------------------------- */
+    /* 仮の金額と手数料を計算
+    /*--------------------------------------------------- */
+     async calculator_price() {
+     if(!confirm('金額を計算しますか？')){
+          /* キャンセルの時の処理 */
+          return false;
+        }else{
+      let commission_price = this.persons_selected.persons_platform_fee / 100;
+      this.orders.orders_price = this.temporary_price - this.temporary_price * commission_price;
+      }
+      
+
+    },      
 
   },
   //ロード時にデータベースから情報を取得
@@ -96,9 +131,9 @@
 
  },
  computed:{
-         get_search_data() {//監視用データをまとめる
+         get_products_data() {//監視用データをまとめる
            return [
-           this.orders.persons_id,
+           this.orders.products_options_id,
            this.orders.products_id,
            ];
          },
@@ -106,8 +141,8 @@
 
        },
        watch: {
-    get_search_data(){//監視用
-     // this.change_persons();
+    get_products_data(){//監視用
+   this.get_temporary_price();
 
 
    },

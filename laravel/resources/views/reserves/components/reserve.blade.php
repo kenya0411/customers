@@ -1,3 +1,6 @@
+
+
+<div class="reserveList listSection" >
 <div class="modalWindow" v-bind:class=' {show:isActive}'>
     
 <div class="overlay" v-on:click.self="modal_close()">
@@ -7,7 +10,7 @@
             
         </div>
         <p>名前にミスがないかご確認ください。</p><div class="notice"><span>※</span>鑑定結果の中から「様」or「さま」の単語と、<br>その手前の文字を抽出しております。</div>       
-        <ul class="name_check">
+        <ul class="show_area">
             <li v-for="val in name_check">@{{ val}}</li>
             
         </ul>
@@ -16,7 +19,7 @@
 </div>
 </div>
 
-<div class="reserveList listSection" > 
+ 
 <ul>
     <li class="flexHead flexWrap">
 {{-- <div class="pcBlock"> --}}

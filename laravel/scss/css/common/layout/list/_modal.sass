@@ -28,7 +28,7 @@
 		@include rem(16)
 		font-weight: 700
 		margin-bottom: 8px
-	.name_check
+	.show_area
 		@include rem(14)
 		padding: 16px
 		line-height: 1.5em
@@ -78,5 +78,20 @@
 				color: $bgcolor
 				border: 1px solid $bgcolor
 				transition-duration: 0.5s
-		
-		
+	
+
+/*--------------------------------------------------- */
+/* orderList
+/*--------------------------------------------------- */	
+.orderList
+	.modalWindow
+		.inner
+			max-width: calc(80% - 50px)
+			max-height: calc(80% - 50px)
+		.flex
+			justify-content: space-between
+		.flex2
+			width: calc(50% - 16px)
+		.show_area
+			max-height: 300px
+			height: calc(100% - 50px)
