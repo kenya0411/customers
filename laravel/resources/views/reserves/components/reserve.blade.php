@@ -178,9 +178,9 @@
             </div>
 
             <div class="btnFlex4 number3">
-                <div class="text_wrap">
+                <a  v-bind:href='`/orders/detail/?id=${order.id}`' class="text_wrap">
 
-                    編集<i class="fa-solid fa-pencil"></i></div>
+                    編集ページ<i class="fa-solid fa-pencil"></i></a>
             </div>
             <div class="btnFlex4 number4">
 <div v-if="orders[orders_id[index].index].orders_is_ship_finished == '0'">

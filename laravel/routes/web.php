@@ -101,10 +101,12 @@ Route::post('orders', 'OrderController@post');
 Route::get('orders/ajax', 'OrderController@ajax_index');
 Route::get('orders/ajax_search', 'OrderController@ajax_search');
 
-
+//注文詳細
 Route::get('orders/detail', 'OrderController@detail_index');
-Route::get('orders/detail/ajax', 'OrderController@ajax_detail_index');
-Route::post('orders/detail/ajax_update', 'OrderController@ajax_detail_update');
+Route::get('orders/detail/ajax', 'OrderController@ajax_detail_index');//表示用
+Route::post('orders/detail/ajax_update', 'OrderController@ajax_detail_update');//修正用
+Route::get('orders/detail/ajax_change_products', 'OrderController@ajax_change_products');//占い師や商品の監視用
+Route::post('orders/detail/ajax_change_products', 'OrderController@ajax_change_products');//占い師や商品の監視用
 
 
 

@@ -1,6 +1,6 @@
 
     let params = (new URL(document.location)).searchParams//クエリ取得用
-console.log(params)
+    let params_id =params.get('id')
 
   const hoge = {
     el: '.main_content',
@@ -12,65 +12,82 @@ console.log(params)
         orders: '',
         customers: '',
         users: '',
+        fortunes: '',
+        persons_selected: '',//選択した占い師
         }
       },
-  methods: {  // filtersじゃなくmethods
+  methods: { 
+    //日付のフォーマット
     moment: function (date) {
       return moment(date).format('YYYY/MM/DD')
     },
     //ロード時に各種情報をデータベースから取得
     async load_page() {
-      let url = '/orders/detail/ajax?id='+ '1';
+      let url = '/orders/detail/ajax?id='+ params_id;
       axios.get(url)
       .then(response => [
         this.persons = response.data.persons,
+        this.persons_selected = response.data.persons_selected[0],//v-model用
         this.products = response.data.products,
         this.products_options = response.data.products_options,
-        this.customers = response.data.customers,
+        this.customers = response.data.customers[0],
         this.users = response.data.users,
-        this.orders = response.data.orders,
-        this.fortunes = response.data.fortunes,
+        this.orders = response.data.orders[0],
+        this.fortunes = response.data.fortunes[0],
+
         ])
       .catch(error => console.log(error))
 
     },
-        //発送予約
+       //データベース修正
       submit_update(id) {
-        console.log(id)
-        
         let url = '/orders/detail/ajax_update';
        axios.post(url, {
         id: id,
-        orders_id: this.orders[0].orders_id,
-        customers_name: this.customers[0].customers_name,
-        customers_nickname: this.customers[0].customers_nickname,
-        persons_id: this.orders[0].persons_id,
+        orders_id: this.orders.orders_id,
+        customers_id: this.customers.customers_id,
+        customers_name: this.customers.customers_name,
+        customers_nickname: this.customers.customers_nickname,
+        persons_id: this.orders.persons_id,
+        products_id: this.orders.products_id,
+        products_options_id: this.orders.products_options_id,
+        orders_price: this.orders.orders_price,
+        fortunes_worry: this.fortunes.fortunes_worry,
+        fortunes_answer: this.fortunes.fortunes_answer,
+        users_id: this.orders.users_id,
+        orders_notice: this.orders.orders_notice,
+        customers_address: this.customers.customers_address,
       })
       .then(response => [
-        console.log(response.data.test),
-
           location.reload(),
-
+          // console.log(response.data.test)
+          
         ])
       .catch(error => console.log(error)) 
  
 
       },
-    //検索用の情報をデータベースから取得＋ページネーションの情報を取得
-    async search_page() {
-      let url = '/orders/ajax_search/?persons_id=' + this.search_persons+'&year='+this.search_year+'&month='+this.search_month+'&orders_id='+this.search_orders_id+'&page='+this.current_page;
-      axios.get(url)
+    //占い師や商品を変更時に自動で変更
+    async change_products(id,persons_id,products_id,products_options_id) {
+      let url = '/orders/detail/ajax_change_products';
+      
+       axios.post(url, {
+        id: id,
+        persons_id: persons_id,
+        products_id: products_id,
+        products_options_id: products_options_id,
+      })
       .then(response => [
-        all = response.data.orders,
-        this.orders = response.data.orders.data,
-        this.current_page = all.current_page,
-        this.last_page = all.last_page,
-        console.log(this.orders),
+        this.products = response.data.products,
+        this.products_options = response.data.products_options,
+        this.orders.products_id = products_id,
+        this.orders.products_options_id = products_options_id,
 
         ])
       .catch(error => console.log(error))
 
     },
+
   },
   //ロード時にデータベースから情報を取得
   created:function(){
@@ -81,19 +98,16 @@ console.log(params)
  computed:{
          get_search_data() {//監視用データをまとめる
            return [
-           this.search_persons,
-           this.search_orders_id,
-           this.search_year,
-           this.search_month,
-           this.current_page,
+           this.orders.persons_id,
+           this.orders.products_id,
            ];
          },
 
 
        },
        watch: {
-    get_search_data(val){//監視用
-     this.search_page();
+    get_search_data(){//監視用
+     // this.change_persons();
 
 
    },

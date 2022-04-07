@@ -711,7 +711,7 @@
   background-color: #fff;
 }
 .formSection > .inner {
-  padding: 0px 20px;
+  padding: 0px 20px 40px;
 }
 .formSection [type="text"], .formSection select, .formSection [type="number"], .formSection textarea {
   background-color: #f5f5f5;
@@ -1161,6 +1161,10 @@ main .addbtn a, main .commonBtn a {
 .pagination .is_active {
   background-color: #000;
   color: #fff;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 .inner_pad {
