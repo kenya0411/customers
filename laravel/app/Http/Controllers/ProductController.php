@@ -99,8 +99,9 @@ return $data;
     public function update(Request $request)
     {
         //半角数字のみ出力
-        $products_price = preg_replace('/[^0-9]/', '', $request->products_price);
-        $products_price = mb_convert_kana($products_price, "n");
+        // $products_price = preg_replace('/[^0-9]/', '', $request->products_price);
+        $products_price = $request->products_price;
+        // $products_price = mb_convert_kana($products_price, "n");
         $param = [
             'products_id' => $request->products_id,
             'products_name' => $request->products_name,
@@ -130,7 +131,7 @@ return $data;
 
          $param = ['is_delete' => 0];
         $persons = DB::select('select * from persons where is_delete=:is_delete', $param);
-       return view('products.add', ['persons' => $persons]);
+       return view('products.product_add_form', ['persons' => $persons]);
    }
 
 

@@ -92,6 +92,9 @@ Route::get('products_options/ajax','ProductOptionController@ajax_index');
 Route::get('products_options/ajax_search', 'ProductOptionController@ajax_search');
 
 
+Route::post('products_options/add/ajax_change_products', 'ProductOptionController@ajax_change_products');//占い師や商品の監視用
+
+
 /*--------------------------------------------------- */
 /* Orders
 /*--------------------------------------------------- */
@@ -107,10 +110,15 @@ Route::get('orders/detail/ajax', 'OrderController@ajax_detail_index');//表示�
 Route::post('orders/detail/ajax_update', 'OrderController@ajax_detail_update');//修正用
 Route::get('orders/detail/ajax_change_products', 'OrderController@ajax_change_products');
 Route::post('orders/detail/ajax_change_products', 'OrderController@ajax_change_products');//占い師や商品の監視用
-
 Route::post('orders/detail/ajax_get_temporary_price', 'OrderController@ajax_get_temporary_price');//金額の取得
-
 Route::post('orders/ajax_modal_fortunes', 'OrderController@ajax_modal_fortunes');//鑑定結果の表示用（モーダルウインドウ）
+
+
+//新規注文
+Route::get('orders/add', 'OrderController@add_index');
+Route::get('orders/add/ajax', 'OrderController@ajax_add_index');
+Route::post('orders/add/ajax_add_commission_price', 'OrderController@ajax_add_commission_price');//手数料を表示
+Route::post('orders/add/ajax_search_customers', 'OrderController@ajax_search_customers');//リピーターかどうかを確認
 
 
 

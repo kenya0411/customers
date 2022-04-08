@@ -849,44 +849,44 @@
     padding-top: 8px;
   }
 }
-.detailFrom .price_dd .flex {
+.detailFrom .price_dd .flex, .addFrom .price_dd .flex {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.detailFrom .price_dd .flex .flex4 {
+.detailFrom .price_dd .flex .flex4, .addFrom .price_dd .flex .flex4 {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
 }
-.detailFrom .price_dd .flex .flex4 .title {
+.detailFrom .price_dd .flex .flex4 .title, .addFrom .price_dd .flex .flex4 .title {
   width: 100%;
   font-size: 14px;
   font-size: 1.4rem;
 }
-.detailFrom .price_dd .flex .flex4 input, .detailFrom .price_dd .flex .flex4 select {
+.detailFrom .price_dd .flex .flex4 input, .detailFrom .price_dd .flex .flex4 select, .addFrom .price_dd .flex .flex4 input, .addFrom .price_dd .flex .flex4 select {
   width: 100%;
 }
-.detailFrom .price_dd .flex .flex4:nth-of-type(1) {
+.detailFrom .price_dd .flex .flex4:nth-of-type(1), .addFrom .price_dd .flex .flex4:nth-of-type(1) {
   width: calc(60% - 100px);
   /* style */
 }
-.detailFrom .price_dd .flex .flex4:nth-of-type(2) {
+.detailFrom .price_dd .flex .flex4:nth-of-type(2), .addFrom .price_dd .flex .flex4:nth-of-type(2) {
   width: 110px;
   display: flex;
   align-items: center;
 }
-.detailFrom .price_dd .flex .flex4:nth-of-type(2) input {
+.detailFrom .price_dd .flex .flex4:nth-of-type(2) input, .addFrom .price_dd .flex .flex4:nth-of-type(2) input {
   width: 100px;
 }
-.detailFrom .price_dd .flex .flex4:nth-of-type(2) span {
+.detailFrom .price_dd .flex .flex4:nth-of-type(2) span, .addFrom .price_dd .flex .flex4:nth-of-type(2) span {
   margin-left: 4px;
   width: calc(100% - 110px);
 }
-.detailFrom .price_dd .flex .flex4:nth-of-type(3) {
+.detailFrom .price_dd .flex .flex4:nth-of-type(3), .addFrom .price_dd .flex .flex4:nth-of-type(3) {
   width: calc(40% - 80px);
   /* style */
 }
-.detailFrom .price_dd .flex .flex4:nth-of-type(3) .calcBtn {
+.detailFrom .price_dd .flex .flex4:nth-of-type(3) .calcBtn, .addFrom .price_dd .flex .flex4:nth-of-type(3) .calcBtn {
   cursor: pointer;
   width: 100%;
   position: relative;
@@ -900,51 +900,51 @@
   align-items: center;
 }
 @media (min-width: 769px) {
-  .detailFrom .price_dd .flex .flex4:nth-of-type(3) .calcBtn:hover {
+  .detailFrom .price_dd .flex .flex4:nth-of-type(3) .calcBtn:hover, .addFrom .price_dd .flex .flex4:nth-of-type(3) .calcBtn:hover {
     background-color: #fff;
     color: #1B8EE4;
     border: 1px solid #1B8EE4;
     transition-duration: 0.5s;
   }
 }
-.detailFrom .price_dd .flex .flex4:nth-of-type(4) {
+.detailFrom .price_dd .flex .flex4:nth-of-type(4), .addFrom .price_dd .flex .flex4:nth-of-type(4) {
   width: 100%;
   margin-top: 16px;
   /* style */
 }
 
 @media (max-width: 768px) {
-  .detailFrom.formSection .price_dd .flex {
+  .detailFrom.formSection .price_dd .flex, .addFrom.formSection .price_dd .flex {
     justify-content: space-between;
   }
-  .detailFrom.formSection .price_dd .flex .flex4 {
+  .detailFrom.formSection .price_dd .flex .flex4, .addFrom.formSection .price_dd .flex .flex4 {
     width: 100%;
   }
-  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(1) {
+  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(1), .addFrom.formSection .price_dd .flex .flex4:nth-of-type(1) {
     width: calc(50%);
   }
-  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(1) input {
+  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(1) input, .addFrom.formSection .price_dd .flex .flex4:nth-of-type(1) input {
     width: 100%;
   }
-  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(2) {
+  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(2), .addFrom.formSection .price_dd .flex .flex4:nth-of-type(2) {
     width: calc(50% - 8px);
   }
-  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(2) span {
+  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(2) span, .addFrom.formSection .price_dd .flex .flex4:nth-of-type(2) span {
     width: auto;
   }
-  .detailFrom.formSection .price_dd .flex .flex4 input, .detailFrom.formSection .price_dd .flex .flex4 select {
+  .detailFrom.formSection .price_dd .flex .flex4 input, .detailFrom.formSection .price_dd .flex .flex4 select, .addFrom.formSection .price_dd .flex .flex4 input, .addFrom.formSection .price_dd .flex .flex4 select {
     width: inherit;
     max-width: 200px;
   }
-  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(3) {
+  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(3), .addFrom.formSection .price_dd .flex .flex4:nth-of-type(3) {
     margin-top: 16px;
     /* style */
   }
-  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(4) {
+  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(4), .addFrom.formSection .price_dd .flex .flex4:nth-of-type(4) {
     width: 50%;
     /* style */
   }
-  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(4) input {
+  .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(4) input, .addFrom.formSection .price_dd .flex .flex4:nth-of-type(4) input {
     width: 100%;
   }
 }

@@ -120,7 +120,7 @@ public function add(Request $request)
          // $param = ['is_delete' => 0];
         // $persons = DB::select('select * from persons where is_delete=:is_delete', $param);
        // return view('products.add_option', ['persons' => $persons]);
- return view('products.add_option');
+    return view('products.product_option_add_form');
 }
 
 
@@ -153,24 +153,10 @@ public function create(Request $request)
 /*--------------------------------------------------- */
 public function ajax_index(Request $request) {
 
-// $persons = '';
-// $products = '';
-// $products_options = '';
-
     $persons = DB::table('persons')
     ->get();   
     $products = DB::table('products')
     ->get();   
-        // $products_options = DB::table('products_options')
-        // ->where('is_delete','=',0)
-        // ->get();   
-
-
-        // $users = DB::table('users')
-        // ->where('permission_id','=',2)
-        // ->get();   
-    
-
     return ["persons"=>$persons,"products"=>$products];
 }
 
@@ -199,6 +185,21 @@ public function ajax_search(Request $request) {
 }
 
 
+
+/*--------------------------------------------------- */
+/* 占い師を選択時に自動で情報を変更させる
+/*--------------------------------------------------- */
+public function ajax_change_products(Request $request) {
+
+        //商品
+    $products = DB::table('products')
+    ->where('persons_id','=',$request->persons_id)//占い師
+    ->get();
+
+    return [
+        "products"=>$products,
+    ];
+}
 
 
 
