@@ -12,8 +12,8 @@
             
         </div> 
 
-        <div class="show_area">
-            @{{ this.modal_fortunes_worry }}
+        <div class="show_area  pre-line">
+            @{{ modal_fortunes.fortunes_worry }}
         </div>
             </div>
             <div class="flex2">
@@ -23,8 +23,8 @@
             
         </div> 
 
-        <div class="show_area">
-            @{{ this.modal_fortunes_answer }}
+        <div class="show_area pre-line">
+            @{{modal_fortunes.fortunes_answer}}
             
         </div>     
             </div>

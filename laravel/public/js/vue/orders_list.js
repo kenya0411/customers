@@ -18,8 +18,7 @@
           current_page:1,//ページネーション用
           last_page: "",//ページネーション用
 isActive: false,//モーダル用
-modal_fortunes_worry: "",//モーダル用
-modal_fortunes_answer: "",//モーダル用
+modal_fortunes: "",//モーダル用
 
         }
       },
@@ -30,20 +29,18 @@ modal_fortunes_answer: "",//モーダル用
       //モーダルウインドウ（名前チェック用）
       modal_open(id) {
         this.isActive = true
-        let url = '/orders/ajax_modal_fortunes?id='+id;
-
-        axios.get(url)
+        let url = '/orders/ajax_modal_fortunes';
+       axios.post(url, {
+        id: id,
+      })
         .then(response => [
-          this.modal_fortunes_worry = response.data.modal_fortunes_worry,
-          this.modal_fortunes_answer = response.data.modal_fortunes_answer,
-          
-          
-          
+          this.modal_fortunes = response.data.modal_fortunes,
           ])
         .catch(error => console.log(error))
       },
       modal_close(){
-        this.isActive = false
+        this.isActive = false;
+        this.modal_fortunes = '';
 
       },
     //ロード時に各種情報をデータベースから取得

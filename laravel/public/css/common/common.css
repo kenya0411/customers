@@ -4,6 +4,10 @@
   font-display: swap;
   src: url("/common/font/rodin-b.woff") format("woff"), url("/common/font/rodin-b.otf") format("truetype");
 }
+.pre-line {
+  white-space: pre-line;
+}
+
 .break_word {
   word-wrap: break-word;
 }
@@ -591,6 +595,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition-duration: 0.5s;
 }
 .modalWindow .inner {
   padding: 32px;

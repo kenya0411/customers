@@ -110,7 +110,7 @@ Route::post('orders/detail/ajax_change_products', 'OrderController@ajax_change_p
 
 Route::post('orders/detail/ajax_get_temporary_price', 'OrderController@ajax_get_temporary_price');//金額の取得
 
-Route::get('orders/ajax_modal_fortunes', 'OrderController@ajax_modal_fortunes');//鑑定結果の表示用（モーダルウインドウ）
+Route::post('orders/ajax_modal_fortunes', 'OrderController@ajax_modal_fortunes');//鑑定結果の表示用（モーダルウインドウ）
 
 
 

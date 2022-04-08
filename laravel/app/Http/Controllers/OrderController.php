@@ -191,50 +191,50 @@ public function ajax_detail_update(Request $request) {
     'users_id' => $request->users_id,
     'orders_notice' => $request->orders_notice,
     'updated_at' => date( "Y-m-d H:i:s" , time() ),
-];
-DB::update('update orders set 
- orders_id=:orders_id,
- persons_id=:persons_id,
- products_id=:products_id,
- products_options_id=:products_options_id,
- orders_price=:orders_price,
- users_id=:users_id,
- orders_notice=:orders_notice,
- updated_at=:updated_at
- where id=:id'
- , $param);
+    ];
+    DB::update('update orders set 
+    orders_id=:orders_id,
+    persons_id=:persons_id,
+    products_id=:products_id,
+    products_options_id=:products_options_id,
+    orders_price=:orders_price,
+    users_id=:users_id,
+    orders_notice=:orders_notice,
+    updated_at=:updated_at
+    where id=:id'
+    , $param);
 
 
     //DB【customers】の修正
-$param = ['customers_id' => $request->customers_id,
-'customers_name' => $request->customers_name,
-'customers_nickname' => $request->customers_nickname,
-'customers_address' => $request->customers_address,
-'updated_at' => date( "Y-m-d H:i:s" , time() ),
+    $param = ['customers_id' => $request->customers_id,
+    'customers_name' => $request->customers_name,
+    'customers_nickname' => $request->customers_nickname,
+    'customers_address' => $request->customers_address,
+    'updated_at' => date( "Y-m-d H:i:s" , time() ),
 
-];
-DB::update('update customers set 
- customers_name=:customers_name,
- customers_nickname=:customers_nickname,
- customers_address=:customers_address,
- updated_at=:updated_at
- where customers_id=:customers_id'
- , $param);
+    ];
+    DB::update('update customers set 
+    customers_name=:customers_name,
+    customers_nickname=:customers_nickname,
+    customers_address=:customers_address,
+    updated_at=:updated_at
+    where customers_id=:customers_id'
+    , $param);
 
 
     //DB【fortunes】の修正
-$param = ['id' => $request->id,
-'fortunes_worry' => $request->fortunes_worry,
-'fortunes_answer' => $request->fortunes_answer,
-'updated_at' => date( "Y-m-d H:i:s" , time() ),
+    $param = ['id' => $request->id,
+    'fortunes_worry' => $request->fortunes_worry,
+    'fortunes_answer' => $request->fortunes_answer,
+    'updated_at' => date( "Y-m-d H:i:s" , time() ),
 
-];
-DB::update('update fortunes set 
- fortunes_worry=:fortunes_worry,
- fortunes_answer=:fortunes_answer,
- updated_at=:updated_at
- where id=:id'
- , $param);
+    ];
+    DB::update('update fortunes set 
+    fortunes_worry=:fortunes_worry,
+    fortunes_answer=:fortunes_answer,
+    updated_at=:updated_at
+    where id=:id'
+    , $param);
 
 
 
@@ -315,11 +315,9 @@ public function ajax_modal_fortunes(Request $request) {
     ->where('id','=',$request->id)//論理削除されてないもの
     ->get(); 
 
-$modal_fortunes_worry = $fortunes[0]->fortunes_worry;
-$modal_fortunes_answer = $fortunes[0]->fortunes_answer;
+    $modal_fortunes = $fortunes[0];
     return [
-    "modal_fortunes_worry"=>$modal_fortunes_worry,
-    "modal_fortunes_answer"=>$modal_fortunes_answer,
+    "modal_fortunes"=>$modal_fortunes,
     ];
 
 }
