@@ -948,6 +948,12 @@
     width: 100%;
   }
 }
+main .commonBtnFlex {
+  display: flex;
+}
+main .commonBtnFlex > div {
+  margin-right: 8px;
+}
 main .editBtn {
   display: flex;
   justify-content: center;
@@ -1078,6 +1084,32 @@ main .detailBtn a {
 }
 main .backBlock {
   margin-bottom: 20px;
+}
+main .backListBtn a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  word-break: break-all;
+  width: fit-content;
+  text-decoration: none;
+  background: #fff;
+  text-align: center;
+  border: 1px solid #fff;
+  color: #888;
+  transition: all 0.5s ease;
+}
+@media (min-width: 769px) {
+  main .backListBtn a:hover {
+    background: #888;
+    color: #fff;
+    border: 1px solid #fff;
+    box-shadow: none;
+  }
+}
+main .backListBtn a {
+  padding: 6px 16px;
+  border: 1px solid #888;
+  position: relative;
 }
 main .backBtn a {
   display: flex;

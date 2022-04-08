@@ -139,7 +139,10 @@ Route::get('customers/ajax_search', 'CustomerController@ajax_search');
 
 
 
-
+//詳細ページ
+Route::get('customers/detail', 'CustomerController@detail_index');
+Route::get('customers/detail/ajax', 'CustomerController@ajax_detail_index');//表示用
+Route::post('customers/detail/ajax_update', 'CustomerController@ajax_detail_update');//修正用
 
 
 

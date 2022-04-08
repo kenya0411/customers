@@ -1,7 +1,7 @@
 
 @extends('common.base'){{-- 継承元 --}}
-@section('title','注文編集'){{-- タイトル --}}
-@section('heading','注文編集'){{-- 見出し --}}
+@section('title','顧客情報詳細'){{-- タイトル --}}
+@section('heading','顧客情報詳細'){{-- 見出し --}}
 
 
 @section('content')
@@ -12,7 +12,7 @@
     <a href="#" onClick="history.back(); return false;">戻る</a>
 </div>
 <div class="backListBtn">
-    <a href="../" >注文ページ一覧へ</a>
+    <a href="../" >顧客ページ一覧へ</a>
 </div>
     </div>
 
@@ -20,13 +20,13 @@
 
 
 
-@include('orders.components.detail')
+@include('customers.components.customer_detail')
 
 
 @endsection
 
 @section('vue')
-<script src="/js/vue/detail_form.js"></script>
+<script src="/js/vue/customers_detail.js"></script>
 
 @endsection
 

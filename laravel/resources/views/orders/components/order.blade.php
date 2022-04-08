@@ -104,7 +104,7 @@
             <div >
                 <div class="hiddenName">顧客情報</div>
 
-                <a >
+                <a v-bind:href='`/customers/detail/?id=${order.customers_id}`'>
                     
                 <ul>
                     <li v-if="order.customers_id !== 0">
@@ -115,6 +115,7 @@
                     @{{ customers[order.customers_id - 1].customers_name }}
                         
                     </li>
+                </ul>
                 </a>
 
             </div>

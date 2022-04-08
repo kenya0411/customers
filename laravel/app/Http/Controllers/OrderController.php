@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Customer;
 use App\Order;
 use App\Products;
 use App\products_options;
@@ -85,13 +86,42 @@ public function ajax_search(Request $request) {
     $year = '';  
     $month = '';  
     $person = '';  
+    $customers = '';  
 
 
 
+
+    //注文情報
     $orders = Order::query();
     $orders=$orders->where('is_delete','=',0);//論理削除
     $orders=$orders->where('orders_id','like','%'.$request->orders_id.'%');//商品ID
+    
+    //顧客名で検索
+    if(!empty($request->customers_name)){
+        $customers = Customer::query();
+        $customers=$customers->where('is_delete','=',0);//論理削除
+        //ニックネームか本名をor検索
+        $customers=$customers->where('customers_name','like','%'.$request->customers_name.'%')
+        ->orWhere('customers_nickname','like','%'.$request->customers_name.'%');
+        $customers=$customers->get();
+    }
 
+    //顧客名で注文情報を絞り込み
+    if(!empty($request->customers_name)){
+        //顧客の絞り込み
+        foreach ($customers as $key => $value) {
+            $is_customers = $value;//foreachが発動したかの確認用
+            if($key === 0){
+               $orders=$orders->where('customers_id','=',$value['customers_id']);//
+            }else{
+               $orders=$orders->orWhere('customers_id','=',$value['customers_id']);//
+            }
+        }
+        //顧客名がどれにもマッチしない場合、検索結果が0になる。
+        if(empty($is_customers)){
+            $orders=$orders->where('customers_id','=','false');//
+        }
+    }
 
 
     // 鑑定士で絞り込み

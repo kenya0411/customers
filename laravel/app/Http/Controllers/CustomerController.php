@@ -30,47 +30,41 @@ public function show_list($request,$redirect){
     public function index(Request $request)
     {
 
-$data = $this->show_list($request,'customers.list_customer');
-return $data;
+    $data = $this->show_list($request,'customers.list_customer');
+    return $data;
 
     }
 
     public function post(Request $request)
     {
-$data = $this->show($request,'','customers.index');
+    $data = $this->show($request,'','customers.index');
 
-return $data;
+    return $data;
 
 
     }
+   public function detail_index(Request $request)
+    {
 
+    $data = $this->show_list($request,'customers.customer_detail');
+    return $data;
 
-
-
-
-
+    }
 
 
 
 /*--------------------------------------------------- */
 /* 一覧画面のajax
 /*--------------------------------------------------- */
-    public function ajax_index(Request $request) {
+public function ajax_index(Request $request) {
 
-         $customers = DB::table('customers')
-        ->where('is_delete','=',0)//論理削除されてないもの
-        ->paginate(1);   
-
-
-        // $customers = DB::table('customers')
-        // ->where('is_delete','=',0)//論理削除されてないもの
-        // ->get();   
-
-        // $customers = DB::table('customers')->paginate(10);
+     $customers = DB::table('customers')
+    ->where('is_delete','=',0)//論理削除されてないもの
+    ->paginate(30);   
 
 
-    return ["customers"=>$customers];
-    }
+return ["customers"=>$customers];
+}
 
 
 
@@ -86,13 +80,55 @@ return $data;
     $customers=$customers->where('customers_name','like','%'.$request->customers_name.'%')
     ->orWhere('customers_nickname','like','%'.$request->customers_name.'%');
 
-    $customers=$customers->paginate(1);
+    $customers=$customers->paginate(30);
     // $customers=$customers->get();
 
     return ["customers"=>$customers];
 
     }
 
+
+
+/*--------------------------------------------------- */
+/* 詳細ページのajax
+/*--------------------------------------------------- */
+public function ajax_detail_index(Request $request) {
+
+    //顧客情報
+    $customers = DB::table('customers')
+    ->where('customers_id','=',$request->id)//今年
+    ->get();
+
+return ["customers"=>$customers];
+}
+
+/*--------------------------------------------------- */
+/* 編集用
+/*--------------------------------------------------- */
+public function ajax_detail_update(Request $request) {
+
+
+    // //DB【customers】の修正
+    $param = ['customers_id' => $request->customers['customers_id'],
+    'customers_name' => $request->customers['customers_name'],
+    'customers_nickname' => $request->customers['customers_nickname'],
+    'customers_address' => $request->customers['customers_address'],
+    'customers_note' => $request->customers['customers_note'],
+    'updated_at' => date( "Y-m-d H:i:s" , time() ),
+
+    ];
+    DB::update('update customers set 
+    customers_name=:customers_name,
+    customers_nickname=:customers_nickname,
+    customers_address=:customers_address,
+    customers_note=:customers_note,
+    updated_at=:updated_at
+    where customers_id=:customers_id'
+    , $param);
+
+
+
+}
 
 
 }

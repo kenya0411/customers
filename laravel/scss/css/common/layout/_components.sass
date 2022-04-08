@@ -2,6 +2,10 @@
 
 @import "../../../_import.sass"
 main
+	.commonBtnFlex
+		display: flex
+		>div
+			margin-right: 8px
 	.editBtn
 		@include btn-btn($color-main,#fff)
 		width: 100%
@@ -37,6 +41,14 @@ main
 					color: #fff
 	.backBlock
 		margin-bottom: $mbPad
+	.backListBtn
+		@include btn(#fff,#888)
+		a
+			padding: 6px 16px
+			border: 1px solid #888
+			position: relative
+
+
 	.backBtn
 		@include btn(#888,#fff)
 		a

@@ -10,6 +10,13 @@
 
 </div>
 </li>
+<li class="me-3">
+<div class="input-group">
+<input type="text"  placeholder="顧客名" aria-label="顧客名" aria-describedby="input-group-left" name="search_name" v-model="search_customers_name">
+<span class="input-group-text" id="input-group-left-example"><i class="fa-solid fa-magnifying-glass"></i></span>
+
+</div>
+</li>
 
 <li class=" me-3">
 

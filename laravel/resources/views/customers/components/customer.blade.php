@@ -48,7 +48,7 @@
         <div >
             <div class="hiddenName">顧客情報</div>
 
-            <a :href="">
+                <a v-bind:href='`/customers/detail/?id=${customer.customers_id}`'>
 
                 <ul>
                     <li v-if="customer.customers_nickname !== null">
