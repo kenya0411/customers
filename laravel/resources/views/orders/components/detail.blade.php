@@ -112,8 +112,12 @@
 
 
 </dl>
+
 <div class="btnWrap">
     <div class="sendBtn pointer" v-on:click="submit_update(orders.id)">編集する</div>
+</div>
+<div class="deleteWrap">
+    <div class="delete pointer" v-on:click="submit_delete(orders.id)">削除する</div>
 </div>
 
 </div>

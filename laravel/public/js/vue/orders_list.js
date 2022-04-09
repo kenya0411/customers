@@ -10,12 +10,14 @@ const hoge = {
 			products: '',
 			products_options: '',
 			orders: '',
+			customers: '',
 			users: '',
 			search_persons: '',//検索用
 			search_orders_id: '',//検索用
 			search_customers_name: '',//検索用
 			search_year: year,//検索用
 			search_month: month,//検索用
+			get_id: '',//検索用
 			current_page:1,//ページネーション用
 			last_page: "",//ページネーション用
 			isActive: false,//モーダル用
@@ -65,15 +67,26 @@ const hoge = {
 		/* //検索用の情報をデータベースから取得＋ページネーションの情報を取得
 		/*--------------------------------------------------- */		
 		async search_page() {
-			console.log(this.search_customers_name)
 			
-			let url = '/orders/ajax_search/?persons_id=' + this.search_persons+'&year='+this.search_year+'&month='+this.search_month+'&orders_id='+this.search_orders_id+'&page='+this.current_page+'&customers_name='+this.search_customers_name;
-			axios.get(url)
+			let url = '/orders/ajax_search/';
+			// let url = '/orders/ajax_search/?persons_id=' + this.search_persons+'&year='+this.search_year+'&month='+this.search_month+'&orders_id='+this.search_orders_id+'&page='+this.current_page+'&customers_name='+this.search_customers_name;
+			 axios.post(url, {
+				persons_id: this.search_persons,
+				year: this.search_year,
+				month: this.search_month,
+				orders_id: this.search_orders_id,
+				page: this.current_page,
+				customers_name: this.search_customers_name,
+				
+
+			})
 			.then(response => [
 				all = response.data.orders,
 				this.orders = response.data.orders.data,
+				this.get_id = response.data.get_id,
 				this.current_page = all.current_page,
 				this.last_page = all.last_page,
+				
 
 				])
 			.catch(error => console.log(error))

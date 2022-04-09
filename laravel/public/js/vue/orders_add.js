@@ -9,10 +9,7 @@ const hoge = {
 			persons: '', 
 			products: '',
 			products_options: '',
-			orders: '',
 			customers: '',
-			users: '',
-			fortunes: '',
 			persons_selected: '',//選択した占い師
 			temporary_price: '',//仮の金額
 			persons_id: 0,//v-model用
@@ -23,6 +20,7 @@ const hoge = {
 			orders_price: "",//v-model用
 			customers_nickname: "",//v-model用
 			customers_name: "",//v-model用
+			orders_notice: "",//v-model用
 		}
 },
 methods: { 
@@ -38,38 +36,40 @@ async load_page() {
 		this.persons = response.data.persons,
 		this.products = response.data.products,
 		this.products_options = response.data.products_options,
-		this.users = response.data.users,
 
 		])
 	.catch(error => console.log(error))
 
 },
 /*--------------------------------------------------- */
-/*　商品情報の修正
+/*　商品情報の登録
 /*--------------------------------------------------- */
-submit_update(id) {
-	let url = '/orders/detail/ajax_update';
-	axios.post(url, {
-		id: id,
-		orders_id: this.orders.orders_id,
-		customers_id: this.customers.customers_id,
-		customers_name: this.customers.customers_name,
-		customers_nickname: this.customers.customers_nickname,
-		persons_id: this.orders.persons_id,
-		products_id: this.orders.products_id,
-		products_options_id: this.orders.products_options_id,
-		orders_price: this.orders.orders_price,
-		fortunes_worry: this.fortunes.fortunes_worry,
-		fortunes_answer: this.fortunes.fortunes_answer,
-		users_id: this.orders.users_id,
-		orders_notice: this.orders.orders_notice,
-		customers_address: this.customers.customers_address,
-	})
-	.then(response => [
-		location.reload(),
+submit_update() {
+	let url = '/orders/add/ajax_add_update';
+	if(!this.orders_id||!this.persons_id||!this.customers_name){
+	alert('「鑑定士」「商品ID」「顧客名」のいずれかが未入力です。')
+	}else{
 
-		])
-	.catch(error => console.log(error)) 
+		axios.post(url, {
+			orders_id: this.orders_id,
+			customers_id: this.customers_id,
+			customers_name: this.customers_name,
+			customers_nickname: this.customers_nickname,
+			persons_id: this.persons_id,
+			products_id: this.products_id,
+			products_options_id: this.products_options_id,
+			orders_price: this.orders_price,
+			fortunes_worry: this.fortunes_worry,
+			orders_notice: this.orders_notice,
+			customers_address: this.customers_address,
+		})
+		.then(response => [
+			// location.reload(),
+			location.href = '/orders',
+
+			])
+		.catch(error => console.log(error)) 
+	}
 
 
 },
@@ -136,9 +136,11 @@ async add_commission_price(persons_id) {
 	.catch(error => console.log(error))
 
 },
+/*--------------------------------------------------- */
+/* 顧客名を確認しリピーターかどうか調べる
+/*--------------------------------------------------- */
 async search_customers() {
 	let url = '/orders/add/ajax_search_customers';
-	console.log(this.customers_name)
 	
 	axios.post(url, {
 		customers_name: this.customers_name,
@@ -146,7 +148,28 @@ async search_customers() {
 	})
 	.then(response => [
 		this.customers = response.data.customers,
-		console.log('test')
+		
+		])
+	.catch(error => console.log(error))
+
+},
+/*--------------------------------------------------- */
+/* リピーターの場合情報を取得
+/*--------------------------------------------------- */
+async get_data_repeater() {
+	let url = '/orders/add/ajax_get_data_repeater';
+	
+	axios.post(url, {
+		customers_id: this.customers_id,
+	})
+	.then(response => [
+		customer = response.data.customers[0],
+		this.customers_name = customer.customers_name,
+		this.customers_nickname = customer.customers_nickname,
+		this.customers_address = customer.customers_address,
+		this.customers_name = customer.customers_name,
+		this.customers_note = customer.customers_note,
+		
 		
 		])
 	.catch(error => console.log(error))

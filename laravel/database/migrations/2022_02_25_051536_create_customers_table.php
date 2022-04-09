@@ -22,7 +22,7 @@ class CreateCustomersTable extends Migration
             $table->text('customers_address')->nullable();
             $table->text('customers_note')->nullable();
             $table->string('customers_age')->nullable();
-            $table->string('customers_prefecture')->nullable();
+            $table->string('persons_id')->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->boolean('is_delete')->default(0);

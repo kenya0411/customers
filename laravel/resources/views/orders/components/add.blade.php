@@ -6,7 +6,7 @@
 
 			<dt>商品ID</dt>
 			<dd>
-				<input type="text">
+				<input type="text" v-model="orders_id">
 			</dd>
 			<dt>名前</dt>
 			<dd>
@@ -21,13 +21,19 @@
 			</dd>
 			<dt>リピーターか確認</dt>
 			<dd>
-				<select name="" id="" v-model="customers_id"
+				<select name="" id="" 
+				v-model="customers_id"
+				v-on:change="get_data_repeater()"
 				>
 				<option value="0">リピーターではありません。</option>
 				<option v-bind:value="customer.customers_id" v-for="customer in customers"> @{{ customer.customers_nickname }} - @{{ customer.customers_name }}</option>
 
 			</select>
-
+			<div class="link_customer" v-if="customers_id !== 0">
+                <a v-bind:href='`/customers/detail/?id=${customers_id}`' target="_blank">
+顧客詳細ページへ→</a>
+			</div>
+			<a href=""></a>
 			</dd>
 			<dt>鑑定士</dt>
 			<dd>
@@ -86,37 +92,32 @@
 		</div>
 	</div>
 </dd>
-<dt>悩み</dt>
-<dd>
-	<textarea name="" id="" v-bind:valie="fortunes.fortunes_worry" class="textarea1"></textarea>
-</dd>
-<dt>鑑定結果</dt>
-<dd>
-	<textarea name="" id=""  class="textarea1"></textarea>
-</dd>
-<dt>外注者</dt>
-<dd>
-	<select name="" id="" >
-		<option value="0">選択してください</option>
-		<option v-for="user in users" v-bind:value="user.id">@{{ user.nickname }}</option>
-	</select>
-</dd>
-
-<dt>備考</dt>
-<dd>
-	<textarea name="" id=""  class="textarea2"></textarea>
-</dd>
 <dt>住所</dt>
 <dd>
-	<textarea name="" id=""  class="textarea2"></textarea>
+	<textarea id=""  class="textarea2" autocomplete="off"
+	v-model="customers_address"></textarea>
 
 
+</dd>
+<dt>悩み</dt>
+<dd>
+	<textarea name="" id="" class="textarea1" autocomplete="off"
+	v-model="fortunes_worry"></textarea>
+</dd>
+
+
+</dd>
+
+<dt>注文の備考</dt>
+<dd>
+	<textarea name="" id="" class="textarea2" autocomplete="off"
+	v-model="orders_notice"></textarea>
 </dd>
 
 
 </dl>
 <div class="btnWrap">
-	<div class="sendBtn pointer" v-on:click="submit_update(id)">編集する</div>
+	<div class="sendBtn pointer" v-on:click="submit_update()">追加する</div>
 </div>
 
 </div>

@@ -65,13 +65,14 @@
             </div>
 
 
-            <div  v-if="customer.customers_age !== null">
+            <div  >
                 <div class="hiddenName">年齢</div>
-                @{{ customer.customers_age }}歳
+                <span v-if="customer.customers_age !== null">@{{ customer.customers_age }}歳</span>
+                
             </div>  
-            <div  v-if="customer.customers_prefecture !== null">
+            <div  >
                 <div class="hiddenName">住所</div>
-                @{{ customer.customers_prefecture }}
+                <span class="pre-line" v-if="customer.customers_prefecture !== null">@{{ customer.customers_address }}</span>
             </div>  
 
 

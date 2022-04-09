@@ -36,8 +36,8 @@ Route::post('persons', 'PersonController@post');
 // Route::get('person/edit', 'PersonController@edit');
 Route::post('person/edit', 'PersonController@update');
 
-Route::get('person/add', 'PersonController@add');
-Route::post('person/add', 'PersonController@create');
+Route::get('persons/add', 'PersonController@add');
+Route::post('persons/add', 'PersonController@create');
 
 Route::get('person/delete', 'PersonController@delete');
 Route::post('person/delete','PersonController@remove');
@@ -102,7 +102,11 @@ Route::get('orders', 'OrderController@index');
 Route::post('orders', 'OrderController@post');
 
 Route::get('orders/ajax', 'OrderController@ajax_index');
-Route::get('orders/ajax_search', 'OrderController@ajax_search');
+// Route::get('orders/ajax_search', 'OrderController@ajax_search');
+Route::post('orders/ajax_search', 'OrderController@ajax_search');
+
+Route::post('orders/ajax_modal_fortunes', 'OrderController@ajax_modal_fortunes');//鑑定結果の表示用（モーダルウインドウ）
+
 
 //注文詳細
 Route::get('orders/detail', 'OrderController@detail_index');
@@ -111,7 +115,10 @@ Route::post('orders/detail/ajax_update', 'OrderController@ajax_detail_update');/
 Route::get('orders/detail/ajax_change_products', 'OrderController@ajax_change_products');
 Route::post('orders/detail/ajax_change_products', 'OrderController@ajax_change_products');//占い師や商品の監視用
 Route::post('orders/detail/ajax_get_temporary_price', 'OrderController@ajax_get_temporary_price');//金額の取得
-Route::post('orders/ajax_modal_fortunes', 'OrderController@ajax_modal_fortunes');//鑑定結果の表示用（モーダルウインドウ）
+Route::post('orders/detail/ajax_delete', 'OrderController@ajax_delete');//注文情報を削除
+
+
+
 
 
 //新規注文
@@ -119,6 +126,8 @@ Route::get('orders/add', 'OrderController@add_index');
 Route::get('orders/add/ajax', 'OrderController@ajax_add_index');
 Route::post('orders/add/ajax_add_commission_price', 'OrderController@ajax_add_commission_price');//手数料を表示
 Route::post('orders/add/ajax_search_customers', 'OrderController@ajax_search_customers');//リピーターかどうかを確認
+Route::post('orders/add/ajax_get_data_repeater', 'OrderController@ajax_get_data_repeater');//リピーターの場合情報を取得
+Route::post('orders/add/ajax_add_update', 'OrderController@ajax_add_update');//新規注文用
 
 
 
@@ -155,76 +164,12 @@ Route::post('customers/detail/ajax_update', 'CustomerController@ajax_detail_upda
 
 
 /*--------------------------------------------------- */
-/* Customers
+/* テスト用
 /*--------------------------------------------------- */
-// Route::get('customers', 'CustomerController@index');
-// Route::post('customers', 'CustomerController@post');
-
-// Route::get('customers/ajax', 'CustomerController@ajax_customers_index');
-// Route::get('customers/ajax_search', 'CustomerController@ajax_customers_search');
-
-
-
-
-// //検索
-// Route::get('customers/search', 'CustomerController@search');
-
-// //修正
-// Route::post('customers/edit', 'CustomerController@update');
-
-// //追加
-// Route::get('customers/add', 'CustomerController@add');
-// Route::post('customers/add', 'CustomerController@create');
-// // Route::post('customers/ajax/add_product_ajax', 'CustomerController@add_product_ajax');
-// // Route::post('customers/ajax/add_product_option_ajax', 'CustomerController@add_product_option_ajax');
-// Route::get('customers/ajax/add', 'CustomerController@ajax_products');
-// Route::get('customers/ajax/add_option', 'CustomerController@ajax_products_options');
-
-// //削除
-// Route::get('customers/delete', 'CustomerController@delete');
-// Route::post('customers/delete','CustomerController@remove');
-
-
-
-// //詳細
-// Route::get('customers/detail', 'CustomerController@detail');
-// Route::post('customers/detail/edit', 'CustomerController@detail_edit');
-
-// Route::get('customers/detail/ajax', 'CustomerController@ajax_customers');
-// Route::get('customers/detail/ajax_change', 'CustomerController@ajax_change');
-
-
-
-// //予約
-// //
-// Route::get('customers/reserve', 'CustomerController@reserve');
-// Route::post('customers/reserve', 'CustomerController@reserve_post');
-// Route::get('customers/reserve_ajax', 'CustomerController@reserve_ajax');
-// Route::post('customers/reserve_send', 'CustomerController@reserve_send');
-
-
-
-// Route::get('ajax/vue', 'VueController@ajax_products');
-// Route::get('ajax/vue_option', 'VueController@ajax_products_options');
 Route::get('vue', 'VueController@index');
 Route::get('vue/ajax', 'VueController@ajax_index');
 
 
 
-// Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
-// Auth::routes();
-
-// Route::get('/home', 'OrderController@index')->name('home');

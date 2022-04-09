@@ -39,11 +39,11 @@
       </ul>
     </div>
   </li>
- 
+ {{-- 
 
  <li class="menu_list">
     <a href="/customers/add">設定</a>
    
   </li>
- 
+  --}}
 </ul>

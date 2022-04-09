@@ -122,11 +122,29 @@
       
 
     },      
+    /*--------------------------------------------------- */
+    /* 注文を削除
+    /*--------------------------------------------------- */
+     async submit_delete(id) {
+     if(!confirm('注文情報を削除しますか？')){
+          /* キャンセルの時の処理 */
+          return false;
+        }else{
+      let url = '/orders/detail/ajax_delete';
+      
+       axios.post(url, {
+        id: id,
+      })
+      .then(response => [
+      location.href = '/orders',    
+        ])
+      .catch(error => console.log(error))      }
+      
 
+    },  
   },
   //ロード時にデータベースから情報を取得
   created:function(){
-   // this.search_page();
    this.load_page();
 
  },

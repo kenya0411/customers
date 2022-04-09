@@ -833,6 +833,30 @@
   margin-left: 16px;
   max-width: 80px;
 }
+.formSection .deleteWrap {
+  margin-top: 32px;
+}
+.formSection .deleteWrap .delete {
+  position: relative;
+  color: #fff;
+  background-color: #d50000;
+  border: 1px solid #d50000;
+  padding: 8px 12px;
+  max-width: 100px;
+  line-height: 1em;
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 769px) {
+  .formSection .deleteWrap .delete:hover {
+    background-color: #fff;
+    color: #d50000;
+    border: 1px solid #d50000;
+    transition-duration: 0.5s;
+  }
+}
 
 @media (max-width: 768px) {
   .formSection dt, .formSection dd {

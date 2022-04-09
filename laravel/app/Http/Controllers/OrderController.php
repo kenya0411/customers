@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Customer;
 use App\Order;
+use App\Fortune;
 use App\Products;
 use App\products_options;
 
@@ -74,7 +75,12 @@ public function ajax_index(Request $request) {
 
 
 
-		return ["users"=>$users,"persons"=>$persons,"products"=>$products,"products_options"=>$products_options,"customers"=>$customers];
+		return [
+			"users"=>$users,
+			"persons"=>$persons,
+			"products"=>$products,
+			"products_options"=>$products_options,
+			"customers"=>$customers];
 }
 
 
@@ -85,74 +91,97 @@ public function ajax_index(Request $request) {
 
 public function ajax_search(Request $request) {
 
-		$year = '';	
-		$month = '';	
-		$person = '';	
-		$customers = '';	
+	$year = '';	
+	$month = '';	
+	$person = '';	
+	$customers = '';	
+	$test = '';	
 
 
 
 
-		//注文情報
-		$orders = Order::query();
-		$orders=$orders->where('is_delete','=',0);//論理削除
-		$orders=$orders->where('orders_id','like','%'.$request->orders_id.'%');//商品ID
-		
-		//顧客名で検索
-		if(!empty($request->customers_name)){
-				$customers = Customer::query();
-				$customers=$customers->where('is_delete','=',0);//論理削除
-				//ニックネームか本名をor検索
-				$customers=$customers->where('customers_name','like','%'.$request->customers_name.'%')
-				->orWhere('customers_nickname','like','%'.$request->customers_name.'%');
-				$customers=$customers->get();
-		}
+	//注文情報
+	$orders = Order::query();
+	$orders=$orders->where('is_delete','=',0);//論理削除
+	$orders=$orders->where('orders_id','like','%'.$request->orders_id.'%');//商品ID
+	
+	//顧客名で検索
+	if(!empty($request->customers_name)){
+			//顧客情報をDBから取得
+			$customers = Customer::query();
+			$customers=$customers->where('is_delete','=',0);//論理削除
+			//ニックネームか本名をor検索
+			$customers=$customers->where('customers_name','like','%'.$request->customers_name.'%')
+			->orWhere('customers_nickname','like','%'.$request->customers_name.'%');
+			$customers=$customers->get();
+		//顧客IDを連想配列化
+		$customers_id = [];
+		foreach ($customers as $key => $value) {
+			$customers_id[$key] = $value['customers_id'];
+		};
+		//絞り込み
+		$orders=$orders->whereIn('customers_id',$customers_id);
 
-		//顧客名で注文情報を絞り込み
-		if(!empty($request->customers_name)){
-				//顧客の絞り込み
-				foreach ($customers as $key => $value) {
-						$is_customers = $value;//foreachが発動したかの確認用
-						if($key === 0){
-							 $orders=$orders->where('customers_id','=',$value['customers_id']);//
-						}else{
-							 $orders=$orders->orWhere('customers_id','=',$value['customers_id']);//
-						}
-				}
-				//顧客名がどれにもマッチしない場合、検索結果が0になる。
-				if(empty($is_customers)){
-						$orders=$orders->where('customers_id','=','false');//
-				}
-		}
+	}
+
+	
+	if(!empty($request->customers_name)){
+
+	}
 
 
-		// 鑑定士で絞り込み
-		if(!empty($request->persons_id)){
-				$person = $request->persons_id;
-				$orders->when($person, function($orders, $person) { 
-						return $orders->where('persons_id','=',$person);
-				}) ;
-		}
+	// 鑑定士で絞り込み
+	if(!empty($request->persons_id)){
+			$person = $request->persons_id;
+			$orders->when($person, function($orders, $person) { 
+					return $orders->where('persons_id','=',$person);
+			}) ;
+	}
 
-		// 年で絞り込み
-		if(!empty($request->year)){
-				$year = $request->year;
-				$orders->when($year, function($orders, $year) { 
-						return $orders->whereYear('created_at','=',$year);
-				}) ;
-		}
+	// 年で絞り込み
+	if(!empty($request->year)){
+			$year = $request->year;
+			$orders->when($year, function($orders, $year) { 
+					return $orders->whereYear('created_at','=',$year);
+			}) ;
+	}
 
-		// 月で絞り込み
-		if(!empty($request->month)){
-				$month = $request->month;
-				$orders->when($month, function($orders, $month) { 
-						return $orders->whereMonth('created_at','=',$month);
-				}) ;
-		}
+	// 月で絞り込み
+	if(!empty($request->month)){
+			$month = $request->month;
+			$orders->when($month, function($orders, $month) { 
+					return $orders->whereMonth('created_at','=',$month);
+			}) ;
+	}
 
-		$orders=$orders->paginate(30);
+	$orders=$orders->paginate(30);
 
-		return ["orders"=>$orders];
+
+
+
+	//index用の配列
+    $get_id=[];
+    if(!empty($orders)){
+        foreach ($orders as $key => $value) {
+            $get_id[] = array(
+                'index' => $key,
+                'id' => !empty($value->id) ? $value->id - 1 : 0,
+                'customers_id' => !empty($value->customers_id) ? $value->customers_id - 1 : 0,
+                'persons_id' => !empty($value->persons_id) ? $value->persons_id - 1 : 0,
+                'products_id' => !empty($value->products_id) ? $value->products_id - 1 : 0,
+                'products_options_id' => !empty($value->products_options_id) ? $value->products_options_id - 1 : 0,
+                'users_id' => !empty($value->users_id) ? $value->users_id - 1 : 0,
+            );
+
+        }
+    };
+
+
+	return [
+		"orders"=>$orders,
+		"get_id"=>$get_id,
+		"test"=>$test,
+	];
 
 }
 
@@ -161,7 +190,6 @@ public function ajax_search(Request $request) {
 /*--------------------------------------------------- */
 /* 詳細一覧
 /*--------------------------------------------------- */
-	 //order以外の情報を取得
 public function ajax_detail_index(Request $request) {
 	
 	//注文
@@ -221,7 +249,6 @@ public function ajax_detail_index(Request $request) {
 /*--------------------------------------------------- */
 /* 編集用
 /*--------------------------------------------------- */
-//order以外の情報を取得
 public function ajax_detail_update(Request $request) {
 	//DB【orders】の修正
 	$param = ['id' => $request->id,
@@ -406,24 +433,121 @@ public function ajax_add_commission_price(Request $request) {
 }
 
 /*--------------------------------------------------- */
-/* 手数料を表示
+/*顧客名で検索（リピーターかどうかを確認）
 /*--------------------------------------------------- */
 public function ajax_search_customers(Request $request) {
 
+    if(!empty($request->customers_name) || !empty($request->customers_nickname)){
+        $customers = Customer::query();
+        $customers=$customers->where('is_delete','=',0);//論理削除
+        $customers=$customers->where('customers_name','like','%'.$request->customers_name.'%');
+        $customers=$customers->where('customers_nickname','like','%'.$request->customers_nickname.'%');
+        $customers=$customers->get();
 
-    $customers = Customer::query();
-    $customers=$customers->where('is_delete','=',0);//論理削除
-    
-    //ニックネームか本名をor検索
-    $customers=$customers->where('customers_name','like','%'.$request->customers_name.'%')
-    ->orWhere('customers_nickname','like','%'.$request->customers_nickname.'%');
-
-    $customers=$customers->get();
+    }else{
+        $customers = [];
+    }
 
     return ["customers"=>$customers];
 }
 
+/*--------------------------------------------------- */
+/*リピーターの場合情報を取得
+/*--------------------------------------------------- */
+public function ajax_get_data_repeater(Request $request) {
+
+        $customers = Customer::query();
+        $customers=$customers->where('customers_id','=',$request->customers_id);
+        $customers=$customers->get();
 
 
+    return ["customers"=>$customers];
+}
+
+/*--------------------------------------------------- */
+/* 新規注文用
+/*--------------------------------------------------- */
+public function ajax_add_update(Request $request) {
+
+
+ 
+    //新規顧客の場合、customersに情報を追加
+    if(empty($request->customers_id)){
+        $customers = new Customer();
+        $customers->create([
+        'customers_nickname' => !empty($request->customers_nickname) ? $request->customers_nickname : null,
+        'customers_name' => !empty($request->customers_name) ? $request->customers_name : null,
+        'customers_address' => !empty($request->customers_address) ? $request->customers_address : null,
+        'customers_note' => !empty($request->customers_note) ? $request->customers_note : null,
+        'persons_id' => $request->persons_id,
+      ]);
+        $customers_id = Customer::latest()->first();
+        $customers_id =  $customers_id->customers_id;   
+    }else{
+		//リピーターの場合はIDのみ取得
+		$customers_id =  $request->customers_id;   
+
+    }
+
+    //注文情報を追加
+    $orders = new Order();
+    $orders->create([
+		'orders_id' => !empty($request->orders_id) ? $request->orders_id : 0,
+		'customers_id' => $customers_id,
+		'products_id' => !empty($request->products_id) ? $request->products_id : 0,
+		'products_options_id' => !empty($request->products_options_id) ? $request->products_options_id : 0,
+		'orders_price' => !empty($request->orders_price) ? $request->orders_price : 0,
+		'orders_notice' => !empty($request->orders_notice) ? $request->orders_notice : null,
+		'persons_id' => $request->persons_id,
+    ]);
+    //注文情報(orders)のIDと悩み(fortune)のIDを同じにする。
+    $id = Order::latest()->first();
+    $id =  $id->id;   
+
+
+
+    //鑑定の悩みを追加
+    $fortunes = new Fortune();
+    $fortunes->create([
+		'id' => $id,
+		'fortunes_worry' => !empty($request->fortunes_worry) ? $request->fortunes_worry : null,
+    ]);
+
+
+
+}
+
+
+
+
+/*--------------------------------------------------- */
+/*注文情報の削除（論理削除）
+/*--------------------------------------------------- */
+public function ajax_delete(Request $request) {
+
+	$param = [
+	'id' => $request->id,
+	'is_delete' => 1,
+	'updated_at' => date( "Y-m-d H:i:s" , time() ),
+
+	];
+
+	//DB【fortunes】の削除
+	DB::update('update fortunes set 
+	is_delete=:is_delete,
+	updated_at=:updated_at
+	where id=:id'
+	, $param);
+
+
+	//DB【orders】の削除
+	DB::update('update orders set 
+	is_delete=:is_delete,
+	updated_at=:updated_at
+	where id=:id'
+	, $param);
+
+
+}
 
 }

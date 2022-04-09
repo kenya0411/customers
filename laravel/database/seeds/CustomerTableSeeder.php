@@ -20,7 +20,7 @@ class CustomerTableSeeder extends Seeder
 松尾 千春 様',
                 'customers_note' => '無し',
                 'customers_age' => '24',
-                'customers_prefecture' => '福岡県',
+                'persons_id' => '1',
             ],
             [
                 'customers_nickname' => 'Smile',
@@ -31,7 +31,7 @@ The nature 101
 奥平 姫音 様',
                 'customers_note' => '無し',
                 'customers_age' => '28',
-                'customers_prefecture' => '沖縄県',
+                'persons_id' => '2',
             ],
             [
                 'customers_nickname' => '*MOOMIN*',
@@ -41,7 +41,7 @@ The nature 101
 田中 恵里奈 様',
                 'customers_note' => '無し',
                 'customers_age' => '18',
-                'customers_prefecture' => '神奈川県',
+                'persons_id' => '1',
             ],
 
             [
@@ -51,7 +51,7 @@ The nature 101
 
                 'customers_note' => '',
                 'customers_age' => '38',
-                'customers_prefecture' => '',
+                'persons_id' => '1',
             ],
 
 

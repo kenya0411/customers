@@ -63,7 +63,28 @@
 			margin-right: 4px
 			margin-left: 16px
 			max-width: 80px
+	.deleteWrap
+		margin-top: 32px
+		.delete
 
+			$bgcolor: #d50000
+			position: relative
+			color: #fff
+			background-color: $bgcolor
+			border: 1px solid $bgcolor
+			padding: 8px 12px
+			max-width: 100px
+			line-height: 1em
+			margin-left: auto
+			display: flex
+			justify-content: center
+			align-items: center
+			@include tabup
+				&:hover
+					background-color: #fff
+					color: $bgcolor
+					border: 1px solid $bgcolor
+					transition-duration: 0.5s
 
 
 

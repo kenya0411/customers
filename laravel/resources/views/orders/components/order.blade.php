@@ -63,17 +63,17 @@
      </div>
     </li>
 
-    <li class="flexBodyWrap flexWrap" v-for="order in orders">
+    <li class="flexBodyWrap flexWrap"  v-for="(order, index) in orders">
  
  <div class="mbBlock">
                    <ul class="no1">
 
-                    <li>@{{ customers[order.customers_id - 1].customers_nickname }}</li>
-                    <li>@{{ customers[order.customers_id - 1].customers_name }}</li>
+                    {{-- <li>@{{ customers[get_id[index].customers_id].customers_nickname }}</li> --}}
+                    {{-- <li>@{{ customers[get_id[index].customers_id].customers_name }}</li> --}}
                 </ul>
                 <div class="no2">
-<span v-if="order.orders_is_reserve_finished == '1'">鑑定済み</span>
-<span v-if="order.orders_is_ship_finished == '1'">発送済み</span>
+{{-- <span v-if="order.orders_is_reserve_finished == '1'">鑑定済み</span> --}}
+{{-- <span v-if="order.orders_is_ship_finished == '1'">発送済み</span> --}}
 
                 </div>
 <div class="no3">
@@ -88,8 +88,9 @@
 
             <div>
                 <div class="hiddenName">商品ID</div>
-                {{-- <a v-bind:href='`${persons[order.persons_id - 1].persons_platform_url + order.orders_id}`'> --}}
-                <a v-bind:href="persons[order.persons_id - 1].persons_platform_url + order.orders_id " target="_blank">
+                <a v-bind:href="persons[get_id[index].persons_id].persons_platform_url + order.orders_id "
+                v-if="persons[get_id[index].persons_id]"
+                 target="_blank">
                     <div class="icon_wrap">
                         
                     <span class="break_all">
@@ -107,12 +108,18 @@
                 <a v-bind:href='`/customers/detail/?id=${order.customers_id}`'>
                     
                 <ul>
-                    <li v-if="order.customers_id !== 0">
-                    @{{ customers[order.customers_id - 1].customers_nickname }}
-                        
+                    <li >
+                        <span v-if="customers">
+                            @{{ customers[get_id[index].customers_id].customers_nickname }}
+                        </span>
+                    
                     </li>
-                    <li v-if="order.customers_id !== 0">
-                    @{{ customers[order.customers_id - 1].customers_name }}
+                    <li >
+                        <span v-if="customers">
+                             @{{ customers[get_id[index].customers_id].customers_name }}
+                        </span>
+
+                   
                         
                     </li>
                 </ul>
@@ -123,14 +130,24 @@
                 <div class="hiddenName">商品情報</div>
 
                 <ul>
-                    <li v-if="order.persons_id !== 0">@{{ persons[order.persons_id - 1].persons_name }}</li>
-                    <li v-if="order.products_id !== 0">@{{ products[order.products_id - 1].products_name }}</li>
-                    <li v-if="order.products_options_id !== 0"> @{{ products_options[order.products_options_id - 1].products_options_name}}</li>
-                   
-                    {{-- <li>@{{ products_options[order.products_options_id - 1].products_options_name }}</li> --}}
-                {{--     <li>@{{customer.persons_name}}</li>
-                    <li>@{{customer.products_name}}</li>
-                    <li>@{{customer.products_options_name}}</li> --}}
+                    <li v-if="order.persons_id !== 0">
+
+                        <span  v-if="persons[get_id[index].persons_name]">
+                    @{{ persons[1].persons_name }}
+        
+                        </span>
+                </li>
+                    <li v-if="order.products_id !== 0">
+                        <span  v-if="products[get_id[index].products_id]">
+                    @{{ products[get_id[index].products_id].products_name }}
+
+                        </span>
+                </li>
+                    <li v-if="order.products_options_id !== 0"> 
+                        <span  v-if="products_options[get_id[index].products_options_id]">
+
+                    @{{ products_options[get_id[index].products_options_id].products_options_name}}</li>
+            </span>
                 </ul>
 
              
@@ -145,13 +162,16 @@
          
 
      <div class="tabInvi">
-<span v-if="order.orders_is_reserve_finished == '1'">鑑定済み</span>
-<span v-if="order.orders_is_ship_finished == '1'">発送済み</span>
+{{-- <span v-if="order.orders_is_reserve_finished == '1'">鑑定済み</span> --}}
+{{-- <span v-if="order.orders_is_ship_finished == '1'">発送済み</span> --}}
 
 </div>
-            <div v-if="order.users_id !== 0">
+            <div>
                 <div class="hiddenName">外注者</div>
-@{{ users[order.users_id - 1].nickname }}様
+                <span  v-if="order.users_id !== 0  && users[get_id[index].users_id]">
+                @{{ users[get_id[index].users_id].nickname }}様
+            </span>
+
         </div>
             <div>
                 <div class="hiddenName">購入日</div>
@@ -179,23 +199,21 @@
                   </div>   
                     </li>
                     <li>
-                                        {{-- <a v-bind:href='`/orders/detail/?id=${order.id}&date_year=${customer.date_year}&date_month=${customer.date_month}`'>商品情報</a> --}}
+                                       
 
-                                        <a v-bind:href='`/orders/detail/?id=${order.id}`'><img src="/img/common/icon/order_icon2.png" class="retina" alt="編集"></a>
+            <a v-bind:href='`/orders/detail/?id=${order.id}`'>
+                <img src="/img/common/icon/order_icon2.png" class="retina" alt="編集">
+            </a>
 
                     </li>
                 
                 </ul>
  
-
             </div>
 
 
  </div>
 
-
-        {{-- @endforeach --}}
-{{-- <script src="{{ asset('js/components/customers_select_product_list.js') }}"></script> --}}
 
 </li>
 </ul>

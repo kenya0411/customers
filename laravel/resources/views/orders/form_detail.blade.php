@@ -26,7 +26,7 @@
 @endsection
 
 @section('vue')
-<script src="/js/vue/detail_form.js"></script>
+<script src="/js/vue/orders_detail.js"></script>
 
 @endsection
 
