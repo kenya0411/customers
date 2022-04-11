@@ -170,6 +170,9 @@ Route::get('vue', 'VueController@index');
 Route::get('vue/ajax', 'VueController@ajax_index');
 
 
+Route::get('export', 'VueController@csv_export');
+Route::get('import', 'VueController@csv_import');
+
 
 
 Auth::routes();

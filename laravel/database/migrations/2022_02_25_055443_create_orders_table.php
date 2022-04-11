@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->integer('customers_id')->default(0);
             $table->integer('products_id')->default(0);
             $table->integer('products_options_id')->default(0);
-            $table->integer('products_options_multiple_id')->default(0);
+            // $table->integer('products_options_multiple_id')->default(0);
             $table->integer('persons_id')->default(0);
             $table->integer('users_id')->default(0);
             $table->integer('orders_price')->default(0);
