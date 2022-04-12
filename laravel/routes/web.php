@@ -164,6 +164,18 @@ Route::post('customers/detail/ajax_update', 'CustomerController@ajax_detail_upda
 
 
 /*--------------------------------------------------- */
+/* Ships
+/*--------------------------------------------------- */
+
+Route::get('ships', 'ShipController@index');
+Route::post('ships', 'ShipController@post');
+
+Route::get('ships/ajax', 'ShipController@ajax_index');
+Route::post('ships/ajax_update', 'ShipController@ajax_update');
+
+
+
+/*--------------------------------------------------- */
 /* テスト用
 /*--------------------------------------------------- */
 Route::get('vue', 'VueController@index');
