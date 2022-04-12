@@ -80,10 +80,14 @@ return ["customers"=>$customers];
     $customers=$customers->where('customers_name','like','%'.$request->customers_name.'%')
     ->orWhere('customers_nickname','like','%'.$request->customers_name.'%');
 
-    $customers=$customers->paginate(30);
+    $customers=$customers->paginate(100);
+    $data=$customers->sortBy('created_at')->values()->toArray();
     // $customers=$customers->get();
 
-    return ["customers"=>$customers];
+    return [
+        "customers"=>$customers,
+        "data"=>$data,
+    ];
 
     }
 

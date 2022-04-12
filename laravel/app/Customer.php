@@ -13,6 +13,8 @@ class Customer extends Model
       'customers_name',
       'customers_address',
       'customers_note',
+      'updated_at',
+      'created_at',
       // 'customers_age',
       'persons_id'
   ];

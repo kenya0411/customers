@@ -184,6 +184,7 @@ Route::get('vue/ajax', 'VueController@ajax_index');
 
 Route::get('export', 'VueController@csv_export');
 Route::get('import', 'VueController@csv_import');
+Route::get('import_customers', 'VueController@csv_import_customers');
 
 
 

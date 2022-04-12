@@ -91,12 +91,36 @@ $customers = (new FastExcel)->import('csv/import/customers.csv', function ($line
         'customers_name' => trim($line['customers_name']),
         'customers_address' => $line['customers_address'],
         'persons_id' => $line['persons_id'],
+        'persons_id' => $line['persons_id'],
     ]);
 });
 
 
 
 }
+
+
+
+public function csv_import_customers(Request $request) {
+
+
+
+$customers = (new FastExcel)->import('csv/import/customers.csv', function ($line) {
+    return Customer::create([
+        'customers_id' => $line['customers_id'],
+        'customers_nickname' => trim($line['customers_nickname'], "\r"),
+        'customers_name' => trim($line['customers_name']),
+        'customers_address' => $line['customers_address'],
+        'persons_id' => $line['persons_id'],
+        'updated_at' => $line['updated_at'],
+        'created_at' => $line['created_at'],
+    ]);
+});
+
+
+
+}
+
 
 
 
