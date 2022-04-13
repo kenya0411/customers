@@ -173,6 +173,8 @@ Route::post('ships', 'ShipController@post');
 Route::get('ships/ajax', 'ShipController@ajax_index');
 Route::post('ships/ajax_update', 'ShipController@ajax_update');
 
+Route::post('ships/ajax_ship_shipped', 'ShipController@ajax_ship_shipped');//発送確認用
+Route::post('ships/ajax_ship_finished', 'ShipController@ajax_ship_finished');//発送報告確認用
 
 
 /*--------------------------------------------------- */

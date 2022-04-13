@@ -545,6 +545,215 @@
     font-size: 1.4rem;
   }
 }
+.shipsList .pcBlock #address_block {
+  height: 120px;
+}
+.shipsList .pcBlock .btnFlex {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  justify-content: flex-end;
+  display: flex;
+  align-items: center;
+}
+.shipsList .pcBlock .btnFlex .btnFlex4 {
+  margin-left: 16px;
+}
+.shipsList .pcBlock .btnFlex .number1 .icon_wrap, .shipsList .pcBlock .btnFlex .number1 a, .shipsList .pcBlock .btnFlex .number1 a:visited, .shipsList .pcBlock .btnFlex .number1 .text_wrap, .shipsList .pcBlock .btnFlex .number2 .icon_wrap, .shipsList .pcBlock .btnFlex .number2 a, .shipsList .pcBlock .btnFlex .number2 a:visited, .shipsList .pcBlock .btnFlex .number2 .text_wrap, .shipsList .pcBlock .btnFlex .number3 .icon_wrap, .shipsList .pcBlock .btnFlex .number3 a, .shipsList .pcBlock .btnFlex .number3 a:visited, .shipsList .pcBlock .btnFlex .number3 .text_wrap {
+  position: relative;
+  cursor: pointer;
+  color: #fff;
+  background-color: #1c8ee3;
+  border: 1px solid #1c8ee3;
+  line-height: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.shipsList .pcBlock .btnFlex .number1 .icon_wrap:hover, .shipsList .pcBlock .btnFlex .number1 a:hover, .shipsList .pcBlock .btnFlex .number1 a:visited:hover, .shipsList .pcBlock .btnFlex .number1 .text_wrap:hover, .shipsList .pcBlock .btnFlex .number2 .icon_wrap:hover, .shipsList .pcBlock .btnFlex .number2 a:hover, .shipsList .pcBlock .btnFlex .number2 a:visited:hover, .shipsList .pcBlock .btnFlex .number2 .text_wrap:hover, .shipsList .pcBlock .btnFlex .number3 .icon_wrap:hover, .shipsList .pcBlock .btnFlex .number3 a:hover, .shipsList .pcBlock .btnFlex .number3 a:visited:hover, .shipsList .pcBlock .btnFlex .number3 .text_wrap:hover {
+  background-color: #fff;
+  color: #1c8ee3;
+  border: 1px solid #1c8ee3;
+  transition-duration: 0.5s;
+}
+.shipsList .pcBlock .btnFlex .number3 i, .shipsList .pcBlock .btnFlex .number4 i {
+  margin-left: 4px;
+  font-size: 14px;
+  font-size: 1.4rem;
+}
+.shipsList .pcBlock .btnFlex .number3 .text_wrap {
+  cursor: pointer;
+  padding: 12px 16px;
+  margin-left: 16px;
+}
+.shipsList .pcBlock .btnFlex .number4 button, .shipsList .pcBlock .btnFlex .number5 button {
+  position: relative;
+  color: #fff;
+  background-color: #c70000;
+  border: 1px solid #c70000;
+  padding: 12px 16px;
+  line-height: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 769px) {
+  .shipsList .pcBlock .btnFlex .number4 button:hover, .shipsList .pcBlock .btnFlex .number5 button:hover {
+    background-color: #fff;
+    color: #c70000;
+    border: 1px solid #c70000;
+    transition-duration: 0.5s;
+  }
+}
+.shipsList .pcBlock .btnFlex .number5 button {
+  color: #fff;
+  background-color: #e96700;
+  border: 1px solid #e96700;
+}
+@media (min-width: 769px) {
+  .shipsList .pcBlock .btnFlex .number5 button:hover {
+    background-color: #fff;
+    color: #e96700;
+    border: 1px solid #e96700;
+  }
+}
+
+.shipsList .flexBodyWrap {
+  margin-bottom: 32px;
+}
+.shipsList .flexWrap .countHead {
+  background-color: #000;
+  color: #fff;
+  line-height: 1em;
+  padding: 16px 24px;
+}
+@media (max-width: 768px) {
+  .shipsList .flexWrap .pcBlock {
+    display: none;
+  }
+}
+@media (min-width: 769px) {
+  .shipsList .flexWrap .pcBlock .flex {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+  }
+  .shipsList .flexWrap .pcBlock .flex .flex5 {
+    position: relative;
+  }
+  .shipsList .flexWrap .pcBlock .flex .flex5 .title {
+    width: 100%;
+    display: block;
+    font-size: 14px;
+    font-size: 1.4rem;
+    color: #333;
+    line-height: 1.7em;
+  }
+  .shipsList .flexWrap .pcBlock .flex .flex5:nth-of-type(1) {
+    width: 15%;
+  }
+  .shipsList .flexWrap .pcBlock .flex .flex5:nth-of-type(2), .shipsList .flexWrap .pcBlock .flex .flex5:nth-of-type(3) {
+    width: 30%;
+  }
+  .shipsList .flexWrap .pcBlock .flex .flex5:nth-of-type(2) textarea, .shipsList .flexWrap .pcBlock .flex .flex5:nth-of-type(3) textarea {
+    height: calc(100% - 32px);
+  }
+  .shipsList .flexWrap .pcBlock .flex .flex5:nth-of-type(4) {
+    width: 20%;
+  }
+  .shipsList .flexWrap .pcBlock .flex .flex5:nth-of-type(5) {
+    width: 100%;
+  }
+  .shipsList .flexWrap .pcBlock .flex .flex5 .flexBlock {
+    margin-bottom: 20px;
+  }
+  .shipsList .flexWrap .pcBlock .flex .flex5 .flexBlock:nth-last-of-type(1) {
+    margin-bottom: 0;
+  }
+  .shipsList .flexWrap .pcBlock .flex .flex5 textarea {
+    height: 100%;
+  }
+  .shipsList .flexWrap .pcBlock .flex .flex5 select {
+    width: 100%;
+  }
+  .shipsList .flexWrap .pcBlock .flex .flex5 .ships_notice {
+    height: 120px;
+  }
+}
+.shipsList .icon_list {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.shipsList .icon_list > li {
+  margin-left: 16px;
+}
+.shipsList .icon_list > li:nth-last-of-type(1) {
+  margin-right: 0;
+}
+.shipsList .icon_list button {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .shipsList .pcBlock .flex {
+    flex-wrap: wrap;
+  }
+  .shipsList .pcBlock .flex5 {
+    width: 100%;
+  }
+  .shipsList .pcBlock .flex5 .flexBlock {
+    margin-bottom: 24px;
+  }
+  .shipsList .pcBlock .flex5 select {
+    background: #fff;
+  }
+  .shipsList .pcBlock .no2 textarea, .shipsList .pcBlock .no3 textarea {
+    margin-bottom: 24px;
+    height: 200px;
+  }
+  .shipsList .pcBlock .no4 textarea {
+    height: 130px;
+  }
+  .shipsList .pcBlock .title {
+    width: 100%;
+    font-weight: 700;
+    display: block;
+  }
+  .shipsList .pcBlock a {
+    display: block;
+  }
+}
+@media (max-width: 480px) {
+  .shipsList .pcBlock .btnFlex {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .shipsList .pcBlock .btnFlex .btnFlex4 {
+    width: 100%;
+    margin: 0;
+  }
+  .shipsList .pcBlock .btnFlex .number1, .shipsList .pcBlock .btnFlex .number2 {
+    width: calc(50% - 10px);
+  }
+  .shipsList .pcBlock .btnFlex .number1 .icon_wrap, .shipsList .pcBlock .btnFlex .number2 .icon_wrap {
+    margin: auto;
+  }
+  .shipsList .pcBlock .btnFlex .number4, .shipsList .pcBlock .btnFlex .number3 {
+    margin-top: 32px;
+    width: 100%;
+  }
+  .shipsList .pcBlock .btnFlex .number4 button, .shipsList .pcBlock .btnFlex .number4 .text_wrap, .shipsList .pcBlock .btnFlex .number3 button, .shipsList .pcBlock .btnFlex .number3 .text_wrap {
+    width: 100%;
+    margin: auto;
+    max-width: 200px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-size: 1.4rem;
+  }
+}
 @media (max-width: 768px) {
   .customerList .flexWrap .pcBlock {
     display: none;

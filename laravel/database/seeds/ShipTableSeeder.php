@@ -14,17 +14,17 @@ class ShipTableSeeder extends Seeder
         DB::table('ships')->insert([
             [
             'id'  => 1,
-            'orders_ship_is_finished'  => 0,
+            'orders_is_ship_finished'  => 0,
             'ships_is_other_name'  => '',
             ],
             [
             'id'  => 2,
-            'orders_ship_is_finished'  => 0,
+            'orders_is_ship_finished'  => 0,
             'ships_is_other_name'  => '田中太郎',
             ],
             [
             'id'  => 3,
-            'orders_ship_is_finished'  => 0,
+            'orders_is_ship_finished'  => 0,
             'ships_is_other_name'  => 0,
             ],
 

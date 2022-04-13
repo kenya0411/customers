@@ -48,7 +48,8 @@ public function add_index(Request $request)
 		return $data;
 }
 
-
+/*---------------------------------------------------------------------------------------------------- */
+//注文一覧
 
 /*--------------------------------------------------- */
 /* 一覧画面のajax
@@ -101,7 +102,8 @@ public function ajax_search(Request $request) {
 
 
 	//注文情報
-	$orders = Order::query();
+	// $orders = Order::query();
+	$orders = Order::orderBy('created_at', 'desc');//購入順
 	$orders=$orders->where('is_delete','=',0);//論理削除
 	$orders=$orders->where('orders_id','like','%'.$request->orders_id.'%');//商品ID
 	
@@ -185,7 +187,8 @@ public function ajax_search(Request $request) {
 
 }
 
-
+/*---------------------------------------------------------------------------------------------------- */
+//詳細画面
 
 /*--------------------------------------------------- */
 /* 詳細一覧
@@ -385,8 +388,8 @@ public function ajax_modal_fortunes(Request $request) {
 }
 
 
-
-
+/*---------------------------------------------------------------------------------------------------- */
+//新規注文
 
 /*--------------------------------------------------- */
 /* 新規注文画面

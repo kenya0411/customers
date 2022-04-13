@@ -32,8 +32,6 @@ const hoge = {
           this.customers = response.data.customers.data,
           this.current_page = all.current_page,
           this.last_page = all.last_page,
-          console.log(response.data ),
-          console.log(all ),
           
           ])
          .catch(error => console.log(error))

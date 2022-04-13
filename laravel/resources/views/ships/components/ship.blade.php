@@ -1,6 +1,6 @@
 
 
-<div class="reserveList listSection" >
+<div class="shipsList listSection" >
 {{-- <div class="modalWindow" v-bind:class=' {show:isActive}'>
     
 <div class="overlay" v-on:click.self="modal_close()">
@@ -83,7 +83,7 @@
         </div>
         <div class="flexBlock">
             <span class="title">[顧客情報]</span>
-                          <a >
+                <a v-bind:href='`/customers/detail/?id=${order.customers_id}`'>
                     
                 <ul>
                     <li v-if="order.customers_id !== 0">
@@ -114,12 +114,24 @@
 
     </div>
     <div class="flex5 no2">
+          <div class="flexBlock">
+
+            <span class="title">[鑑定書の名前]</span>
+            <input type="text"
+            v-model="ships[orders_id[index].index].ships_is_other_name"
+            v-on:keyup.enter.v.backspace="listUpdate(order.id,index)" 
+            v-on:change="listUpdate(order.id,index)"
+            v-on:mouseleave="listUpdate(order.id,index)"
+            >
+        </div>
+              <div class="flexBlock">
+
             <span class="title">[住所]</span>
-            <div class="textarea">
-            </div>
-            <textarea id="" readonly 
+
+            <textarea id="address_block" readonly 
              v-model="customers[order.customers_id - 1].customers_address"
             ></textarea>
+        </div>
 
     </div>
     <div class="flex5 no3">
@@ -133,84 +145,66 @@
           <div class="flexBlock">
             <span class="title">[追加の商品1]</span>
             <input type="text" 
-            v-model="ships[order.id - 1].customers_address">
-            <select name="users_id" id="" 
-            v-model="orders[orders_id[index].index].users_id"
-            v-on:change="listUpdate('users_id',order.id,index)">
-      <option value="0" >選択してください</option>
+            v-model="ships[orders_id[index].index].ships_add_product1"
+            v-on:keyup.enter.v.backspace="listUpdate(order.id,index)" 
+            v-on:change="listUpdate(order.id,index)"
+            v-on:mouseleave="listUpdate(order.id,index)"
+            >
 
-                <option v-for="user in users" v-bind:value="user.id">@{{ user.nickname }}</option>
-            </select>
         </div>
 
           <div class="flexBlock">
             <span class="title">[追加の商品2]</span>
-            <select name="users_id" id="" 
-            v-model="orders[orders_id[index].index].users_id"
-            v-on:change="listUpdate('users_id',order.id,index)">
-      <option value="0" >選択してください</option>
-
-                <option v-for="user in users" v-bind:value="user.id">@{{ user.nickname }}</option>
-            </select>
+            <input type="text" 
+            v-model="ships[orders_id[index].index].ships_add_product2"
+            v-on:keyup.enter.v.backspace="listUpdate(order.id,index)" 
+            v-on:change="listUpdate(order.id,index)"
+            v-on:mouseleave="listUpdate(order.id,index)"
+            >
+        </div>
+          <div class="flexBlock">
+            <span class="title">[追加の商品3]</span>
+            <input type="text" 
+            v-model="ships[orders_id[index].index].ships_add_product3"
+            v-on:keyup.enter.v.backspace="listUpdate(order.id,index)" 
+            v-on:change="listUpdate(order.id,index)"
+            v-on:mouseleave="listUpdate(order.id,index)"
+            >
         </div>
          <div class="flexBlock">
             <span class="title">[発送時の備考]</span>
-            <textarea class="orders_notice" id="" v-model="orders[orders_id[index].index].orders_notice" 
-            v-on:keyup.enter.v.backspace="listUpdate('orders_notice',order.id,index)" 
-            v-on:change="listUpdate('orders_notice',order.id,index)"
-            v-on:mouseleave="listUpdate('orders_notice',order.id,index)"
+            <textarea class="ships_notice" id="" v-model="ships[orders_id[index].index].ships_notice" 
+            v-on:keyup.enter.v.backspace="listUpdate(order.id,index)" 
+            v-on:change="listUpdate(order.id,index)"
+            v-on:mouseleave="listUpdate(order.id,index)"
             >
         </textarea>
         </div>
-                 <div class="flexBlock">
-            <span class="title">[発送]</span>
 
-            <select name="orders_is_ship_finished" id="" 
-            v-model="orders[orders_id[index].index].orders_is_ship_finished"
-            v-on:change="listUpdate('orders_is_ship_finished',order.id,index)"
-            >
-                <option value="0"></option>
-                <option value="2">発送不要</option>
-            </select>
-        </div>
 
     </div> 
 
     <div class="flex5 no5">
         <div class="btnFlex">
-            <div class="btnFlex4 number1">
-                <div class="icon_wrap" v-on:click="copyToClipboard(order.id)">
-                    <i class="fa-solid fa-clipboard"></i>
-                </div>
-            </div>
-            <div class="btnFlex4 number2">
-                <div class="icon_wrap" v-on:click="modal_open(order.id)">
 
-                <i class="fa-solid fa-circle-check"></i>
-            </div>
-            </div>
 
             <div class="btnFlex4 number3">
                 <a  v-bind:href='`/orders/detail/?id=${order.id}`' class="text_wrap">
 
                     編集ページ<i class="fa-solid fa-pencil"></i></a>
             </div>
-            <div class="btnFlex4 number4">
-<div v-if="orders[orders_id[index].index].orders_is_ship_finished == '0'">
+            <div class="btnFlex4 number4" v-if="ships[orders_id[index].index].orders_is_ship_shipped == 0">
+
+                    <button 
+                    v-on:click="ship_shipped(order.id)"
+                    >発送完了<i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+            <div class="btnFlex4 number5"  v-if="ships[orders_id[index].index].orders_is_ship_shipped == '1'">
     
 
                     <button 
-                    v-on:click="reserve_ship(order.id)"
-                    >発送予約<i class="fa-solid fa-paper-plane"></i></button>
-</div>
-<div v-if="orders[orders_id[index].index].orders_is_ship_finished == '2'">
-    
-
-                    <button 
-                    v-on:click="reserve_ship(order.id)"
-                    >鑑定完了(発送無し)</button>
-</div>
-
+                    v-on:click="ship_finished(order.id)"
+                    >発送報告完了<i class="fa-solid fa-bullhorn"></i></button>
             </div>
 
         </div>

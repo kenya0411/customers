@@ -73,20 +73,17 @@ return ["customers"=>$customers];
  public function ajax_search(Request $request) {
 
 
-
-    $customers = Customer::query();
+    //更新が新しい順にする
+    $customers = Customer::orderBy('updated_at', 'desc');
     $customers=$customers->where('is_delete','=',0);//論理削除
     //ニックネームか本名をor検索
     $customers=$customers->where('customers_name','like','%'.$request->customers_name.'%')
     ->orWhere('customers_nickname','like','%'.$request->customers_name.'%');
 
     $customers=$customers->paginate(100);
-    $data=$customers->sortBy('created_at')->values()->toArray();
-    // $customers=$customers->get();
 
     return [
         "customers"=>$customers,
-        "data"=>$data,
     ];
 
     }
