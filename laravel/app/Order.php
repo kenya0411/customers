@@ -15,6 +15,11 @@ class Order extends Model
       'products_options_id',
       'persons_id',
       'orders_price',
+      'orders_is_reserve_finished',
+      'orders_is_ship_finished',
+      'users_id',
+      'updated_at',
+      'created_at',
       'orders_notice'
   ];
 }

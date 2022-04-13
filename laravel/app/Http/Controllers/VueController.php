@@ -52,10 +52,13 @@ $customers = Customer::all();
 public function csv_import(Request $request) {
 
 
-$fortunes = (new FastExcel)->import('csv/import/6.csv', function ($line) {
+for ($i=1; $i <=12 ; $i++) { 
+$csv = 'csv/import/sale - 2021-'.$i.'.csv';
+
+
+$fortunes = (new FastExcel)->import($csv, function ($line) {
     return Fortune::create([
         'id' => $line['id'],
-
         'orders_id' => $line['orders_id'],
         'fortunes_worry' => $line['fortunes_worry'],
         'fortunes_answer' => $line['fortunes_answer'],
@@ -67,7 +70,7 @@ $fortunes = (new FastExcel)->import('csv/import/6.csv', function ($line) {
 
 
 
-$orders = (new FastExcel)->import('csv/import/6.csv', function ($line) {
+$orders = (new FastExcel)->import($csv, function ($line) {
     return Order::create([
         'id' => $line['id'],
         'orders_id' => $line['orders_id'],
@@ -84,16 +87,8 @@ $orders = (new FastExcel)->import('csv/import/6.csv', function ($line) {
     ]);
 });
 
-$customers = (new FastExcel)->import('csv/import/customers.csv', function ($line) {
-    return Customer::create([
-        'customers_id' => $line['customers_id'],
-        'customers_nickname' => trim($line['customers_nickname'], "\r"),
-        'customers_name' => trim($line['customers_name']),
-        'customers_address' => $line['customers_address'],
-        'persons_id' => $line['persons_id'],
-        'persons_id' => $line['persons_id'],
-    ]);
-});
+
+}
 
 
 
