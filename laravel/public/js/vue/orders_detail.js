@@ -60,6 +60,8 @@
         users_id: this.orders.users_id,
         orders_notice: this.orders.orders_notice,
         customers_address: this.customers.customers_address,
+        orders_is_reserve_finished: this.orders.orders_is_reserve_finished,
+        orders_is_ship_finished: this.orders.orders_is_ship_finished,
       })
       .then(response => [
           location.reload(),

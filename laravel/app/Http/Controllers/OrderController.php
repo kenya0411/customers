@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Customer;
 use App\Order;
+use App\Ship;
 use App\Fortune;
 use App\Products;
 use App\products_options;
@@ -312,6 +313,8 @@ public function ajax_detail_update(Request $request) {
 	'orders_price' => $request->orders_price,
 	'users_id' => $request->users_id,
 	'orders_notice' => $request->orders_notice,
+	'orders_is_reserve_finished' => $request->orders_is_reserve_finished,
+	'orders_is_ship_finished' => $request->orders_is_ship_finished,
 	'updated_at' => date( "Y-m-d H:i:s" , time() ),
 	];
 	DB::update('update orders set 
@@ -322,6 +325,8 @@ public function ajax_detail_update(Request $request) {
 	orders_price=:orders_price,
 	users_id=:users_id,
 	orders_notice=:orders_notice,
+	orders_is_reserve_finished=:orders_is_reserve_finished,
+	orders_is_ship_finished=:orders_is_ship_finished,
 	updated_at=:updated_at
 	where id=:id'
 	, $param);
@@ -357,6 +362,35 @@ public function ajax_detail_update(Request $request) {
 	updated_at=:updated_at
 	where id=:id'
 	, $param);
+
+
+
+	//DB【ships】の修正
+	// $param = ['id' => $request->id,
+	// 'orders_is_reserve_finished' => $request->orders_is_reserve_finished,
+	// 'orders_is_ship_finished' => $request->orders_is_ship_finished,
+	// 'updated_at' => date( "Y-m-d H:i:s" , time() ),
+
+	// ];
+	// DB::update('update ships set 
+	// orders_is_reserve_finished=:orders_is_reserve_finished,
+	// orders_is_ship_finished=:orders_is_ship_finished,
+	// updated_at=:updated_at
+	// where id=:id'
+	// , $param);
+
+
+$data = [
+  'id' => $request->id,
+   'orders_is_ship_finished' => $request->orders_is_ship_finished,
+   'updated_at' => date( "Y-m-d H:i:s" , time() )
+
+];
+
+ship::upsert($data,['id'], [ 'orders_is_ship_finished', 'updated_at']);
+
+
+
 
 }
 

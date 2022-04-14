@@ -93,11 +93,22 @@
         <option v-for="user in users" v-bind:value="user.id">@{{ user.nickname }}</option>
     </select>
 </dd>
-<dt>鑑定・発送</dt>
+<dt>鑑定</dt>
 <dd>
-    <span v-if="orders.orders_is_reserve_finished == '1'">鑑定済み</span>
-<span v-if="orders.orders_is_ship_finished == '1'">発送済み</span>
-
+    <select name="" id="" v-model="orders.orders_is_reserve_finished">
+        <option value="0"></option>
+        <option value="1">鑑定済み</option>
+    </select>
+{{--     <span v-if="orders.orders_is_reserve_finished == '1'">鑑定済み</span>
+<span v-if="orders.orders_is_ship_finished == '1'">発送済み</span> --}}
+</dd>
+<dt>発送</dt>
+<dd>
+        <select name="" id="" v-model="orders.orders_is_ship_finished">
+        <option value="0"></option>
+        <option value="1">発送済み</option>
+        <option value="2">発送不要</option>
+    </select>
 </dd>
 <dt>備考</dt>
 <dd>

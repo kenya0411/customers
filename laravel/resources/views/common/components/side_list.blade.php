@@ -5,7 +5,8 @@
     <div class="menu_contents">
       <ul>
         <li><a href="/orders">注文一覧</a></li>
-        <li><a href="/reserves">予約一覧</a></li>
+        <li><a href="/reserves">鑑定予約一覧</a></li>
+        <li><a href="/ships">発送予約一覧</a></li>
         <li><a href="/orders/add">新規注文</a></li>
       </ul>
     </div>

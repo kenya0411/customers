@@ -14,6 +14,7 @@ class CreateShipsTable extends Migration
     public function up()
     {
         Schema::create('ships', function (Blueprint $table) {
+            $table->unique(['id']);
             $table->integer('id');
             $table->integer('orders_is_ship_finished')->nullable();
             $table->integer('orders_is_ship_shipped')->default(0);
