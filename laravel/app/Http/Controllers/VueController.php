@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Products;
+use App\Product;
 use App\Person;
 use App\Order;
 use App\Customer;
@@ -116,6 +116,26 @@ $customers = (new FastExcel)->import('csv/import/customers.csv', function ($line
 
 }
 
+
+
+public function csv_import_products(Request $request) {
+
+
+
+$products = (new FastExcel)->import('csv/import/products.csv', function ($line) {
+    return Product::create([
+        'products_id' => $line['products_id'],
+        'products_name' => $line['products_name'],
+        'products_price' => $line['products_price'],
+        'products_method' => $line['products_method'],
+        'products_detail' => $line['products_detail'],
+        'persons_id' => $line['persons_id'],
+    ]);
+});
+
+
+
+}
 
 
 
