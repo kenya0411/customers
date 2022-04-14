@@ -15,7 +15,7 @@ require('./bootstrap');
 /*--------------------------------------------------- */
 /* カウントダウン
 /*--------------------------------------------------- */
-import vueCounter from "./vueCounter";
+// import vueCounter from "./vueCounter";
 import { createApp } from "vue";
 
 // createApp({
@@ -33,34 +33,34 @@ import { createApp } from "vue";
 /*--------------------------------------------------- */
 /* test
 /*--------------------------------------------------- */
-// import ExampleComponent from './components/ExampleComponent.vue'
+// import Price from './components/price.vue'
 
 // createApp({
 //     components:{
-//         ExampleComponent
+//         Price
 //     }
-// }).mount('#test')
+// }).mount('#price')
 
 
-import User from './components/User.vue'
+// import User from './components/User.vue'
 
 
-createApp({
-    components:{
-        User
-    }
-}).mount('#user')
+// createApp({
+//     components:{
+//         User
+//     }
+// }).mount('#user')
 
 
-import MyModal from './components/MyModal.vue'
-import index from './components/index.vue'
+// import MyModal from './components/MyModal.vue'
+// import index from './components/index.vue'
 
 
-createApp({
-    components:{
-        MyModal
-    }
-}).mount('main')
+// createApp({
+//     components:{
+//         MyModal
+//     }
+// }).mount('main')
 
 
 /**

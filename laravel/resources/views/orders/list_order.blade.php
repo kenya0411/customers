@@ -7,6 +7,8 @@
 @section('content')
 
 @include('orders.components.search')
+@include('orders.components.price')
+
 @include('common.components.pagination')
 
 @include('orders.components.order')

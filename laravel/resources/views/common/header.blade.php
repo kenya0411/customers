@@ -59,3 +59,4 @@ $d = '?'.now();
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" async=""></script> --}}
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+{{-- <script src="{{ mix('js/app.js') }}"></script> --}}

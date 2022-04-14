@@ -106,6 +106,7 @@ Route::get('orders/ajax', 'OrderController@ajax_index');
 Route::post('orders/ajax_search', 'OrderController@ajax_search');
 
 Route::post('orders/ajax_modal_fortunes', 'OrderController@ajax_modal_fortunes');//鑑定結果の表示用（モーダルウインドウ）
+Route::post('orders/ajax_get_total_price', 'OrderController@ajax_get_total_price');//月の合計料金を出力
 
 
 //注文詳細

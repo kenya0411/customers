@@ -22,7 +22,7 @@ class UserTableSeeder extends Seeder
 
             [
                 'name' => 'miyakawa',
-                'nickname' => '管理者',
+                'nickname' => '宮川',
                 'password' => Hash::make('test'),
                 'permissions_id' => 2,
             ],
@@ -33,16 +33,16 @@ class UserTableSeeder extends Seeder
                 'permissions_id' => 2,
             ],
            [
-                'name' => 'yamashita',
-                'nickname' => '山下',
+                'name' => 'etc',
+                'nickname' => 'その他',
                 'password' => Hash::make('test'),
                 'permissions_id' => 3,
             ],
                        [
-                'name' => 'makino',
-                'nickname' => '牧野',
+                'name' => 'yamashita',
+                'nickname' => '山下',
                 'password' => Hash::make('test'),
-                'permissions_id' => 4,
+                'permissions_id' => 3,
             ],
         ]);
     }

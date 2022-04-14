@@ -22,6 +22,7 @@ const hoge = {
 			last_page: "",//ページネーション用
 			isActive: false,//モーダル用
 			modal_fortunes: "",//モーダル用
+			total_price: 0,//月の合計料金
 
 		}
 	},
@@ -29,7 +30,26 @@ const hoge = {
 		moment: function (date) {
 			return moment(date).format("MM月DD日")
 		},
-			//モーダルウインドウ（名前チェック用）
+			/*--------------------------------------------------- */
+			/* 月の合計料金を出力
+			/*--------------------------------------------------- */
+			get_total_price() {
+				let url = '/orders/ajax_get_total_price';
+				axios.post(url, {
+					year: this.search_year,
+					month: this.search_month,
+				})
+				.then(response => [
+					this.total_price = response.data.total_price,
+					console.log(response.data.total_price),
+					
+					])
+				.catch(error => console.log(error))
+			},
+			/*--------------------------------------------------- */
+			/* //モーダルウインドウ（名前チェック用）
+			/*--------------------------------------------------- */
+			
 			modal_open(id) {
 				this.isActive = true
 				let url = '/orders/ajax_modal_fortunes';
@@ -70,7 +90,7 @@ const hoge = {
 			
 			let url = '/orders/ajax_search/';
 			// let url = '/orders/ajax_search/?persons_id=' + this.search_persons+'&year='+this.search_year+'&month='+this.search_month+'&orders_id='+this.search_orders_id+'&page='+this.current_page+'&customers_name='+this.search_customers_name;
-			 axios.post(url, {
+			axios.post(url, {
 				persons_id: this.search_persons,
 				year: this.search_year,
 				month: this.search_month,
@@ -95,32 +115,30 @@ const hoge = {
 	},
 	//ロード時にデータベースから情報を取得
 	created:function(){
-	 this.search_page();
-	 this.load_page();
+	this.search_page();
+	this.load_page();
+		this.get_total_price();
 
  },
  computed:{
-				 get_search_data() {//監視用データをまとめる
-					 return [
-					 this.search_persons,
-					 this.search_orders_id,
-					 this.search_year,
-					 this.search_month,
-					 this.search_customers_name,
-					 this.current_page,
-					 ];
-				 },
+	get_search_data() {//監視用データをまとめる
+		return [
+		this.search_persons,
+		this.search_orders_id,
+		this.search_year,
+		this.search_month,
+		this.search_customers_name,
+		this.current_page,
+		];
+	},
 
 
-			 },
-			 watch: {
-		get_search_data(val){//監視用
-		 this.search_page();
-
-
-	 },
-
-
+ },
+watch: {
+	get_search_data(val){//監視用
+	this.search_page();
+	this.get_total_price();
+	},
  },
 
 }

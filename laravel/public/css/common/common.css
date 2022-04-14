@@ -1181,6 +1181,9 @@
     width: 100%;
   }
 }
+/*--------------------------------------------------- */
+/* 各種ボタン系 */
+/*--------------------------------------------------- */
 main .commonBtnFlex {
   display: flex;
 }
@@ -1411,6 +1414,9 @@ main .addbtn a, main .commonBtn a {
   padding: 8px 16px;
 }
 
+/*--------------------------------------------------- */
+/* 検索ブロック */
+/*--------------------------------------------------- */
 .searchBlock {
   margin-top: 20px;
 }
@@ -1444,32 +1450,19 @@ main .addbtn a, main .commonBtn a {
     margin-bottom: 8px;
   }
 }
-.cloneBlock {
-  margin-top: 50px;
-  border-top: 1px solid #aaa;
-  padding-top: 50px;
-}
-.cloneBlock form {
-  justify-content: flex-end;
-  display: flex;
-}
-.cloneBlock form .flex3 {
-  margin-right: 8px;
-  display: flex;
-  align-items: center;
-}
-.cloneBlock form input {
-  background-color: #fff;
-  max-width: 70px;
-}
-
+/*--------------------------------------------------- */
+/* ページネーション */
+/*--------------------------------------------------- */
 .pagination {
   margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
 }
 .pagination li {
   display: flex;
   align-items: center;
   padding: 8px;
+  margin-bottom: 4px;
   height: 30px;
   width: 30px;
   justify-content: center;
@@ -1492,6 +1485,26 @@ main .addbtn a, main .commonBtn a {
 .pagination .is_active {
   background-color: #000;
   color: #fff;
+}
+
+/*--------------------------------------------------- */
+/* 総合料金 */
+/*--------------------------------------------------- */
+.price_block {
+  margin-top: 20px;
+}
+.price_block .inner {
+  border: 1px dotted #aaa;
+  padding: 12px;
+  line-height: 1em;
+  display: inline-block;
+}
+.price_block .flex3 {
+  display: flex;
+}
+.price_block .flex3:nth-last-of-type(1) {
+  margin-left: 0.5em;
+  font-weight: 700;
 }
 
 .pointer {

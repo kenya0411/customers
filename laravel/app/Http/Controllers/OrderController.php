@@ -187,6 +187,49 @@ public function ajax_search(Request $request) {
 
 }
 
+
+
+
+/*--------------------------------------------------- */
+/* 月の合計料金を出力
+/*--------------------------------------------------- */
+
+public function ajax_get_total_price(Request $request) {
+	$orders = Order::query();
+	$orders=$orders->where('is_delete','=',0);//論理削除
+	// 年で絞り込み
+	if(!empty($request->year)){
+			$year = $request->year;
+			$orders->when($year, function($orders, $year) { 
+					return $orders->whereYear('created_at','=',$year);
+			}) ;
+	}
+
+	// 月で絞り込み
+	if(!empty($request->month)){
+			$month = $request->month;
+			$orders->when($month, function($orders, $month) { 
+					return $orders->whereMonth('created_at','=',$month);
+			}) ;
+	}
+	$orders=$orders->get();
+
+$total_price = 0;
+foreach ($orders as $key => $value) {
+	$total_price = $total_price + $value['orders_price'];
+};
+$total_price = number_format($total_price);
+
+		return [
+			"orders"=>$orders,
+			"total_price"=>$total_price,
+		];
+}
+
+
+
+
+
 /*---------------------------------------------------------------------------------------------------- */
 //詳細画面
 
@@ -247,6 +290,13 @@ public function ajax_detail_index(Request $request) {
 	"persons_selected"=>$persons_selected
 	];
 }
+
+
+
+
+
+
+
 
 
 /*--------------------------------------------------- */
