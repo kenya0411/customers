@@ -184,6 +184,8 @@ public function ajax_ship_shipped(Request $request)
         where id=:id'
         , $param); 
 
+
+
 }
 
 

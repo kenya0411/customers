@@ -56,10 +56,10 @@
 				let url = '/ships/ajax';
 				axios.get(url)
 				.then(response => [
+					this.orders = response.data.orders,
 					this.persons = response.data.persons,
 					this.products = response.data.products,
 					this.products_options = response.data.products_options,
-					this.orders = response.data.orders,
 					this.customers = response.data.customers,
 					this.fortunes = response.data.fortunes,
 					this.ships = response.data.ships,
