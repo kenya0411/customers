@@ -21,6 +21,7 @@ const hoge = {
 			customers_nickname: "",//v-model用
 			customers_name: "",//v-model用
 			orders_notice: "",//v-model用
+			orders_is_ship_finished: 0,//v-model用
 		}
 },
 methods: { 
@@ -62,6 +63,7 @@ submit_update() {
 			fortunes_worry: this.fortunes_worry,
 			orders_notice: this.orders_notice,
 			customers_address: this.customers_address,
+			orders_is_ship_finished: this.orders_is_ship_finished,
 		})
 		.then(response => [
 			// location.reload(),
@@ -175,7 +177,19 @@ async get_data_repeater() {
 	.catch(error => console.log(error))
 
 },
+/*--------------------------------------------------- */
+/* 鑑定士によって自動で発送不要にする
+/*--------------------------------------------------- */
+async ships_require_or_not() {
+	let url = '/orders/add/ajax_get_data_repeater';
+	
+	if(this.persons_id ==2){
+		this.orders_is_ship_finished = 2;
+	}else{
+		this.orders_is_ship_finished = 0;
 
+	}
+},
 
 },
 /*--------------------------------------------------- */
@@ -199,7 +213,12 @@ computed:{
 				this.customers_nickname,
 				];
 			},
-
+			//鑑定士の確認
+			get_persons_data() {
+				return [
+				this.persons_id,
+				];
+			},
 		},
 		watch: {
 			get_products_data(){//監視用
@@ -209,6 +228,11 @@ computed:{
 			get_customers_data(){//監視用
 
 				this.search_customers();
+
+			},
+			get_persons_data(){//監視用
+
+				this.ships_require_or_not();
 
 			},
 

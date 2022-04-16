@@ -162,8 +162,9 @@
          
 
      <div class="tabInvi">
-{{-- <span v-if="order.orders_is_reserve_finished == '1'">鑑定済み</span> --}}
-{{-- <span v-if="order.orders_is_ship_finished == '1'">発送済み</span> --}}
+<span v-if="order.orders_is_reserve_finished == '1'">鑑定済み</span><br>
+<span v-if="order.orders_is_ship_finished == '1'">発送済み</span>
+<span v-if="order.orders_is_ship_finished == '2'">発送不要</span>
 
 </div>
             <div>

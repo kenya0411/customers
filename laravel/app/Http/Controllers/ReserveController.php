@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Users;
 use App\Product;
+use App\Ship;
 
 // use App\Http\Requests\HelloRequest;バリデーション用
 use Illuminate\Http\Request;
@@ -242,7 +243,12 @@ public function ajax_reserve_ship(Request $request)
 				where id=:id'
 				, $param); 
 
-
+		//注文情報を追加
+		$ships = new Ship();
+		$ships->create([
+			'id' => $request->id,
+			'orders_is_ship_finished' => 0,
+		]);
 
 }
 

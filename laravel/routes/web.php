@@ -143,6 +143,7 @@ Route::post('reserves/ajax_update', 'ReserveController@ajax_update');
 
 Route::get('reserves/ajax_clipboard_copy', 'ReserveController@ajax_clipboard_copy');//クリップボードコピー用
 Route::get('reserves/ajax_reserve_ship', 'ReserveController@ajax_reserve_ship');//発送確認用
+Route::post('reserves/ajax_reserve_ship', 'ReserveController@ajax_reserve_ship');//発送確認用
 Route::get('reserves/ajax_name_check', 'ReserveController@ajax_name_check');//名前確認用
 
 
@@ -173,6 +174,7 @@ Route::post('ships', 'ShipController@post');
 
 Route::get('ships/ajax', 'ShipController@ajax_index');
 Route::post('ships/ajax_update', 'ShipController@ajax_update');
+Route::post('ships/ajax_search', 'ShipController@ajax_search');
 
 Route::post('ships/ajax_ship_shipped', 'ShipController@ajax_ship_shipped');//発送確認用
 Route::post('ships/ajax_ship_finished', 'ShipController@ajax_ship_finished');//発送報告確認用

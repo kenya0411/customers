@@ -338,7 +338,6 @@ public function ajax_detail_update(Request $request) {
 	'customers_nickname' => $request->customers_nickname,
 	'customers_address' => $request->customers_address,
 	'updated_at' => date( "Y-m-d H:i:s" , time() ),
-
 	];
 	DB::update('update customers set 
 	customers_name=:customers_name,
@@ -478,7 +477,7 @@ public function ajax_modal_fortunes(Request $request) {
 /*--------------------------------------------------- */
 /* 新規注文画面
 /*--------------------------------------------------- */
-		//order以外の情報を取得
+//order以外の情報を取得
 public function ajax_add_index(Request $request) {
 
 	$persons = DB::table('persons')
@@ -586,6 +585,7 @@ public function ajax_add_update(Request $request) {
 		'orders_price' => !empty($request->orders_price) ? $request->orders_price : 0,
 		'orders_notice' => !empty($request->orders_notice) ? $request->orders_notice : null,
 		'persons_id' => $request->persons_id,
+		'orders_is_ship_finished' => $request->orders_is_ship_finished,
     ]);
     //注文情報(orders)のIDと悩み(fortune)のIDを同じにする。
     $id = Order::latest()->first();

@@ -16,7 +16,7 @@ class CreateShipsTable extends Migration
         Schema::create('ships', function (Blueprint $table) {
             $table->unique(['id']);
             $table->integer('id');
-            $table->integer('orders_is_ship_finished')->nullable();
+            $table->integer('orders_is_ship_finished')->default(null);
             $table->integer('orders_is_ship_shipped')->default(0);
             $table->string('ships_is_other_name')->nullable();
             $table->text('ships_notice')->nullable();

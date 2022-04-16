@@ -13,6 +13,7 @@
 				fortunes: '',
 				orders_id: '',
 				ships: '',
+				search_persons: 0,
 			}
 		},
 		methods: {	
@@ -64,27 +65,46 @@
 					this.fortunes = response.data.fortunes,
 					this.ships = response.data.ships,
 					this.orders_id = response.data.orders_id,
-
+					
 					])
 				.catch(error => console.log(error))
 
 			},
-
-			//データベースに上書き
-			listUpdate(id,index) {
-				console.log('test')
+			/*--------------------------------------------------- */
+			/* //検索用の情報をデータベースから取得
+			/*--------------------------------------------------- */		
+			async search_page() {
 				
-				let url = '/ships/ajax_update/';
-
-				axios.post(url, {
-					id: id,
-					ships_is_other_name: this.ships[index].ships_is_other_name,
-					ships_notice: this.ships[index].ships_notice,
-					ships_add_product1: this.ships[index].ships_add_product1,
-					ships_add_product2: this.ships[index].ships_add_product2,
-					ships_add_product3: this.ships[index].ships_add_product3,
+				let url = '/ships/ajax_search/';
+				if(this.search_persons !== 0){
+					axios.post(url, {
+					persons_id: this.search_persons,
 				})
 				.then(response => [
+					this.orders_id = response.data.orders_id,
+					this.orders = response.data.orders,
+
+					])
+				.catch(error => console.log(error))				
+				}
+
+
+			},
+			//データベースに上書き
+			listUpdate(id) {
+				
+				let url = '/ships/ajax_update/';
+				
+				axios.post(url, {
+					id: id,
+					ships_is_other_name: this.ships[id].ships_is_other_name,
+					ships_notice: this.ships[id].ships_notice,
+					ships_add_product1: this.ships[id].ships_add_product1,
+					ships_add_product2: this.ships[id].ships_add_product2,
+					ships_add_product3: this.ships[id].ships_add_product3,
+				})
+				.then(response => [
+
 					])
 				.catch(error => console.log(error)) 
 			}
@@ -96,16 +116,22 @@
 
 	},
 	computed:{
-		get_update_data() {//監視用データをまとめる
+		// get_update_data() {//監視用データをまとめる
+		// 	return [
+		// 	this.fortunes,
+		// ];
+		// },
+		get_search_persons() {//監視用データをまとめる
 			return [
-			this.fortunes,
+			this.search_persons,
 		];
 		},
 
-
 	},
 	watch: {
-		get_update_data(val){//監視用
+		get_search_persons(val){//監視用
+		this.search_page();
+
 	},
 
 

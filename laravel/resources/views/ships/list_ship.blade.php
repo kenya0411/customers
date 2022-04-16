@@ -5,8 +5,10 @@
 
 
 @section('content')
+@include('ships.components.search')
 
 @include('ships.components.ship')
+{{-- @include('ships.components.ship_outsource') --}}
 
 
 @endsection

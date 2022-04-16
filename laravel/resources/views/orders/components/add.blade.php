@@ -92,6 +92,14 @@
 		</div>
 	</div>
 </dd>
+<dt>発送の要否</dt>
+<dd>
+<select name="" id="" v-model="orders_is_ship_finished">
+	<option value="0">必須</option>
+	<option value="2">不要</option>
+
+</select>
+</dd>
 <dt>住所</dt>
 <dd>
 	<textarea id=""  class="textarea2" autocomplete="off"

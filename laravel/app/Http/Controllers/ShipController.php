@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Users;
+use App\Ship;
 
 // use App\Http\Requests\HelloRequest;バリデーション用
 use Illuminate\Http\Request;
@@ -81,10 +82,8 @@ public function ajax_index(Request $request) {
         ->get(); 
 
           //注文
-        $ships = DB::table('ships')
-        ->where('is_delete','=',0)//論理削除されてないもの
-        ->where('orders_is_ship_finished','=',0)
-        ->get();     
+        $ships = Ship::query()->get();
+        $ships->prepend(['orders_is_ship_finished'=>1]);//先頭に配列を追加
 
         //順番とIDを取得（vueで値を表示する為に必須）
         $orders_id=[];
@@ -114,6 +113,40 @@ public function ajax_index(Request $request) {
     }
 
 
+/*--------------------------------------------------- */
+/* 一覧画面のajax
+/*--------------------------------------------------- */
+public function ajax_search(Request $request) {
+
+ 
+        //注文
+        $orders = DB::table('orders')
+        ->where('is_delete','=',0)//論理削除されてないもの
+        ->where('orders_is_ship_finished','=',0)
+        ->where('orders_is_reserve_finished','=',1)
+        ->where('persons_id','=',$request->persons_id)
+        ->get(); 
+
+
+        //順番とIDを取得（vueで値を表示する為に必須）
+        $orders_id=[];
+        if(!empty($orders)){
+            foreach ($orders as $key => $value) {
+                $orders_id[] = array(
+                    'index' => $key,
+                    'id' => $value->id,
+                );
+
+            }
+        }
+
+        
+
+        return [
+            "orders"=>$orders,
+            "orders_id"=>$orders_id,
+        ];
+    }
 
 
 
@@ -140,7 +173,6 @@ public function ajax_index(Request $request) {
         // }
 
         //備考、外注、発送の上書き
-        if(!empty($request->ships_notice)){
             $param2 = [
                 'id' => $request->id,
                 'ships_is_other_name' => !empty($request->ships_is_other_name) ? $request->ships_is_other_name : null,
@@ -157,13 +189,13 @@ public function ajax_index(Request $request) {
                 ships_add_product3=:ships_add_product3
                 where id=:id'
                 , $param2); 
-        }
 
+        $ships = DB::table('ships')
+        ->where('is_delete','=',0)//論理削除されてないもの
+        ->where('orders_is_ship_finished','=',0)
+        ->get();   
 
-        // $fortunes = DB::table('fortunes')->get();   
-        // $test = $request->fortunes_worry;
-
-        // return ["fortunes"=>$fortunes,"test"=>$test];
+        return ["ships"=>$ships];
 
     }
 

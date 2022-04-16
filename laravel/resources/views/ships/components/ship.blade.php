@@ -1,41 +1,20 @@
 
 
 <div class="shipsList listSection" >
-{{-- <div class="modalWindow" v-bind:class=' {show:isActive}'>
-    
-<div class="overlay" v-on:click.self="modal_close()">
-    <div class="inner">
-        <div class="title">
-        ■名前確認用
-            
-        </div>
-        <p>名前にミスがないかご確認ください。</p><div class="notice"><span>※</span>鑑定結果の中から「様」or「さま」の単語と、<br>その手前の文字を抽出しております。</div>       
-        <ul class="show_area">
-            <li v-for="val in name_check">@{{ val}}</li>
-            
-        </ul>
-        <div class="closeBtn" v-on:click.self="modal_close()">閉じる</div>
-    </div>
-</div>
-</div> --}}
+
 
  
 <ul>
     <li class="flexHead flexWrap">
-{{-- <div class="pcBlock">
-    
-
-        <div >予約一覧</div>
- 
-        </div> --}}
 
 
-<div class="mbBlock">
+
+{{-- <div class="mbBlock">
         <div >顧客情報</div>
         <div>鑑定・発送</div>
     
 
-     </div>
+     </div> --}}
     </li>
 
     <li class="flexBodyWrap flexWrap" v-for="(order, index) in orders">
@@ -118,10 +97,10 @@
 
             <span class="title">[鑑定書の名前]</span>
             <input type="text"
-            v-model="ships[orders_id[index].index].ships_is_other_name"
-            v-on:keyup.enter.v.backspace="listUpdate(order.id,index)" 
-            v-on:change="listUpdate(order.id,index)"
-            v-on:mouseleave="listUpdate(order.id,index)"
+            v-model="ships[orders_id[index].id].ships_is_other_name"
+            v-on:keyup.enter.v.backspace="listUpdate(order.id,order.id)" 
+            v-on:change="listUpdate(order.id,order.id)"
+            v-on:mouseleave="listUpdate(order.id,order.id)"
             >
         </div>
               <div class="flexBlock">
@@ -145,10 +124,10 @@
           <div class="flexBlock">
             <span class="title">[追加の商品1]</span>
             <input type="text" 
-            v-model="ships[orders_id[index].index].ships_add_product1"
-            v-on:keyup.enter.v.backspace="listUpdate(order.id,index)" 
-            v-on:change="listUpdate(order.id,index)"
-            v-on:mouseleave="listUpdate(order.id,index)"
+            v-model="ships[orders_id[index].id].ships_add_product1"
+            v-on:keyup.enter.v.backspace="listUpdate(order.id)" 
+            v-on:change="listUpdate(order.id)"
+            v-on:mouseleave="listUpdate(order.id)"
             >
 
         </div>
@@ -156,27 +135,27 @@
           <div class="flexBlock">
             <span class="title">[追加の商品2]</span>
             <input type="text" 
-            v-model="ships[orders_id[index].index].ships_add_product2"
-            v-on:keyup.enter.v.backspace="listUpdate(order.id,index)" 
-            v-on:change="listUpdate(order.id,index)"
-            v-on:mouseleave="listUpdate(order.id,index)"
+            v-model="ships[orders_id[index].id].ships_add_product2"
+            v-on:keyup.enter.v.backspace="listUpdate(order.id)" 
+            v-on:change="listUpdate(order.id)"
+            v-on:mouseleave="listUpdate(order.id)"
             >
         </div>
           <div class="flexBlock">
             <span class="title">[追加の商品3]</span>
             <input type="text" 
-            v-model="ships[orders_id[index].index].ships_add_product3"
-            v-on:keyup.enter.v.backspace="listUpdate(order.id,index)" 
-            v-on:change="listUpdate(order.id,index)"
-            v-on:mouseleave="listUpdate(order.id,index)"
+            v-model="ships[orders_id[index].id].ships_add_product3"
+            v-on:keyup.enter.v.backspace="listUpdate(order.id)" 
+            v-on:change="listUpdate(order.id)"
+            v-on:mouseleave="listUpdate(order.id)"
             >
         </div>
          <div class="flexBlock">
             <span class="title">[発送時の備考]</span>
-            <textarea class="ships_notice" id="" v-model="ships[orders_id[index].index].ships_notice" 
-            v-on:keyup.enter.v.backspace="listUpdate(order.id,index)" 
-            v-on:change="listUpdate(order.id,index)"
-            v-on:mouseleave="listUpdate(order.id,index)"
+            <textarea class="ships_notice" id="" v-model="ships[orders_id[index].id].ships_notice" 
+            v-on:keyup.enter.v.backspace="listUpdate(order.id)" 
+            v-on:change="listUpdate(order.id)"
+            v-on:mouseleave="listUpdate(order.id)"
             >
         </textarea>
         </div>
@@ -193,13 +172,15 @@
 
                     編集ページ<i class="fa-solid fa-pencil"></i></a>
             </div>
-            <div class="btnFlex4 number4" v-if="ships[orders_id[index].index].orders_is_ship_shipped == 0">
+            <div class="btnFlex4 number4" 
+            v-if="ships[orders_id[index].id].orders_is_ship_shipped == 0">
 
                     <button 
                     v-on:click="ship_shipped(order.id)"
                     >発送完了<i class="fa-solid fa-paper-plane"></i></button>
             </div>
-            <div class="btnFlex4 number5"  v-if="ships[orders_id[index].index].orders_is_ship_shipped == '1'">
+            <div class="btnFlex4 number5"  
+            v-if="ships[orders_id[index].id].orders_is_ship_shipped == '1'">
     
 
                     <button 

@@ -43,21 +43,25 @@
 
 			//発送予約
 			reserve_ship(id) {
-				let url = '/reserves/ajax_reserve_ship?id='+id;
+				let url = '/reserves/ajax_reserve_ship';
 				//発送の確認
 				if(!confirm('鑑定完了しましたか？')){
 					/* キャンセルの時の処理 */
 					return false;
 				}else{
-				axios.get(url)
-				.then(response => [
-					location.reload(),
-					
-					])
-				.catch(error => console.log(error))
-				} 
 
-			},
+					axios.post(url, {
+						id: id,
+					})
+					.then(response => [
+					location.reload(),
+						
+						])
+					.catch(error => console.log(error)) 
+	
+
+			}
+		},
 			//クリップボードに保存
 			copyToClipboard(id) {
 				let url = '/reserves/ajax_clipboard_copy?id='+id;
