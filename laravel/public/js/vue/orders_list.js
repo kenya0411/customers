@@ -105,7 +105,7 @@ const hoge = {
 				this.get_id = response.data.get_id,
 				this.current_page = all.current_page,
 				this.last_page = all.last_page,
-				console.log('test')
+				console.log(this.current_page)
 				
 				
 
@@ -138,9 +138,8 @@ const hoge = {
 watch: {
 	get_search_data(val){//監視用
 	this.search_page();
-	// this.get_total_price();
-	console.log(this.search_year)
-	
+	this.get_total_price();
+
 	},
  },
 
