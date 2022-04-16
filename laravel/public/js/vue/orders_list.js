@@ -139,6 +139,8 @@ watch: {
 	get_search_data(val){//監視用
 	this.search_page();
 	this.get_total_price();
+	console.log(this.search_year)
+	
 	},
  },
 
