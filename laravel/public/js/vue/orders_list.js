@@ -18,7 +18,7 @@ const hoge = {
 			search_year: year,//検索用
 			search_month: month,//検索用
 			get_id: '',//検索用
-			current_page:1,//ページネーション用
+			current_page:2,//ページネーション用
 			last_page: "",//ページネーション用
 			isActive: false,//モーダル用
 			modal_fortunes: "",//モーダル用
