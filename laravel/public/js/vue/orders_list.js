@@ -5,7 +5,6 @@ let month = d.getMonth() +1;
 const hoge = {
 	el: '.main_content',
 	data () {
-
 		return {
 			persons: '', 
 			products: '',
@@ -24,7 +23,7 @@ const hoge = {
 			isActive: false,//モーダル用
 			modal_fortunes: "",//モーダル用
 			total_price: 0,//月の合計料金
-			_token: "{{ csrf_token() }}",
+			
 
 		}
 	},
