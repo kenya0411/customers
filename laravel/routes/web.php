@@ -128,6 +128,8 @@ Route::get('orders/add/ajax', 'OrderController@ajax_add_index');
 Route::post('orders/add/ajax_add_commission_price', 'OrderController@ajax_add_commission_price');//手数料を表示
 Route::post('orders/add/ajax_search_customers', 'OrderController@ajax_search_customers');//リピーターかどうかを確認
 Route::post('orders/add/ajax_get_data_repeater', 'OrderController@ajax_get_data_repeater');//リピーターの場合情報を取得
+Route::get('orders/add/ajax_add_update', 'OrderController@ajax_add_update');//新規注文用
+
 Route::post('orders/add/ajax_add_update', 'OrderController@ajax_add_update');//新規注文用
 
 
