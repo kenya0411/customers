@@ -11,7 +11,7 @@
 <script>objectFitImages();</script>
 
 {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
-
+<script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
 <script>
     $(function() {
     // naviMenu1();//ハンバーガーメニュー
