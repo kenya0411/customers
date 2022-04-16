@@ -41,7 +41,6 @@ const hoge = {
 				})
 				.then(response => [
 					this.total_price = response.data.total_price,
-					console.log(response.data.total_price),
 					
 					])
 				.catch(error => console.log(error))
@@ -106,6 +105,8 @@ const hoge = {
 				this.get_id = response.data.get_id,
 				this.current_page = all.current_page,
 				this.last_page = all.last_page,
+				console.log('test')
+				
 				
 
 				])
