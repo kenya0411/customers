@@ -88,7 +88,7 @@ const hoge = {
 		/*--------------------------------------------------- */		
 		async search_page() {
 			
-			let url = '/orders/ajax_search/';
+			let url = '/orders/ajax_search';
 			// let url = '/orders/ajax_search/?persons_id=' + this.search_persons+'&year='+this.search_year+'&month='+this.search_month+'&orders_id='+this.search_orders_id+'&page='+this.current_page+'&customers_name='+this.search_customers_name;
 			axios.post(url, {
 				persons_id: this.search_persons,
