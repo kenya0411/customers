@@ -68,12 +68,12 @@
  <div class="mbBlock">
                    <ul class="no1">
 
-                    {{-- <li>@{{ customers[get_id[index].customers_id].customers_nickname }}</li> --}}
-                    {{-- <li>@{{ customers[get_id[index].customers_id].customers_name }}</li> --}}
+                    <li>@{{ customers[get_id[index].customers_id].customers_nickname }}</li>
+                    <li>@{{ customers[get_id[index].customers_id].customers_name }}</li>
                 </ul>
                 <div class="no2">
-{{-- <span v-if="order.orders_is_reserve_finished == '1'">鑑定済み</span> --}}
-{{-- <span v-if="order.orders_is_ship_finished == '1'">発送済み</span> --}}
+<span v-if="order.orders_is_reserve_finished == '1'">鑑定済み<br></span>
+<span v-if="order.orders_is_ship_finished == '1'">発送済み</span>
 
                 </div>
 <div class="no3">
@@ -188,7 +188,7 @@
             <div>
                      <div class="pcInvi">
         <div class="editBtn">
-                                        {{-- <a v-bind:href='`/customers/detail/?id=${customer.id}&date_year=${customer.date_year}&date_month=${customer.date_month}`'>商品情報</a> --}}
+                                        <a v-bind:href='`/orders/detail/?id=${order.id}`'>編集ページ</a>
             
         </div>
          
