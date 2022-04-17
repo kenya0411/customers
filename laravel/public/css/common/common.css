@@ -1450,6 +1450,24 @@ main .addbtn a, main .commonBtn a {
     margin-bottom: 8px;
   }
 }
+@media (max-width: 480px) {
+  .searchBlock ul li {
+    margin-bottom: 8px;
+  }
+  .searchBlock ul li.wid100 {
+    width: 100%;
+  }
+  .searchBlock ul li .input-group {
+    width: 100%;
+    display: flex;
+  }
+  .searchBlock ul li .input-group input {
+    width: calc(100% - 30px);
+  }
+  .searchBlock ul li .input-group span {
+    width: 30px;
+  }
+}
 /*--------------------------------------------------- */
 /* ページネーション */
 /*--------------------------------------------------- */
@@ -1517,6 +1535,9 @@ main .addbtn a, main .commonBtn a {
 
 main {
   margin-bottom: 70px;
+}
+main * {
+  word-break: break-all;
 }
 main .strong {
   color: #ef7520;
