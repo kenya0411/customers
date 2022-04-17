@@ -6,7 +6,7 @@ use App\Person;
 use App\Order;
 use App\Customer;
 use App\Fortune;
-use App\product_option;
+use App\Product_option;
 use Rap2hpoutre\FastExcel\FastExcel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
