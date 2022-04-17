@@ -16,7 +16,7 @@ class CreateProductsOptionsTable extends Migration
         Schema::create('products_options', function (Blueprint $table) {
             $table->bigIncrements('products_options_id');
             $table->string('products_options_name')->nullable();
-            $table->integer('products_options_price')->nullable();
+            $table->integer('products_options_price')->default(0);
             $table->text('products_options_detail')->nullable();
             $table->integer('products_id')->nullable();
             $table->integer('persons_id')->nullable();

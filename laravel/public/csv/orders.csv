@@ -1,4 +1,0 @@
-﻿id,orders_id,customers_id,products_id,products_options_id,products_options_multiple_id,persons_id,users_id,orders_price,orders_is_reserve_finished,orders_is_ship_finished,orders_notice,updated_at,created_at,is_delete
-1,m59648008140dsa,3,3,6,0,2,2,0,0,2,,2022-04-08T07:41:40.000000Z,2022-04-05T00:19:40.000000Z,0
-2,m66373406825,2,2,0,0,1,3,1780,0,0,,2022-04-08T00:11:46.000000Z,2022-04-05T00:19:40.000000Z,0
-3,8402616,4,3,0,0,1,3,2000,0,2,aaadsa,2022-04-05T00:19:40.000000Z,2022-04-05T00:19:40.000000Z,0

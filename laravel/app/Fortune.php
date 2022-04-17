@@ -12,5 +12,7 @@ class Fortune extends Model
       'id', 
       'fortunes_worry', 
       'fortunes_answer',
+      'created_at',
+      'updated_at',
   ];
 }

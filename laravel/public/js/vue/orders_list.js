@@ -1,6 +1,6 @@
 let d = new Date();
 let year = d.getFullYear();
-let month = d.getMonth() +1;
+// let month = d.getMonth() +1;
 
 const hoge = {
 	el: '.main_content',
@@ -12,11 +12,11 @@ const hoge = {
 			orders: '',
 			customers: '',
 			users: '',
-			search_persons: '',//検索用
+			search_persons: 0,//検索用
 			search_orders_id: '',//検索用
 			search_customers_name: '',//検索用
 			search_year: year,//検索用
-			search_month: month,//検索用
+			search_month: 0,//検索用
 			get_id: '',//検索用
 			current_page:1,//ページネーション用
 			last_page: "",//ページネーション用

@@ -45,7 +45,7 @@ $year = $d->format('Y');
 
 
 <select  aria-label="Default select" name="date_month"  v-model="search_month"  id="">
-<option value=""></option>
+<option value="0">月</option>
 
 @for ($i = 1; $i <= 12; $i++)
 $d = now();
@@ -65,7 +65,7 @@ $d = now();
    <li>
     
      <select name="search_persons_id" v-model="search_persons" id="">
-      <option value="0" >選択してください</option>
+      <option value="0" >鑑定士の選択</option>
 
       <option v-for="person in persons"  v-bind:value="person.persons_id" >@{{ person.persons_name }}</option>
       

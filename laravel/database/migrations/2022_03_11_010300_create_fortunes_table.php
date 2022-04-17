@@ -16,7 +16,7 @@ class CreateFortunesTable extends Migration
         Schema::create('fortunes', function (Blueprint $table) {
             $table->unique(['id']);
             $table->integer('id');
-            $table->string('orders_id')->nullable();
+            // $table->string('orders_id')->nullable();
             $table->text('fortunes_worry')->nullable();
             $table->text('fortunes_answer')->nullable();
             $table->text('fortunes_reply1')->nullable();

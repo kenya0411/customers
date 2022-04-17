@@ -6,7 +6,7 @@ use App\Person;
 use App\Order;
 use App\Customer;
 use App\Fortune;
-use App\products_options;
+use App\product_option;
 use Rap2hpoutre\FastExcel\FastExcel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -49,46 +49,50 @@ $customers = Customer::all();
 
  
     }
-public function csv_import(Request $request) {
+public function csv_import_orders(Request $request) {
+
+    for ($year=2021; $year <=2022 ; $year++) { 
+
+        for ($i=1; $i <=12 ; $i++) { 
+        $csv = 'csv/import/sale - '.$year.'-'.$i.'.csv';
+
+            if (file_exists($csv)) {
+
+            $fortunes = (new FastExcel)->import($csv, function ($line) {
+                return Fortune::create([
+                    'id' => $line['id'],
+                    'orders_id' => $line['orders_id'],
+                    'fortunes_worry' => $line['fortunes_worry'],
+                    'fortunes_answer' => $line['fortunes_answer'],
+                    'fortunes_reply1' => $line['fortunes_reply1'],
+                    'updated_at' => $line['updated_at'],
+                    'created_at' => $line['created_at'],
+                ]);
+            });
 
 
-for ($i=1; $i <=12 ; $i++) { 
-$csv = 'csv/import/sale - 2021-'.$i.'.csv';
+
+            $orders = (new FastExcel)->import($csv, function ($line) {
+                return Order::create([
+                    'id' => $line['id'],
+                    'orders_id' => $line['orders_id'],
+                    'customers_id' => $line['customers_id'],
+                    'products_id' => $line['products_id'],
+                    // 'products_options_id' => $line['products_options_id'],
+                    'persons_id' => $line['persons_id'],
+                    'users_id' => $line['users_id'],
+                    'orders_price' => $line['orders_price'],
+                    'orders_is_reserve_finished' => $line['orders_is_reserve_finished'],
+                    'orders_is_ship_finished' => $line['orders_is_ship_finished'],
+                    'updated_at' => $line['updated_at'],
+                    'created_at' => $line['created_at'],
+                ]);
+            });
 
 
-$fortunes = (new FastExcel)->import($csv, function ($line) {
-    return Fortune::create([
-        'id' => $line['id'],
-        'orders_id' => $line['orders_id'],
-        'fortunes_worry' => $line['fortunes_worry'],
-        'fortunes_answer' => $line['fortunes_answer'],
-        'fortunes_reply1' => $line['fortunes_reply1'],
-        'updated_at' => $line['updated_at'],
-        'created_at' => $line['created_at'],
-    ]);
-});
-
-
-
-$orders = (new FastExcel)->import($csv, function ($line) {
-    return Order::create([
-        'id' => $line['id'],
-        'orders_id' => $line['orders_id'],
-        'customers_id' => $line['customers_id'],
-        'products_id' => $line['products_id'],
-        // 'products_options_id' => $line['products_options_id'],
-        'persons_id' => $line['persons_id'],
-        'users_id' => $line['users_id'],
-        'orders_price' => $line['orders_price'],
-        'orders_is_reserve_finished' => $line['orders_is_reserve_finished'],
-        'orders_is_ship_finished' => $line['orders_is_ship_finished'],
-        'updated_at' => $line['updated_at'],
-        'created_at' => $line['created_at'],
-    ]);
-});
-
-
-}
+            }
+        }
+    }
 
 
 
@@ -136,6 +140,135 @@ $products = (new FastExcel)->import('csv/import/products.csv', function ($line) 
 
 
 }
+
+public function csv_import_products_options(Request $request) {
+
+
+
+$products_options = (new FastExcel)->import('csv/import/products_options.csv', function ($line) {
+    return Product_option::create([
+        'products_options_id' => $line['products_options_id'],
+        'products_options_name' => $line['products_options_name'],
+        'products_options_price' => $line['products_options_price'],
+        'products_options_detail' => $line['products_options_detail'],
+        'persons_id' => $line['persons_id'],
+        'products_id' => $line['products_id'],
+    ]);
+});
+
+
+
+}
+
+
+
+
+
+/*--------------------------------------------------- */
+/* import All
+/*--------------------------------------------------- */
+
+
+
+
+
+
+
+public function csv_import_all(Request $request) {
+
+
+$customers = (new FastExcel)->import('csv/import/customers.csv', function ($line) {
+    return Customer::create([
+        'customers_id' => $line['customers_id'],
+        'customers_nickname' => trim($line['customers_nickname'], "\r"),
+        'customers_name' => trim($line['customers_name']),
+        'customers_address' => $line['customers_address'],
+        'persons_id' => $line['persons_id'],
+        'updated_at' => $line['updated_at'],
+        'created_at' => $line['created_at'],
+    ]);
+});
+
+
+$products = (new FastExcel)->import('csv/import/products.csv', function ($line) {
+    return Product::create([
+        'products_id' => $line['products_id'],
+        'products_name' => $line['products_name'],
+        'products_price' => $line['products_price'],
+        'products_method' => $line['products_method'],
+        'products_detail' => $line['products_detail'],
+        'persons_id' => $line['persons_id'],
+    ]);
+});
+
+
+$products_options = (new FastExcel)->import('csv/import/products_options.csv', function ($line) {
+    return Product_option::create([
+        'products_options_id' => $line['products_options_id'],
+        'products_options_name' => $line['products_options_name'],
+        'products_options_price' => $line['products_options_price'],
+        'products_options_detail' => $line['products_options_detail'],
+        'persons_id' => $line['persons_id'],
+        'products_id' => $line['products_id'],
+    ]);
+});
+
+
+
+
+
+    for ($year=2021; $year <=2022 ; $year++) { 
+
+        for ($i=1; $i <=12 ; $i++) { 
+        $csv = 'csv/import/sale - '.$year.'-'.$i.'.csv';
+
+            if (file_exists($csv)) {
+
+            $fortunes = (new FastExcel)->import($csv, function ($line) {
+                return Fortune::create([
+                    'id' => $line['id'],
+                    'orders_id' => $line['orders_id'],
+                    'fortunes_worry' => $line['fortunes_worry'],
+                    'fortunes_answer' => $line['fortunes_answer'],
+                    'fortunes_reply1' => $line['fortunes_reply1'],
+                    'updated_at' => $line['updated_at'],
+                    'created_at' => $line['created_at'],
+                ]);
+            });
+
+
+
+            $orders = (new FastExcel)->import($csv, function ($line) {
+                return Order::create([
+                    'id' => $line['id'],
+                    'orders_id' => $line['orders_id'],
+                    'customers_id' => $line['customers_id'],
+                    'products_id' => $line['products_id'],
+                    // 'products_options_id' => $line['products_options_id'],
+                    'persons_id' => $line['persons_id'],
+                    'users_id' => $line['users_id'],
+                    'orders_price' => $line['orders_price'],
+                    'orders_is_reserve_finished' => $line['orders_is_reserve_finished'],
+                    'orders_is_ship_finished' => $line['orders_is_ship_finished'],
+                    'updated_at' => $line['updated_at'],
+                    'created_at' => $line['created_at'],
+                ]);
+            });
+
+
+            }
+        }
+    }
+
+
+
+
+    return redirect('orders');
+
+
+}
+
+
 
 
 
