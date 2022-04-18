@@ -23,7 +23,7 @@
 
 
            <div class="mbBlock">
-            <div class="no0">@{{ persons[product.persons_id - 1].persons_name }}</div>
+            {{-- <div class="no0">@{{ persons[product.persons_id].persons_name }}</div> --}}
             <div class="no1">@{{ product.products_name }}</div>
             <div class="no3">
                 <i class="fa-solid fa-circle-chevron-down"></i>    
@@ -37,7 +37,11 @@
             <input type="hidden" name="products_id" :value="product.products_id">
             
             <div class="no0">
-                @{{ persons[product.persons_id - 1].persons_name }}
+                <span v-if="persons[product.persons_id]">
+                    
+                @{{ persons[product.persons_id].persons_name }}
+                    
+                </span>
             </div>
             <div ><input type="text" name="products_name" :value="product.products_name"></div>
             <div >

@@ -3,6 +3,28 @@ aside {
   border-right: 1px solid #e3e4e6;
   height: 100vh;
 }
+aside .btnWrap {
+  margin-top: 32px;
+}
+aside .btnWrap a, aside .btnWrap a:visited {
+  position: relative;
+  color: #fff;
+  background-color: #1B8EE4;
+  border: 1px solid #1B8EE4;
+  padding: 8px 12px;
+  line-height: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 769px) {
+  aside .btnWrap a:hover, aside .btnWrap a:visited:hover {
+    background-color: #fff;
+    color: #1B8EE4;
+    border: 1px solid #1B8EE4;
+    transition-duration: 0.5s;
+  }
+}
 @media (max-width: 768px) {
   aside {
     display: none;

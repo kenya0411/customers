@@ -57,7 +57,9 @@
 
 <div class="mbBlock">
         <div >顧客情報</div>
-        <div>鑑定・発送</div>
+        <div>状況</div>
+        <div>鑑定士</div>
+        <div></div>
     
 
      </div>
@@ -74,6 +76,13 @@
                 <div class="no2">
 <span v-if="order.orders_is_reserve_finished == '1'">鑑定済み<br></span>
 <span v-if="order.orders_is_ship_finished == '1'">発送済み</span>
+
+                </div>
+
+
+                <div class="no2">
+                    @{{ persons[get_id[index].persons_id].persons_name }}
+
 
                 </div>
 <div class="no3">
@@ -130,10 +139,10 @@
                 <div class="hiddenName">商品情報</div>
 
                 <ul>
-                    <li v-if="order.persons_id !== 0">
+                    {{-- <li v-if="order.persons_id !== 0"> --}}
 
-                        <span  v-if="persons[get_id[index].persons_name]">
-                    @{{ persons[1].persons_name }}
+                        <span  v-if="persons[get_id[index].persons_id]">
+                    @{{ persons[get_id[index].persons_id].persons_name }}
         
                         </span>
                 </li>

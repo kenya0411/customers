@@ -40,8 +40,11 @@
 
 					
 					width: 33.33%
-				.no3
-					text-align: right
+				>div,.no3
+					&:nth-last-of-type(1)
+						text-align: right
+						width: 20px
+						margin-left: auto
 
 		.flexWrap
 
@@ -72,3 +75,15 @@
 					margin-bottom: 4px
 
 
+@include mb
+	.listSection
+		.flexWrap
+			
+			.mbBlock
+				@include rem(14)
+				>div,>ul
+					padding-right: 8px
+
+		.flexWrap
+			.pcBlock
+				@include rem(14)

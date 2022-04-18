@@ -914,8 +914,10 @@
   .listSection .flexWrap .mbBlock > div, .listSection .flexWrap .mbBlock > ul {
     width: 33.33%;
   }
-  .listSection .flexWrap .mbBlock .no3 {
+  .listSection .flexWrap .mbBlock > div:nth-last-of-type(1), .listSection .flexWrap .mbBlock .no3:nth-last-of-type(1) {
     text-align: right;
+    width: 20px;
+    margin-left: auto;
   }
   .listSection .flexWrap .selected_mb {
     background-color: #333;
@@ -945,6 +947,19 @@
   .listSection .flexWrap .pcBlock .hiddenName {
     font-weight: 700;
     margin-bottom: 4px;
+  }
+}
+@media (max-width: 480px) {
+  .listSection .flexWrap .mbBlock {
+    font-size: 14px;
+    font-size: 1.4rem;
+  }
+  .listSection .flexWrap .mbBlock > div, .listSection .flexWrap .mbBlock > ul {
+    padding-right: 8px;
+  }
+  .listSection .flexWrap .pcBlock {
+    font-size: 14px;
+    font-size: 1.4rem;
   }
 }
 .formSection {
@@ -1481,8 +1496,8 @@ main .addbtn a, main .commonBtn a {
   align-items: center;
   padding: 8px;
   margin-bottom: 4px;
-  height: 30px;
-  width: 30px;
+  height: 36px;
+  width: 36px;
   justify-content: center;
   line-height: 1em;
   border: 1px solid #ddd;
@@ -1491,6 +1506,12 @@ main .addbtn a, main .commonBtn a {
   font-size: 14px;
   font-size: 1.4rem;
   cursor: pointer;
+}
+@media (max-width: 480px) {
+  .pagination li {
+    font-size: 12px;
+    font-size: 1.2rem;
+  }
 }
 @media (min-width: 769px) {
   .pagination li:not(.is_active):hover {
@@ -1523,6 +1544,10 @@ main .addbtn a, main .commonBtn a {
 .price_block .flex3:nth-last-of-type(1) {
   margin-left: 0.5em;
   font-weight: 700;
+}
+
+.disabled {
+  pointer-events: none;
 }
 
 .pointer {

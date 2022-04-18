@@ -15,6 +15,7 @@
 
             <div class="mbBlock">
                 <div >顧客情報</div>
+                <div ></div>
 
 
             </div>

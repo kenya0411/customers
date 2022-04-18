@@ -159,7 +159,7 @@ public function ajax_search(Request $request) {
 
 	$orders=$orders->paginate(30);
 
-
+// $test = $orders->last_page();
 
 
 	//index用の配列
@@ -183,7 +183,6 @@ public function ajax_search(Request $request) {
 	return [
 		"orders"=>$orders,
 		"get_id"=>$get_id,
-		"test"=>$test,
 	];
 
 }

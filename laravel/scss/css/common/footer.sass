@@ -12,3 +12,34 @@ footer
 
 // #footGoto 
 	// @include footGoto 
+.footerNavi
+	@include mbup
+		display: none
+	@include mb
+		position: fixed
+		bottom: 0
+		left: 0
+		right: 0
+		width: 100%
+		ul
+			height: 50px
+			display: flex
+			background-color: rgba(0,0,0,0.8)
+			justify-content: space-between
+		li
+
+			width: calc(25%)
+			border-right: 1px dotted #ddd
+			&:nth-last-of-type(1)
+				border: 0
+		a
+			width: 100%
+			height: 100%
+			display: flex
+			padding: 8px
+			justify-content: center
+			align-items: center
+			i
+				@include rem(22)
+				color: #fff
+

@@ -80,7 +80,7 @@ return ["customers"=>$customers];
     $customers=$customers->where('customers_name','like','%'.$request->customers_name.'%')
     ->orWhere('customers_nickname','like','%'.$request->customers_name.'%');
 
-    $customers=$customers->paginate(100);
+    $customers=$customers->paginate(30);
 
     return [
         "customers"=>$customers,

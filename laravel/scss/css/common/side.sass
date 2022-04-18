@@ -8,6 +8,27 @@ aside
 	background-color: #fff
 	border-right: 1px solid #e3e4e6
 	height: 100vh
+	.btnWrap
+		margin-top: 32px
+		a,a:visited
+			$bgcolor: $color-main
+			position: relative
+			color: #fff
+			background-color: $bgcolor
+			border: 1px solid $bgcolor
+			padding: 8px 12px
+			line-height: 1em
+			display: flex
+			justify-content: center
+			align-items: center
+			@include tabup
+				&:hover
+					background-color: #fff
+					color: $bgcolor
+					border: 1px solid $bgcolor
+					transition-duration: 0.5s
+		
+		
 	@include tab
 		display: none
 	li

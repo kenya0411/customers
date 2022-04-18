@@ -23,7 +23,9 @@ const hoge = {
 			isActive: false,//モーダル用
 			modal_fortunes: "",//モーダル用
 			total_price: 0,//月の合計料金
-			
+			range: 8,
+			front_dot: false,
+			end_dot: false,
 
 		}
 	},
@@ -89,7 +91,6 @@ const hoge = {
 		async search_page() {
 			
 			let url = '/orders/ajax_search';
-			// let url = '/orders/ajax_search/?persons_id=' + this.search_persons+'&year='+this.search_year+'&month='+this.search_month+'&orders_id='+this.search_orders_id+'&page='+this.current_page+'&customers_name='+this.search_customers_name;
 			axios.post(url, {
 				persons_id: this.search_persons,
 				year: this.search_year,
@@ -106,7 +107,6 @@ const hoge = {
 				this.get_id = response.data.get_id,
 				this.current_page = all.current_page,
 				this.last_page = all.last_page,
-				console.log(this.current_page)
 				
 				
 
@@ -114,7 +114,24 @@ const hoge = {
 			.catch(error => console.log(error))
 
 		},
+		/*--------------------------------------------------- */
+		/* ページネーション用
+		/*--------------------------------------------------- */
+		calRange(start, end) {
+			const range = [];
+			for (let i = start; i <= end; i++) {
+			range.push(i);
+			}
+			return range;
+		},
+		sizeCheck() {
+			if (this.last_page <= this.range + 4) {
+			return false;
+			}
+			return true;
+		},
 	},
+
 	//ロード時にデータベースから情報を取得
 	created:function(){
 	this.search_page();
@@ -133,7 +150,41 @@ const hoge = {
 		this.current_page,
 		];
 	},
+	// frontPageRange() {
+	// 	if (!this.sizeCheck) {
+	// 	this.front_dot = false;
+	// 	this.end_dot = false;
+	// 	return this.calRange(1, this.last_page);
+	// 	}
+	// 	return this.calRange(1, 2);
+	// },
+	middlePageRange() {
+		if (!this.sizeCheck) return [];
+		let start = "";
+		let end = "";
+		if (this.current_page <= this.range) {
+		start = 1;
+		end = this.range + 2;
+		this.front_dot = false;
+		this.end_dot = true;
+		} else if (this.current_page > this.last_page - this.range) {
+		start = this.last_page - this.range - 1;
+		end = this.last_page - 2;
+		this.front_dot = true;
+		this.end_dot = false;
+		} else {
+		start = this.current_page - Math.floor(this.range / 2);
+		end = this.current_page + Math.floor(this.range / 2);
+		this.front_dot = true;
+		this.end_dot = true;
+		}
+		return this.calRange(start, end);
+	},
+	endPageRange() {
+		if (!this.sizeCheck) return [];
 
+		return this.calRange(this.last_page - 1, this.last_page);
+	}
 
  },
 watch: {

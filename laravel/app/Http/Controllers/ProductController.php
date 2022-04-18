@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Product;
+use App\Person;
 use App\products_options;
 
 // use App\Http\Requests\HelloRequest;バリデーション用
@@ -164,8 +165,11 @@ return $data;
 /*--------------------------------------------------- */
     public function ajax_index(Request $request) {
 
-        $persons = DB::table('persons')
-        ->get();   
+        // $persons = DB::table('persons')
+        // ->get();   
+        $persons = Person::query()->get();
+        $persons->prepend(['persons_name'=>'']);//先頭に配列を追加
+
 
         // $products = DB::table('products')
         // ->where('is_delete','=',0)//論理削除されてないもの

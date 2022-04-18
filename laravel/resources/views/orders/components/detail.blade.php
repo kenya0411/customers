@@ -26,7 +26,7 @@
 <dt>鑑定士</dt>
 <dd>
     <select name="" id="" v-model="orders.persons_id" 
-    v-on:change="change_products(orders.id,orders.persons_id,0,0)">
+    v-on:change="change_products(orders.id,orders.persons_id,0,0);add_commission_price(orders.persons_id);">
         <option v-bind:value="person.persons_id" v-for="person in persons"> @{{ person.persons_name }}</option>
 
     </select>
@@ -63,7 +63,8 @@
         </div>
         <div class="flex4">
             <div class="title">[手数料]</div>
-    <input type="number" inputmode="numeric" v-bind:value="persons_selected.persons_platform_fee" ><span>%</span>
+    <input type="number" inputmode="numeric" v-model="persons_platform_fee"  ><span>%</span>
+    {{-- <input type="number" inputmode="numeric" v-bind:value="persons_selected.persons_platform_fee" ><span>%</span> --}}
 
         </div>
         <div class="flex4">

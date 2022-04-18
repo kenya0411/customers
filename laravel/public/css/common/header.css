@@ -232,6 +232,12 @@ header.fixed .flex .flex2.no3 {
   header .hover a, header .hover a:visited {
     color: #fff;
   }
+  header .btnWrap {
+    background-color: #71BB15;
+  }
+  header .btnWrap a, header .btnWrap a:visited {
+    color: #fff;
+  }
   header .menu_side {
     position: relative;
   }
