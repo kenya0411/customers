@@ -15,6 +15,8 @@
 				orders_id: '',
 				isActive: false,//モーダル用
 				name_check: '',//名前確認用
+				is_loaded: false,
+
 				}
 			},
 		methods: {	
@@ -78,15 +80,16 @@
 				let url = '/reserves/ajax';
 				axios.get(url)
 				.then(response => [
+					this.orders = response.data.orders,
+					this.orders_id = response.data.orders_id,
+
 					this.persons = response.data.persons,
 					this.products = response.data.products,
 					this.products_options = response.data.products_options,
-					this.orders = response.data.orders,
 					this.users = response.data.users,
 					this.customers = response.data.customers,
 					this.fortunes = response.data.fortunes,
-					this.orders_id = response.data.orders_id,
-					console.log(this.products)
+					this.is_loaded = true,
 					
 
 					])
@@ -116,26 +119,20 @@
 	//ロード時にデータベースから情報を取得
 	created:function(){
 	this.load_page();
-
  },
- computed:{
-				get_update_data() {//監視用データをまとめる
-					return [
-					this.fortunes,
-					];
-				},
+ // 	computed:{
+	// 	get_update_data() {//監視用データをまとめる
+	// 		return [
+	// 		this.fortunes,
+	// 			];
+	// 	},
 
 
-			},
-			watch: {
-		get_update_data(val){//監視用
-
-
-		},
-
-
-
-	},
+	// },
+	// watch: {
+	// 	get_update_data(val){//監視用
+	// 	},
+	// },
 
 }
 

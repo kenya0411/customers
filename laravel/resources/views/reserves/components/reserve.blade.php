@@ -1,5 +1,4 @@
 
-
 <div class="reserveList listSection" >
     <div class="modalWindow" v-bind:class=' {show:isActive}'>
 

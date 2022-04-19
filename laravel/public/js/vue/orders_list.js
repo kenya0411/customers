@@ -25,6 +25,7 @@ const hoge = {
 			total_price: 0,//月の合計料金
 			range: 8,
 			front_dot: false,
+			is_loaded: false,
 			end_dot: false,
 
 		}
@@ -80,6 +81,7 @@ const hoge = {
 				this.products = response.data.products,
 				this.products_options = response.data.products_options,
 				this.customers = response.data.customers,
+				this.is_loaded = true,
 				this.users = response.data.users,
 				])
 			.catch(error => console.log(error))

@@ -20,7 +20,8 @@ $d = '?'.now();
 {{-- <script src="https://unpkg.com/vue@next"></script> --}}
    {{-- <script src="https://unpkg.com/vue-router@4.0.5/dist/vue-router.global.js"></script> --}}
 
-   
+<script src="https://unpkg.com/vue-loaders/dist/vue-loaders.umd.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/vue-loaders/dist/vue-loaders.css">
 <script src="https://unpkg.com/vuejs-paginate@2.1.0"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vuejs-paginate/2.1.0/index.js"></script>
 <script src="https://unpkg.com/laravel-vue-pagination@2.3.1/dist/laravel-vue-pagination.umd.min.js"></script>
