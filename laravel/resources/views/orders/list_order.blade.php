@@ -6,12 +6,25 @@
 
 @section('content')
 
+
+<div id="loading" v-bind:class=' {close:is_loaded}'>
+  <img src="/img/common/loading.gif" >
+</div>
 @include('orders.components.search')
+
+@can('admin')
 @include('orders.components.price')
+@endcan
 
 @include('common.components.pagination')
 
+@can('admin')
 @include('orders.components.order')
+@elsecan('fortune')
+@include('orders.components.order_fortune')
+@endcan
+
+
 @include('common.components.pagination')
 
 

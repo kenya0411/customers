@@ -10,6 +10,8 @@
 
 </div>
 </li>
+@can('admin')
+
 <li class="me-3 wid100">
 <div class="input-group">
 <input type="text"  placeholder="顧客名" aria-label="顧客名" aria-describedby="input-group-left" name="search_name" v-model="search_customers_name">
@@ -17,6 +19,7 @@
 
 </div>
 </li>
+@endcan
 
 <li class=" me-3">
 
@@ -61,6 +64,7 @@ $d = now();
 @endfor
 </select>
 </li>
+@can('admin')
 
    <li>
     
@@ -72,5 +76,6 @@ $d = now();
       
     </select>
   </li>
+@endcan
 
 @endsection

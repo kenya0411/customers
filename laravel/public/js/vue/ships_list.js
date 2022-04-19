@@ -14,6 +14,8 @@
 				orders_id: '',
 				ships: '',
 				search_persons: 0,
+			is_loaded: false,
+
 			}
 		},
 		methods: {	
@@ -65,7 +67,8 @@
 					this.fortunes = response.data.fortunes,
 					this.ships = response.data.ships,
 					this.orders_id = response.data.orders_id,
-					
+					this.is_loaded = true,
+
 					])
 				.catch(error => console.log(error))
 

@@ -7,6 +7,10 @@
     data () {
       return {
         customers: '',
+        orders: '',
+        products: '',
+        is_loaded: false,
+
         }
       },
   methods: { 
@@ -20,6 +24,9 @@
       axios.get(url)
       .then(response => [
         this.customers = response.data.customers[0],
+        this.orders = response.data.orders,
+        this.products = response.data.products,
+        this.is_loaded = true,
 
         ])
       .catch(error => console.log(error))

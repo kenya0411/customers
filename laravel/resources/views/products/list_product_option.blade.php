@@ -5,7 +5,9 @@
 
 
 @section('content')
-
+<div id="loading" v-bind:class=' {close:is_loaded}'>
+  <img src="/img/common/loading.gif" >
+</div>
 <div class="addbtnWrap">
 
     <div class="addbtn">

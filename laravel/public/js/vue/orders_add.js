@@ -22,6 +22,8 @@ const hoge = {
 			customers_name: "",//v-model用
 			orders_notice: "",//v-model用
 			orders_is_ship_finished: 0,//v-model用
+			is_loaded: false,
+
 		}
 },
 methods: { 
@@ -37,6 +39,7 @@ async load_page() {
 		this.persons = response.data.persons,
 		this.products = response.data.products,
 		this.products_options = response.data.products_options,
+		this.is_loaded = true,
 
 		])
 	.catch(error => console.log(error))

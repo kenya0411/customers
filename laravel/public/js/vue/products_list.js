@@ -11,6 +11,8 @@ const hoge = {
 			range: 2,
 			front_dot: false,
 			end_dot: false,
+			is_loaded: false,
+
 	}
 },
 methods: {	// filtersじゃなくmethods
@@ -24,6 +26,8 @@ async load_page() {
 	.then(response => [
 		this.persons = response.data.persons,
 		// this.products = response.data.products,
+				this.is_loaded = true,
+
 
 		])
 	.catch(error => console.log(error))

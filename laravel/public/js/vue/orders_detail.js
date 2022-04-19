@@ -17,6 +17,7 @@
 				temporary_price: '',//仮の金額
       persons_platform_fee: "",//v-model用
 			persons_id: "",//v-model用
+			is_loaded: false,
 
 				}
 			},
@@ -38,8 +39,8 @@
 				this.users = response.data.users,
 				this.orders = response.data.orders[0],
 				this.fortunes = response.data.fortunes[0],
-        console.log(this.orders.persons_id)
-        
+				this.is_loaded = true,
+
 
 				])
 			.catch(error => console.log(error))
@@ -62,6 +63,7 @@
 				orders_price: this.orders.orders_price,
 				fortunes_worry: this.fortunes.fortunes_worry,
 				fortunes_answer: this.fortunes.fortunes_answer,
+				fortunes_reply1: this.fortunes.fortunes_reply1,
 				users_id: this.orders.users_id,
 				orders_notice: this.orders.orders_notice,
 				customers_address: this.customers.customers_address,

@@ -23,11 +23,7 @@
         <h2>@yield('heading')</h2>
     </section>
     <section class="main_content common_padding" >
-<div id="loading" v-bind:class=' {close:is_loaded}'>
-  <img src="/img/common/loading.gif" >
 
-  {{-- <div class="spinner"></div> --}}
-</div>
     @yield('content')
     </section>
     

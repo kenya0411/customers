@@ -5,6 +5,9 @@
 
 
 @section('content')
+<div id="loading" v-bind:class=' {close:is_loaded}'>
+  <img src="/img/common/loading.gif" >
+</div>
 @include('ships.components.search')
 
 {{-- @include('ships.components.ship') --}}

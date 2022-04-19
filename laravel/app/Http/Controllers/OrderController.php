@@ -351,12 +351,14 @@ public function ajax_detail_update(Request $request) {
 	$param = ['id' => $request->id,
 	'fortunes_worry' => $request->fortunes_worry,
 	'fortunes_answer' => $request->fortunes_answer,
+	'fortunes_reply1' => $request->fortunes_reply1,
 	'updated_at' => date( "Y-m-d H:i:s" , time() ),
 
 	];
 	DB::update('update fortunes set 
 	fortunes_worry=:fortunes_worry,
 	fortunes_answer=:fortunes_answer,
+	fortunes_reply1=:fortunes_reply1,
 	updated_at=:updated_at
 	where id=:id'
 	, $param);

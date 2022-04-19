@@ -8,7 +8,9 @@
           products_options: '',
           search_persons: '',//検索用
           current_page:1,//ページネーション用
-          last_page: "",//ページネーション用
+          last_page: "",//ページネーション用     
+          is_loaded: false,
+
       }
   },
     methods: {  // filtersじゃなくmethods
@@ -22,6 +24,7 @@
       .then(response => [
         this.persons = response.data.persons,
         this.products = response.data.products,
+        this.is_loaded = true,
 
         ])
       .catch(error => console.log(error))

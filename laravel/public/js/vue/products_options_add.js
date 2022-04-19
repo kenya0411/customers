@@ -8,12 +8,13 @@
           persons: '', 
           products: '',
           search_persons: '',//検索用
+      is_loaded: false,
+
       }
   }, 
   methods: { 
     async change_products(persons_id) {
       let url = '/orders/detail/ajax_change_products';
-      console.log('test')
       
       
        axios.post(url, {
@@ -35,6 +36,8 @@
         //商品データや顧客データを取得
         this.persons = response.data.persons,
         this.products = response.data.products,
+        this.is_loaded = true,
+
         ])
       .catch(error => console.log(error))
   },

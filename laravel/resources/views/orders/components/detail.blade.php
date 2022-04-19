@@ -87,6 +87,10 @@
 <dd>
     <textarea name="" id="" v-model="fortunes.fortunes_answer" class="textarea1"></textarea>
 </dd>
+<dt>鑑定後の返信</dt>
+<dd>
+    <textarea name="" id="" v-model="fortunes.fortunes_reply1" class="textarea2"></textarea>
+</dd>
 <dt>外注者</dt>
 <dd>
     <select name="" id="" v-model="orders.users_id">
@@ -100,8 +104,6 @@
         <option value="0"></option>
         <option value="1">鑑定済み</option>
     </select>
-{{--     <span v-if="orders.orders_is_reserve_finished == '1'">鑑定済み</span>
-<span v-if="orders.orders_is_ship_finished == '1'">発送済み</span> --}}
 </dd>
 <dt>発送</dt>
 <dd>

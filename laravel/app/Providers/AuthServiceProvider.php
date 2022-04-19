@@ -27,8 +27,20 @@ class AuthServiceProvider extends ServiceProvider
 
         // 管理者の場合にtrueを返す
         Gate::define('admin', function ($user) {
-            return ($user->role == 0);
+            return ($user->permissions_id === 1);
         });
-        //
+        // 鑑定者の場合にtrueを返す
+        Gate::define('fortune', function ($user) {
+            return ($user->permissions_id === 2);
+        });
+        // 発送者の場合にtrueを返す
+        Gate::define('ship', function ($user) {
+            return ($user->permissions_id === 3);
+        });
+
+        //コメント返信者の場合にtrueを返す
+        Gate::define('comment', function ($user) {
+            return ($user->permissions_id === 4);
+        });
     }
 }

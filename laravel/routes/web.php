@@ -26,6 +26,13 @@ Route::get('/home', function () {
     // redirect関数にパスを指定する方法
     return redirect('/orders');
 });
+
+
+
+
+//ログイン済みのみ
+Route::group(['middleware' => ['auth']], function () {
+
 /*--------------------------------------------------- */
 /* person
 /*--------------------------------------------------- */
@@ -195,6 +202,7 @@ Route::get('import_products', 'VueController@csv_import_products');
 Route::get('import_products_options', 'VueController@csv_import_products_options');
 Route::get('import', 'VueController@csv_import_all');
 
+});
 
 
 Auth::routes();

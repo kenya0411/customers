@@ -47,9 +47,7 @@
         <div >商品ID</div>
         <div >顧客情報</div>
         <div>商品情報</div>
-        <div>金額</div>
-        <div>鑑定・発送</div>
-        <div>外注</div>
+        <div>担当者</div>
         <div>日付</div>
         <div></div>
         </div>
@@ -97,19 +95,14 @@
 
             <div>
                 <div class="hiddenName">商品ID</div>
-                <a v-bind:href="persons[get_id[index].persons_id].persons_platform_url + order.orders_id "
-                v-if="persons[get_id[index].persons_id]"
-                 target="_blank">
+       
                     <div class="icon_wrap">
                         
                     <span class="break_all">
-                        
                        @{{order.orders_id }} 
                     </span>
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </div>
                 
-                </a>
 
 </div>
             <div >
@@ -119,15 +112,7 @@
                     
                 <ul>
                     <li >
-                        <span v-if="customers">
-                            @{{ customers[get_id[index].customers_id].customers_nickname }}
-                        </span>
-                    
-                    </li>
-                    <li >
-                        <span v-if="customers">
-                             @{{ customers[get_id[index].customers_id].customers_name }}
-                        </span>
+                        詳細
 
                    
                         
@@ -140,52 +125,35 @@
                 <div class="hiddenName">商品情報</div>
 
                 <ul>
-                    {{-- <li v-if="order.persons_id !== 0"> --}}
-
-                        <span  v-if="persons[get_id[index].persons_id]">
-                    @{{ persons[get_id[index].persons_id].persons_name }}
-        
-                        </span>
-                </li>
+                   
                     <li v-if="order.products_id !== 0">
                         <span  v-if="products[get_id[index].products_id]">
                     @{{ products[get_id[index].products_id].products_name }}
 
                         </span>
                 </li>
-                    <li v-if="order.products_options_id !== 0"> 
-                        <span  v-if="products_options[get_id[index].products_options_id]">
-
-                    @{{ products_options[get_id[index].products_options_id].products_options_name}}</li>
-            </span>
+              
                 </ul>
 
              
             </div>
-            <div>
-                <div class="hiddenName">料金</div>
-
-                @{{order.orders_price}}円
-
-            </div>
+         
            
          
 
-     <div class="tabInvi">
-<span v-if="order.orders_is_reserve_finished == '1'">鑑定済み</span><br>
-<span v-if="order.orders_is_ship_finished == '1'">発送済み</span>
-<span v-if="order.orders_is_ship_finished == '2'">発送不要</span>
-
-</div>
+ 
             <div>
                 <div class="hiddenName">外注者</div>
-                <span  v-if="order.users_id !== 0  && users[get_id[index].users_id]">
+                @php
+
+                @endphp
+                <span  v-if="order.users_id === {{ Auth::user()->id }}">
                 @{{ users[get_id[index].users_id].nickname }}様
             </span>
 
         </div>
             <div>
-                <div class="hiddenName">購入日</div>
+                <div class="hiddenName">日付</div>
                 <div class="break_all">
                     
          @{{ moment(order.created_at ) }}

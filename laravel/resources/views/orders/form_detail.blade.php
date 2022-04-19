@@ -19,8 +19,13 @@
 </div>
 
 
-
+@can('admin')
 @include('orders.components.detail')
+@elsecan('fortune')
+@include('orders.components.detail_fortune')
+@endcan
+
+
 
 
 @endsection

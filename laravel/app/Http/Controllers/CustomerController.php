@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Customer;
-use App\Products;
+use App\Product;
 use App\products_options;
 
 // use App\Http\Requests\HelloRequest;バリデーション用
@@ -97,10 +97,22 @@ public function ajax_detail_index(Request $request) {
 
     //顧客情報
     $customers = DB::table('customers')
-    ->where('customers_id','=',$request->id)//今年
+    ->where('customers_id','=',$request->id)
     ->get();
 
-return ["customers"=>$customers];
+    //注文情報
+    $orders = DB::table('orders')
+    ->where('customers_id','=',$request->id)
+    ->get();
+
+    $products = Product::query()->get();
+    $products->prepend(['products_name'=>""]);//先頭に配列を追加
+
+return [
+    "customers"=>$customers,
+    "orders"=>$orders,
+    "products"=>$products,
+];
 }
 
 /*--------------------------------------------------- */

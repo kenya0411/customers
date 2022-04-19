@@ -1,3 +1,5 @@
+@can('admin')
+
 <ul class="menu_side" id="menu">
 
    <li class="menu_list">
@@ -48,3 +50,19 @@
   </li>
  
 </ul>
+
+@elsecan('fortune')
+
+
+<ul class="menu_side" id="menu">
+
+   <li class="menu_list">
+    <a href="/orders">注文管理</a>
+  
+  </li>
+
+ 
+</ul>
+
+
+@endcan

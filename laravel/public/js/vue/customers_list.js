@@ -9,6 +9,7 @@ const hoge = {
 			last_page: "",
 			range: 8,
 			front_dot: false,
+			is_loaded: false,
 			end_dot: false,
 				}
 			},
@@ -64,6 +65,7 @@ const hoge = {
 	//ロード時にデータベースから情報を取得
 	created:function(){
 		this.search_page();
+		this.is_loaded = true
 
 	},
 	computed:{
