@@ -527,8 +527,13 @@ public function ajax_search_customers(Request $request) {
     if(!empty($request->customers_name) || !empty($request->customers_nickname)){
         $customers = Customer::query();
         $customers=$customers->where('is_delete','=',0);//論理削除
+    if(!empty($request->customers_name)){
         $customers=$customers->where('customers_name','like','%'.$request->customers_name.'%');
+     }
+    if(!empty($request->customers_nickname)){
+
         $customers=$customers->where('customers_nickname','like','%'.$request->customers_nickname.'%');
+    }
         $customers=$customers->get();
 
     }else{

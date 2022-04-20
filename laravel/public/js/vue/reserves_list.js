@@ -6,11 +6,11 @@
 		el: '.main_content',
 		data () {
 			return {
-				persons: '', 
+				persons: [], 
 				products: '',
 				products_options: '',
 				orders: '',
-				fortunes: '',
+				fortunes: [],
 				users: '',
 				orders_id: '',
 				orders_list: [],
@@ -25,27 +25,26 @@
 			moment: function (date) {
 				return moment(date).format('YYYY/MM/DD')
 			},
-			test(id,index){
+			test(){
 				let url = '/reserves/ajax_test';
-				console.log(id)
 				
 			axios.post(url, {
-				id: id,
-				index: index,
 			})
 			.then(response => [
-					this.orders_list[index] = response.data.orders,
-					console.log(response.data.orders),
 					
-					// this.orders_id[index] = response.data.orders_id,
+					this.orders_list = response.data.orders_list,
+					// this.orders = response.data.orders,
 
-					// this.persons[index] = response.data.persons,
-					// this.products[index] = response.data.products,
-					// this.products_options[index] = response.data.products_options,
-					// this.users[index] = response.data.users,
-					// this.customers[index] = response.data.customers,
-					// this.fortunes[index] = response.data.fortunes,
-					// this.is_loaded = true,
+					// this.persons = response.data.persons,
+					// this.products = response.data.products,
+					// this.products_options = response.data.products_options,
+					// this.users = response.data.users,
+					// this.customers = response.data.customers,
+					// this.fortunes = response.data.fortunes,
+					this.is_loaded = true,
+					console.log(this.orders_list ),
+					
+					
 				])
 			.catch(error => console.log(error)) 
 		},		
@@ -103,17 +102,17 @@
 			//ロード時にデータベースから情報を取得
 			async load_page() {
 				let url = '/reserves/ajax';
-				axios.get(url)
+				await axios.get(url)
 				.then(response => [
 					this.orders = response.data.orders,
-					this.orders_id = response.data.orders_id,
+					// this.orders_id = response.data.orders_id,
 
-					this.persons = response.data.persons,
-					this.products = response.data.products,
-					this.products_options = response.data.products_options,
-					this.users = response.data.users,
-					this.customers = response.data.customers,
-					this.fortunes = response.data.fortunes,
+					// this.persons = response.data.persons,
+					// this.products = response.data.products,
+					// this.products_options = response.data.products_options,
+					// this.users = response.data.users,
+					// this.customers = response.data.customers,
+					// this.fortunes = response.data.fortunes,
 					this.is_loaded = true,
 					
 
@@ -143,12 +142,13 @@
 
 	//ロード時にデータベースから情報を取得
 	created:function(){
-	this.load_page();
+	// this.load_page();
+	this.test();
  },
  // 	computed:{
 	// 	get_update_data() {//監視用データをまとめる
 	// 		return [
-	// 		this.fortunes,
+	// 		this.orders,
 	// 			];
 	// 	},
 
@@ -156,6 +156,8 @@
 	// },
 	// watch: {
 	// 	get_update_data(val){//監視用
+	// this.test(this.orders);
+
 	// 	},
 	// },
 

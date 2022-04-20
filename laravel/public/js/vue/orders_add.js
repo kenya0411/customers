@@ -146,7 +146,7 @@ async add_commission_price(persons_id) {
 /*--------------------------------------------------- */
 async search_customers() {
 	let url = '/orders/add/ajax_search_customers';
-	
+	console.log(this.customers_name)
 	axios.post(url, {
 		customers_name: this.customers_name,
 		customers_nickname: this.customers_nickname,

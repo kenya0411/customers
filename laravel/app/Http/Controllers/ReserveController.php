@@ -92,16 +92,16 @@ public function ajax_index(Request $request) {
 		// ->get();	
 				
 		//順番とIDを取得（vueで値を表示する為に必須）
-		$orders_id=[];
-		if(!empty($orders)){
-				foreach ($orders as $key => $value) {
-						$orders_id[] = array(
-								'index' => $key,
-								'id' => $value->id,
-						);
+		// $orders_id=[];
+		// if(!empty($orders)){
+		// 		foreach ($orders as $key => $value) {
+		// 				$orders_id[] = array(
+		// 						'index' => $key,
+		// 						'id' => $value->id,
+		// 				);
 
-				}
-		}
+		// 		}
+		// }
 
 		
 
@@ -113,7 +113,7 @@ public function ajax_index(Request $request) {
 		"orders"=>$orders,
 		// "customers"=>$customers,
 		// "fortunes"=>$fortunes,
-		"orders_id"=>$orders_id
+		// "orders_id"=>$orders_id
 	];
 }
 
@@ -125,16 +125,47 @@ public function ajax_index(Request $request) {
 /*--------------------------------------------------- */
 public function ajax_index_test(Request $request) {
 
+	
+
 		// $orders = DB::table('orders')
-		$Order::latest()->first();
-		// ->where('is_delete','=',0)//論理削除されてないもの
-		// ->where('orders_is_reserve_finished','=',0)
-		->where('id','=',1541)
+		// ->where('id','=',$request->id)
 		// ->get();
-		->latest()->first();
 
+		// $test = $request->id;
 
+		// //鑑定結果	
+		// $fortunes = DB::table('fortunes')
+		// ->where('id','=',$request->id)
+		// ->get();	
+		
+		//注文
+	
+		$orders = Order::query()
+		->where('is_delete','=',0)//論理削除されてないもの
+		->where('orders_is_reserve_finished','=',0)
+		->get();
+	
+		$orders_id=[];
+		$customers_id=[];
+		$persons_id=[];
+		$products_id=[];
+		$fortunes_id=[];
+		if(!empty($orders)){
 
+		foreach ($orders as $key => $value) {
+				$orders_id[] = array(
+						'index' => $key,
+						'id' => $value->id,
+				);
+			$fortunes_id[$key] = $value->id;
+			$customers_id[$key] = $value->customers_id;
+			$persons_id[$key] = $value->persons_id;
+			$products_id[$key] = $value->products_id;
+
+		}
+		}
+
+		$orders_list = [];
 
 		//鑑定士
 		$persons = DB::table('persons')
@@ -142,15 +173,15 @@ public function ajax_index_test(Request $request) {
 
 
 
-		//商品情報
+		// //商品情報
 		$products = DB::table('products')
 		->get();
 		// $products = Product::query()->get();
-		$products->prepend(['products_name'=>'']);//先頭に配列を追加
 
 
 		//顧客管理	
 		$customers = DB::table('customers')
+		->whereIn('customers_id',$customers_id)//論理削除されてないもの
 		->get();	
 		// $customers = Customer::query()->get();
 		
@@ -165,38 +196,66 @@ public function ajax_index_test(Request $request) {
 
 		//鑑定結果	
 		$fortunes = DB::table('fortunes')
+		->whereIn('id',$fortunes_id)//論理削除されてないもの
 		->get();	
-		
-		//注文
+			$orders_id=[];
 
-		// $orders = Order::query()
-		// ->where('is_delete','=',0)//論理削除されてないもの
-		// ->where('orders_is_reserve_finished','=',0)
-		// ->get();	
-				
-		//順番とIDを取得（vueで値を表示する為に必須）
-		$orders_id=[];
+
 		if(!empty($orders)){
+
+
 				foreach ($orders as $key => $value) {
-						$orders_id[] = array(
-								'index' => $key,
-								'id' => $value->id,
-						);
+					//商品情報
+					$keyIndex = array_search($value->products_id, array_column((array)$products, 'products_id'));
+					$result_produts = $products[$keyIndex];
+
+					//顧客情報
+					$keyIndex = array_search($value->customers_id, array_column((array)$customers, 'customers_id'));
+					$result_customers = $customers[$keyIndex];
+
+					//鑑定士
+					$keyIndex = array_search($value->persons_id, array_column((array)$persons, 'persons_id'));
+					$result_persons = $persons[$keyIndex];
+
+					//外注者
+					$keyIndex = array_search($value->users_id, array_column((array)$users, 'id'));
+					$result_users = $users[$keyIndex];
+
+					//オプション
+					$keyIndex = array_search($value->products_options_id, array_column((array)$products_options, 'products_options_id'));
+					$result_products_options = $products_options[$keyIndex];
+
+					//鑑定内容
+					$keyIndex = array_search($value->id, array_column((array)$fortunes, 'id'));
+					$result_fortunes = $fortunes[$keyIndex];
+
+
+					$orders_list[$key] =array(
+						'orders' => $value,
+						'products' => $result_produts,
+						'customers' => $result_customers,
+						'fortunes' => $result_fortunes,
+						'products_options' => $result_products_options,
+						'users' => $result_users,
+						'persons' => $result_persons,
+					);
+
 
 				}
 		}
 
-		
+
 
 		return [
-		"users"=>$users,
-		"persons"=>$persons,
-		"products"=>$products,
-		"products_options"=>$products_options,
-		"orders"=>$orders,
-		"customers"=>$customers,
-		"fortunes"=>$fortunes,
-		"orders_id"=>$orders_id
+		// "users"=>$users,
+		// "persons"=>$persons,
+		// "products"=>$products,
+		// "products_options"=>$products_options,
+		// "orders"=>$orders,
+		// "customers"=>$customers,
+		// "fortunes"=>$fortunes,
+		// "test"=>$test,
+		"orders_list"=>$orders_list
 	];
 }
 
