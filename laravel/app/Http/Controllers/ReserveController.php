@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Users;
 use App\Product;
+use App\Customer;
+use App\Order;
 use App\Ship;
 
 // use App\Http\Requests\HelloRequest;バリデーション用
@@ -48,6 +50,92 @@ public function index(Request $request)
 /*--------------------------------------------------- */
 public function ajax_index(Request $request) {
 
+		// //鑑定士
+		// $persons = DB::table('persons')
+		// ->get(); 
+
+
+
+		// //商品情報
+		// $products = DB::table('products')
+		// ->get();
+		// // $products = Product::query()->get();
+		// $products->prepend(['products_name'=>'']);//先頭に配列を追加
+
+
+		// //顧客管理	
+		// $customers = DB::table('customers')
+		// ->get();	
+		// // $customers = Customer::query()->get();
+		
+		// //外注用
+		// $users = DB::table('users')
+		// ->where('permissions_id','=',2)//論理削除されてないもの
+		// ->get(); 
+
+		// //追加オプション
+		// $products_options = DB::table('products_options')
+		// ->get();
+
+		// //鑑定結果	
+		// $fortunes = DB::table('fortunes')
+		// ->get();	
+		
+		//注文
+		$orders = DB::table('orders')
+		->where('is_delete','=',0)//論理削除されてないもの
+		->where('orders_is_reserve_finished','=',0)
+		->get();	
+		// $orders = Order::query()
+		// ->where('is_delete','=',0)//論理削除されてないもの
+		// ->where('orders_is_reserve_finished','=',0)
+		// ->get();	
+				
+		//順番とIDを取得（vueで値を表示する為に必須）
+		$orders_id=[];
+		if(!empty($orders)){
+				foreach ($orders as $key => $value) {
+						$orders_id[] = array(
+								'index' => $key,
+								'id' => $value->id,
+						);
+
+				}
+		}
+
+		
+
+		return [
+		// "users"=>$users,
+		// "persons"=>$persons,
+		// "products"=>$products,
+		// "products_options"=>$products_options,
+		"orders"=>$orders,
+		// "customers"=>$customers,
+		// "fortunes"=>$fortunes,
+		"orders_id"=>$orders_id
+	];
+}
+
+
+
+
+/*--------------------------------------------------- */
+/* 一覧画面のajaxtest
+/*--------------------------------------------------- */
+public function ajax_index_test(Request $request) {
+
+		// $orders = DB::table('orders')
+		$Order::latest()->first();
+		// ->where('is_delete','=',0)//論理削除されてないもの
+		// ->where('orders_is_reserve_finished','=',0)
+		->where('id','=',1541)
+		// ->get();
+		->latest()->first();
+
+
+
+
 		//鑑定士
 		$persons = DB::table('persons')
 		->get(); 
@@ -55,15 +143,16 @@ public function ajax_index(Request $request) {
 
 
 		//商品情報
-		// $products = DB::table('products')
-		// ->get();
-		$products = Product::query()->get();
+		$products = DB::table('products')
+		->get();
+		// $products = Product::query()->get();
 		$products->prepend(['products_name'=>'']);//先頭に配列を追加
 
 
 		//顧客管理	
 		$customers = DB::table('customers')
 		->get();	
+		// $customers = Customer::query()->get();
 		
 		//外注用
 		$users = DB::table('users')
@@ -79,11 +168,12 @@ public function ajax_index(Request $request) {
 		->get();	
 		
 		//注文
-		$orders = DB::table('orders')
-		->where('is_delete','=',0)//論理削除されてないもの
-		->where('orders_is_reserve_finished','=',0)
-		->get();	
-		
+
+		// $orders = Order::query()
+		// ->where('is_delete','=',0)//論理削除されてないもの
+		// ->where('orders_is_reserve_finished','=',0)
+		// ->get();	
+				
 		//順番とIDを取得（vueで値を表示する為に必須）
 		$orders_id=[];
 		if(!empty($orders)){
@@ -109,6 +199,8 @@ public function ajax_index(Request $request) {
 		"orders_id"=>$orders_id
 	];
 }
+
+
 
 
 

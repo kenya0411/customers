@@ -13,6 +13,7 @@
 				fortunes: '',
 				users: '',
 				orders_id: '',
+				orders_list: [],
 				isActive: false,//モーダル用
 				name_check: '',//名前確認用
 				is_loaded: false,
@@ -24,6 +25,30 @@
 			moment: function (date) {
 				return moment(date).format('YYYY/MM/DD')
 			},
+			test(id,index){
+				let url = '/reserves/ajax_test';
+				console.log(id)
+				
+			axios.post(url, {
+				id: id,
+				index: index,
+			})
+			.then(response => [
+					this.orders_list[index] = response.data.orders,
+					console.log(response.data.orders),
+					
+					// this.orders_id[index] = response.data.orders_id,
+
+					// this.persons[index] = response.data.persons,
+					// this.products[index] = response.data.products,
+					// this.products_options[index] = response.data.products_options,
+					// this.users[index] = response.data.users,
+					// this.customers[index] = response.data.customers,
+					// this.fortunes[index] = response.data.fortunes,
+					// this.is_loaded = true,
+				])
+			.catch(error => console.log(error)) 
+		},		
 			//モーダルウインドウ（名前チェック用）
 			modal_open(id) {
 				this.isActive = true

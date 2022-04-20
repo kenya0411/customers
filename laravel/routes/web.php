@@ -147,6 +147,7 @@ Route::get('reserves', 'ReserveController@index');
 Route::post('reserves', 'ReserveController@post');
 
 Route::get('reserves/ajax', 'ReserveController@ajax_index');
+Route::post('reserves/ajax_test', 'ReserveController@ajax_index_test');
 Route::post('reserves/ajax_update', 'ReserveController@ajax_update');
 
 Route::get('reserves/ajax_clipboard_copy', 'ReserveController@ajax_clipboard_copy');//クリップボードコピー用
