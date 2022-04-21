@@ -6,13 +6,7 @@
 		el: '.main_content',
 		data () {
 			return {
-				persons: [], 
-				products: '',
-				products_options: '',
-				orders: '',
-				fortunes: [],
 				users: '',
-				orders_id: '',
 				orders_list: [],
 				isActive: false,//モーダル用
 				name_check: '',//名前確認用
@@ -25,26 +19,15 @@
 			moment: function (date) {
 				return moment(date).format('YYYY/MM/DD')
 			},
-			test(){
-				let url = '/reserves/ajax_test';
+			async load_page(){
+				let url = '/reserves/ajax';
 				
 			axios.post(url, {
 			})
 			.then(response => [
-					
 					this.orders_list = response.data.orders_list,
-					// this.orders = response.data.orders,
-
-					// this.persons = response.data.persons,
-					// this.products = response.data.products,
-					// this.products_options = response.data.products_options,
-					// this.users = response.data.users,
-					// this.customers = response.data.customers,
-					// this.fortunes = response.data.fortunes,
+					this.users = response.data.users,
 					this.is_loaded = true,
-					console.log(this.orders_list ),
-					
-					
 				])
 			.catch(error => console.log(error)) 
 		},		
@@ -99,27 +82,7 @@
 					])
 				.catch(error => console.log(error))
 			},
-			//ロード時にデータベースから情報を取得
-			async load_page() {
-				let url = '/reserves/ajax';
-				await axios.get(url)
-				.then(response => [
-					this.orders = response.data.orders,
-					// this.orders_id = response.data.orders_id,
 
-					// this.persons = response.data.persons,
-					// this.products = response.data.products,
-					// this.products_options = response.data.products_options,
-					// this.users = response.data.users,
-					// this.customers = response.data.customers,
-					// this.fortunes = response.data.fortunes,
-					this.is_loaded = true,
-					
-
-					])
-				.catch(error => console.log(error))
-
-			},
 
 			//データベースに上書き
 		listUpdate(name,id,index) {
@@ -128,13 +91,14 @@
 			
 			axios.post(url, {
 				id: id,
-				fortunes_worry: this.fortunes[id - 1].fortunes_worry,
-				fortunes_answer: this.fortunes[id - 1].fortunes_answer,
-				orders_notice: this.orders[index].orders_notice,
-				users_id: this.orders[index].users_id,
-				orders_is_ship_finished: this.orders[index].orders_is_ship_finished,
+				fortunes_worry: this.orders_list[index].fortunes.fortunes_worry,
+				fortunes_answer: this.orders_list[index].fortunes.fortunes_answer,
+				orders_notice: this.orders_list[index].orders.orders_notice,
+				users_id: this.orders_list[index].users.id,
+				orders_is_ship_finished: this.orders_list[index].orders.orders_is_ship_finished,
 			})
 			.then(response => [
+				
 				])
 			.catch(error => console.log(error)) 
 		}
@@ -142,8 +106,7 @@
 
 	//ロード時にデータベースから情報を取得
 	created:function(){
-	// this.load_page();
-	this.test();
+	this.load_page();
  },
  // 	computed:{
 	// 	get_update_data() {//監視用データをまとめる

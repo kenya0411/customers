@@ -146,9 +146,8 @@ Route::post('orders/add/ajax_add_update', 'OrderController@ajax_add_update');//�
 Route::get('reserves', 'ReserveController@index');
 Route::post('reserves', 'ReserveController@post');
 
-Route::get('reserves/ajax', 'ReserveController@ajax_index');
-Route::get('reserves/ajax_test', 'ReserveController@ajax_index_test');
-Route::post('reserves/ajax_test', 'ReserveController@ajax_index_test');
+// Route::get('reserves/ajax', 'ReserveController@ajax_index');
+Route::post('reserves/ajax', 'ReserveController@ajax_index');
 Route::post('reserves/ajax_update', 'ReserveController@ajax_update');
 
 Route::get('reserves/ajax_clipboard_copy', 'ReserveController@ajax_clipboard_copy');//クリップボードコピー用

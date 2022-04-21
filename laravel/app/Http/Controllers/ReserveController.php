@@ -48,7 +48,7 @@ public function index(Request $request)
 /*--------------------------------------------------- */
 /* 一覧画面のajax
 /*--------------------------------------------------- */
-public function ajax_index(Request $request) {
+public function ajaindex(Request $request) {
 
 		// //鑑定士
 		// $persons = DB::table('persons')
@@ -121,23 +121,13 @@ public function ajax_index(Request $request) {
 
 
 /*--------------------------------------------------- */
-/* 一覧画面のajaxtest
+/* 一覧画面のajax
 /*--------------------------------------------------- */
-public function ajax_index_test(Request $request) {
+public function ajax_index(Request $request) {
 
 	
 
-		// $orders = DB::table('orders')
-		// ->where('id','=',$request->id)
-		// ->get();
-
-		// $test = $request->id;
-
-		// //鑑定結果	
-		// $fortunes = DB::table('fortunes')
-		// ->where('id','=',$request->id)
-		// ->get();	
-		
+	
 		//注文
 	
 		$orders = Order::query()
@@ -145,60 +135,16 @@ public function ajax_index_test(Request $request) {
 		->where('orders_is_reserve_finished','=',0)
 		->get();
 	
-		$orders_id=[];
-		$customers_id=[];
-		$persons_id=[];
-		$products_id=[];
-		$fortunes_id=[];
-		if(!empty($orders)){
-
-		foreach ($orders as $key => $value) {
-				$orders_id[] = array(
-						'index' => $key,
-						'id' => $value->id,
-				);
-			$fortunes_id[$key] = $value->id;
-			$customers_id[$key] = $value->customers_id;
-			$persons_id[$key] = $value->persons_id;
-			$products_id[$key] = $value->products_id;
-
-		}
-		}
-
+	
 		$orders_list = [];
 
-		//鑑定士
-		$persons = DB::table('persons')
-		->get(); 
 
 
-
-		// //商品情報
-		$products = DB::table('products')
-		->get();
-		// $products = Product::query()->get();
-
-
-		//顧客管理	
-		$customers = DB::table('customers')
-		->whereIn('customers_id',$customers_id)//論理削除されてないもの
-		->get();	
-		// $customers = Customer::query()->get();
-		
 		//外注用
 		$users = DB::table('users')
 		->where('permissions_id','=',2)//論理削除されてないもの
 		->get(); 
 
-		//追加オプション
-		$products_options = DB::table('products_options')
-		->get();
-
-		//鑑定結果	
-		$fortunes = DB::table('fortunes')
-		->whereIn('id',$fortunes_id)//論理削除されてないもの
-		->get();	
-			$orders_id=[];
 
 
 		if(!empty($orders)){
@@ -206,38 +152,48 @@ public function ajax_index_test(Request $request) {
 
 				foreach ($orders as $key => $value) {
 					//商品情報
-					$keyIndex = array_search($value->products_id, array_column((array)$products, 'products_id'));
-					$result_produts = $products[$keyIndex];
+					$products_data = DB::table('products')
+					->where('products_id',$value->products_id)
+					->get();	
 
-					//顧客情報
-					$keyIndex = array_search($value->customers_id, array_column((array)$customers, 'customers_id'));
-					$result_customers = $customers[$keyIndex];
+					// //顧客情報
+					$customers_data = DB::table('customers')
+					->where('customers_id',$value->customers_id)
+					->get();	
 
 					//鑑定士
-					$keyIndex = array_search($value->persons_id, array_column((array)$persons, 'persons_id'));
-					$result_persons = $persons[$keyIndex];
+					$persons_data = DB::table('persons')
+					->where('persons_id',$value->persons_id)
+					->get(); 
 
 					//外注者
-					$keyIndex = array_search($value->users_id, array_column((array)$users, 'id'));
-					$result_users = $users[$keyIndex];
+					$users_data = DB::table('users')
+					->where('id',$value->users_id)
+					->get(); 
 
 					//オプション
-					$keyIndex = array_search($value->products_options_id, array_column((array)$products_options, 'products_options_id'));
-					$result_products_options = $products_options[$keyIndex];
+					$products_options_data = DB::table('products_options')
+					->where('products_options_id',$value->products_options_id)
+					->get();
+
 
 					//鑑定内容
-					$keyIndex = array_search($value->id, array_column((array)$fortunes, 'id'));
-					$result_fortunes = $fortunes[$keyIndex];
+					$fortunes_data = DB::table('fortunes')
+					->where('id',$value->id)
+					->get();	
 
-
+					//空の際に配列だけ用意
+					$empty_products = ['products_id'=>0];
+					$empty_products_options = ['products_options_id'=>0];
+					$empty_users = ['id'=>0];
 					$orders_list[$key] =array(
 						'orders' => $value,
-						'products' => $result_produts,
-						'customers' => $result_customers,
-						'fortunes' => $result_fortunes,
-						'products_options' => $result_products_options,
-						'users' => $result_users,
-						'persons' => $result_persons,
+						'customers' => !empty($customers_data[0]) ? $customers_data[0] : 0,
+						'fortunes' => !empty($fortunes_data[0]) ? $fortunes_data[0] : 0,
+						'products_options' => !empty($products_options_data[0]) ? $products_options_data[0] : $empty_products_options,
+						'users' => !empty($users_data[0]) ? $users_data[0] : $empty_users,
+						'persons' => !empty($persons_data[0]) ? $persons_data[0] : 0,
+						'products' => !empty($products_data[0]) ? $products_data[0] : $empty_products,
 					);
 
 
@@ -247,7 +203,7 @@ public function ajax_index_test(Request $request) {
 
 
 		return [
-		// "users"=>$users,
+		"users"=>$users,
 		// "persons"=>$persons,
 		// "products"=>$products,
 		// "products_options"=>$products_options,
@@ -288,11 +244,11 @@ public function ajax_index_test(Request $request) {
 				}
 
 				//備考、外注、発送の上書き
-				if(!empty($request->orders_notice)){
+				// if(!empty($request->orders_notice)){
 						$param2 = [
 								'id' => $request->id,
 								'orders_notice' => $request->orders_notice,
-								'users_id' => $request->users_id,
+								'users_id' => !empty($request->users_id) ? $request->users_id : 0,
 								'orders_is_ship_finished' => $request->orders_is_ship_finished,
 						];
 						DB::update('update orders set 
@@ -301,7 +257,7 @@ public function ajax_index_test(Request $request) {
 								orders_is_ship_finished=:orders_is_ship_finished
 								where id=:id'
 								, $param2); 
-				}
+				// }
 
 
 				// $fortunes = DB::table('fortunes')->get();	
@@ -326,7 +282,7 @@ public function ajax_index_test(Request $request) {
 				
 				//鑑定者
 				$users = DB::table('users')
-				->where('id','=',$orders[0]->users_id)//論理削除されてないもの
+				->where('id','=',!empty($orders[0]->users_id) ? $orders[0]->users_id : 0,)
 				->get(); 
 
 				//商品一覧
@@ -354,9 +310,14 @@ public function ajax_index_test(Request $request) {
 				->get(); 
 
 
+				$html = "";
 //コピー用
-				$html = "■鑑定者\n";
+				if(!empty($users[0])){
+				$html .= "■鑑定者\n";
+
 				$html .= $users[0]->nickname."\n\n";
+
+				}
 				$html .= "■鑑定方法\n";
 				$html .= $products[0]->products_method."\n\n";
 				$html .= "■商品ID\n";
