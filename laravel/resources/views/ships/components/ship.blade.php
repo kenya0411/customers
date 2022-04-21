@@ -17,21 +17,21 @@
      </div> --}}
     </li>
 
-    <li class="flexBodyWrap flexWrap" v-for="(order, index) in orders">
+    <li class="flexBodyWrap flexWrap" v-for="(order, index) in orders_list">
     <div class="countHead">
         No.@{{ index + 1 }}
     </div>
  <div class="mbBlock">
                    <ul class="no1">
 
-                   <li>@{{ customers[order.customers_id - 1].customers_nickname }}</li>
-                    <li>@{{ customers[order.customers_id - 1].customers_name }}</li>
+                   <li>@{{ order.customers.customers_nickname }}</li>
+                    <li>@{{ order.customers.customers_name }}</li>
                 </ul>
                 <div class="no2">
                    <ul>
-                    <li v-if="order.persons_id !== 0">@{{ persons[order.persons_id - 1].persons_name }}</li>
-                    <li v-if="order.products_id !== 0">@{{ products[order.products_id - 1].products_name }}</li>
-                    <li v-if="order.products_options_id !== 0"> @{{ products_options[order.products_options_id - 1].products_options_name}}</li>
+                    <li v-if="order.persons_id !== 0">@{{ order.persons.persons_name }}</li>
+                    <li v-if="order.products_id !== 0">@{{ order.products.products_name }}</li>
+                    <li v-if="order.products_options_id !== 0"> @{{ order.products_options.products_options_name}}</li>
                    
                 </ul>
                 </div>
@@ -49,11 +49,11 @@
         <div class="flexBlock">
             <span class="title">[商品ID]</span>
 
-                            <a v-bind:href="persons[order.persons_id - 1].persons_platform_url + order.orders_id " target="_blank">
+                            <a v-bind:href="order.persons.persons_platform_url + order.orders.orders_id " target="_blank">
                     <div class="icon_wrap">
                         
                     <span>
-                       @{{order.orders_id }} 
+                       @{{order.orders.orders_id }} 
                     </span>
                 <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </div>
@@ -66,11 +66,11 @@
                     
                 <ul>
                     <li v-if="order.customers_id !== 0">
-                    @{{ customers[order.customers_id - 1].customers_nickname }}
+                    @{{ order.customers.customers_nickname }}
                         
                     </li>
                     <li v-if="order.customers_id !== 0">
-                    @{{ customers[order.customers_id - 1].customers_name }}
+                    @{{ order.customers.customers_name }}
                         
                     </li>
                 </ul>
@@ -79,9 +79,9 @@
         <div class="flexBlock">
             <span class="title">[商品情報]</span>
                         <ul>
-                    <li v-if="order.persons_id !== 0">@{{ persons[order.persons_id - 1].persons_name }}</li>
-                    <li v-if="order.products_id !== 0">@{{ products[order.products_id - 1].products_name }}</li>
-                    <li v-if="order.products_options_id !== 0"> @{{ products_options[order.products_options_id - 1].products_options_name}}</li>
+                    <li v-if="order.persons_id !== 0">@{{ order.persons.persons_name }}</li>
+                    <li v-if="order.products_id !== 0">@{{ order.products.products_name }}</li>
+                    <li v-if="order.products_options_id !== 0"> @{{ order.products_options.products_options_name}}</li>
                    
                 </ul>
         </div>
@@ -95,20 +95,27 @@
     <div class="flex5 no2">
           <div class="flexBlock">
 
+ {{--            <span class="title">[鑑定書の名前]</span>
+            <input type="text"
+            v-model="order.ships.ships_is_other_name"
+            v-on:keyup.enter.v.backspace="listUpdate(order.orders.id,order.orders.id)" 
+            v-on:change="listUpdate(order.orders.id,order.orders.id)"
+            v-on:mouseleave="listUpdate(order.orders.id,order.orders.id)"
+            > --}}
             <span class="title">[鑑定書の名前]</span>
             <input type="text"
-            v-model="ships[orders_id[index].id].ships_is_other_name"
-            v-on:keyup.enter.v.backspace="listUpdate(order.id,order.id)" 
-            v-on:change="listUpdate(order.id,order.id)"
-            v-on:mouseleave="listUpdate(order.id,order.id)"
-            >
+            v-model="order.ships.ships_is_other_name"
+            v-on:keyup.enter.v.backspace="listUpdate(order.orders.id,index)" 
+            v-on:change="listUpdate(order.orders.id,index)"
+            v-on:mouseleave="listUpdate(order.orders.id,index)"
+            > 
         </div>
               <div class="flexBlock">
 
             <span class="title">[住所]</span>
 
             <textarea id="address_block" readonly 
-             v-model="customers[order.customers_id - 1].customers_address"
+             v-model="order.customers.customers_address"
             ></textarea>
         </div>
 
@@ -117,17 +124,17 @@
             <span class="title">[鑑定結果]</span>
 
             <textarea name="" id="" readonly 
-            v-model="fortunes[orders_id[index].id - 1].fortunes_answer"
-            >@{{ fortunes[orders_id[index].index].fortunes_answer }}</textarea>
+            v-model="order.fortunes.fortunes_answer"
+            >@{{ order.fortunes.fortunes_answer }}</textarea>
     </div>
 <div class="flex5 no4">
           <div class="flexBlock">
             <span class="title">[追加の商品1]</span>
             <input type="text" 
-            v-model="ships[orders_id[index].id].ships_add_product1"
-            v-on:keyup.enter.v.backspace="listUpdate(order.id)" 
-            v-on:change="listUpdate(order.id)"
-            v-on:mouseleave="listUpdate(order.id)"
+            v-model="order.ships.ships_add_product1"
+            v-on:keyup.enter.v.backspace="listUpdate(order.orders.id,index)" 
+            v-on:change="listUpdate(order.orders.id,index)"
+            v-on:mouseleave="listUpdate(order.orders.id,index)"
             >
 
         </div>
@@ -135,27 +142,27 @@
           <div class="flexBlock">
             <span class="title">[追加の商品2]</span>
             <input type="text" 
-            v-model="ships[orders_id[index].id].ships_add_product2"
-            v-on:keyup.enter.v.backspace="listUpdate(order.id)" 
-            v-on:change="listUpdate(order.id)"
-            v-on:mouseleave="listUpdate(order.id)"
+            v-model="order.ships.ships_add_product2"
+            v-on:keyup.enter.v.backspace="listUpdate(order.orders.id,index)" 
+            v-on:change="listUpdate(order.orders.id,index)"
+            v-on:mouseleave="listUpdate(order.orders.id,index)"
             >
         </div>
           <div class="flexBlock">
             <span class="title">[追加の商品3]</span>
             <input type="text" 
-            v-model="ships[orders_id[index].id].ships_add_product3"
-            v-on:keyup.enter.v.backspace="listUpdate(order.id)" 
-            v-on:change="listUpdate(order.id)"
-            v-on:mouseleave="listUpdate(order.id)"
+            v-model="order.ships.ships_add_product3"
+            v-on:keyup.enter.v.backspace="listUpdate(order.orders.id,index)" 
+            v-on:change="listUpdate(order.orders.id,index)"
+            v-on:mouseleave="listUpdate(order.orders.id,index)"
             >
         </div>
          <div class="flexBlock">
             <span class="title">[発送時の備考]</span>
-            <textarea class="ships_notice" id="" v-model="ships[orders_id[index].id].ships_notice" 
-            v-on:keyup.enter.v.backspace="listUpdate(order.id)" 
-            v-on:change="listUpdate(order.id)"
-            v-on:mouseleave="listUpdate(order.id)"
+            <textarea class="ships_notice" id="" v-model="order.ships.ships_notice" 
+            v-on:keyup.enter.v.backspace="listUpdate(order.orders.id,index)" 
+            v-on:change="listUpdate(order.orders.id,index)"
+            v-on:mouseleave="listUpdate(order.orders.id,index)"
             >
         </textarea>
         </div>
@@ -168,23 +175,23 @@
 
 
             <div class="btnFlex4 number3">
-                <a  v-bind:href='`/orders/detail/?id=${order.id}`' class="text_wrap">
+                <a  v-bind:href='`/orders/detail/?id=${order.orders.id}`' class="text_wrap">
 
                     編集ページ<i class="fa-solid fa-pencil"></i></a>
             </div>
             <div class="btnFlex4 number4" 
-            v-if="ships[orders_id[index].id].orders_is_ship_shipped == 0">
+            v-if="order.ships.orders_is_ship_shipped == 0">
 
                     <button 
-                    v-on:click="ship_shipped(order.id)"
+                    v-on:click="ship_shipped(order.orders.id)"
                     >発送完了<i class="fa-solid fa-paper-plane"></i></button>
             </div>
             <div class="btnFlex4 number5"  
-            v-if="ships[orders_id[index].id].orders_is_ship_shipped == '1'">
+            v-if="order.ships.orders_is_ship_shipped == '1'">
     
 
                     <button 
-                    v-on:click="ship_finished(order.id)"
+                    v-on:click="ship_finished(order.orders.id)"
                     >発送報告完了<i class="fa-solid fa-bullhorn"></i></button>
             </div>
 

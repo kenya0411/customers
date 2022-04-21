@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Users;
 use App\Ship;
+use App\Order;
 
 // use App\Http\Requests\HelloRequest;バリデーション用
 use Illuminate\Http\Request;
@@ -38,6 +39,14 @@ public function index(Request $request)
 
 
 
+public function add_variable($request,$orders){
+
+     $param = ['is_delete' => 0];
+     $persons = DB::select('select * from persons');
+     $orders = DB::select('select * from orders where is_delete=:is_delete', $param);
+     return view($redirect)->with('orders', $orders)->with('persons', $persons);
+ }
+
 
 
 
@@ -47,69 +56,159 @@ public function index(Request $request)
 /*--------------------------------------------------- */
 public function ajax_index(Request $request) {
 
-    //鑑定士
-    $persons = DB::table('persons')
-    ->get(); 
+    // //鑑定士
+    // $persons = DB::table('persons')
+    // ->get(); 
 
 
 
-    //商品情報
-    $products = DB::table('products')
-    ->get();
+    // //商品情報
+    // $products = DB::table('products')
+    // ->get();
 
-    //顧客管理   
-    $customers = DB::table('customers')
-    ->get();   
+    // //顧客管理   
+    // $customers = DB::table('customers')
+    // ->get();   
     
-    //外注用
-    $users = DB::table('users')
-        ->where('permissions_id','=',2)//論理削除されてないもの
-        ->get(); 
+    // //外注用
+    // $users = DB::table('users')
+    //     ->where('permissions_id','=',2)//論理削除されてないもの
+    //     ->get(); 
 
-        //追加オプション
-        $products_options = DB::table('products_options')
-        ->get();
+    //     //追加オプション
+    //     $products_options = DB::table('products_options')
+    //     ->get();
 
-        //鑑定結果   
-        $fortunes = DB::table('fortunes')
-        ->get();   
+    //     //鑑定結果   
+    //     $fortunes = DB::table('fortunes')
+    //     ->get();   
         
+    //     //注文
+    //     $orders = DB::table('orders')
+    //     ->where('is_delete','=',0)//論理削除されてないもの
+    //     ->where('orders_is_ship_finished','=',0)
+    //     ->where('orders_is_reserve_finished','=',1)
+    //     ->get(); 
+
+    //       //注文
+    //     $ships = Ship::query()->get();
+    //     $ships->prepend(['orders_is_ship_finished'=>1]);//先頭に配列を追加
+
+    //     //順番とIDを取得（vueで値を表示する為に必須）
+    //     $orders_id=[];
+    //     if(!empty($orders)){
+    //         foreach ($orders as $key => $value) {
+    //             $orders_id[] = array(
+    //                 'index' => $key,
+    //                 'id' => $value->id,
+    //             );
+
+    //         }
+    //     }
+
+        
+
+    //     return [
+    //         // "users"=>$users,
+    //         "persons"=>$persons,
+    //         "products"=>$products,
+    //         "products_options"=>$products_options,
+    //         "orders"=>$orders,
+    //         "customers"=>$customers,
+    //         "fortunes"=>$fortunes,
+    //         "orders_id"=>$orders_id,
+    //         "ships"=>$ships
+    //     ];
+
+  
+
+    
         //注文
-        $orders = DB::table('orders')
+    
+        $orders = Order::query()
         ->where('is_delete','=',0)//論理削除されてないもの
         ->where('orders_is_ship_finished','=',0)
-        ->where('orders_is_reserve_finished','=',1)
+        ->get();
+    
+    
+
+
+
+        //外注用
+        $persons = DB::table('persons')
+        ->where('is_delete','=',0)//論理削除されてないもの
+        ->whereIn('persons_id',[1,3])//論理削除されてないもの
         ->get(); 
 
-          //注文
-        $ships = Ship::query()->get();
-        $ships->prepend(['orders_is_ship_finished'=>1]);//先頭に配列を追加
 
-        //順番とIDを取得（vueで値を表示する為に必須）
-        $orders_id=[];
+        $orders_list = [];
+
         if(!empty($orders)){
-            foreach ($orders as $key => $value) {
-                $orders_id[] = array(
-                    'index' => $key,
-                    'id' => $value->id,
-                );
+                foreach ($orders as $key => $value) {
+                    //商品情報
+                    $products_data = DB::table('products')
+                    ->where('products_id',$value->products_id)
+                    ->get();    
 
-            }
+                    // //顧客情報
+                    $customers_data = DB::table('customers')
+                    ->where('customers_id',$value->customers_id)
+                    ->get();    
+
+                    //鑑定士
+                    $persons_data = DB::table('persons')
+                    ->where('persons_id',$value->persons_id)
+                    ->get(); 
+
+                    //外注者
+                    $users_data = DB::table('users')
+                    ->where('id',$value->users_id)
+                    ->get(); 
+
+                    //オプション
+                    $products_options_data = DB::table('products_options')
+                    ->where('products_options_id',$value->products_options_id)
+                    ->get();
+
+
+                    //鑑定内容
+                    $fortunes_data = DB::table('fortunes')
+                    ->where('id',$value->id)
+                    ->get();    
+
+                    //鑑定内容
+                    $ships_data = DB::table('ships')
+                    ->where('id',$value->id)
+                    ->get();
+
+                    //空の際に配列だけ用意
+                    $empty_products = ['products_id'=>0];
+                    $empty_products_options = ['products_options_id'=>0];
+                    $empty_users = ['id'=>0];
+                    //配列を追加
+                    $orders_list[$key] =array(
+                        'orders' => $value,
+                        'customers' => !empty($customers_data[0]) ? $customers_data[0] : 0,
+                        'fortunes' => !empty($fortunes_data[0]) ? $fortunes_data[0] : 0,
+                        'products_options' => !empty($products_options_data[0]) ? $products_options_data[0] : $empty_products_options,
+                        'users' => !empty($users_data[0]) ? $users_data[0] : $empty_users,
+                        'persons' => !empty($persons_data[0]) ? $persons_data[0] : 0,
+                        'products' => !empty($products_data[0]) ? $products_data[0] : $empty_products,
+                        'ships' => !empty($ships_data[0]) ? $ships_data[0] : 0,
+                    );
+
+
+                }
         }
 
-        
+
 
         return [
-            // "users"=>$users,
-            "persons"=>$persons,
-            "products"=>$products,
-            "products_options"=>$products_options,
-            "orders"=>$orders,
-            "customers"=>$customers,
-            "fortunes"=>$fortunes,
-            "orders_id"=>$orders_id,
-            "ships"=>$ships
-        ];
+        "orders_list"=>$orders_list,
+        "persons"=>$persons
+    ];
+
+
     }
 
 
@@ -120,32 +219,86 @@ public function ajax_search(Request $request) {
 
  
         //注文
-        $orders = DB::table('orders')
-        ->where('is_delete','=',0)//論理削除されてないもの
-        ->where('orders_is_ship_finished','=',0)
-        ->where('orders_is_reserve_finished','=',1)
-        ->where('persons_id','=',$request->persons_id)
-        ->get(); 
-
-
-        //順番とIDを取得（vueで値を表示する為に必須）
-        $orders_id=[];
-        if(!empty($orders)){
-            foreach ($orders as $key => $value) {
-                $orders_id[] = array(
-                    'index' => $key,
-                    'id' => $value->id,
-                );
-
-            }
+        $orders = DB::table('orders');
+        $orders =$orders->where('is_delete','=',0);
+        $orders =$orders->where('orders_is_ship_finished','=',0);
+        $orders =$orders->where('orders_is_reserve_finished','=',1);
+        if (!empty($request->persons_id)) {
+        $orders =$orders->where('persons_id','=',$request->persons_id);
         }
+        $orders =$orders->get(); 
+
+
+
+  
+
+
+        $orders_list = [];
+        if(!empty($orders)){
+                foreach ($orders as $key => $value) {
+                    //商品情報
+                    $products_data = DB::table('products')
+                    ->where('products_id',$value->products_id)
+                    ->get();    
+
+                    // //顧客情報
+                    $customers_data = DB::table('customers')
+                    ->where('customers_id',$value->customers_id)
+                    ->get();    
+
+                    //鑑定士
+                    $persons_data = DB::table('persons')
+                    ->where('persons_id',$value->persons_id)
+                    ->get(); 
+
+                    //外注者
+                    $users_data = DB::table('users')
+                    ->where('id',$value->users_id)
+                    ->get(); 
+
+                    //オプション
+                    $products_options_data = DB::table('products_options')
+                    ->where('products_options_id',$value->products_options_id)
+                    ->get();
+
+
+                    //鑑定内容
+                    $fortunes_data = DB::table('fortunes')
+                    ->where('id',$value->id)
+                    ->get();    
+
+                    //鑑定内容
+                    $ships_data = DB::table('ships')
+                    ->where('id',$value->id)
+                    ->get();
+
+                    //空の際に配列だけ用意
+                    $empty_products = ['products_id'=>0];
+                    $empty_products_options = ['products_options_id'=>0];
+                    $empty_users = ['id'=>0];
+                    //配列を追加
+                    $orders_list[$key] =array(
+                        'orders' => $value,
+                        'customers' => !empty($customers_data[0]) ? $customers_data[0] : 0,
+                        'fortunes' => !empty($fortunes_data[0]) ? $fortunes_data[0] : 0,
+                        'products_options' => !empty($products_options_data[0]) ? $products_options_data[0] : $empty_products_options,
+                        'users' => !empty($users_data[0]) ? $users_data[0] : $empty_users,
+                        'persons' => !empty($persons_data[0]) ? $persons_data[0] : 0,
+                        'products' => !empty($products_data[0]) ? $products_data[0] : $empty_products,
+                        'ships' => !empty($ships_data[0]) ? $ships_data[0] : 0,
+                    );
+
+
+                }
+        }
+
 
         
 
+ 
         return [
-            "orders"=>$orders,
-            "orders_id"=>$orders_id,
-        ];
+        "orders_list"=>$orders_list,
+    ];
     }
 
 

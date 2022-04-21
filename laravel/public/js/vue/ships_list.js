@@ -7,12 +7,7 @@
 		data () {
 			return {
 				persons: '', 
-				products: '',
-				products_options: '',
-				orders: '',
-				fortunes: '',
-				orders_id: '',
-				ships: '',
+				orders_list: [],
 				search_persons: 0,
 			is_loaded: false,
 
@@ -59,16 +54,11 @@
 				let url = '/ships/ajax';
 				axios.get(url)
 				.then(response => [
-					this.orders = response.data.orders,
+					this.orders_list = response.data.orders_list,
 					this.persons = response.data.persons,
-					this.products = response.data.products,
-					this.products_options = response.data.products_options,
-					this.customers = response.data.customers,
-					this.fortunes = response.data.fortunes,
-					this.ships = response.data.ships,
-					this.orders_id = response.data.orders_id,
 					this.is_loaded = true,
-
+					console.log(this.orders_list )
+					
 					])
 				.catch(error => console.log(error))
 
@@ -84,8 +74,9 @@
 					persons_id: this.search_persons,
 				})
 				.then(response => [
-					this.orders_id = response.data.orders_id,
-					this.orders = response.data.orders,
+					// this.orders_id = response.data.orders_id,
+					// this.orders = response.data.orders,
+					this.orders_list = response.data.orders_list,
 
 					])
 				.catch(error => console.log(error))				
@@ -94,17 +85,17 @@
 
 			},
 			//データベースに上書き
-			listUpdate(id) {
+			listUpdate(id,index) {
 				
 				let url = '/ships/ajax_update/';
 				
 				axios.post(url, {
 					id: id,
-					ships_is_other_name: this.ships[id].ships_is_other_name,
-					ships_notice: this.ships[id].ships_notice,
-					ships_add_product1: this.ships[id].ships_add_product1,
-					ships_add_product2: this.ships[id].ships_add_product2,
-					ships_add_product3: this.ships[id].ships_add_product3,
+					ships_is_other_name: this.orders_list[index].ships.ships_is_other_name,
+					ships_notice: this.orders_list[index].ships.ships_notice,
+					ships_add_product1: this.orders_list[index].ships.ships_add_product1,
+					ships_add_product2: this.orders_list[index].ships.ships_add_product2,
+					ships_add_product3: this.orders_list[index].ships.ships_add_product3,
 				})
 				.then(response => [
 

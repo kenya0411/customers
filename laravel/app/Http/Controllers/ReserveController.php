@@ -45,77 +45,77 @@ public function index(Request $request)
 
 
 
-/*--------------------------------------------------- */
-/* 一覧画面のajax
-/*--------------------------------------------------- */
-public function ajaindex(Request $request) {
+// /*--------------------------------------------------- */
+// /* 一覧画面のajax
+// /*--------------------------------------------------- */
+// public function ajaindex(Request $request) {
 
-		// //鑑定士
-		// $persons = DB::table('persons')
-		// ->get(); 
-
-
-
-		// //商品情報
-		// $products = DB::table('products')
-		// ->get();
-		// // $products = Product::query()->get();
-		// $products->prepend(['products_name'=>'']);//先頭に配列を追加
+// 		// //鑑定士
+// 		// $persons = DB::table('persons')
+// 		// ->get(); 
 
 
-		// //顧客管理	
-		// $customers = DB::table('customers')
-		// ->get();	
-		// // $customers = Customer::query()->get();
+
+// 		// //商品情報
+// 		// $products = DB::table('products')
+// 		// ->get();
+// 		// // $products = Product::query()->get();
+// 		// $products->prepend(['products_name'=>'']);//先頭に配列を追加
+
+
+// 		// //顧客管理	
+// 		// $customers = DB::table('customers')
+// 		// ->get();	
+// 		// // $customers = Customer::query()->get();
 		
-		// //外注用
-		// $users = DB::table('users')
-		// ->where('permissions_id','=',2)//論理削除されてないもの
-		// ->get(); 
+// 		// //外注用
+// 		// $users = DB::table('users')
+// 		// ->where('permissions_id','=',2)//論理削除されてないもの
+// 		// ->get(); 
 
-		// //追加オプション
-		// $products_options = DB::table('products_options')
-		// ->get();
+// 		// //追加オプション
+// 		// $products_options = DB::table('products_options')
+// 		// ->get();
 
-		// //鑑定結果	
-		// $fortunes = DB::table('fortunes')
-		// ->get();	
+// 		// //鑑定結果	
+// 		// $fortunes = DB::table('fortunes')
+// 		// ->get();	
 		
-		//注文
-		$orders = DB::table('orders')
-		->where('is_delete','=',0)//論理削除されてないもの
-		->where('orders_is_reserve_finished','=',0)
-		->get();	
-		// $orders = Order::query()
-		// ->where('is_delete','=',0)//論理削除されてないもの
-		// ->where('orders_is_reserve_finished','=',0)
-		// ->get();	
+// 		//注文
+// 		$orders = DB::table('orders')
+// 		->where('is_delete','=',0)//論理削除されてないもの
+// 		->where('orders_is_reserve_finished','=',0)
+// 		->get();	
+// 		// $orders = Order::query()
+// 		// ->where('is_delete','=',0)//論理削除されてないもの
+// 		// ->where('orders_is_reserve_finished','=',0)
+// 		// ->get();	
 				
-		//順番とIDを取得（vueで値を表示する為に必須）
-		// $orders_id=[];
-		// if(!empty($orders)){
-		// 		foreach ($orders as $key => $value) {
-		// 				$orders_id[] = array(
-		// 						'index' => $key,
-		// 						'id' => $value->id,
-		// 				);
+// 		//順番とIDを取得（vueで値を表示する為に必須）
+// 		// $orders_id=[];
+// 		// if(!empty($orders)){
+// 		// 		foreach ($orders as $key => $value) {
+// 		// 				$orders_id[] = array(
+// 		// 						'index' => $key,
+// 		// 						'id' => $value->id,
+// 		// 				);
 
-		// 		}
-		// }
+// 		// 		}
+// 		// }
 
 		
 
-		return [
-		// "users"=>$users,
-		// "persons"=>$persons,
-		// "products"=>$products,
-		// "products_options"=>$products_options,
-		"orders"=>$orders,
-		// "customers"=>$customers,
-		// "fortunes"=>$fortunes,
-		// "orders_id"=>$orders_id
-	];
-}
+// 		return [
+// 		// "users"=>$users,
+// 		// "persons"=>$persons,
+// 		// "products"=>$products,
+// 		// "products_options"=>$products_options,
+// 		"orders"=>$orders,
+// 		// "customers"=>$customers,
+// 		// "fortunes"=>$fortunes,
+// 		// "orders_id"=>$orders_id
+// 	];
+// }
 
 
 
@@ -293,7 +293,7 @@ public function ajax_index(Request $request) {
 				//商品オプション
 				if(!empty($orders[0]->products_options_id)){
 
-						$products_options = DB::table('products_options')
+				$products_options = DB::table('products_options')
 				->where('products_options_id','=',$orders[0]->products_options_id)//論理削除されてないもの
 				->get();	
 				$products_options_detail = $products_options[0]->products_options_detail;
@@ -311,28 +311,37 @@ public function ajax_index(Request $request) {
 
 
 				$html = "";
-//コピー用
+				//コピー用
 				if(!empty($users[0])){
 				$html .= "■鑑定者\n";
-
 				$html .= $users[0]->nickname."\n\n";
-
 				}
+
 				$html .= "■鑑定方法\n";
+				if(!empty($products[0]->products_method)){
 				$html .= $products[0]->products_method."\n\n";
+				}
 				$html .= "■商品ID\n";
 				$html .= $orders[0]->orders_id."\n\n";
 				$html .= "■悩みのジャンル\n";
+				if(!empty($products[0])){
+
 				$html .= $products[0]->products_name."\n\n";
+			}
 				$html .= "■ご相談内容\n";
 				$html .= $fortunes[0]->fortunes_worry."\n\n";
 				$html .= "■鑑定内容\n\n";
 				$html .= "■商品自体の内容\n";
+				if(!empty($products[0]->products_detail)){
+
 				$html .= $products[0]->products_detail."\n";
+				}
 				$html .= $products_options_detail."\n\n";
 				$html .= "■備考\n";
+				if(!empty($orders[0]->orders_notice)){
+
 				$html .= $orders[0]->orders_notice."\n\n";
-				
+				}
 
 				return ["html"=>$html];
 		}
@@ -356,11 +365,14 @@ public function ajax_reserve_ship(Request $request)
 				, $param); 
 
 		//注文情報を追加
-		$ships = new Ship();
-		$ships->create([
-			'id' => $request->id,
-			'orders_is_ship_finished' => 0,
-		]);
+		// $ships = new Ship();
+		Ship::upsert([
+			[
+				'id' => $request->id,
+			'orders_is_ship_finished' => 0
+			]
+		],
+		['id']);
 
 }
 

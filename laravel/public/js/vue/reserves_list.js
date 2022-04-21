@@ -74,6 +74,7 @@
 			//クリップボードに保存
 			copyToClipboard(id) {
 				let url = '/reserves/ajax_clipboard_copy?id='+id;
+				console.log(id)
 				
 				axios.get(url)
 				.then(response => [
