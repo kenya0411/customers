@@ -1602,6 +1602,10 @@ main .addbtn a, main .commonBtn a {
   padding: 8px 16px;
 }
 
+[disabled="true"] {
+  pointer-events: none;
+}
+
 main {
   margin-bottom: 70px;
 }

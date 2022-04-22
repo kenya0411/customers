@@ -26,17 +26,30 @@ const hoge = {
 			modal_answer_is: false,//モーダル用
 			modal_reply_is: false,//モーダル用
 			total_price: 0,//月の合計料金
-			range: 8,
+			range: 0,
+			first_range: 8,
 			front_dot: false,
 			is_loaded: false,
 			end_dot: false,
-
+			processing: false,
 		}
 	},
 	methods: {	
 		moment: function (date) {
 			return moment(date).format("MM月DD日")
 		},
+			/*--------------------------------------------------- */
+			/* isProcessing
+			/*--------------------------------------------------- */
+			isProcessing() {
+				this.isDisabled = true;
+				setTimeout(function () {
+				this.isDisabled = false;
+				console.log('test')
+				
+
+					 }, 2000)
+			},
 			/*--------------------------------------------------- */
 			/* 月の合計料金を出力
 			/*--------------------------------------------------- */
@@ -119,24 +132,28 @@ const hoge = {
 		/* //検索用の情報をデータベースから取得＋ページネーションの情報を取得
 		/*--------------------------------------------------- */		
 		async search_page() {
+				this.processing = true;
 			
 			let url = '/orders/ajax_search';
-			axios.post(url, {
+			 await axios.post(url, {
 				persons_id: this.search_persons,
 				year: this.search_year,
 				month: this.search_month,
 				orders_id: this.search_orders_id,
 				page: this.current_page,
 				customers_name: this.search_customers_name,
-				
 
 			})
 			.then(response => [
 				all = response.data.orders,
+				range = this.first_range,
 				this.orders = response.data.orders.data,
 				this.get_id = response.data.get_id,
 				this.current_page = all.current_page,
 				this.last_page = all.last_page,
+				this.range = this.last_page - 2 < range ?  this.last_page - 5 : range,
+
+				this.processing = false,
 				
 				
 
@@ -177,6 +194,10 @@ const hoge = {
 		this.search_year,
 		this.search_month,
 		this.search_customers_name,
+		];
+	},
+	get_current_page_data() {//監視用データをまとめる
+		return [
 		this.current_page,
 		];
 	},
@@ -219,8 +240,15 @@ const hoge = {
  },
 watch: {
 	get_search_data(val){//監視用
+	this.current_page = 1;
+
 	this.search_page();
 	this.get_total_price();
+
+	},
+	get_current_page_data(val){//監視用
+	this.search_page();
+
 
 	},
  },

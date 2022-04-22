@@ -185,6 +185,7 @@ public function ajax_search(Request $request) {
 
 	return [
 		"orders"=>$orders,
+		"last_page"=>$orders['last_page'],
 		"get_id"=>$get_id,
 	];
 

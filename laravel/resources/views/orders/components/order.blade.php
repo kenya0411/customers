@@ -36,8 +36,8 @@
 			<div class="mbBlock">
 				<ul class="no1">
 
-					<li>@{{ customers[get_id[index].customers_id].customers_nickname }}</li>
-					<li>@{{ customers[get_id[index].customers_id].customers_name }}</li>
+					<li v-if="customers[get_id[index].customers_id]">@{{ customers[get_id[index].customers_id].customers_nickname }}</li>
+					<li v-if="customers[get_id[index].customers_id]">@{{ customers[get_id[index].customers_id].customers_name }}</li>
 				</ul>
 				<div class="no2">
 					<span v-if="order.orders_is_reserve_finished == '1'">鑑定済み<br></span>
@@ -47,7 +47,10 @@
 
 
 				<div class="no2">
+					<span  v-if="persons[get_id[index].persons_id]">
+						
 					@{{ persons[get_id[index].persons_id].persons_name }}
+					</span>
 
 
 				</div>
