@@ -12,6 +12,7 @@ const hoge = {
 			orders: '',
 			customers: '',
 			users: '',
+			fortunes_reply: '',
 			search_persons: 0,//検索用
 			search_orders_id: '',//検索用
 			search_customers_name: '',//検索用
@@ -22,6 +23,8 @@ const hoge = {
 			last_page: "",//ページネーション用
 			isActive: false,//モーダル用
 			modal_fortunes: "",//モーダル用
+			modal_answer_is: false,//モーダル用
+			modal_reply_is: false,//モーダル用
 			total_price: 0,//月の合計料金
 			range: 8,
 			front_dot: false,
@@ -50,10 +53,28 @@ const hoge = {
 				.catch(error => console.log(error))
 			},
 			/*--------------------------------------------------- */
-			/* //モーダルウインドウ（名前チェック用）
+			/* //モーダルウインドウ（鑑定用）
 			/*--------------------------------------------------- */
 			
-			modal_open(id) {
+			modal_open_answer(id) {
+				this.isActive = true
+				this.modal_answer_is = true
+				let url = '/orders/ajax_modal_fortunes';
+				axios.post(url, {
+					id: id,
+				})
+				.then(response => [
+					this.modal_fortunes = response.data.modal_fortunes,
+					])
+				.catch(error => console.log(error))
+			},
+
+			/*--------------------------------------------------- */
+			/* //モーダルウインドウ（お礼用）
+			/*--------------------------------------------------- */
+			
+			modal_open_reply(id) {
+				this.modal_reply_is = true
 				this.isActive = true
 				let url = '/orders/ajax_modal_fortunes';
 				axios.post(url, {
@@ -64,9 +85,14 @@ const hoge = {
 					])
 				.catch(error => console.log(error))
 			},
+			/*--------------------------------------------------- */
+			/*モーダルを閉じる 
+			/*--------------------------------------------------- */
 			modal_close(){
 				this.isActive = false;
 				this.modal_fortunes = '';
+				this.modal_answer_is = false
+				this.modal_reply_is = false
 
 			},
 		/*--------------------------------------------------- */
@@ -83,6 +109,8 @@ const hoge = {
 				this.customers = response.data.customers,
 				this.is_loaded = true,
 				this.users = response.data.users,
+				this.fortunes_reply = response.data.fortunes_reply,
+				
 				])
 			.catch(error => console.log(error))
 

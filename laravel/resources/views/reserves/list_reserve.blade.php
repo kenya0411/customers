@@ -8,7 +8,14 @@
 <div id="loading" v-bind:class=' {close:is_loaded}'>
   <img src="/img/common/loading.gif" >
 </div>
+
+@can('admin')
 @include('reserves.components.reserve')
+
+@elsecan('fortune')
+@include('reserves.components.reserve_fortune')
+
+@endcan
 
 
 @endsection

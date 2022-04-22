@@ -67,10 +67,23 @@
 						
 						])
 					.catch(error => console.log(error)) 
-	
+			}
+		},
+			/*--------------------------------------------------- */
+			/* 編集完了
+			/*--------------------------------------------------- */
+			submit_edit_finish(name,id,index) {
+				//発送の確認
+				if(!confirm('鑑定結果の入力が完了しましたか？')){
+					/* キャンセルの時の処理 */
+					return false;
+				}else{
+					this.listUpdate(name,id,index);
+					location.reload();
 
 			}
 		},
+
 			//クリップボードに保存
 			copyToClipboard(id) {
 				let url = '/reserves/ajax_clipboard_copy?id='+id;

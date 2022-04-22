@@ -55,9 +55,6 @@
 
 </dl>
 
-<div class="btnWrap">
-    <div class="sendBtn pointer" v-on:click="submit_update(orders.id)">編集する</div>
-</div>
 
 </div>
 

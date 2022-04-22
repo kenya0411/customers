@@ -58,9 +58,10 @@
 
    <li class="menu_list">
     <a href="/orders">注文管理</a>
-  
   </li>
-
+   <li class="menu_list">
+    <a href="/reserves">鑑定予約</a>
+  </li>
  
 </ul>
 

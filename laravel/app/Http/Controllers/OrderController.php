@@ -68,7 +68,9 @@ public function ajax_index(Request $request) {
 		$users = DB::table('users')
 		->get(); 
 		$products_options = DB::table('products_options')
-		->get();	 
+		->get();
+		$fortunes_reply = DB::table('fortunes')
+		->pluck('fortunes_reply1');
 				// $orders = DB::table('orders')
 				// ->where('is_delete','=',0)//論理削除されてないもの
 				// ->whereYear('created_at','=',date("Y"))//今年
@@ -81,6 +83,7 @@ public function ajax_index(Request $request) {
 			"users"=>$users,
 			"persons"=>$persons,
 			"products"=>$products,
+			"fortunes_reply"=>$fortunes_reply,
 			"products_options"=>$products_options,
 			"customers"=>$customers];
 }

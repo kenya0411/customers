@@ -897,6 +897,9 @@
   max-height: 300px;
   height: calc(100% - 50px);
 }
+.orderList .modalWindow .wid100 {
+  width: 100%;
+}
 
 @media (max-width: 768px) {
   .listSection .flexWrap .tabInvi {
@@ -1583,6 +1586,10 @@ main .addbtn a, main .commonBtn a {
     display: none;
   }
 }
+.wid100 {
+  width: 100%;
+}
+
 .disabled {
   pointer-events: none;
 }
@@ -1614,6 +1621,10 @@ main input, main textarea {
   padding: 4px 8px;
   line-height: 1em;
   background-color: #eee;
+}
+main input:read-only, main textarea:read-only {
+  background-color: #fff;
+  cursor: default;
 }
 main select {
   border: 1px solid #ddd;
