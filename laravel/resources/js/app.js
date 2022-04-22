@@ -36,11 +36,18 @@ import { createApp } from "vue";
 // import Price from './components/price.vue'
 
 // createApp({
-//     components:{
-//         Price
-//     }
-// }).mount('#price')
+//     methods:{
+//         change_name: function (text) {
+//             let textList = ['けいらん', '恵蘭', '慧蘭','れんれい','レンレイ','恋霊'];
+//                 let result = text;
 
+//             textList.forEach(function(element){
+//                 result = result.replace(element, 'Rise' );
+//         });
+//             return result
+//         },
+//     }
+// }).mount('.textBox')
 
 // import User from './components/User.vue'
 

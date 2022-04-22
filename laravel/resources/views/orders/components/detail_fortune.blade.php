@@ -34,15 +34,24 @@
 
 <dt>悩み</dt>
 <dd>
-    <textarea name="" id="" v-model="fortunes.fortunes_worry" readonly class="textarea1"></textarea>
+    <div class="textBox pre-line textarea1">
+          @{{ change_name(fortunes.fortunes_worry  ) }}
+        
+    </div>
 </dd>
 <dt>鑑定結果</dt>
 <dd>
-    <textarea name="" id="" v-model="fortunes.fortunes_answer" class="textarea1"></textarea>
+        <div class="textBox pre-line textarea1">
+@{{ fortunes.fortunes_answer }}
+        {{--  --}}
+    </div>
 </dd>
 <dt>鑑定後の返信</dt>
 <dd>
-    <textarea name="" id="" v-model="fortunes.fortunes_reply1" class="textarea2"></textarea>
+        <div class="textBox pre-line textarea2" >
+          @{{ change_name(fortunes.fortunes_reply1  ) }}
+
+        </div>
 </dd>
 
 

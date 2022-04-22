@@ -1606,6 +1606,13 @@ main .addbtn a, main .commonBtn a {
   pointer-events: none;
 }
 
+.textBox {
+  max-height: 300px;
+  overflow-y: scroll;
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
 main {
   margin-bottom: 70px;
 }

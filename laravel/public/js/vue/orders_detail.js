@@ -26,6 +26,25 @@
 		moment: function (date) {
 			return moment(date).format('YYYY/MM/DD')
 		},
+		/*--------------------------------------------------- */
+		/* 鑑定士の名前を痴漢
+		/*--------------------------------------------------- */
+		change_name: function (text) {
+			let textList = ['けいらん', '恵蘭', '慧蘭','れんれい','レンレイ','恋霊'];
+				let result = text;
+				
+				if(!result){
+				console.log(text)
+
+
+				}else{
+					textList.forEach(function(element){
+				result = result.replace(element, 'Rise' );
+		});
+			return result			
+				}
+
+		},
 		//ロード時に各種情報をデータベースから取得
 		async load_page() {
 			let url = '/orders/detail/ajax?id='+ params_id;

@@ -38,18 +38,8 @@ const hoge = {
 		moment: function (date) {
 			return moment(date).format("MM月DD日")
 		},
-			/*--------------------------------------------------- */
-			/* isProcessing
-			/*--------------------------------------------------- */
-			isProcessing() {
-				this.isDisabled = true;
-				setTimeout(function () {
-				this.isDisabled = false;
-				console.log('test')
-				
 
-					 }, 2000)
-			},
+
 			/*--------------------------------------------------- */
 			/* 月の合計料金を出力
 			/*--------------------------------------------------- */

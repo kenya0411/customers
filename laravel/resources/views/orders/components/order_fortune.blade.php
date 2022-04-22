@@ -13,7 +13,6 @@
 				<div >顧客情報</div>
 				<div>商品情報</div>
 				<div>担当者</div>
-				<div>日付</div>
 				<div></div>
 			</div>
 
@@ -33,8 +32,8 @@
 			<div class="mbBlock">
 				<ul class="no1">
 
-					<li>@{{ customers[get_id[index].customers_id].customers_nickname }}</li>
-					<li>@{{ customers[get_id[index].customers_id].customers_name }}</li>
+					<li v-if="customers[get_id[index].customers_id]">@{{ customers[get_id[index].customers_id].customers_nickname }}</li>
+					<li v-if="customers[get_id[index].customers_id]">@{{ customers[get_id[index].customers_id].customers_name }}</li>
 				</ul>
 				<div class="no2">
 					<span v-if="order.orders_is_reserve_finished == '1'">鑑定済み<br></span>
@@ -44,8 +43,10 @@
 
 
 				<div class="no2">
-					@{{ persons[get_id[index].persons_id].persons_name }}
+					<span  v-if="persons[get_id[index].persons_id]">
 
+					@{{ persons[get_id[index].persons_id].persons_name }}
+</span>
 
 				</div>
 				<div class="no3">
@@ -106,16 +107,14 @@
 
 
 
-
-				<div>
+<div>
+				<div v-if="order.users_id === {{ Auth::user()->id }}">
 					<div class="hiddenName">外注者</div>
-					@php
-
-					@endphp
-					<span	v-if="order.users_id === {{ Auth::user()->id }}">
+		
+					<span v-if="users[get_id[index].users_id]">
 						@{{ users[get_id[index].users_id].nickname }}様
 					</span>
-
+</div>
 				</div>
 				<div>
 					<div class="hiddenName">日付</div>
@@ -125,13 +124,13 @@
 					</div>
 
 				</div>
-
+<div></div>
 
 
 				<div>
 					<div class="pcInvi">
 						<div class="editBtn">
-							<a v-bind:href='`/orders/detail/?id=${order.id}`'>編集ページ</a>
+							<a v-bind:href='`/orders/detail/?id=${order.id}`'>詳細ページ</a>
 
 						</div>
 
