@@ -16,18 +16,40 @@ Route::get('/', function () {
     // return view('welcome');
     return view('auth/login');
 });
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('/', function () {
-        return redirect('/orders');
-    });
+// Route::group(['middleware' => ['auth']], function () {
+//     Route::get('/', function () {
+//         return redirect('/home');
+//     });
 
-});
+// });
+
+Route::group(['middleware' => ['auth','can:ship']], function () {
 Route::get('/home', function () {
-    // redirect関数にパスを指定する方法
-    return redirect('/orders');
+    return redirect('/ships');
+    });
+    
 });
 
+// Route::group(['middleware' => ['auth','can:admin']], function () {
+// Route::get('/home', function () {
+//     return redirect('/orders');
+//     });
 
+// });
+// Route::group(['middleware' => ['auth','can:fortune']], function () {
+// Route::get('/home', function () {
+//     return redirect('/orders');
+//     });
+
+// });
+
+
+// Route::group(['middleware' => ['auth']], function () {
+//     Route::get('/', function () {
+//         return redirect('/home');
+//     });
+
+// });
 
 
 //ログイン済みのみ

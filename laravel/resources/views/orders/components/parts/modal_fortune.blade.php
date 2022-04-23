@@ -10,7 +10,7 @@
 						</div> 
 
 						<div class="show_area pre-line">
-							@{{ modal_fortunes.fortunes_worry }}
+							@{{ change_name(modal_fortunes.fortunes_worry) }}
 						</div>
 					</div>
 					<div class="flex2">
@@ -34,7 +34,7 @@
 						</div> 
 
 						<div class="show_area pre-line">
-							@{{ modal_fortunes.fortunes_reply1 }}
+							@{{ change_name(modal_fortunes.fortunes_reply1) }}
 						</div>
 					</div>
 	

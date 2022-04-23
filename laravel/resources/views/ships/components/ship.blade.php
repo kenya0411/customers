@@ -17,7 +17,7 @@
      </div> --}}
     </li>
 
-    <li class="flexBodyWrap flexWrap" v-for="(order, index) in orders_list">
+    <li class="flexBodyWrap flexWrap" v-for="(order, index) in orders_list" v-if="orders_list.length">
     <div class="countHead">
         No.@{{ index + 1 }}
     </div>
@@ -206,9 +206,10 @@
  </div>
 
 
-        {{-- @endforeach --}}
-{{-- <script src="{{ asset('js/components/customers_select_product_list.js') }}"></script> --}}
+</li>
 
+        <li v-else>
+発送予約はありません。
 </li>
 </ul>
 </div>

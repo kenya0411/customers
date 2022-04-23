@@ -9,9 +9,7 @@
 		<li class="flexBodyWrap flexWrap" v-for="(order, index) in orders_list">
 			<div class="countHead" v-if="order.orders.users_id === {{ Auth::user()->id }}">	
 
-				@php
-				$user_true = true;
-				@endphp
+
 				商品ID：@{{ order.orders.orders_id }}
 			</div>
  				<div class="mbBlock" v-if="order.orders.users_id === {{ Auth::user()->id }}">
@@ -72,8 +70,11 @@
 								</div>
 								<div class="flex5 no2">
 									<span class="title">[悩み]</span>
-
-									<textarea id="" v-model="order.fortunes.fortunes_worry " readonly></textarea>
+									    <div class="textBox pre-line">
+									@{{ change_name (order.fortunes.fortunes_worry )}}
+        
+    </div>
+									
 
 								</div>
 								<div class="flex5 no3">
@@ -109,8 +110,8 @@
 
 
 										<button 
-										v-on:click="listUpdate('fortunes_answer',order.orders.id,index)"
-										>修正する</button>
+										v-on:click="submit_edit_finish('fortunes_answer',order.orders.id,index)"
+										>編集する</button>
 								
 								</div>
 
@@ -126,12 +127,7 @@
 
 
 			</li>
-			@if($user_true = true)
-			<li>
-				鑑定予約はありません。
-			</li>
-			@endif
+
 		</ul>
 	</div>
-
 

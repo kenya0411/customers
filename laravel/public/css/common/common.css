@@ -823,13 +823,14 @@
 .modalWindow .show_area {
   font-size: 14px;
   font-size: 1.4rem;
-  padding: 16px;
+  padding: 16px 16px 32px;
   line-height: 1.5em;
   max-height: 300px;
   height: calc(100% - 50px);
   overflow: scroll;
   border: 1px solid #aaa;
   background-color: #eee;
+  min-height: 200px;
 }
 .modalWindow li {
   list-style: disc;
@@ -1590,6 +1591,12 @@ main .addbtn a, main .commonBtn a {
   width: 100%;
 }
 
+@media (max-width: 768px) {
+  .tab_wid100 {
+    width: 100%;
+  }
+}
+
 .disabled {
   pointer-events: none;
 }
@@ -1623,17 +1630,16 @@ main .strong {
   color: #ef7520;
   font-weight: 700;
 }
-main input, main textarea {
+main input, main textarea, main .textBox {
   width: 100%;
   font-size: 14px;
   font-size: 1.4rem;
   border: 1px solid #ddd;
   line-height: 1.5em;
   padding: 4px 8px;
-  line-height: 1em;
   background-color: #eee;
 }
-main input:read-only, main textarea:read-only {
+main input:read-only, main textarea:read-only, main .textBox:read-only {
   background-color: #fff;
   cursor: default;
 }

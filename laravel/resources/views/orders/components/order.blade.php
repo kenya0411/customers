@@ -179,7 +179,7 @@
 								<img src="/img/common/icon/order_icon1.png" class="retina" alt="鑑定">
 							</div>	 
 						</li>
-						<li v-if="fortunes_reply[get_id[index].id] !== null">
+						<li v-if="fortunes_reply[get_id[index].id]">
 							<div class="reply pointer" v-on:click="modal_open_reply(order.id)">
 								<img src="/img/common/icon/order_icon4.png" class="retina" alt="お礼">
 							</div>	 

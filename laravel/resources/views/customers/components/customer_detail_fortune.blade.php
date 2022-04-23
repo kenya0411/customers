@@ -24,7 +24,7 @@
                 <li>
                     
                 <a v-bind:href='`/orders/detail/?id=${order.id}`'>
-                【 @{{ moment(customers.created_at ) }}】 @{{ products[order.products_id].products_name }}  
+                【 @{{ moment(order.created_at ) }}】 @{{ products[order.products_id].products_name }}  
                     
                 </a>
                 </li>

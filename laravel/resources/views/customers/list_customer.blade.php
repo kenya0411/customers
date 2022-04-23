@@ -5,6 +5,7 @@
 
 
 @section('content')
+@can('admin')
 
 @include('customers.components.search')
 @include('common.components.pagination')
@@ -12,6 +13,7 @@
 @include('customers.components.customer')
 @include('common.components.pagination')
 
+@endcan
 
 @endsection
 

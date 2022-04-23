@@ -19,6 +19,27 @@
 			moment: function (date) {
 				return moment(date).format('YYYY/MM/DD')
 			},
+		/*--------------------------------------------------- */
+		/* 鑑定士の名前を置換
+		/*--------------------------------------------------- */
+		change_name: function (text) {
+			let textList = ['けいらん', '恵蘭', '慧蘭','ケイラン','れんれい','レンレイ','恋霊','フェアリース'];
+			
+			let afterName = 'Rise' ;
+				let result = text;
+				
+				if(!result){
+				console.log(text)
+
+
+				}else{
+					textList.forEach(function(element){
+				result = result.replace(element, afterName );
+		});
+			return result			
+				}
+
+		},
 			async load_page(){
 				let url = '/reserves/ajax';
 				

@@ -27,10 +27,12 @@
 			return moment(date).format('YYYY/MM/DD')
 		},
 		/*--------------------------------------------------- */
-		/* 鑑定士の名前を痴漢
+		/* 鑑定士の名前を置換
 		/*--------------------------------------------------- */
 		change_name: function (text) {
-			let textList = ['けいらん', '恵蘭', '慧蘭','れんれい','レンレイ','恋霊'];
+			let textList = ['けいらん', '恵蘭', '慧蘭','ケイラン','れんれい','レンレイ','恋霊','フェアリース'];
+			
+			let afterName = 'Rise' ;
 				let result = text;
 				
 				if(!result){
@@ -39,7 +41,7 @@
 
 				}else{
 					textList.forEach(function(element){
-				result = result.replace(element, 'Rise' );
+				result = result.replace(element, afterName );
 		});
 			return result			
 				}
