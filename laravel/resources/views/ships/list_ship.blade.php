@@ -8,10 +8,14 @@
 <div id="loading" v-bind:class=' {close:is_loaded}'>
   <img src="/img/common/loading.gif" >
 </div>
-@include('ships.components.search')
 
+@include('ships.components.search')
+@can('admin')
 @include('ships.components.ship')
-{{-- @include('ships.components.ship_outsource') --}}
+@elsecan('ship')
+
+@include('ships.components.ship_outsource')
+@endcan
 
 
 @endsection

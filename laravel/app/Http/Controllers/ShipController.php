@@ -128,6 +128,8 @@ public function ajax_index(Request $request) {
         $orders = Order::query()
         ->where('is_delete','=',0)//論理削除されてないもの
         ->where('orders_is_ship_finished','=',0)
+        ->where('orders_is_reserve_finished','=',1)
+
         ->get();
     
     

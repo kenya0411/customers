@@ -1587,6 +1587,10 @@ main .addbtn a, main .commonBtn a {
     display: none;
   }
 }
+.user-select {
+  user-select: all;
+}
+
 .wid100 {
   width: 100%;
 }

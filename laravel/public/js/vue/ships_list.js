@@ -77,6 +77,8 @@
 					// this.orders_id = response.data.orders_id,
 					// this.orders = response.data.orders,
 					this.orders_list = response.data.orders_list,
+					console.log(this.orders_list )
+					
 
 					])
 				.catch(error => console.log(error))				

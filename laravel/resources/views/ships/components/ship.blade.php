@@ -9,12 +9,6 @@
 
 
 
-{{-- <div class="mbBlock">
-        <div >顧客情報</div>
-        <div>鑑定・発送</div>
-    
-
-     </div> --}}
     </li>
 
     <li class="flexBodyWrap flexWrap" v-for="(order, index) in orders_list" v-if="orders_list.length">
