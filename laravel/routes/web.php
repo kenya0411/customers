@@ -23,12 +23,12 @@ Route::get('/', function () {
 
 // });
 
-Route::group(['middleware' => ['auth','can:ship']], function () {
-Route::get('/home', function () {
-    return redirect('/ships');
-    });
+// Route::group(['middleware' => ['auth','can:ship']], function () {
+// Route::get('/home', function () {
+//     return redirect('/ships');
+//     });
     
-});
+// });
 
 // Route::group(['middleware' => ['auth','can:admin']], function () {
 // Route::get('/home', function () {

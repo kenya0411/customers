@@ -42,4 +42,19 @@ class LoginController extends Controller
      {
        return 'name';
      }
+
+         // Override
+    protected function authenticated(\Illuminate\Http\Request $request, $user)
+    {
+        if ($user->permissions_id === 1) {
+            // 管理ユーザ
+            $this->redirectTo = '/orders';
+        } elseif($user->permissions_id === 2){
+            $this->redirectTo = '/orders';
+
+        }elseif($user->permissions_id === 3){
+            $this->redirectTo = '/ships';
+
+        }
+    }
 }
