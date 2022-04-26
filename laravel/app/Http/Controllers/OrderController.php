@@ -109,9 +109,6 @@ public function ajax_search(Request $request) {
 	// $orders = Order::query();
 	$orders = Order::orderBy('created_at', 'desc');//購入順
 	$orders=$orders->where('is_delete','=',0);//論理削除
-	$orders=$orders->where('is_delete','=',0);//論理削除
-	$orders=$orders->whereYear('created_at','=',date("Y"));//今年
-
 	$orders=$orders->where('orders_id','like','%'.$request->orders_id.'%');//商品ID
 	
 	//顧客名で検索
