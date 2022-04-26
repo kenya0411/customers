@@ -7,10 +7,10 @@ const hoge = {
 			search_customers_id: '',//検索用
 			current_page:1,
 			last_page: "",
-			range: 8,
-			front_dot: false,
+			range: 0,
+			first_range: 8,
 			is_loaded: false,
-			end_dot: false,
+			processing: false,
 				}
 			},
 			methods: {
@@ -29,14 +29,20 @@ const hoge = {
 				// },
 				//検索用
 				async search_page() {
+				this.processing = true;
+
 				 let url = '/customers/ajax_search/?customers_name=' + this.search_customers_id+'&page='+this.current_page;
 				 axios.get(url)
 				 .then(response => [
 					all = response.data.customers,
+				range = this.first_range,
+					
 					this.customers = response.data.customers.data,
 					this.current_page = all.current_page,
 					this.last_page = all.last_page,
-					
+				this.range = this.last_page - 2 < range ?  this.last_page - 5 : range,
+
+				this.processing = false,
 					])
 				 .catch(error => console.log(error))
 
@@ -75,33 +81,46 @@ const hoge = {
 			 this.search_customers_id,
 			 ];
 		 },
-		middlePageRange() {
-			if (!this.sizeCheck) return [];
-			let start = "";
-			let end = "";
-			if (this.current_page <= this.range) {
-			start = 1;
-			end = this.range + 2;
-			this.front_dot = false;
-			this.end_dot = true;
-			} else if (this.current_page > this.last_page - this.range) {
-			start = this.last_page - this.range - 1;
-			end = this.last_page - 2;
-			this.front_dot = true;
-			this.end_dot = false;
-			} else {
-			start = this.current_page - Math.floor(this.range / 2);
-			end = this.current_page + Math.floor(this.range / 2);
-			this.front_dot = true;
-			this.end_dot = true;
-			}
-			return this.calRange(start, end);
-		},
-		endPageRange() {
-			if (!this.sizeCheck) return [];
-
-			return this.calRange(this.last_page - 1, this.last_page);
+	frontPageRange() {
+		if (!this.sizeCheck) {
+		return this.calRange(1, 1);
 		}
+		return this.calRange(1, 1);
+
+	},
+	middlePageRange() {
+		
+		if (!this.sizeCheck) return [];
+		let start = "";
+		let end = "";
+		if (this.current_page <= this.first_range && this.last_page <= this.first_range ) {
+		start = 1;
+		end = this.last_page;
+		}
+		else if (this.current_page <= this.range) {
+		start = 1;
+		end = this.range + 2;
+		} else if (this.current_page > this.last_page - this.range) {
+		start = this.last_page - this.range;
+		end = this.last_page;
+		} else if(this.range <= 0){
+		start = 1;
+		end = this.last_page;			
+		}
+		else {
+		start = this.current_page - Math.floor(this.range / 2);
+		end = this.current_page + Math.floor(this.range / 2);
+
+		}
+		return this.calRange(start, end);
+	},
+	endPageRange() {
+
+		if (!this.sizeCheck) return [];
+
+		return this.calRange(this.last_page, this.last_page);
+
+	}
 	},
 	watch: {
 		get_search_data(val){//監視用データの値が変更されたら発動

@@ -17,7 +17,6 @@
 					 <div class="no1">
 							 <ul>
 									<li v-if="order.products.products_id !== 0">@{{ order.products.products_name }}</li>
-									<li v-if="order.products_options.products_options_id !== 0"> @{{ order.products_options.products_options_name}}</li>
 
 							</ul>
 					</div>
@@ -58,7 +57,6 @@
 										<span class="title">[商品情報]</span>
 										<ul>
 											<li> @{{ order.products.products_name }}</li>
-											<li> @{{ order.products_options.products_options_name }}</li>
 
 										</ul>
 									</div>
@@ -111,7 +109,7 @@
 
 										<button 
 										v-on:click="submit_edit_finish('fortunes_answer',order.orders.id,index)"
-										>編集する</button>
+										>鑑定結果の入力完了</button>
 								
 								</div>
 

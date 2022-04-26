@@ -18,9 +18,9 @@
 
 
 			<div class="mbBlock">
-				<div >顧客情報</div>
-				<div>状況</div>
-				<div>鑑定士</div>
+				<div >商品ID</div>
+				<div>商品情報</div>
+				<div>担当者</div>
 				<div></div>
 
 
@@ -30,24 +30,29 @@
 		<li class="flexBodyWrap flexWrap" v-for="(order, index) in orders">
 
 			<div class="mbBlock">
-				<ul class="no1">
+				<div class="no1">
+							@{{order.orders_id }} 
 
-					<li v-if="customers[get_id[index].customers_id]">@{{ customers[get_id[index].customers_id].customers_nickname }}</li>
-					<li v-if="customers[get_id[index].customers_id]">@{{ customers[get_id[index].customers_id].customers_name }}</li>
-				</ul>
+				</div>
 				<div class="no2">
-					<span v-if="order.orders_is_reserve_finished == '1'">鑑定済み<br></span>
-					<span v-if="order.orders_is_ship_finished == '1'">発送済み</span>
+
+						<div v-if="order.products_id !== 0">
+							<span	v-if="products[get_id[index].products_id]">
+								@{{ products[get_id[index].products_id].products_name }}
+
+							</span>
+						</div>
 
 				</div>
 
 
 				<div class="no2">
-					<span  v-if="persons[get_id[index].persons_id]">
+				<div v-if="order.users_id === {{ Auth::user()->id }}">
 
-					@{{ persons[get_id[index].persons_id].persons_name }}
-</span>
-
+				<span v-if="users[get_id[index].users_id]">
+					@{{ users[get_id[index].users_id].nickname }}様
+				</span>
+				</div>
 				</div>
 				<div class="no3">
 					<i class="fa-solid fa-circle-chevron-down"></i>		

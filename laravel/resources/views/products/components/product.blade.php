@@ -70,10 +70,5 @@
 
 
 
-<script>
 
-
-
-
-</script>
 

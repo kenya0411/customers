@@ -88,9 +88,3 @@
     </ul>
     </div>
 
-
-
-<script>
-
-    
-</script>

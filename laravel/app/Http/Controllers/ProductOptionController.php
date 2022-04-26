@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Product;
-use App\product_option;
+use App\Product_option;
 
 // use App\Http\Requests\HelloRequest;バリデーション用
 use Illuminate\Http\Request;
@@ -167,7 +167,7 @@ public function ajax_search(Request $request) {
     $person = '';  
 
 
-    $products_options = product_option::query();
+    $products_options = Product_option::query();
     $products_options=$products_options->where('is_delete','=',0);//論理削除
 
     if(!empty($request->persons_id)){

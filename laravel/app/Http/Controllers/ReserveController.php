@@ -369,7 +369,8 @@ public function ajax_reserve_ship(Request $request)
 		Ship::upsert([
 			[
 				'id' => $request->id,
-			'orders_is_ship_finished' => 0
+			'orders_is_ship_finished' => 0,
+			'orders_is_ship_shipped' => 0,
 			]
 		],
 		['id']);
