@@ -1,3 +1,4 @@
+@can('admin')
 <footer>
     <div class="footerNavi">
         <ul>
@@ -8,7 +9,7 @@
         </ul>
     </div>
 </footer>
-
+@endcan
 <div id="footGoto">
     <div>  <a href="#"><span>TOP</span></a></div>
 </div>
