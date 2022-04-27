@@ -112,7 +112,7 @@
 
 
 
-<div>
+<div class="tabInvi">
 				<div v-if="order.users_id === {{ Auth::user()->id }}">
 					<div class="hiddenName">外注者</div>
 		
@@ -129,7 +129,7 @@
 					</div>
 
 				</div>
-<div></div>
+<div class="tabInvi"></div>
 
 
 				<div>
