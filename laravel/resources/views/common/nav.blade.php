@@ -3,11 +3,13 @@
 <header>
     <div class="flex common_padding_wide">
         <div class="flex2 no1"> 
-            <a href="/">   
-                <h1>
-                 ロゴ
-             </h1>
-         </a>
+            @can('admin')
+            <a href="/orders"><h1>注文管理システム</h1> </a>
+         @elsecan('fortune')
+            <a href="/orders"><h1>注文管理システム</h1> </a>
+            @elsecan('ships')
+            <a href="/orders"><h1>注文管理システム</h1> </a>
+            @endcan
      </div>
         <div class="flex2 no2 navi"> 
 
