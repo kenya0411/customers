@@ -202,6 +202,7 @@ Route::post('customers/detail/ajax_update', 'CustomerController@ajax_detail_upda
 
 Route::get('ships', 'ShipController@index');
 Route::post('ships', 'ShipController@post');
+Route::get('ships_test', 'ShipController@index_test');
 
 Route::get('ships/ajax', 'ShipController@ajax_index');
 Route::post('ships/ajax_update', 'ShipController@ajax_update');

@@ -23,6 +23,8 @@
 @include('orders.components.detail')
 @elsecan('fortune')
 @include('orders.components.detail_fortune')
+@elsecan('comment')
+@include('orders.components.detail_comment')
 @endcan
 
 

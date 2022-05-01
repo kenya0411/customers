@@ -37,6 +37,13 @@ public function index(Request $request)
 }
 
 
+public function index_test(Request $request)
+{
+
+    $data = $this->show_list($request,'ships.list_ship_test');
+    return $data;
+
+}
 
 
 public function add_variable($request,$orders){

@@ -14,35 +14,41 @@ class UserTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'name' => 'master',
+                'name' => 'master1',
                 'nickname' => '管理者',
-                'password' => Hash::make('test'),
+                'password' => Hash::make('SXKVn5Bv5v'),
                 'permissions_id' => 1,
             ],
 
             [
-                'name' => 'miyakawa',
+                'name' => 'miyagawa02',
                 'nickname' => '宮川',
-                'password' => Hash::make('test'),
+                'password' => Hash::make('9EHkXYmpuK'),
                 'permissions_id' => 2,
             ],
            [
-                'name' => 'rui',
+                'name' => 'rui04502',
                 'nickname' => 'ルイ',
-                'password' => Hash::make('test'),
+                'password' => Hash::make('mJk3NGHcUW'),
                 'permissions_id' => 2,
             ],
            [
-                'name' => 'etc',
+                'name' => 'etc06403',
                 'nickname' => 'その他',
-                'password' => Hash::make('test'),
+                'password' => Hash::make('rRLuL7QUbg'),
+                'permissions_id' => 2,
+            ],
+            [
+                'name' => 'yamashita03',
+                'nickname' => '山下',
+                'password' => Hash::make('3RsaJqjrcM'),
                 'permissions_id' => 3,
             ],
-                       [
-                'name' => 'yamashita',
-                'nickname' => '山下',
-                'password' => Hash::make('test'),
-                'permissions_id' => 3,
+            [
+                'name' => 'comment04',
+                'nickname' => 'コメント返信者',
+                'password' => Hash::make('SZ7gqZjxhD'),
+                'permissions_id' => 4,
             ],
         ]);
     }

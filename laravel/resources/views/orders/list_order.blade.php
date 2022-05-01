@@ -22,6 +22,8 @@
 @include('orders.components.order')
 @elsecan('fortune')
 @include('orders.components.order_fortune')
+@elsecan('comment')
+@include('orders.components.order_comment')
 @endcan
 
 

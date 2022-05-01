@@ -59,7 +59,7 @@
                     @{{ order.ships.ships_is_other_name }}
                 
             </div>
-            <div v-else class=" user-select">
+            <div v-else>
 
                     @{{ order.customers.customers_name }}
 </div>
@@ -76,7 +76,7 @@
               <div class="flexBlock">
 
             <span class="title">[住所]</span>
-    <div class="textBox pre-line textarea1 user-select">
+    <div class="textBox pre-line textarea1">
           @{{ order.customers.customers_address}}
         
     </div>
@@ -86,7 +86,7 @@
     </div>
     <div class="flex5 no3">
             <span class="title">[鑑定結果]</span>
-    <div class="textBox pre-line textarea1 user-select">
+    <div class="textBox pre-line textarea1 ">
           @{{ order.fortunes.fortunes_answer }}
         
     </div>
@@ -96,7 +96,7 @@
             <div class="flexBlock"
             v-if="order.ships.ships_add_product1">
             <span class="title">[追加の商品1]</span>
-            <div class="textBox pre-line user-select">
+            <div class="textBox pre-line ">
             @{{ order.ships.ships_add_product1 }}
 
             </div>
@@ -105,7 +105,7 @@
             <div class="flexBlock"
             v-if="order.ships.ships_add_product2">
             <span class="title">[追加の商品2]</span>
-            <div class="textBox pre-line  user-select">
+            <div class="textBox pre-line  ">
             @{{ order.ships.ships_add_product2 }}
 
             </div>
@@ -114,7 +114,7 @@
             <div class="flexBlock"
             v-if="order.ships.ships_add_product3">
             <span class="title">[追加の商品3]</span>
-            <div class="textBox pre-line  user-select">
+            <div class="textBox pre-line  ">
             @{{ order.ships.ships_add_product3 }}
 
             </div>
@@ -122,9 +122,11 @@
 
 
 
-         <div class="flexBlock">
+         <div class="flexBlock"
+ v-if="order.ships.ships_notice"
+         >
             <span class="title">[発送時の備考]</span>
-            <div class="textBox pre-line  user-select" v-if="order.ships.ships_notice">
+            <div class="textBox pre-line ">
             @{{ order.ships.ships_notice }}
             </div>
        

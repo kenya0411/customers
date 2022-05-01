@@ -55,6 +55,9 @@ class LoginController extends Controller
         }elseif($user->permissions_id === 3){
             $this->redirectTo = '/ships';
 
+        }elseif($user->permissions_id === 4){
+            $this->redirectTo = '/orders';
+
         }
     }
 }
