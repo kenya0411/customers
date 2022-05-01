@@ -1,6 +1,7 @@
 
 <div class="reserveList listSection" >
 
+@include('reserves.components.parts.modal_namecheck')
 
 
 	<ul>
