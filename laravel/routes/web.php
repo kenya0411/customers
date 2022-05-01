@@ -219,12 +219,11 @@ Route::get('vue', 'VueController@index');
 Route::get('vue/ajax', 'VueController@ajax_index');
 
 
-// Route::get('export', 'VueController@csv_export');
-Route::get('import_orders', 'VueController@csv_import_orders');
-Route::get('import_customers', 'VueController@csv_import_customers');
-Route::get('import_products', 'VueController@csv_import_products');
-Route::get('import_products_options', 'VueController@csv_import_products_options');
-Route::get('import', 'VueController@csv_import_all');
+// Route::get('import_orders', 'VueController@csv_import_orders');
+// Route::get('import_customers', 'VueController@csv_import_customers');
+// Route::get('import_products', 'VueController@csv_import_products');
+// Route::get('import_products_options', 'VueController@csv_import_products_options');
+// Route::get('import', 'VueController@csv_import_all');
 
 });
 
