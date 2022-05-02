@@ -42,7 +42,7 @@ $d = '?'.now();
 <link rel="stylesheet" href="/css/common/footer.css{{ $d }}">
 <link rel="stylesheet" href="/css/common/side.css{{ $d }}">
 <link rel="stylesheet" href="/css/common/common.css{{ $d }}">
-
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.10/dist/clipboard.min.js"></script>
 <!-- font -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <script src="https://kit.fontawesome.com/d5c3364311.js" crossorigin="anonymous"></script>

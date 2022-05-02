@@ -11,6 +11,7 @@
 				isActive: false,//モーダル用
 				name_check: '',//名前確認用
 				is_loaded: false,
+				copy_textarea: "",
 
 				}
 			},
@@ -110,16 +111,26 @@
 			
 			copyToClipboard(id) {
 				let url = '/reserves/ajax_clipboard_copy?id='+id;
-				if(!navigator.clipboard){alert("このブラウザは対応していません")}
 				axios.get(url)
 				.then(response => [
+			this.copy_textarea = response.data.html,
+
 				navigator.clipboard.writeText(response.data.html).then(
        ()=>{alert("クリップボードにコピーしました")},
-       ()=>{alert("コピーに失敗しました")}
-    )
+       ()=>[
+			copytext = document.getElementById('copyText'),
+			copytext.select(),
+			document.execCommand("copy"),
+			alert("クリップボードにコピーしました")
+       ]
+    ),
+
 					
 					])
 				.catch(error => console.log(error))
+
+
+
 			},
 
 
