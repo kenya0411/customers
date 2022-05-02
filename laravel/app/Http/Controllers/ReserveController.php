@@ -319,8 +319,11 @@ public function ajax_index(Request $request) {
 		$fortunes = DB::table('fortunes')
 				->where('id','=',$orders[0]->id)//論理削除されてないもの
 				->get(); 
-
-
+				$name = ['けいらん', '恵蘭', '慧蘭','ケイラン','れんれい','レンレイ','恋霊','フェアリース'];
+				$afterName = 'Rise' ;
+				foreach ($name as $key) {
+					$fortunes[0]->fortunes_worry = str_replace($key, $afterName, $fortunes[0]->fortunes_worry);
+				}
 				$html = "";
 				//コピー用
 				if(!empty($users[0])){

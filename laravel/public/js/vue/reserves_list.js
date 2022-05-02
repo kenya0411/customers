@@ -115,7 +115,8 @@
 				.then(response => [
 			this.copy_textarea = response.data.html,
 				// navigator.clipboard.writeText(response.data.html)
-
+				console.log(response.data.html)
+				
 					])
 				.catch(error => console.log(error))
 					setTimeout(function () {
