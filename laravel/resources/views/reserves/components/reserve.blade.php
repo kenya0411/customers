@@ -192,6 +192,6 @@
 </li>
 		</ul>
 	</div>
-								<textarea class="none-important copyText" id="copyText"  v-model="copy_textarea"></textarea>
+								<textarea class="opacity0 copyText" id="copyText"  v-model="copy_textarea"></textarea>
 
 

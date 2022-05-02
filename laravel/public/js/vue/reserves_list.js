@@ -114,20 +114,16 @@
 				axios.get(url)
 				.then(response => [
 			this.copy_textarea = response.data.html,
+				// navigator.clipboard.writeText(response.data.html)
 
-				navigator.clipboard.writeText(response.data.html).then(
-       ()=>{alert("クリップボードにコピーしました")},
-       ()=>[
-			copytext = document.getElementById('copyText'),
-			copytext.select(),
-			document.execCommand("copy"),
-			alert("クリップボードにコピーしました")
-       ]
-    ),
-
-					
 					])
 				.catch(error => console.log(error))
+					setTimeout(function () {
+					copytext = document.getElementById('copyText');
+					copytext.select();
+					document.execCommand("copy");
+					alert('コピーしました')
+					}, 200);
 
 
 

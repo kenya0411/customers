@@ -1587,8 +1587,8 @@ main .addbtn a, main .commonBtn a {
     display: none;
   }
 }
-.none-important {
-  display: none !important;
+.opacity0 {
+  opacity: 0;
 }
 
 .user-select {
