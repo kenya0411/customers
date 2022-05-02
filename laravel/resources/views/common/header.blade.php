@@ -1,19 +1,10 @@
 
-<?php 
-//キャッシュ削除
+@php
  // header('Expires: Tue, 1 Jan 2019 00:00:00 GMT');
  // header('Last-Modified:' . gmdate( 'D, d M Y H:i:s' ) . 'GMT');
  // header('Cache-Control:no-cache,no-store,must-revalidate,max-age=0');
  // header('Cache-Control:pre-check=0,post-check=0',false);
  // header('Pragma:no-cache');
-//ここまで
- ?>
-@php
- header('Expires: Tue, 1 Jan 2019 00:00:00 GMT');
- header('Last-Modified:' . gmdate( 'D, d M Y H:i:s' ) . 'GMT');
- header('Cache-Control:no-cache,no-store,must-revalidate,max-age=0');
- header('Cache-Control:pre-check=0,post-check=0',false);
- header('Pragma:no-cache');
 $d = '?'.now();
 // $d = '';
 @endphp
@@ -28,7 +19,9 @@ $d = '?'.now();
 {{-- <script src="https://unpkg.com/vuejs-paginate@2.1.0"></script> --}}
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vuejs-paginate/2.1.0/index.js"></script> --}}
 {{-- <script src="https://unpkg.com/laravel-vue-pagination@2.3.1/dist/laravel-vue-pagination.umd.min.js"></script> --}}
-
+{{-- <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"> --}}
+<link rel="apple-touch-icon" href="/favicon.ico" sizes="180x180">
+<link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
