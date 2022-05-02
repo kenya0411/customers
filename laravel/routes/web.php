@@ -52,6 +52,8 @@ Route::get('/', function () {
 // });
 
 
+    
+
 //ログイン済みのみ
 Route::group(['middleware' => ['auth']], function () {
 

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -8,6 +9,20 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
+
+
+
+@can('admin')
+<a href="/orders">注文システムへ</a>
+@elsecan('fortune')
+<a href="/orders">注文システムへ</a>
+@elsecan('comment')
+<a href="/orders">注文システムへ</a>
+@elsecan('ship')
+<a href="/ships">注文システムへ</a>
+
+@else
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -67,6 +82,9 @@
                             </div>
                         </div>
                     </form>
+
+@endcan
+
                 </div>
             </div>
         </div>
