@@ -110,7 +110,7 @@
 			
 			copyToClipboard(id) {
 				let url = '/reserves/ajax_clipboard_copy?id='+id;
-				
+				if(!navigator.clipboard){alert("このブラウザは対応していません")}
 				axios.get(url)
 				.then(response => [
 				navigator.clipboard.writeText(response.data.html).then(
