@@ -43,6 +43,17 @@ public function index(Request $request)
 
 
 
+public function index_test(Request $request)
+{
+
+		$data = $this->show_list($request,'reserves.list_reserve_test');
+		return $data;
+
+}
+
+
+
+
 
 
 // /*--------------------------------------------------- */
@@ -314,7 +325,7 @@ public function ajax_index(Request $request) {
 				//コピー用
 				if(!empty($users[0])){
 				$html .= "■鑑定者\n";
-				$html .= $users[0]->nickname."\n\n";
+				$html .= $users[0]->nickname."様\n\n";
 				}
 
 				$html .= "■鑑定方法\n";

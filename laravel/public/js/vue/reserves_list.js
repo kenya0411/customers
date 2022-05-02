@@ -104,15 +104,19 @@
 
 			}
 		},
-
-			//クリップボードに保存
+			/*--------------------------------------------------- */
+			/* //クリップボードに保存
+			/*--------------------------------------------------- */
+			
 			copyToClipboard(id) {
 				let url = '/reserves/ajax_clipboard_copy?id='+id;
-				console.log(id)
 				
 				axios.get(url)
 				.then(response => [
-				navigator.clipboard.writeText(response.data.html)
+				navigator.clipboard.writeText(response.data.html).then(
+       ()=>{alert("クリップボードにコピーしました")},
+       ()=>{alert("コピーに失敗しました")}
+    )
 					
 					])
 				.catch(error => console.log(error))
@@ -133,6 +137,7 @@
 				orders_is_ship_finished: this.orders_list[index].orders.orders_is_ship_finished,
 			})
 			.then(response => [
+
 				
 				])
 			.catch(error => console.log(error)) 

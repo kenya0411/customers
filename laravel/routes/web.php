@@ -168,6 +168,8 @@ Route::post('orders/add/ajax_add_update', 'OrderController@ajax_add_update');//æ
 Route::get('reserves', 'ReserveController@index');
 Route::post('reserves', 'ReserveController@post');
 
+Route::get('reserves_test', 'ReserveController@index_test');
+
 // Route::get('reserves/ajax', 'ReserveController@ajax_index');
 Route::post('reserves/ajax', 'ReserveController@ajax_index');
 Route::post('reserves/ajax_update', 'ReserveController@ajax_update');
@@ -219,11 +221,11 @@ Route::get('vue', 'VueController@index');
 Route::get('vue/ajax', 'VueController@ajax_index');
 
 
-Route::get('import_orders', 'VueController@csv_import_orders');
-Route::get('import_customers', 'VueController@csv_import_customers');
-Route::get('import_products', 'VueController@csv_import_products');
-Route::get('import_products_options', 'VueController@csv_import_products_options');
-Route::get('import', 'VueController@csv_import_all');
+// Route::get('import_orders', 'VueController@csv_import_orders');
+// Route::get('import_customers', 'VueController@csv_import_customers');
+// Route::get('import_products', 'VueController@csv_import_products');
+// Route::get('import_products_options', 'VueController@csv_import_products_options');
+// Route::get('import', 'VueController@csv_import_all');
 
 });
 
