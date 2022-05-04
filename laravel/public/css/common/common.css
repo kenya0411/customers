@@ -341,7 +341,7 @@
     width: auto;
   }
 }
-.reserveList select {
+.reserveList [name="users_id"] {
   color: red;
 }
 .reserveList .pcBlock .btnFlex {
