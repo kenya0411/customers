@@ -341,6 +341,9 @@
     width: auto;
   }
 }
+.reserveList select {
+  color: red;
+}
 .reserveList .pcBlock .btnFlex {
   margin-top: 24px;
   margin-bottom: 24px;

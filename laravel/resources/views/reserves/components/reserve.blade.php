@@ -111,7 +111,8 @@
 										<select name="users_id" id="" 
 										v-model="order.users.id"
 										v-on:change="listUpdate('users_id',order.orders.id,index)">
-										<option value="0" >選択してください</option>
+										<option value="0" ></option>
+										{{-- <option value="0" >選択してください</option> --}}
 
 										<option v-for="user in users" v-bind:value="user.id">@{{ user.nickname }}</option>
 									</select>
