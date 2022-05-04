@@ -11,6 +11,7 @@
 <dt>商品ID</dt>
 <dd>
     <input type="text" v-model="orders.orders_id">
+ <a v-bind:href="persons[orders.persons_id - 1].persons_platform_url + orders.orders_id "target="_blank">商品ページ</a>
 </dd>
 <dt>名前</dt>
 <dd>
