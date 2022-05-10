@@ -756,6 +756,10 @@
     font-size: 14px;
     font-size: 1.4rem;
   }
+  .shipsList .pcBlock .btnFlex .number5 button {
+    margin: auto;
+    margin-top: 32px;
+  }
 }
 @media (max-width: 768px) {
   .customerList .flexWrap .pcBlock {

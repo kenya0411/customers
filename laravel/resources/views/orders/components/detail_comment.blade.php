@@ -42,12 +42,15 @@
         {{--  --}}
     </div>
 </dd>
-<dt>鑑定後の返信</dt>
-<dd>
-        <div class="textBox pre-line textarea2" >
-          @{{ change_name(fortunes.fortunes_reply1  ) }}
 
-        </div>
+<dt>鑑定後のお礼メッセージ</dt>
+<dd>
+    <textarea name="" id="" v-model="fortunes.fortunes_reply1" class="textarea2"></textarea>
+</dd>
+
+<dt>お礼の返信</dt>
+<dd>
+    <textarea name="" id="" v-model="fortunes.fortunes_reply_answer1" class="textarea2"></textarea>
 </dd>
 
 
@@ -60,7 +63,9 @@
 
 </dl>
 
-
+<div class="btnWrap">
+    <div class="sendBtn pointer" v-on:click="submit_update(orders.id)">編集する</div>
+</div>
 </div>
 
 </div>

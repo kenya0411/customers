@@ -36,7 +36,6 @@
 				let result = text;
 				
 				if(!result){
-				console.log(text)
 
 
 				}else{
@@ -85,6 +84,7 @@
 				fortunes_worry: this.fortunes.fortunes_worry,
 				fortunes_answer: this.fortunes.fortunes_answer,
 				fortunes_reply1: this.fortunes.fortunes_reply1,
+				fortunes_reply_answer1: this.fortunes.fortunes_reply_answer1,
 				users_id: this.orders.users_id,
 				orders_notice: this.orders.orders_notice,
 				customers_address: this.customers.customers_address,

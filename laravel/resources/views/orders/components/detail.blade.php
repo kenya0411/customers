@@ -88,9 +88,13 @@
 <dd>
     <textarea name="" id="" v-model="fortunes.fortunes_answer" class="textarea1"></textarea>
 </dd>
-<dt>鑑定後の返信</dt>
+<dt>鑑定後のお礼</dt>
 <dd>
     <textarea name="" id="" v-model="fortunes.fortunes_reply1" class="textarea2"></textarea>
+</dd>
+<dt>お礼の返信</dt>
+<dd>
+    <textarea name="" id="" v-model="fortunes.fortunes_reply_answer1" class="textarea2"></textarea>
 </dd>
 <dt>外注者</dt>
 <dd>

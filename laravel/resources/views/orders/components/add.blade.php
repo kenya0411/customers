@@ -101,13 +101,7 @@
 
 </select>
 </dd>
-<dt>住所</dt>
-<dd>
-	<textarea id=""  class="textarea2" autocomplete="off"
-	v-model="customers_address"></textarea>
 
-
-</dd>
 <dt>悩み</dt>
 <dd>
 	<textarea name="" id="" class="textarea1" autocomplete="off"
@@ -117,12 +111,18 @@
 
 </dd>
 
-<dt>注文の備考</dt>
+<dt>備考</dt>
 <dd>
 	<textarea name="" id="" class="textarea2" autocomplete="off"
 	v-model="orders_notice"></textarea>
 </dd>
+<dt>住所</dt>
+<dd>
+	<textarea id=""  class="textarea2" autocomplete="off"
+	v-model="customers_address"></textarea>
 
+
+</dd>
 
 </dl>
 <div class="btnWrap">
