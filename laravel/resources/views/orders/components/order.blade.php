@@ -40,9 +40,9 @@
 					<li v-if="customers[get_id[index].customers_id]">@{{ customers[get_id[index].customers_id].customers_name }}</li>
 				</ul>
 				<div class="no2">
-					<span v-if="order.orders_is_reserve_finished == '1'">鑑定済み<br></span>
-					<span v-if="order.orders_is_ship_finished == '1'">発送済み</span>
-
+				<span v-if="order.orders_is_reserve_finished == '1' && order.orders_is_ship_finished == '1'">完了</span>
+				<span v-if="order.orders_is_reserve_finished == '1' && order.orders_is_ship_finished == '2'">完了</span>
+				<span v-if="order.orders_is_reserve_finished == '1' && order.orders_is_ship_finished == '0'">鑑定済み</span>
 				</div>
 
 
@@ -141,9 +141,12 @@
 			
 
 			<div class="tabInvi">
-				<span v-if="order.orders_is_reserve_finished == '1'">鑑定済み</span><br>
-				<span v-if="order.orders_is_ship_finished == '1'">発送済み</span>
-				<span v-if="order.orders_is_ship_finished == '2'">発送不要</span>
+				<span v-if="order.orders_is_reserve_finished == '1' && order.orders_is_ship_finished == '1'">完了</span>
+				<span v-if="order.orders_is_reserve_finished == '1' && order.orders_is_ship_finished == '2'">完了</span>
+				<span v-if="order.orders_is_reserve_finished == '1' && order.orders_is_ship_finished == '0'">鑑定済み</span>
+
+				{{-- <span v-if="order.orders_is_ship_finished == '1'">発送済み</span> --}}
+				{{-- <span v-if="order.orders_is_ship_finished == '2'">発送不要</span> --}}
 
 			</div>
 			<div>
