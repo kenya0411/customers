@@ -49,7 +49,10 @@
                             <div class="col-md-6">
                                 
                                  <select name="permission_id" class="form-control">
-                                {{My_func::permission_id()}}
+                                <option value="1">管理者</option>
+                                <option value="2">鑑定者</option>
+                                <option value="3">発送者</option>
+                                <option value="4">コメント返信者</option>
                                 
                             </select>
                             </div>
