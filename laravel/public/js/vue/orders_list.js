@@ -16,6 +16,7 @@ const hoge = {
 			search_persons: 0,//検索用
 			search_orders_id: '',//検索用
 			search_customers_name: '',//検索用
+			search_fortunes_answer: '',//検索用
 			search_year: year,//検索用
 			search_month: 0,//検索用
 			get_id: '',//検索用
@@ -151,6 +152,7 @@ const hoge = {
 				orders_id: this.search_orders_id,
 				page: this.current_page,
 				customers_name: this.search_customers_name,
+				fortunes_answer: this.search_fortunes_answer,
 
 			})
 			.then(response => [
@@ -203,6 +205,7 @@ const hoge = {
 		this.search_year,
 		this.search_month,
 		this.search_customers_name,
+		this.search_fortunes_answer,
 		];
 	},
 	get_current_page_data() {//監視用データをまとめる

@@ -21,9 +21,16 @@
 </li>
 @endcan
 
+
+<li class="me-3 mb-3 tab_wid100">
+<div class="input-group">
+<input type="text"  placeholder="鑑定結果" aria-label="鑑定結果" aria-describedby="input-group-left" name="search_answer" v-model="search_fortunes_answer">
+<span class="input-group-text" id="input-group-left-example"><i class="fa-solid fa-magnifying-glass"></i></span>
+
+</div>
+</li>
+
 <li class=" me-3">
-
-
 {{-- <select aria-label="Default select" name="date_year" v-model="search_year" id=""> --}}
 <select aria-label="Default select" name="date_year" v-model="search_year"  id="">
 <option value=""></option>

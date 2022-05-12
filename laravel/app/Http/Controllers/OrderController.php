@@ -100,6 +100,7 @@ public function ajax_search(Request $request) {
 	$month = '';	
 	$person = '';	
 	$customers = '';	
+	$fortunes = '';	
 	$test = '';	
 
 
@@ -134,6 +135,28 @@ public function ajax_search(Request $request) {
 	if(!empty($request->customers_name)){
 
 	}
+
+
+
+	//顧客名で検索
+	if(!empty($request->fortunes_answer)){
+			//顧客情報をDBから取得
+			$fortunes = Fortune::query();
+			$fortunes=$fortunes->where('is_delete','=',0);//論理削除
+			//ニックネームか本名をor検索
+			$fortunes=$fortunes->where('fortunes_answer','like','%'.$request->fortunes_answer.'%');
+			$fortunes=$fortunes->get();
+		//顧客IDを連想配列化
+		$fortunes_id = [];
+		foreach ($fortunes as $key => $value) {
+			$fortunes_id[$key] = $value['id'];
+		};
+		//絞り込み
+		$orders=$orders->whereIn('id',$fortunes_id);
+
+	}
+
+
 
 
 	// 鑑定士で絞り込み
