@@ -431,10 +431,9 @@ public function ajax_name_check(Request $request)
 
 						//文字を切り取り
 						$str = mb_substr( $html, $start, $endNum );
+						$html = str_replace($str, "", $html,$n);
 						$str = str_replace("。", "", $str);
 						$str = str_replace("、", "", $str);
-						$html = str_replace($str, "", $html,$n);
-
 						//文字列をnameに追加
 						$name[]= $str;
 				}

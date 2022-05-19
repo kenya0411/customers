@@ -61,7 +61,6 @@
 				axios.get(url)
 				.then(response => [
 					this.name_check = response.data.html,
-					console.log(response.data.html),
 					
 					
 					])
