@@ -27,14 +27,24 @@
 					</div>
 				</div>
 				<div class="flex" v-if="modal_reply_is == true">
-					<div class="flex2 wid100">
+					<div class="flex2">
 						<div class="title">
-							■お礼のメッセージ
+							■鑑定後のお礼
 
 						</div> 
 
 						<div class="show_area pre-line">
 							@{{ change_name(modal_fortunes.fortunes_reply1) }}
+						</div>
+					</div>
+						<div class="flex2" v-if="modal_fortunes.fortunes_reply_answer1">
+						<div class="title">
+							■お礼の返信
+
+						</div> 
+
+						<div class="show_area pre-line" >
+							@{{ change_name(modal_fortunes.fortunes_reply_answer1) }}
 						</div>
 					</div>
 	

@@ -105,6 +105,7 @@ const hoge = {
 				})
 				.then(response => [
 					this.modal_fortunes = response.data.modal_fortunes,
+					
 					])
 				.catch(error => console.log(error))
 			},
