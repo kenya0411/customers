@@ -84,6 +84,12 @@
          @{{ moment(order.updated_at ) }}
 
         </div>
+        <div class="flexBlock">
+            <span class="title">[購入回数]</span>
+            @{{order.past_order_count_data }}回
+
+
+        </div>
 
     </div>
     <div class="flex5 no2">

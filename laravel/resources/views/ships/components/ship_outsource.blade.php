@@ -64,10 +64,15 @@
                     @{{ order.customers.customers_name }}
 </div>
             
-                </a>
+             
         </div>
 
+        <div class="flexBlock">
+            <span class="title">[購入回数]</span>
+            @{{order.past_order_count_data }}回
 
+
+        </div>
  
 
     </div>

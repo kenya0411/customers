@@ -162,7 +162,14 @@ public function ajax_index(Request $request) {
                     // //顧客情報
                     $customers_data = DB::table('customers')
                     ->where('customers_id',$value->customers_id)
-                    ->get();    
+                    ->get(); 
+
+                    // //購入回数
+                    $past_order_count_data = Order::query()
+                    ->where('is_delete','=',0)//論理削除されてないもの
+                    ->where('customers_id',$value->customers_id)
+                    ->get();
+                    $past_order_count_data = count($past_order_count_data);
 
                     //鑑定士
                     $persons_data = DB::table('persons')
@@ -204,6 +211,7 @@ public function ajax_index(Request $request) {
                         'persons' => !empty($persons_data[0]) ? $persons_data[0] : 0,
                         'products' => !empty($products_data[0]) ? $products_data[0] : $empty_products,
                         'ships' => !empty($ships_data[0]) ? $ships_data[0] : 0,
+                        'past_order_count_data' => !empty($past_order_count_data) ? $past_order_count_data : 0,
                     );
 
 

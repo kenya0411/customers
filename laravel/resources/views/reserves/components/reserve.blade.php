@@ -25,6 +25,11 @@
 
 							</ul>
 					</div>
+					 <div class="no2">
+							 <ul>
+									<li v-if="order.users.name">@{{ order.users.name}}様</li>
+							</ul>
+					</div>
 					<div class="no3">
 						<i class="fa-solid fa-circle-chevron-down"></i>	 
 						<i class="fa-solid fa-circle-chevron-up"></i>	 
