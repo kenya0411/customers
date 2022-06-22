@@ -262,6 +262,13 @@ public function ajax_search(Request $request) {
                     $customers_data = DB::table('customers')
                     ->where('customers_id',$value->customers_id)
                     ->get();    
+                    
+                    // //購入回数
+                    $past_order_count_data = Order::query()
+                    ->where('is_delete','=',0)//論理削除されてないもの
+                    ->where('customers_id',$value->customers_id)
+                    ->get();
+                    $past_order_count_data = count($past_order_count_data);
 
                     //鑑定士
                     $persons_data = DB::table('persons')
@@ -302,6 +309,7 @@ public function ajax_search(Request $request) {
                         'users' => !empty($users_data[0]) ? $users_data[0] : $empty_users,
                         'persons' => !empty($persons_data[0]) ? $persons_data[0] : 0,
                         'products' => !empty($products_data[0]) ? $products_data[0] : $empty_products,
+                        'past_order_count_data' => !empty($past_order_count_data) ? $past_order_count_data : 0,
                         'ships' => !empty($ships_data[0]) ? $ships_data[0] : 0,
                     );
 
