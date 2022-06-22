@@ -27,7 +27,7 @@
 					</div>
 					 <div class="no2">
 							 <ul>
-									<li v-if="order.users.name">@{{ order.users.name}}様</li>
+									<li v-if="order.users.name">@{{ order.users.nickname}}様</li>
 							</ul>
 					</div>
 					<div class="no3">
