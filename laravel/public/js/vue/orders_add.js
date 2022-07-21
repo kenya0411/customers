@@ -186,7 +186,7 @@ async get_data_repeater() {
 async ships_require_or_not() {
 	let url = '/orders/add/ajax_get_data_repeater';
 	
-	if(this.persons_id ==2){
+	if(this.persons_id ==2||this.persons_id ==4||){
 		this.orders_is_ship_finished = 2;
 	}else{
 		this.orders_is_ship_finished = 0;
