@@ -86,7 +86,7 @@
 									</div>
 									<div class="flexBlock">
 										<span class="title">[購入日]</span>
-										@{{ moment(order.updated_at ) }}
+										@{{ moment(order.orders.created_at ) }}
 
 									</div>
 
