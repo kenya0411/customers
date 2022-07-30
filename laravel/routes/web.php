@@ -231,5 +231,11 @@ Route::get('vue/ajax', 'VueController@ajax_index');
 
 });
 
+//省略
+Route::group(['middleware'=>'auth'],function(){
+//中略
+        Route::get('/password/change','ChangePasswordController@edit')->name('password.form');
+        Route::put('/password/change','ChangePasswordController@update')->name('password.change');
+});
 
 Auth::routes();
