@@ -166,8 +166,29 @@
 			</div>
 
 
+
 			
 			<div>
+			<div class="pcInvi mb_list fortune_list">
+				<div class="hiddenName">鑑定内容</div>
+				<ul>
+					<li>
+						<div class="worry pointer" v-on:click="modal_open_answer(order.id)">
+								鑑定結果
+							</div>	 
+					</li>
+					<li>
+							<div v-if="fortunes_reply[get_id[index].id]">
+							<div class="reply pointer" v-on:click="modal_open_reply(order.id)">
+								お礼
+							</div>	 
+						</div>						
+					</li>
+				</ul>
+							
+
+				
+			</div>
 				<div class="pcInvi">
 					<div class="editBtn">
 						<a v-bind:href='`/orders/detail/?id=${order.id}`'>編集ページ</a>
