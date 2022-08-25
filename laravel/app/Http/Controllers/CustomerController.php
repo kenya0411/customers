@@ -97,11 +97,13 @@ public function ajax_detail_index(Request $request) {
 
     //顧客情報
     $customers = DB::table('customers')
+    ->where('is_delete','=',0)//論理削除されてないもの
     ->where('customers_id','=',$request->id)
     ->get();
 
     //注文情報
     $orders = DB::table('orders')
+    ->where('is_delete','=',0)//論理削除されてないもの
     ->where('customers_id','=',$request->id)
     ->get();
 
