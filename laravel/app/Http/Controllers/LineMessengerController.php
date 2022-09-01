@@ -12,6 +12,7 @@ class LineMessengerController extends Controller
     public function webhook(Request $request) {
         // LINEから送られた内容を$inputsに代入
         $inputs=$request->all();
+      file_put_contents("test/return.txt", var_export( $inputs , true));
  
         if(!empty($inputs['events'])) {
 
