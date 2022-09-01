@@ -4,14 +4,14 @@ LINE\LINEBot\Response::__set_state(array(
    'headers' => 
   array (
     'x-xss-protection' => '1; mode=block',
-    'x-line-request-id' => 'dbc8e3c9-0738-44ea-912f-82c8598889cb',
+    'x-line-request-id' => '0403b9e7-f4bb-4d98-be02-0ba4500c779d',
     'x-frame-options' => 'DENY',
     'x-content-type-options' => 'nosniff',
     'www-authenticate' => 'Bearer error="invalid_token", error_description="invalid token"',
     'server' => 'envoy',
     'pragma' => 'no-cache',
     'expires' => '0',
-    'date' => 'Thu, 01 Sep 2022 15:12:13 GMT',
+    'date' => 'Thu, 01 Sep 2022 15:13:16 GMT',
     'content-type' => 'application/json',
     'content-length' => '104',
     'cache-control' => 'no-cache, no-store, max-age=0, must-revalidate',
