@@ -12,7 +12,6 @@ class LineMessengerController extends Controller
     public function webhook(Request $request) {
         // LINEから送られた内容を$inputsに代入
         $inputs=$request->all();
-      file_put_contents("return.txt", var_export( $inputs , true));
  
         if(!empty($inputs['events'])) {
 
@@ -25,7 +24,6 @@ class LineMessengerController extends Controller
   
              $message_arr= $inputs['events'][0]["message"];
              $message= $message_arr['text'];
-       file_put_contents("test/test.txt", var_export($inputs, true));
       
             // replyTokenを取得
             $reply_token=$inputs['events'][0]['replyToken'];
@@ -38,11 +36,7 @@ class LineMessengerController extends Controller
             $reply_message='メッセージありがとうございます';
             $user_id=$inputs['events'][0]['source']['userId'];
 
-// $textMessageBuilder = new LINEBot\MessageBuilder\TextMessageBuilder('hello');
-// $response = $bot->replyMessage($reply_token, $textMessageBuilder);
-      file_put_contents("test/return.txt", var_export( $user_id , true));
-       file_put_contents("test/message.txt", var_export($reply_message, true));
-echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+      file_put_contents("return.txt", var_export( $user_id , true));
 
 
 
