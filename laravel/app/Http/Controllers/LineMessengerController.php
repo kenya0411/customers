@@ -37,10 +37,10 @@ class LineMessengerController extends Controller
             $reply_message='メッセージありがとうございます';
             $user_id=$inputs['events'][0]['source']['userId'];
 
-$textMessageBuilder = new LINEBot\MessageBuilder\TextMessageBuilder('hello');
-$response = $bot->replyMessage($reply_token, $textMessageBuilder);
-      file_put_contents("test/return.txt", var_export( $textMessageBuilder , true));
-       file_put_contents("test/message.txt", var_export($response, true));
+// $textMessageBuilder = new LINEBot\MessageBuilder\TextMessageBuilder('hello');
+// $response = $bot->replyMessage($reply_token, $textMessageBuilder);
+      file_put_contents("test/return.txt", var_export( $user_id , true));
+       file_put_contents("test/message.txt", var_export($reply_message, true));
 echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
 
 
