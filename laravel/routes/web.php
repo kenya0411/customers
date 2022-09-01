@@ -27,7 +27,7 @@ Route::get('/line/webhook', 'LineMessengerController@test')->name('line.webhook'
 Route::post('/line/webhook', 'LineMessengerController@test')->name('line.webhook');
  
 // LINE メッセージ送信用
-Route::get('/line/message', 'LineMessengerController@message');
+Route::get('/line/message', 'LineMessengerController@test');
 // Route::group(['middleware' => ['auth']], function () {
 //     Route::get('/', function () {
 //         return redirect('/home');
