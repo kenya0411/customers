@@ -66,10 +66,10 @@ $replyToken = $event['replyToken']; // 返事するメッセージを作成 // �
 $message = [ 'type' => 'text',
     'text' => 'こんにちは！',
 ];
-      file_put_contents("return.txt", var_export( $event , true));
 
 // アクセストークン
 $accessToken = config('services.line.channel_token');
+      file_put_contents("return.txt", var_export( $accessToken , true));
 
 // ヘッダーを設定
 $headers = [
