@@ -41,11 +41,9 @@ class LineMessengerController extends Controller
 
         $textMessageBuilder = new TextMessageBuilder($reply_message);
       file_put_contents("return.txt", var_export( $textMessageBuilder , true));
-        
-        $response    = $bot->pushMessage($user_id, $textMessageBuilder);
 
+        // $response    = $bot->pushMessage($user_id, $textMessageBuilder);
 
-            
             // return $reply;
         }else{
             return 'ok';
@@ -61,21 +59,45 @@ class LineMessengerController extends Controller
 
 
     public function test(Request $request) {
-//データ取得
-$json_string = file_get_contents('php://input');
-$json_object = json_decode($json_string);
-        $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('xdK4psB3g40LlSAHsycfDsaRvA8//bFRrB0XnFNiRGd2R/dUN02YH+Q5GwHAxpCRERnxoGnb8p3Y0KAKEAEtb9ZQn0RG+jI5lA8IDY7crY+A/7UonUkWiZku0O3Va/BZLt8mcAbOt4mDrh6d8R4xMwdB04t89/1O/w1cDnyilFU=');
-        $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => '845191daab69d06ed2aeb5d086335460']);
-        $response = $bot->getMessageContent('0');
-        if ($response->isSucceeded()) {
-        $tempfile = tmpfile();
-        fwrite($tempfile, $response->getRawBody());
-        } else {
-        error_log($response->getHTTPStatus() . ' ' . $response->getRawBody());
-        }
-        file_put_contents("test.txt", var_export($json_object, true));
-        return 'test_ok';
+$raw = file_get_contents('php://input'); 
+$receive = json_decode($raw, true); // イベントを取得 
+$event = $receive['events'][0]; // 返信するトークンを取得 
+$replyToken = $event['replyToken']; // 返事するメッセージを作成 // テキスト 
+$message = [ 'type' => 'text',
+    'text' => 'こんにちは！',
+];
 
+// アクセストークン
+$accessToken = config('services.line.channel_token');
+
+// ヘッダーを設定
+$headers = [
+    'Content-Type: application/json',
+    'Authorization: Bearer '.$accessToken,
+];
+
+// ボディーを設定
+$body = json_encode([
+            'replyToken' => $replyToken,
+            'messages'   => [
+                $message,
+            ]
+        ]);
+
+// CURLオプションを設定
+$options = [
+    CURLOPT_URL            => 'https://api.line.me/v2/bot/message/reply',
+    CURLOPT_CUSTOMREQUEST  => 'POST',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_HTTPHEADER     => $headers,
+    CURLOPT_POSTFIELDS     => $body,
+];
+
+// 返信
+$curl = curl_init();
+curl_setopt_array($curl, $options);
+curl_exec($curl);
+curl_close($curl);
 
         }
     }
