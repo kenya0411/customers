@@ -1,0 +1,29 @@
+array (
+  'destination' => 'U9a6c97c1212b4fa8a5f6c76068fac1ad',
+  'events' => 
+  array (
+    0 => 
+    array (
+      'type' => 'message',
+      'message' => 
+      array (
+        'type' => 'text',
+        'id' => '16709782736488',
+        'text' => 'あ',
+      ),
+      'webhookEventId' => '01GBWSGJYMD5HSAFNM77DDSEY9',
+      'deliveryContext' => 
+      array (
+        'isRedelivery' => true,
+      ),
+      'timestamp' => 1662044883565,
+      'source' => 
+      array (
+        'type' => 'user',
+        'userId' => 'Ucb7718e5d65232dca709bdbe33f600c2',
+      ),
+      'replyToken' => 'f704807c06004a53a18e5676a6e704b5',
+      'mode' => 'active',
+    ),
+  ),
+)

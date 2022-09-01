@@ -1,0 +1,19 @@
+LINE\LINEBot\Response::__set_state(array(
+   'httpStatus' => 401,
+   'body' => '{"message":"Authentication failed. Confirm that the access token in the authorization header is valid."}',
+   'headers' => 
+  array (
+    'x-xss-protection' => '1; mode=block',
+    'x-line-request-id' => 'bb991f2e-524e-4eb1-8249-0739ba304b95',
+    'x-frame-options' => 'DENY',
+    'x-content-type-options' => 'nosniff',
+    'www-authenticate' => 'Bearer error="invalid_token", error_description="invalid token"',
+    'server' => 'envoy',
+    'pragma' => 'no-cache',
+    'expires' => '0',
+    'date' => 'Thu, 01 Sep 2022 15:09:06 GMT',
+    'content-type' => 'application/json',
+    'content-length' => '104',
+    'cache-control' => 'no-cache, no-store, max-age=0, must-revalidate',
+  ),
+))

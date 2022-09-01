@@ -16,6 +16,18 @@ Route::get('/', function () {
     // return view('welcome');
     return view('auth/login');
 });
+
+
+/*--------------------------------------------------- */
+/* LINE
+/*--------------------------------------------------- */
+
+// LINE メッセージ受信
+Route::get('/line/webhook', 'LineMessengerController@webhook')->name('line.webhook');
+Route::post('/line/webhook', 'LineMessengerController@webhook')->name('line.webhook');
+ 
+// LINE メッセージ送信用
+Route::get('/line/message', 'LineMessengerController@message');
 // Route::group(['middleware' => ['auth']], function () {
 //     Route::get('/', function () {
 //         return redirect('/home');
@@ -214,6 +226,8 @@ Route::post('ships/ajax_search', 'ShipController@ajax_search');
 
 Route::post('ships/ajax_ship_shipped', 'ShipController@ajax_ship_shipped');//発送確認用
 Route::post('ships/ajax_ship_finished', 'ShipController@ajax_ship_finished');//発送報告確認用
+
+
 
 
 /*--------------------------------------------------- */
