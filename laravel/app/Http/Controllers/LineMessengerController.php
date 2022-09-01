@@ -36,17 +36,16 @@ class LineMessengerController extends Controller
             $reply_message='メッセージありがとうございます';
             $user_id=$inputs['events'][0]['source']['userId'];
 
-      file_put_contents("return.txt", var_export( $user_id , true));
 
 
 
+        $textMessageBuilder = new TextMessageBuilder($reply_message);
+        $response    = $bot->pushMessage($user_id, $textMessageBuilder);
 
 
-
-            // ユーザーにメッセージを返す
-            $reply=$bot->replyText($reply_token, $reply_message);
+      file_put_contents("return.txt", var_export( $reply , true));
             
-            return $reply;
+            // return $reply;
         }else{
             return 'ok';
             
