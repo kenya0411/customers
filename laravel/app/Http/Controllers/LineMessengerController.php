@@ -40,10 +40,11 @@ class LineMessengerController extends Controller
 
 
         $textMessageBuilder = new TextMessageBuilder($reply_message);
+      file_put_contents("return.txt", var_export( $reply_message , true));
+        
         $response    = $bot->pushMessage($user_id, $textMessageBuilder);
 
 
-      file_put_contents("return.txt", var_export( $reply , true));
             
             // return $reply;
         }else{
