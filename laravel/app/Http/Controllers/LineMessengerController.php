@@ -68,7 +68,7 @@ $message = [ 'type' => 'text',
 ];
 
 // アクセストークン
-$accessToken = config('services.line.channel_token');
+$accessToken = config('services.line.messenger_secret');
       file_put_contents("return.txt", var_export( $accessToken , true));
 
 // ヘッダーを設定
