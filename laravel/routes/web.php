@@ -23,11 +23,11 @@ Route::get('/', function () {
 /*--------------------------------------------------- */
 
 // LINE メッセージ受信
-Route::get('/line/webhook', 'LineMessengerController@test')->name('line.webhook');
-Route::post('/line/webhook', 'LineMessengerController@test')->name('line.webhook');
+Route::get('/line/webhook', 'LineMessengerController@webhook')->name('line.webhook');
+Route::post('/line/webhook', 'LineMessengerController@webhook')->name('line.webhook');
  
 // LINE メッセージ送信用
-Route::get('/line/message', 'LineMessengerController@test');
+Route::get('/line/message', 'LineMessengerController@message');
 // Route::group(['middleware' => ['auth']], function () {
 //     Route::get('/', function () {
 //         return redirect('/home');

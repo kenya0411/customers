@@ -1,16 +1,1 @@
-LINE\LINEBot\MessageBuilder\TextMessageBuilder::__set_state(array(
-   'texts' => 
-  array (
-    0 => 'hello',
-  ),
-   'message' => 
-  array (
-    0 => 
-    array (
-      'type' => 'text',
-      'text' => 'hello',
-    ),
-  ),
-   'quickReply' => NULL,
-   'sender' => NULL,
-))
+'232ce89f824e45f18bfcc91e10f94c18'
