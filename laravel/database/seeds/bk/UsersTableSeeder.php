@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class UsersTableSeeder extends Seeder
+class UserTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,22 +14,41 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                //略
-                'permission_id' => 1,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
+                'name' => 'master1',
+                'nickname' => '管理者',
+                'password' => Hash::make('SXKVn5Bv5v'),
+                'permissions_id' => 1,
+            ],
+
+            [
+                'name' => 'miyagawa02',
+                'nickname' => '宮川',
+                'password' => Hash::make('9EHkXYmpuK'),
+                'permissions_id' => 2,
+            ],
+           [
+                'name' => 'rui04502',
+                'nickname' => 'ルイ',
+                'password' => Hash::make('mJk3NGHcUW'),
+                'permissions_id' => 2,
+            ],
+           [
+                'name' => 'etc06403',
+                'nickname' => 'その他',
+                'password' => Hash::make('rRLuL7QUbg'),
+                'permissions_id' => 2,
             ],
             [
-                //略
-                'permission_id' => 2,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
+                'name' => 'yamashita03',
+                'nickname' => '山下',
+                'password' => Hash::make('3RsaJqjrcM'),
+                'permissions_id' => 3,
             ],
             [
-                //略
-                'permission_id' => 3,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s'),
+                'name' => 'comment04',
+                'nickname' => 'コメント返信者',
+                'password' => Hash::make('SZ7gqZjxhD'),
+                'permissions_id' => 4,
             ],
         ]);
     }

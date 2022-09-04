@@ -43,6 +43,15 @@
       </ul>
     </div>
   </li>
+   <li class="menu_list">
+    <a href="#">LINE管理</a>
+    <div class="menu_contents">
+      <ul>
+        <li><a href="/lines">LINEメッセージ</a></li>
+        {{-- <li><a href="/persons/add">新規人材</a></li> --}}
+      </ul>
+    </div>
+  </li>
  
 
  <li class="btnWrap">
