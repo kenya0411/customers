@@ -48,6 +48,7 @@
     <div class="menu_contents">
       <ul>
         <li><a href="/lines">LINEメッセージ</a></li>
+        <li><a href="/lines/mails">メール設定</a></li>
         {{-- <li><a href="/persons/add">新規人材</a></li> --}}
       </ul>
     </div>
@@ -74,6 +75,24 @@
   </li>
  
 </ul>
+@elsecan('comment')
 
+
+<ul class="menu_side" >
+
+   <li class="menu_list">
+    <a href="/orders">注文管理</a>
+  </li>
+
+    <li class="menu_list">
+    <a href="#">LINE管理</a>
+    <div class="menu_contents">
+      <ul>
+        <li><a href="/lines">LINEメッセージ</a></li>
+        {{-- <li><a href="/persons/add">新規人材</a></li> --}}
+      </ul>
+    </div>
+  </li>
+</ul>
 
 @endcan

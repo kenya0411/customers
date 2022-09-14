@@ -1,19 +1,14 @@
-// let d = new Date();
-// let year = d.getFullYear();
-// let month = d.getMonth() +1;
-let params = (new URL(document.location)).searchParams//クエリ取得用
-let params_id =params.get('userid')
 
 const hoge = {
 	el: '.main_content',
 	data () {
 		return {
-			lines_customers: '',
-			lines_list: '',
-			lines_information: '',
-			lines_temporaries: '',
-			userid: '',
-			customers: '',
+			lines_mails: '',
+			// lines_list: '',
+			// lines_information: '',
+			// lines_temporaries: '',
+			// userid: '',
+			// customers: '',
 			users: '',
 			// get_id: '',//検索用
 			is_loaded: false,
@@ -113,17 +108,16 @@ const hoge = {
 		/*--------------------------------------------------- */
 		
 		async load_page() {
-			let url = '/lines/ajax';
+			let url = '/lines/mails/ajax';
 
-			axios.post(url, {
-				userid: params_id,
-			})
+			axios.post(url)
 			.then(response => [
-				this.lines_customers = response.data.lines_customers,
-				this.lines_list = response.data.lines_list,
-				this.lines_information = response.data.lines_information,
 				this.users = response.data.users,
-				this.lines_temporaries = response.data.lines_temporaries,
+				this.lines_mails = response.data.lines_mails,
+				// this.lines_list = response.data.lines_list,
+				// this.lines_information = response.data.lines_information,
+				// this.users = response.data.users,
+				// this.lines_temporaries = response.data.lines_temporaries,
 				this.is_loaded = true,
 				])
 			.catch(error => console.log(error)) 

@@ -233,11 +233,28 @@ Route::post('ships/ajax_ship_finished', 'ShipController@ajax_ship_finished');//�
 /*--------------------------------------------------- */
 Route::get('lines', 'LineMessengerController@index');
 Route::post('lines', 'LineMessengerController@post');
-Route::get('lines/ajax', 'LineMessengerController@ajax_index');
+Route::post('lines/ajax', 'LineMessengerController@ajax_message');
 
+//メッセージ送受信
 Route::get('lines/messages', 'LineMessengerController@message_index');
 Route::post('lines/messages', 'LineMessengerController@message_post');
 Route::post('lines/messages/ajax', 'LineMessengerController@ajax_message');
+
+// Route::get('lines/customers', 'LineMessengerController@ajax_lines_customers_update');
+Route::post('lines/customers', 'LineMessengerController@lines_customers_update');//LINENユーザー情報編集
+Route::post('lines/temporaries', 'LineMessengerController@lines_temporaries_post');//LINE投稿内容DBに保存
+// Route::post('lines/customers/ajax', 'LineMessengerController@ajax_lines_customers_update');
+
+
+//メール設定
+Route::get('lines/mails', 'LineMessengerController@mail_index');
+Route::post('lines/mails', 'LineMessengerController@mail_index');
+
+//ロード時にDBからデータを取得
+Route::post('lines/mails/ajax', 'LineMessengerController@ajax_mail_index');
+
+//新規メールアドレス追加
+Route::post('lines/mails/ajax_new', 'LineMessengerController@ajax_mail_new');
 
 
 

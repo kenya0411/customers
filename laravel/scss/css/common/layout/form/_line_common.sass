@@ -1,0 +1,79 @@
+@charset "UTF-8"
+
+@import "../../../../_import.sass"
+
+$pad: 24px
+
+/*--------------------------------------------------- */
+/* send_common_block
+/*--------------------------------------------------- */
+.formSection
+
+	.send_common_block
+		.heading
+			margin-bottom: 8px
+			display: flex
+			align-items: center
+		.title
+			font-weight: 700
+			margin-right: 8px
+		textarea
+			height: 150px	
+
+		.heading_block
+			background-color: #ccc
+			padding: 12px $pad
+			@include rem(20)
+			font-weight: 700
+		.wrap
+			padding: $pad
+		.btnFlex
+			display: flex
+			justify-content: center
+		.margin_left
+			margin-left: 16px
+		
+		.delete_wrap
+			button
+				$bgcolor: #c30000
+				position: relative
+				color: #fff
+				background-color: $bgcolor
+				border: 1px solid $bgcolor
+				padding: 12px 16px
+				line-height: 1em
+				display: flex
+				margin: 16px auto 0
+				justify-content: center
+				align-items: center
+				@include tabup
+					&:hover
+						background-color: #fff
+						color: $bgcolor
+						border: 1px solid $bgcolor
+						transition-duration: 0.5s
+		.send_wrap
+			.notice
+				text-align: center
+				margin-top: 8px
+				span
+					color: red
+
+			button
+				$bgcolor: #000
+				position: relative
+				color: #fff
+				background-color: $bgcolor
+				border: 1px solid $bgcolor
+				padding: 12px 16px
+				line-height: 1em
+				display: flex
+				margin: 16px auto 0
+				justify-content: center
+				align-items: center
+				@include tabup
+					&:hover
+						background-color: #fff
+						color: $bgcolor
+						border: 1px solid $bgcolor
+						transition-duration: 0.5s

@@ -27,6 +27,8 @@
 @include('customers.components.customer_detail')
 @elsecan('fortune')
 @include('customers.components.customer_detail_fortune')
+@elsecan('comment')
+@include('customers.components.customer_detail_comment')
 @endcan
 
 

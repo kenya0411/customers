@@ -16,17 +16,15 @@ class LinesCustomersSeeder extends Seeder
     {
         DB::table('lines_customers')->insert([
             [
-            // 'lines_customers_id'  => 0,
-            'lines_customers_userid'  => '234352jjt34r54',
-            'lines_customers_name'  => 'ken1',
-            'customers_id'  => 1327,
+            'lines_customers_userid'  => 'Ucb7718e5d65232dca709bdbe33f600c2',
+            'lines_customers_name'  => 'kenya',
+            'customers_id'  => 1633,
             'persons_id'  => 1,
-            ], 
+            ],
             [
-            // 'lines_customers_id'  => 0,
-            'lines_customers_userid'  => '4ggrrete34535',
-            'lines_customers_name'  => 'tanaka',
-            'customers_id'  => 1127,
+            'lines_customers_userid'  => 'U346ddc4e9619ed125a707dc5f690bfe7',
+            'lines_customers_name'  => 'oppo',
+            'customers_id'  => 1631,
             'persons_id'  => 1,
             ],
 

@@ -1,29 +1,43 @@
-<div class="detailFrom formSection ">   
-<div class="inner">
-    
- 
-        <dl>
-         <dt>購入日</dt>
-         <dd>
-        <div class="" v-for="(line_list, index) in lines_list">
-                   @{{ line_list.lines_messages.lines_messages_text }}
+<div class="line_message formSection " >   
+<div class="headingWrap">
+    <div class="title">
+    @{{ lines_information.lines_customers_name }}
+    </div>
+    <div class="details">
+
+        <div class="customerBtn">
+                <a v-bind:href='`/customers/detail/?id=${lines_information.customers_id}`'>
+                お客様情報
+            </a>
+        </div>
+    </div>
 
 </div>
 
-                   {{-- @{{ moment(lines_messages.created_at ) }} --}}
-</dd>
+
+{{-- 受信メッセージ --}}
+@include('lines.components.message.get_message')
+
+
+{{-- 送信リクエスト用 --}}
+@include('lines.components.message.send_request')
+
+
+@can('admin')
+
+{{-- リクエスト用 --}}
+@include('lines.components.message.request')
+
+{{-- ユーザー編集用 --}}
+@include('lines.components.message.useredit')
+@endcan
+
+
+    </div>    
+{{-- </div> --}}
+
+{{-- </div>
 
 
 
-</dl>
-
-<div class="btnWrap">
-    {{-- <div class="sendBtn pointer" v-on:click="submit_update(orders.id)">編集する</div> --}}
-</div>
-<div class="deleteWrap">
-    {{-- <div class="delete pointer" v-on:click="submit_delete(orders.id)">削除する</div> --}}
-</div>
-
-</div>
-
-</div>
+</div> --}}

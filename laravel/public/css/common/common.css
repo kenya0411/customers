@@ -1251,6 +1251,376 @@
   }
 }
 /*--------------------------------------------------- */
+/* send_common_block */
+/*--------------------------------------------------- */
+.formSection .send_common_block .heading {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+.formSection .send_common_block .title {
+  font-weight: 700;
+  margin-right: 8px;
+}
+.formSection .send_common_block textarea {
+  height: 150px;
+}
+.formSection .send_common_block .heading_block {
+  background-color: #ccc;
+  padding: 12px 24px;
+  font-size: 20px;
+  font-size: 2rem;
+  font-weight: 700;
+}
+.formSection .send_common_block .wrap {
+  padding: 24px;
+}
+.formSection .send_common_block .btnFlex {
+  display: flex;
+  justify-content: center;
+}
+.formSection .send_common_block .margin_left {
+  margin-left: 16px;
+}
+.formSection .send_common_block .delete_wrap button {
+  position: relative;
+  color: #fff;
+  background-color: #c30000;
+  border: 1px solid #c30000;
+  padding: 12px 16px;
+  line-height: 1em;
+  display: flex;
+  margin: 16px auto 0;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 769px) {
+  .formSection .send_common_block .delete_wrap button:hover {
+    background-color: #fff;
+    color: #c30000;
+    border: 1px solid #c30000;
+    transition-duration: 0.5s;
+  }
+}
+.formSection .send_common_block .send_wrap .notice {
+  text-align: center;
+  margin-top: 8px;
+}
+.formSection .send_common_block .send_wrap .notice span {
+  color: red;
+}
+.formSection .send_common_block .send_wrap button {
+  position: relative;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #000;
+  padding: 12px 16px;
+  line-height: 1em;
+  display: flex;
+  margin: 16px auto 0;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 769px) {
+  .formSection .send_common_block .send_wrap button:hover {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+    transition-duration: 0.5s;
+  }
+}
+
+/*--------------------------------------------------- */
+/* */
+/*--------------------------------------------------- */
+.lineFlex {
+  display: flex;
+  justify-content: space-between;
+}
+.lineFlex .lineFlexLeft {
+  width: 190px;
+}
+.lineFlex .lineFlexRight {
+  width: calc(100% - 210px);
+}
+
+/*--------------------------------------------------- */
+/* */
+/*--------------------------------------------------- */
+.line_customer .heading {
+  padding-bottom: 16px;
+  padding-top: 16px;
+  font-weight: 700;
+  border-bottom: 1px dotted #aaa;
+}
+.line_customer ul {
+  margin-top: 16px;
+}
+.line_customer ul li {
+  padding: 0 0 8px;
+}
+.line_customer ul li .link {
+  position: relative;
+  padding-left: 0.8em;
+}
+.line_customer ul li .link:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 3px 0 3px 5.2px;
+  border-color: transparent transparent transparent #000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+}
+.line_customer ul li .new_message {
+  font-size: 10px;
+  font-size: 1rem;
+  color: red;
+}
+
+/*--------------------------------------------------- */
+/* */
+/*--------------------------------------------------- */
+.line_message {
+  background-color: transparent;
+}
+.line_message > div {
+  background-color: #fff;
+}
+.line_message .headingWrap {
+  display: flex;
+  padding: 24px;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.line_message .headingWrap:after {
+  content: "";
+  content: "";
+  border-bottom: 1px solid #cecece;
+  width: calc(100%);
+  height: 1px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* style */
+}
+.line_message .headingWrap .title {
+  width: calc(100% - 220px);
+  font-size: 20px;
+  font-size: 2rem;
+  font-weight: 700;
+}
+.line_message .headingWrap .details {
+  width: 200px;
+}
+.line_message .headingWrap .details .detailBtn {
+  margin-left: auto;
+}
+.line_message .headingWrap .customerBtn a, .line_message .headingWrap .customerBtn a:visited {
+  position: relative;
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #000;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-size: 1.2rem;
+  line-height: 1em;
+  display: flex;
+  max-width: fit-content;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  position: relative;
+}
+@media (min-width: 769px) {
+  .line_message .headingWrap .customerBtn a:hover, .line_message .headingWrap .customerBtn a:visited:hover {
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #000;
+    transition-duration: 0.5s;
+  }
+}
+.line_message .messageBlock {
+  height: 300px;
+  overflow-y: scroll;
+  padding-top: 24px;
+}
+.line_message .messageBlock::-webkit-scrollbar {
+  width: 10px;
+}
+.line_message .messageBlock::-webkit-scrollbar-thumb {
+  background-color: #000;
+  border-radius: 5px;
+}
+.line_message .messageBlock::-webkit-scrollbar-track {
+  background-color: #ccc;
+  border-radius: 5px;
+}
+.line_message .messageWrap {
+  margin-bottom: 48px;
+}
+.line_message .messageWrap .flexMessge {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+.line_message .messageWrap .flexMessge .imgFlex {
+  width: 70px;
+  height: 70px;
+  background-color: #aaa;
+  border-radius: 50%;
+}
+.line_message .messageWrap .flexMessge .textFlex {
+  width: calc(100% - 86px);
+}
+.line_message .messageWrap .flexMessge .headingBlock {
+  display: flex;
+  font-size: 14px;
+  font-size: 1.4rem;
+}
+.line_message .messageWrap .flexMessge .headingBlock .name {
+  font-weight: 700;
+}
+.line_message .messageWrap .flexMessge .headingBlock .time {
+  margin-left: 8px;
+}
+.line_message .messageWrap .flexMessge .content {
+  margin-top: 4px;
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  padding: 12px 16px;
+  line-height: 1.5em;
+  width: fit-content;
+  font-size: 16px;
+  font-size: 1.6rem;
+  position: relative;
+}
+.line_message .messageWrap .flexMessge .content:before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 10.4px 6px 0;
+  border-color: transparent #f3f3f3 transparent transparent;
+  position: absolute;
+  top: 10px;
+  left: -10px;
+  margin: auto;
+}
+.line_message .messageWrap .rightMessage {
+  margin-left: auto;
+  margin-right: 32px;
+  justify-content: flex-end;
+}
+.line_message .messageWrap .rightMessage .headingBlock {
+  justify-content: flex-end;
+  padding-right: 8px;
+}
+.line_message .messageWrap .rightMessage .content {
+  margin-left: auto;
+}
+.line_message .messageWrap .rightMessage .content:before {
+  display: none;
+}
+.line_message .send_message_request {
+  border-top: 1px solid #aaa;
+  padding: 24px;
+}
+.line_message .send_message_block {
+  margin-top: 48px;
+}
+.line_message .customer_block {
+  margin-top: 48px;
+}
+.line_message .customer_block .customerBtnWrap button {
+  position: relative;
+  color: #fff;
+  background-color: #000000;
+  border: 1px solid #000000;
+  padding: 12px 16px;
+  line-height: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+@media (min-width: 769px) {
+  .line_message .customer_block .customerBtnWrap button:hover {
+    background-color: #fff;
+    color: #000000;
+    border: 1px solid #000000;
+    transition-duration: 0.5s;
+  }
+}
+
+.formSection {
+  background-color: transparent;
+}
+.formSection > div {
+  background-color: #fff;
+}
+
+.mailFrom ul {
+  width: 100%;
+}
+.mailFrom ul .headBlock {
+  background-color: #eee;
+}
+.mailFrom ul li {
+  display: flex;
+  width: 100%;
+  border: 1px solid #aaa;
+  margin-top: -1px;
+}
+.mailFrom ul li input, .mailFrom ul li textarea {
+  width: 100%;
+}
+.mailFrom ul li > div {
+  display: flex;
+  align-items: center;
+  border-right: 1px solid #aaa;
+  padding: 16px;
+}
+.mailFrom ul li > div:nth-last-of-type(1) {
+  border-right: 0;
+}
+
+.new_mail_block {
+  margin-top: 48px;
+}
+.new_mail_block ul li > div:nth-of-type(1) {
+  width: 40%;
+}
+.new_mail_block ul li > div:nth-of-type(2) {
+  width: calc(60%);
+}
+
+.mailFrom .list_mail_block ul li > div:nth-of-type(1) {
+  width: 80px;
+}
+.mailFrom .list_mail_block ul li > div:nth-of-type(2) {
+  width: calc(35% - 80px);
+}
+.mailFrom .list_mail_block ul li > div:nth-of-type(3) {
+  width: calc(65% - 80px);
+}
+.mailFrom .list_mail_block ul li > div:nth-of-type(4) {
+  width: calc(80px);
+}
+.mailFrom .list_mail_block ul li > div .delete_wrap button {
+  font-size: 12px;
+  font-size: 1.2rem;
+  padding: 8px;
+  margin: auto;
+}
+
+/*--------------------------------------------------- */
 /* 各種ボタン系 */
 /*--------------------------------------------------- */
 main .commonBtnFlex {
@@ -1645,6 +2015,10 @@ main .addbtn a, main .commonBtn a {
   user-select: all;
 }
 
+.white-space {
+  white-space: break-spaces;
+}
+
 .wid100 {
   width: 100%;
 }
@@ -1669,6 +2043,13 @@ main .addbtn a, main .commonBtn a {
 
 [disabled="true"] {
   pointer-events: none;
+}
+
+.disabled {
+  color: #777 !important;
+  background-color: #aaa !important;
+  border: 1px solid #aaa !important;
+  cursor: not-allowed !important;
 }
 
 .textBox {
