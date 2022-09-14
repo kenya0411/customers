@@ -650,14 +650,14 @@ public function ajax_mail_index(Request $request) {
         foreach ($lines_mails as $key => $value) {
 
             //ユーザー情報
-            $users = DB::table('users')
+            $user = DB::table('users')
             ->where('id',$value->users_id)
             ->first(); //一つだけ取得   
  
             //配列にまとめる
             $lines_mails_list[$key] =array(
-                'users_id' => $users->id,
-                'users_nickname' => $users->nickname,
+                'users_id' => $user->id,
+                'users_nickname' => $user->nickname,
                 'lines_mails_mailaddress' => $value->lines_mails_mailaddress,
                 'lines_mails_id' => $value->lines_mails_id,
             );
