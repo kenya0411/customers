@@ -30,7 +30,6 @@ $border-color: #aaa
 				&:nth-last-of-type(1)
 					border-right: 0
 .new_mail_block
-	margin-top: 48px
 
 	ul
 		li
@@ -41,16 +40,18 @@ $border-color: #aaa
 					width: calc(60%)
 .mailFrom
 	.list_mail_block
+		margin-bottom: 48px
 
 		ul
 			li
 				>div
+
 					&:nth-of-type(1)
-						width: 80px
+						width: calc(35% - 120px)
 					&:nth-of-type(2)
-						width: calc(35% - 80px)
+						width: calc(65% - 120px)
 					&:nth-of-type(3)
-						width: calc(65% - 80px)
+						width: calc(160px)
 					&:nth-of-type(4)
 						width: calc(80px)
 					.delete_wrap
@@ -58,3 +59,24 @@ $border-color: #aaa
 							@include rem(12)
 							padding: 8px 
 							margin: auto
+					.test_mail_wrap
+						button
+							$bgcolor: #000
+							position: relative
+							color: #fff
+							background-color: $bgcolor
+							border: 1px solid $bgcolor
+							padding: 8px
+							line-height: 1em
+							display: flex
+							@include rem(12)
+							justify-content: center
+							align-items: center
+							@include tabup
+								&:hover
+									background-color: #fff
+									color: $bgcolor
+									border: 1px solid $bgcolor
+									transition-duration: 0.5s
+					
+					

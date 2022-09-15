@@ -21,6 +21,10 @@ use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
 //ユーザー認証
 use Illuminate\Support\Facades\Auth;
 
+//メール機能
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
+
 class LineMessengerController extends Controller
 {
 
@@ -678,45 +682,51 @@ public function ajax_mail_index(Request $request) {
 
 
 /*--------------------------------------------------- */
-/* 
+/* メール設定の修正・削除
 /*--------------------------------------------------- */
 public function ajax_mail_update(Request $request) {
 
     $submit_name = $request->submit;//押したボタンの種類
     $lines_mails_id = $request->lines_mails_id;//lines_mails_mailaddress
     $lines_mails_mailaddress = $request->lines_mails_mailaddress;//ID
-    // file_put_contents("test/test.txt", var_export( $request->lines_mails_mailaddress , true));
 
-//選択されたIDを更新
-// foreach ((array)$lines_mails_id as $key => $value) {
-//     $lines_mails_mailaddress = $request->lines_mails_mailaddress[$value];//ID
+    /**********************/
+    /* 修正する場合
+    /**********************/
+    if( $submit_name == 'update'){
 
-//     //配列に保存
-//     $param = [
-//     'lines_mails_id' => $value,
-//     'lines_mails_mailaddress' => $lines_mails_mailaddress,
-//     'updated_at' => date( "Y-m-d H:i:s" , time() ),
-//     ];
-//     //ユーザー情報をアップデート
-//     DB::update('update lines_mails set 
-//     lines_mails_mailaddress=:lines_mails_mailaddress,
-//     updated_at=:updated_at
-//     where lines_mails_id=:lines_mails_id'
-//     , $param);
-// }
+    foreach ((array)$lines_mails_mailaddress as $key => $value) {
+        $param = [
+        'lines_mails_id' => $key,
+        'lines_mails_mailaddress' => $value,
+        'updated_at' => date( "Y-m-d H:i:s" , time() ),
+        ];
+        //ユーザー情報をアップデート
+        DB::update('update lines_mails set 
+        lines_mails_mailaddress=:lines_mails_mailaddress,
+        updated_at=:updated_at
+        where lines_mails_id=:lines_mails_id'
+        , $param);
+    }
+    }elseif(!empty($request->send_mail)){
+        $data =$this->send_test_mail($request);
+    return redirect('/lines/mails');
 
-foreach ((array)$lines_mails_mailaddress as $key => $value) {
-    file_put_contents("test/test.txt", var_export( $key , true));
+    }else{
 
-    //配列に保存
+    /**********************/
+    /* //削除する場合
+    /**********************/
+    $delete_id = $request->delete;//削除するID
+    
     $param = [
-    'lines_mails_id' => $key,
-    'lines_mails_mailaddress' => $value,
+    'lines_mails_id' => $delete_id,
+    'is_delete' => 1,
     'updated_at' => date( "Y-m-d H:i:s" , time() ),
     ];
-    //ユーザー情報をアップデート
+    //ユーザー情報を倫理削除
     DB::update('update lines_mails set 
-    lines_mails_mailaddress=:lines_mails_mailaddress,
+    is_delete=:is_delete,
     updated_at=:updated_at
     where lines_mails_id=:lines_mails_id'
     , $param);
@@ -731,6 +741,29 @@ foreach ((array)$lines_mails_mailaddress as $key => $value) {
 
 
 
+/*--------------------------------------------------- */
+/* テストメール送信
+/*--------------------------------------------------- */
+public function send_test_mail(Request $request) {
+    $send_mail_id = $request->send_mail;
+    $to_email = $request->lines_mails_mailaddress[$send_mail_id];
+    $data = [
+        'name' => $request->users_nickname."様",
+        'from_email' => "shimoda.kenya@gmail.com",
+        'to_email' => $to_email,
+        'view' => "lines.components.mail.test_mail",
+        'subject' => "テストメールです。",
+        'site_name' => "顧客管理システム",
+
+    ];
+    
+ // file_put_contents("test/return.txt", var_export( $lines_mails_mailaddress , true));
+
+
+        Mail::send(new TestMail($data));
+
+        // return view('welcome');
+}
 
 
 }
