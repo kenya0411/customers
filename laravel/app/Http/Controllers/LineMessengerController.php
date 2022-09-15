@@ -644,7 +644,7 @@ public function ajax_mail_index(Request $request) {
 
 
 
-    //ラインのメールアドレス情報を配列化
+  //ラインのメールアドレス情報を配列化
   $lines_mails_list = [];
     if(!empty($lines_mails)){
         foreach ($lines_mails as $key => $value) {
@@ -674,6 +674,60 @@ public function ajax_mail_index(Request $request) {
 
 }
 
+
+
+
+/*--------------------------------------------------- */
+/* 
+/*--------------------------------------------------- */
+public function ajax_mail_update(Request $request) {
+
+    $submit_name = $request->submit;//押したボタンの種類
+    $lines_mails_id = $request->lines_mails_id;//lines_mails_mailaddress
+    $lines_mails_mailaddress = $request->lines_mails_mailaddress;//ID
+    // file_put_contents("test/test.txt", var_export( $request->lines_mails_mailaddress , true));
+
+//選択されたIDを更新
+// foreach ((array)$lines_mails_id as $key => $value) {
+//     $lines_mails_mailaddress = $request->lines_mails_mailaddress[$value];//ID
+
+//     //配列に保存
+//     $param = [
+//     'lines_mails_id' => $value,
+//     'lines_mails_mailaddress' => $lines_mails_mailaddress,
+//     'updated_at' => date( "Y-m-d H:i:s" , time() ),
+//     ];
+//     //ユーザー情報をアップデート
+//     DB::update('update lines_mails set 
+//     lines_mails_mailaddress=:lines_mails_mailaddress,
+//     updated_at=:updated_at
+//     where lines_mails_id=:lines_mails_id'
+//     , $param);
+// }
+
+foreach ((array)$lines_mails_mailaddress as $key => $value) {
+    file_put_contents("test/test.txt", var_export( $key , true));
+
+    //配列に保存
+    $param = [
+    'lines_mails_id' => $key,
+    'lines_mails_mailaddress' => $value,
+    'updated_at' => date( "Y-m-d H:i:s" , time() ),
+    ];
+    //ユーザー情報をアップデート
+    DB::update('update lines_mails set 
+    lines_mails_mailaddress=:lines_mails_mailaddress,
+    updated_at=:updated_at
+    where lines_mails_id=:lines_mails_id'
+    , $param);
+}
+
+
+
+    // //アップデート後はリダイレクト
+    return redirect('/lines/mails');
+
+}
 
 
 

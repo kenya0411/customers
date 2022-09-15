@@ -255,6 +255,8 @@ Route::post('lines/mails/ajax', 'LineMessengerController@ajax_mail_index');
 
 //新規メールアドレス追加
 Route::post('lines/mails/ajax_new', 'LineMessengerController@ajax_mail_new');
+//メールアドレス情報の修正
+Route::post('lines/mails/ajax_update', 'LineMessengerController@ajax_mail_update');
 
 
 
