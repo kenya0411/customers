@@ -1331,7 +1331,7 @@
 }
 
 /*--------------------------------------------------- */
-/* */
+/* ベースのレイアウト */
 /*--------------------------------------------------- */
 .lineFlex {
   display: flex;
@@ -1344,6 +1344,20 @@
   width: calc(100% - 210px);
 }
 
+@media (max-width: 768px) {
+  .lineFlex {
+    flex-wrap: wrap;
+  }
+  .lineFlex .lineFlexLeft {
+    width: 100%;
+    order: 2;
+  }
+  .lineFlex .lineFlexRight {
+    width: 100%;
+    order: 1;
+    margin-bottom: 80px;
+  }
+}
 /*--------------------------------------------------- */
 /* */
 /*--------------------------------------------------- */
@@ -1566,31 +1580,39 @@
   background-color: #fff;
 }
 
+/*--------------------------------------------------- */
+/* */
+/*--------------------------------------------------- */
 .mailFrom ul {
   width: 100%;
 }
 .mailFrom ul .headBlock {
   background-color: #eee;
 }
-.mailFrom ul li {
-  display: flex;
-  width: 100%;
-  border: 1px solid #aaa;
-  margin-top: -1px;
-}
-.mailFrom ul li input, .mailFrom ul li textarea {
-  width: 100%;
-}
-.mailFrom ul li > div {
-  display: flex;
-  align-items: center;
-  border-right: 1px solid #aaa;
-  padding: 16px;
-}
-.mailFrom ul li > div:nth-last-of-type(1) {
-  border-right: 0;
+@media (min-width: 769px) {
+  .mailFrom ul li {
+    display: flex;
+    width: 100%;
+    border: 1px solid #aaa;
+    margin-top: -1px;
+  }
+  .mailFrom ul li input, .mailFrom ul li textarea {
+    width: 100%;
+  }
+  .mailFrom ul li > div {
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #aaa;
+    padding: 16px;
+  }
+  .mailFrom ul li > div:nth-last-of-type(1) {
+    border-right: 0;
+  }
 }
 
+/*--------------------------------------------------- */
+/* */
+/*--------------------------------------------------- */
 .new_mail_block ul li > div:nth-of-type(1) {
   width: 40%;
 }
@@ -1598,20 +1620,33 @@
   width: calc(60%);
 }
 
+@media (max-width: 768px) {
+  .new_mail_block ul li > div:nth-of-type(1) {
+    margin-bottom: 12px;
+  }
+  .new_mail_block ul .headBlock {
+    display: none;
+  }
+}
+/*--------------------------------------------------- */
+/* list_mail_block */
+/*--------------------------------------------------- */
 .mailFrom .list_mail_block {
   margin-bottom: 48px;
 }
-.mailFrom .list_mail_block ul li > div:nth-of-type(1) {
-  width: calc(35% - 120px);
-}
-.mailFrom .list_mail_block ul li > div:nth-of-type(2) {
-  width: calc(65% - 120px);
-}
-.mailFrom .list_mail_block ul li > div:nth-of-type(3) {
-  width: calc(160px);
-}
-.mailFrom .list_mail_block ul li > div:nth-of-type(4) {
-  width: calc(80px);
+@media (min-width: 769px) {
+  .mailFrom .list_mail_block ul li > div:nth-of-type(1) {
+    width: calc(35% - 120px);
+  }
+  .mailFrom .list_mail_block ul li > div:nth-of-type(2) {
+    width: calc(65% - 120px);
+  }
+  .mailFrom .list_mail_block ul li > div:nth-of-type(3) {
+    width: calc(160px);
+  }
+  .mailFrom .list_mail_block ul li > div:nth-of-type(4) {
+    width: calc(80px);
+  }
 }
 .mailFrom .list_mail_block ul li > div .delete_wrap button {
   font-size: 12px;
@@ -1641,6 +1676,54 @@
   }
 }
 
+@media (max-width: 768px) {
+  .mailFrom .list_mail_block ul {
+    width: 100%;
+  }
+  .mailFrom .list_mail_block ul .headBlock {
+    display: none;
+  }
+  .mailFrom .list_mail_block ul li {
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    display: flex;
+    padding: 16px;
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 768px) and (max-width: 480px) {
+  .mailFrom .list_mail_block ul li {
+    font-size: 12px;
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 768px) {
+  .mailFrom .list_mail_block ul li:nth-last-of-type(1) {
+    margin-bottom: 0;
+  }
+  .mailFrom .list_mail_block ul li > div {
+    display: block;
+  }
+  .mailFrom .list_mail_block ul li > div:nth-of-type(2) {
+    margin-bottom: 12px;
+    width: 100%;
+  }
+  .mailFrom .list_mail_block ul li > div:nth-of-type(3), .mailFrom .list_mail_block ul li > div:nth-of-type(4) {
+    width: 50%;
+    /* style */
+    /* style */
+  }
+  .mailFrom .list_mail_block ul li > div .delete_wrap button {
+    margin-right: 0;
+  }
+  .mailFrom .list_mail_block ul li .tab_heading {
+    background-color: #eee;
+    margin: -16px -16px 0;
+    padding: 8px 16px;
+    margin-bottom: 8px;
+    width: calc(100% + 32px);
+  }
+}
 /*--------------------------------------------------- */
 /* 各種ボタン系 */
 /*--------------------------------------------------- */
@@ -2071,6 +2154,10 @@ main .addbtn a, main .commonBtn a {
   background-color: #aaa !important;
   border: 1px solid #aaa !important;
   cursor: not-allowed !important;
+}
+
+[v-cloak] {
+  display: none;
 }
 
 .textBox {

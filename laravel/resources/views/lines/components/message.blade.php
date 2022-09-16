@@ -1,4 +1,20 @@
-<div class="line_message formSection " >   
+<div class="pcInvi">
+    
+<div class="backBlock">
+    <div class="commonBtnFlex">
+        
+<div class="backBtn">
+    <a href="#" onClick="history.back(); return false;">戻る</a>
+</div>
+<div class="backListBtn">
+    <a href="/lines" >お客様一覧</a>
+</div>
+    </div>
+
+</div>
+</div>
+
+<div class="line_message formSection " v-cloak>   
 <div class="headingWrap">
     <div class="title">
     @{{ lines_information.lines_customers_name }}

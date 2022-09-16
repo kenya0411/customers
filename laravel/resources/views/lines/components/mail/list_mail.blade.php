@@ -18,12 +18,15 @@
 
     <li v-for="line_mail in lines_mails">
 
-        <div>
+        <div class="tab_heading">
+           
             @{{ line_mail.users_nickname }}
             <input type="hidden" name="users_id" v-bind:value="line_mail.users_id">
             <input type="hidden" name="users_nickname" v-bind:value="line_mail.users_nickname">
         </div>
         <div>
+            <div class="pcInvi">メールアドレス</div>
+
             <input type="mail" v-bind:name="`lines_mails_mailaddress[${line_mail.lines_mails_id}]`" v-bind:value="line_mail.lines_mails_mailaddress ">
         </div>
         <div>
