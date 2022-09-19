@@ -8,14 +8,16 @@ use App\Line_customer;
 use App\Line_message;
 use App\Line_temporary;
 use App\Line_mail;
+use App\Http\Controllers\Components\CommonFunction;
 
+
+//post系？
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 //Line系
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use LINE\LINEBot;
-// use App\Models\User;
 use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
 
 //ユーザー認証
@@ -49,6 +51,9 @@ class LineMessengerController extends Controller
 
 public function index(Request $request)
 {
+    // $test = CommonFunction::change_persons_name();
+
+
         $data = $this->show_list($request,'lines.message_list');
         return $data;
 
@@ -469,6 +474,8 @@ public function ajax_get_message(Request $request,$lines_userid) {
             $customers_data = DB::table('customers')
             ->where('customers_id',$customers_id)
             ->get();    
+
+    // file_put_contents("test/return.txt", var_export( $value->lines_messages_text , true));
 
             //鑑定士
             $persons_data = DB::table('persons')

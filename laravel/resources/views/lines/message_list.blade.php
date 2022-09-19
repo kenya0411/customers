@@ -54,6 +54,8 @@
 @endsection
 
 @section('vue')
+{{-- <script src="/js/vue/lines_test.js"></script> --}}
+
 <script src="/js/vue/lines_message.js"></script>
 
 @endsection

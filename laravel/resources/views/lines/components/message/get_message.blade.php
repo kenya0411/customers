@@ -26,7 +26,9 @@
                 </div>
             </div>
                 <div class="content white-space">
-                    @{{ line_list.lines_messages.lines_messages_text }}
+                            @{{ change_name(line_list.lines_messages.lines_messages_text) }}
+                    
+                    {{-- @{{ line_list.lines_messages.lines_messages_text }} --}}
                     {{-- @{{ line_list.lines_messages.lines_messages_text }} --}}
              {{--        <pre>
                     @{{ line_list.lines_messages }}
@@ -57,7 +59,8 @@
             </div>
         </div>
             <div class="content white-space">
-                @{{ line_list.lines_messages.lines_messages_text }}
+                            @{{ change_name(line_list.lines_messages.lines_messages_text) }}
+                {{-- @{{ line_list.lines_messages.lines_messages_text }} --}}
                        {{--          <pre>
                     @{{ line_list.lines_messages }}
                     </pre> --}}

@@ -23,7 +23,6 @@ const hoge = {
 		moment: function (date) {
 
 			let result = moment(date).format("MM月DD日");
-			console.log(date)
 			
 
 			return result
