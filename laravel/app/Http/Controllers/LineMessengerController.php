@@ -399,9 +399,30 @@ public function ajax_message(Request $request) {
 
     //LINEの情報を取得
     $lines_userid = $request->userid;
+
+    //ラインに登録されたユーザーを取得
     $lines_customers = DB::table('lines_customers')
     ->where('is_delete','=',0)//論理削除されてないもの
     ->get();  
+    $lines_customers_list = [];
+
+    //最終のメッセージがどちらが最後か確認（New用）
+     if(!empty($lines_customers)){
+        foreach ($lines_customers as $key => $value) {  
+        $lines_messages = DB::table('lines_messages')
+        ->where('is_delete','=',0)//論理削除されてないもの
+        ->where('lines_customers_userid','=',$value->lines_customers_userid)//ユーザーIDのメッセージを取得
+        ->orderBy('lines_messages_id', 'desc')//最終のデータを取得
+        ->first(); //1件のみ取得
+            $lines_customers_list[]= [
+                'lines_customers_name'=> $value->lines_customers_name,
+                'lines_customers_userid'=> $value->lines_customers_userid,
+                'lines_messages_to_userid'=> $lines_messages->lines_messages_to_userid,
+                'lines_messages_updated_at'=> $lines_messages->updated_at,
+            ];
+        }
+    }
+
 
     //空の値を入力
     $lines_list = [];
@@ -409,7 +430,8 @@ public function ajax_message(Request $request) {
     $users = [];
     $lines_temporaries = [];
 
-    //LINEのユーザーIDを取得出来ない場合
+
+    //LINEのユーザーIDを取得できる場合
     if(!empty($lines_userid )){
         $temp = $this->ajax_get_message($request,$lines_userid);
         $lines_list = $temp['lines_list'];//Lineメッセージ
@@ -423,7 +445,7 @@ public function ajax_message(Request $request) {
  // file_put_contents("test/return.txt", var_export( $lines_customers[0] , true));
 
         return [
-            "lines_customers"=>$lines_customers,  
+            "lines_customers"=>$lines_customers_list,  
             "lines_list"=> $lines_list,
             "lines_information"=>$lines_information,
             "users"=>$users,
@@ -612,6 +634,13 @@ public function lines_temporaries_post(Request $request) {
 
 
 
+
+//------------------------------------------------------------------------------------------------ 
+// ここからはLINEメール設定
+//------------------------------------------------------------------------------------------------ 
+
+
+
 /*--------------------------------------------------- */
 /* LINE用のメールアドレスを新規追加
 /*--------------------------------------------------- */
@@ -754,13 +783,15 @@ public function ajax_mail_update(Request $request) {
 public function send_test_mail(Request $request) {
     $send_mail_id = $request->send_mail;
     $to_email = $request->lines_mails_mailaddress[$send_mail_id];
+    $site_url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] ;
     $data = [
-        'name' => $request->users_nickname."様",
-        'from_email' => "shimoda.kenya@gmail.com",
-        'to_email' => $to_email,
+        'name' => $request->users_nickname."様",//宛名
+        'from_email' => "shimoda.kenya@gmail.com",//送信元メールアドレス
+        'to_email' => $to_email,//宛先
         'view' => "lines.components.mail.test_mail",
-        'subject' => "テストメールです。",
-        'site_name' => "顧客管理システム",
+        'subject' => "テストメールです。",//タイトル
+        'site_name' => "顧客管理システム",//サイトネーム
+        'site_url' => $site_url ,//サイトネーム
 
     ];
     

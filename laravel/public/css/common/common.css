@@ -1391,9 +1391,10 @@
   margin: auto;
 }
 .line_customer ul li .new_message {
-  font-size: 10px;
-  font-size: 1rem;
+  font-size: 12px;
+  font-size: 1.2rem;
   color: red;
+  margin-left: 4px;
 }
 
 /*--------------------------------------------------- */
