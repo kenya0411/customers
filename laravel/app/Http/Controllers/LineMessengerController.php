@@ -422,8 +422,11 @@ public function ajax_message(Request $request) {
             ];
         }
     }
+    //メッセージの最新順にソート
+    $SortKey = array_column($lines_customers_list, 'lines_messages_updated_at');
+    array_multisort($SortKey, SORT_DESC, $lines_customers_list);
 
-
+    
     //空の値を入力
     $lines_list = [];
     $lines_information = [];
