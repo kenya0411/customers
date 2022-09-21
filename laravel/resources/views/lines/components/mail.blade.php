@@ -1,4 +1,12 @@
+
+@include('common.components.alert')
+
 <div class="mailFrom formSection ">   
+
+
+
+
+
 
 @include('lines.components.mail.list_mail')
 

@@ -1,3 +1,4 @@
+
 <div class="list_mail_block send_common_block" v-if="lines_mails.length">
     <div class="heading_block">
         メールアドレス一覧

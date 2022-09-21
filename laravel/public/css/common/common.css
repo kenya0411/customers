@@ -1016,6 +1016,22 @@
     font-size: 1.4rem;
   }
 }
+.post_status_wrap {
+  margin-bottom: 16px;
+  background-color: #fff;
+}
+.post_status_wrap .inner {
+  padding: 16px;
+  font-size: 16px;
+  font-size: 1.6rem;
+}
+.post_status_wrap.success {
+  border: 2px solid #1ab9aa;
+}
+.post_status_wrap.delete {
+  border: 2px solid red;
+}
+
 .formSection {
   background-color: #fff;
 }

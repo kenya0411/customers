@@ -64,7 +64,11 @@ public function index(Request $request)
 public function mail_index(Request $request)
 {
         $data = $this->show_list($request,'lines.mail_list');
-        return $data;
+    //      $post_status = [
+    //     'status' => $request->old('status'),
+    //     'type' => $request->old('type'),
+    // ];
+        return $data->with('post_status', $request->old());
 
 
     }
@@ -729,10 +733,32 @@ public function ajax_mail_update(Request $request) {
     $lines_mails_id = $request->lines_mails_id;//lines_mails_mailaddress
     $lines_mails_mailaddress = $request->lines_mails_mailaddress;//ID
 
-    /**********************/
-    /* 修正する場合
-    /**********************/
-    if( $submit_name == 'update'){
+    
+    if( $submit_name == 'update'){//メールアドレスの修正
+    $data =$this->update_mail_address($request,$lines_mails_mailaddress);
+    return $data;
+
+    }elseif(!empty($request->send_mail)){//テストメールの送信
+    $data =$this->send_test_mail($request);
+    return $data;
+
+    }else{//メールアドレスの削除
+    $data =$this->delete_mail_address($request);
+    return $data;
+
+
+}
+
+
+
+
+
+}
+
+/*--------------------------------------------------- */
+/* メールアドレスの修正
+/*--------------------------------------------------- */
+public function update_mail_address(Request $request,$lines_mails_mailaddress) {
 
     foreach ((array)$lines_mails_mailaddress as $key => $value) {
         $param = [
@@ -747,15 +773,20 @@ public function ajax_mail_update(Request $request) {
         where lines_mails_id=:lines_mails_id'
         , $param);
     }
-    }elseif(!empty($request->send_mail)){
-        $data =$this->send_test_mail($request);
-    return redirect('/lines/mails');
 
-    }else{
+    // //アップデート後はリダイレクト
+    $post_status = array(
+        'status' => 'success',
+        'type' => 'update_mail',
+    );
+    $get_status = redirect('/lines/mails')->withInput($post_status);
+    return  $get_status ;
 
-    /**********************/
-    /* //削除する場合
-    /**********************/
+}
+/*--------------------------------------------------- */
+/* メールアドレスの削除
+/*--------------------------------------------------- */
+public function delete_mail_address(Request $request) {
     $delete_id = $request->delete;//削除するID
     
     $param = [
@@ -769,14 +800,18 @@ public function ajax_mail_update(Request $request) {
     updated_at=:updated_at
     where lines_mails_id=:lines_mails_id'
     , $param);
-}
-
-
 
     // //アップデート後はリダイレクト
-    return redirect('/lines/mails');
+    $post_status = array(
+        'status' => 'delete',
+        'type' => 'delete_mail',
+    );
+    $get_status = redirect('/lines/mails')->withInput($post_status);
+    return  $get_status ;
 
 }
+
+
 
 
 
@@ -797,13 +832,17 @@ public function send_test_mail(Request $request) {
         'site_url' => $site_url ,//サイトネーム
 
     ];
+        Mail::send(new TestMail($data));//メール送信
+
+
+    //変数を渡してリダイレクト
+    $post_status = array(
+        'status' => 'success',
+        'type' => 'testmail',
+    );
+    $get_status = redirect('/lines/mails')->withInput($post_status);
+    return  $get_status ;
     
- // file_put_contents("test/return.txt", var_export( $lines_mails_mailaddress , true));
-
-
-        Mail::send(new TestMail($data));
-
-        // return view('welcome');
 }
 
 
