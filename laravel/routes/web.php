@@ -258,6 +258,12 @@ Route::post('lines/mails/ajax_new', 'LineMessengerController@ajax_mail_new');
 //メールアドレス情報の修正
 Route::post('lines/mails/ajax_update', 'LineMessengerController@ajax_mail_update');
 
+/*--------------------------------------------------- */
+/* 設定
+/*--------------------------------------------------- */
+Route::get('setting/users', 'UserController@index');
+Route::post('setting/users', 'UserController@post');
+Route::post('setting/users/ajax', 'UserController@ajax_message');
 
 
 /*--------------------------------------------------- */

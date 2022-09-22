@@ -16,6 +16,8 @@
 
 {{-- 管理者 --}}
 @can('admin')
+@include('common.components.alert')
+
 <div class="lineFlex">
   <div class="lineFlexLeft">
 @include('lines.components.message.customer_list')
@@ -32,6 +34,8 @@
 
 {{-- コメント --}}
 @can('comment')
+@include('common.components.alert')
+
 <div class="lineFlex">
   <div class="lineFlexLeft">
 @include('lines.components.message.customer_list')

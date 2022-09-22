@@ -34,7 +34,7 @@
         </div>
         <div class="rightBtnFlex">
         <div class="delete_wrap margin_left">
-        <button name="submit" value="delete">
+        <button name="submit" value="delete" v-on:click="delete_confirm" >
             取り消し
         </button>
     </div>         

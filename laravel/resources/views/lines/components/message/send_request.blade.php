@@ -22,7 +22,7 @@
     </div>
     <div class="send_wrap"  v-else>
 
-        <button >
+        <button  v-on:click="send_confirm">
             メッセージの送信依頼
         </button>
     </div>

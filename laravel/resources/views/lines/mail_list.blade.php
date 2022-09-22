@@ -23,6 +23,13 @@
 
 
 
+{{-- コメント返信者 --}}
+@can('comment')
+
+@include('lines.components.mail')
+
+@endcan
+
 
 
 

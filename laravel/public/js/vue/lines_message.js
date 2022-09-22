@@ -28,10 +28,13 @@ const hoge = {
 		/* スクロールを一番下にする
 		/*--------------------------------------------------- */
 		  scrollToElement() {
+		  	//ロード直後だと取得できない場合があるので、時間差で取得
+		  	setTimeout(function() {
 		  	//メッセージの一番下のセレクタを取得
 			let element = document.getElementsByClassName('end_message')[0];
-
 			element.scrollIntoView(false);
+		  				 }, 200);
+
 		  },
 		/*--------------------------------------------------- */
 		/* 鑑定士の名前を置換
@@ -53,7 +56,28 @@ const hoge = {
 				}
 
 		},
+		/*--------------------------------------------------- */
+		/*アラート
+		/*--------------------------------------------------- */
+		delete_confirm: function(e) {
+		// delete_confirm: function(e) {
+			if(!confirm('削除しますか？')){
+		  	  e.preventDefault();
+				return false;
+			}
 
+		},
+		/*--------------------------------------------------- */
+		/*アラート
+		/*--------------------------------------------------- */
+		send_confirm: function(e) {
+		// delete_confirm: function(e) {
+			if(!confirm('メッセージを送信しますか？')){
+		  	  e.preventDefault();
+				return false;
+			}
+
+		},
 		/*--------------------------------------------------- */
 		/* //ロード時に各種情報をデータベースから取得
 		/*--------------------------------------------------- */
@@ -87,7 +111,6 @@ const hoge = {
 mounted() {
     window.onload = ()=>{
         	this.scrollToElement();
-
     }
 }
 }

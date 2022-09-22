@@ -22,7 +22,6 @@
     // ④マウスを離したらメガメニューをスライドで非表示にする
     $(this).find('.menu_contents').stop().slideUp("fast");
     $(this).removeClass('hover');
- 
   });
  
 });

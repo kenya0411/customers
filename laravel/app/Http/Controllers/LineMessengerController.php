@@ -51,11 +51,10 @@ class LineMessengerController extends Controller
 
 public function index(Request $request)
 {
-    // $test = CommonFunction::change_persons_name();
 
 
         $data = $this->show_list($request,'lines.message_list');
-        return $data;
+        return $data->with('post_status', $request->old());
 
 
     }
@@ -64,28 +63,12 @@ public function index(Request $request)
 public function mail_index(Request $request)
 {
         $data = $this->show_list($request,'lines.mail_list');
-    //      $post_status = [
-    //     'status' => $request->old('status'),
-    //     'type' => $request->old('type'),
-    // ];
+
         return $data->with('post_status', $request->old());
 
 
     }
-// public function message_index(Request $request)
-// {
-//         $data = $this->show_list($request,'lines.message_line');
-//         return $data;
 
-
-//     }
-// public function lines_customers_index(Request $request)
-// {
-//         $data = $this->show_list($request,'lines.update');
-//         return $data;
-
-
-//     }
 
 /*--------------------------------------------------- */
 /* webhook
@@ -127,13 +110,21 @@ public function send_temporary_deta(Request $request) {
         $lines_messages_text = $request->lines_messages_text;//文章
         $send =$this->push_message($request,$lines_customers_userid,$lines_messages_text);//メッセージを送信
         $delete =$this->delete_temporary_deta($request);//DBから倫理削除
+        return $send;
 
     }else{//取り消しボタンを押した場合、送信せずDBから論理削除
         $delete =$this->delete_temporary_deta($request);//DBから倫理削除
-
+        //アラート用
+        $post_status = array(
+            'status' => 'delete',
+            'type' => 'delete_mail_request',
+        );
+        //リダイレクト
+        $get_status = redirect('/lines?userid='.$request->lines_customers_userid)->withInput($post_status);
+        return  $get_status ;
     }
     //リダイレクト
-    return redirect('/lines?userid='.$lines_customers_userid);
+    // return redirect('/lines?userid='.$lines_customers_userid);
 
 }
 
@@ -154,6 +145,7 @@ public function send_temporary_deta(Request $request) {
         updated_at=:updated_at
         where lines_temporaries_id=:lines_temporaries_id'
         , $param);
+
 
 
 
@@ -263,6 +255,15 @@ public function push_message(Request $request,$user_id,$reply) {
     $message = curl_exec($ch);
     curl_close($ch);
 
+
+    //アラート用
+    $post_status = array(
+        'status' => 'success',
+        'type' => 'send_mail',
+    );
+    //リダイレクト
+    $get_status = redirect('/lines?userid='.$request->lines_customers_userid)->withInput($post_status);
+    return  $get_status ;
 }
 /*--------------------------------------------------- */
 /* 
@@ -606,8 +607,15 @@ public function lines_customers_update(Request $request) {
     where lines_customers_id=:lines_customers_id'
     , $param);
 
-    //アップデート後はリダイレクト
-    return redirect('/lines?userid='.$request->lines_customers_userid);
+    //アラート用
+    $post_status = array(
+        'status' => 'success',
+        'type' => 'update_user_info',
+    );
+    //リダイレクト
+    $get_status = redirect('/lines?userid='.$request->lines_customers_userid)->withInput($post_status);
+    return  $get_status ;
+    // return redirect('/lines?userid='.$request->lines_customers_userid);
 
 }
 
@@ -630,8 +638,14 @@ public function lines_temporaries_post(Request $request) {
 
 
 
+    //アラート用
+    $post_status = array(
+        'status' => 'success',
+        'type' => 'send_mail_request',
+    );
     //リダイレクト
-    return redirect('/lines?userid='.$request->lines_customers_userid);
+    $get_status = redirect('/lines?userid='.$request->lines_customers_userid)->withInput($post_status);
+    return  $get_status ;
 
 }
 
@@ -662,8 +676,15 @@ public function ajax_mail_new(Request $request) {
     ]);
 
 
-
-    return redirect('/lines/mails');
+    //アラート用
+    $post_status = array(
+        'status' => 'success',
+        'type' => 'new_mail',
+    );
+    //リダイレクト
+    $get_status = redirect('/lines/mails')->withInput($post_status);
+    return  $get_status ;
+    // return redirect('/lines/mails');
 
 }
 
@@ -774,11 +795,12 @@ public function update_mail_address(Request $request,$lines_mails_mailaddress) {
         , $param);
     }
 
-    // //アップデート後はリダイレクト
+    //アラート用
     $post_status = array(
         'status' => 'success',
         'type' => 'update_mail',
     );
+    //リダイレクト
     $get_status = redirect('/lines/mails')->withInput($post_status);
     return  $get_status ;
 

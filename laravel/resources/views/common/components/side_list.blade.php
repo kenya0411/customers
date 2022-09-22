@@ -54,6 +54,15 @@
     </div>
   </li>
  
+   <li class="menu_list">
+    <a href="#">設定</a>
+    <div class="menu_contents">
+      <ul>
+        <li><a href="/setting/users">ユーザー設定</a></li>
+        {{-- <li><a href="/persons/add">新規人材</a></li> --}}
+      </ul>
+    </div>
+  </li>
 
  <li class="btnWrap">
     <a href="/orders/add">新規注文</a>
@@ -89,6 +98,8 @@
     <div class="menu_contents">
       <ul>
         <li><a href="/lines">LINEメッセージ</a></li>
+        <li><a href="/lines/mails">メール設定</a></li>
+
         {{-- <li><a href="/persons/add">新規人材</a></li> --}}
       </ul>
     </div>
