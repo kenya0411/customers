@@ -19,6 +19,8 @@ LINEのユーザー情報を修正しました。
 メッセージの送信依頼を削除しました。
 @elseif($post_status['type'] == 'send_mail')
 メッセージを送信しました。
+@elseif($post_status['type'] == 'delete_user')
+ユーザーを削除しました。
 @endif      
    </div>
 

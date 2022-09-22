@@ -1,0 +1,148 @@
+@charset "UTF-8"
+
+@import "../../../../_import.sass"
+
+$pad: 24px
+$border-color: #aaa
+
+.settingUserFrom
+	background-color: transparent
+	>div
+		background-color: #fff
+/*--------------------------------------------------- */
+/* 
+/*--------------------------------------------------- */
+.settingUserFrom
+	ul
+
+		width: 100%
+		.headBlock
+			background-color: #eee
+		li
+			@include tabup
+				display: flex
+				width: 100%
+				border: 1px solid $border-color
+				margin-top: -1px
+				input,textarea
+					width: 100%
+				>div
+					display: flex
+					align-items: center
+					border-right: 1px solid $border-color
+					padding: 16px
+					&:nth-last-of-type(1)
+						border-right: 0
+
+
+/*--------------------------------------------------- */
+/* 
+/*--------------------------------------------------- */
+.settingUserFrom
+	ul
+		li
+			>div
+				&:nth-of-type(1)
+					width: 40%
+				&:nth-of-type(2)
+					width: calc(60%)
+@include tab
+
+	.new_mail_block
+		ul
+			li
+				>div
+					&:nth-of-type(1)
+						margin-bottom: 12px
+			.headBlock
+				display: none
+
+
+/*--------------------------------------------------- */
+/* list_mail_block
+/*--------------------------------------------------- */
+.settingUserFrom
+	.list_mail_block
+		margin-bottom: 48px
+
+		ul
+			li
+				>div
+					@include tabup
+						&:nth-of-type(1)
+							width: 50px
+						&:nth-of-type(2)
+							width: calc(25% - 50px)
+
+						&:nth-of-type(3)
+							width: calc(25% - 50px)
+						&:nth-of-type(4)
+							width: calc(25% - 30px)
+						&:nth-of-type(5)
+							width: calc(25%)
+						&:nth-of-type(6)
+							width: calc(80px)
+						select
+							width: 100%
+					.delete_wrap
+						button
+							@include rem(12)
+							padding: 8px 
+							margin: auto
+					.test_mail_wrap
+						button
+							$bgcolor: #000
+							position: relative
+							color: #fff
+							background-color: $bgcolor
+							border: 1px solid $bgcolor
+							padding: 8px
+							line-height: 1em
+							display: flex
+							@include rem(12)
+							justify-content: center
+							align-items: center
+							@include tabup
+								&:hover
+									background-color: #fff
+									color: $bgcolor
+									border: 1px solid $bgcolor
+									transition-duration: 0.5s
+					
+@include tab
+	.mailFrom
+		.list_mail_block
+
+			ul
+
+				width: 100%
+				.headBlock
+					display: none
+				li
+					border: 1px solid #ddd
+					margin-bottom: 20px
+					display: flex
+					padding: 16px
+					flex-wrap: wrap
+					@include mb
+						@include rem(12)
+					&:nth-last-of-type(1)
+						margin-bottom: 0
+					>div
+						display: block
+						&:nth-of-type(2)
+							margin-bottom: 12px
+							width: 100%
+						&:nth-of-type(3),&:nth-of-type(4)
+							width: 50%
+							/* style */
+							/* style */
+						.delete_wrap 
+							button
+								margin-right: 0
+					.tab_heading
+						background-color: #eee
+						margin: -16px -16px 0
+						padding: 8px 16px
+						margin-bottom: 8px
+						width: calc(100% + 32px)

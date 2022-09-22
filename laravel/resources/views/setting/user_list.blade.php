@@ -16,6 +16,7 @@
 
 {{-- 管理者 --}}
 @can('admin')
+@include('setting.user.list')
 
 
 @endcan
@@ -32,6 +33,6 @@
 @endsection
 
 @section('vue')
-<script src="/js/vue/setting_users_mail.js"></script>
+<script src="/js/vue/setting_users_list.js"></script>
 
 @endsection
