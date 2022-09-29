@@ -68,7 +68,7 @@
 			/*--------------------------------------------------- */		
 			async search_page() {
 				
-				let url = '/ships/ajax_search/';
+				let url = '/ships/ajax_search';
 				if(this.search_persons !== 0){
 					axios.post(url, {
 					persons_id: this.search_persons,
@@ -89,7 +89,7 @@
 			//データベースに上書き
 			listUpdate(id,index) {
 				
-				let url = '/ships/ajax_update/';
+				let url = '/ships/ajax_update';
 				
 				axios.post(url, {
 					id: id,
