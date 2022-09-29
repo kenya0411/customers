@@ -133,7 +133,7 @@
 			//データベースに上書き
 		listUpdate(name,id,index) {
 			
-			let url = '/reserves/ajax_update/';
+			let url = '/reserves/ajax_update';
 			
 			axios.post(url, {
 				id: id,
