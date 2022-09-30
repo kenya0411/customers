@@ -1042,74 +1042,30 @@
   padding: 8px;
   margin: auto;
 }
-.settingUserFrom .list_mail_block ul li > div .test_mail_wrap button {
-  position: relative;
-  color: #fff;
-  background-color: #000;
-  border: 1px solid #000;
-  padding: 8px;
-  line-height: 1em;
-  display: flex;
-  font-size: 12px;
-  font-size: 1.2rem;
-  justify-content: center;
-  align-items: center;
-}
-@media (min-width: 769px) {
-  .settingUserFrom .list_mail_block ul li > div .test_mail_wrap button:hover {
-    background-color: #fff;
-    color: #000;
-    border: 1px solid #000;
-    transition-duration: 0.5s;
-  }
-}
 
 @media (max-width: 768px) {
-  .mailFrom .list_mail_block ul {
+  .settingUserFrom .list_mail_block {
+    margin-bottom: 48px;
+  }
+  .settingUserFrom .list_mail_block ul li {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 32px;
+    margin-bottom: 32px;
+  }
+  .settingUserFrom .list_mail_block ul li .num1 {
     width: 100%;
-  }
-  .mailFrom .list_mail_block ul .headBlock {
-    display: none;
-  }
-  .mailFrom .list_mail_block ul li {
-    border: 1px solid #ddd;
-    margin-bottom: 20px;
     display: flex;
-    padding: 16px;
-    flex-wrap: wrap;
-  }
-}
-@media (max-width: 768px) and (max-width: 480px) {
-  .mailFrom .list_mail_block ul li {
-    font-size: 12px;
-    font-size: 1.2rem;
-  }
-}
-@media (max-width: 768px) {
-  .mailFrom .list_mail_block ul li:nth-last-of-type(1) {
-    margin-bottom: 0;
-  }
-  .mailFrom .list_mail_block ul li > div {
-    display: block;
-  }
-  .mailFrom .list_mail_block ul li > div:nth-of-type(2) {
-    margin-bottom: 12px;
-    width: 100%;
-  }
-  .mailFrom .list_mail_block ul li > div:nth-of-type(3), .mailFrom .list_mail_block ul li > div:nth-of-type(4) {
-    width: 50%;
-    /* style */
-    /* style */
-  }
-  .mailFrom .list_mail_block ul li > div .delete_wrap button {
-    margin-right: 0;
-  }
-  .mailFrom .list_mail_block ul li .tab_heading {
-    background-color: #eee;
-    margin: -16px -16px 0;
-    padding: 8px 16px;
+    align-items: center;
+    justify-content: flex-start;
     margin-bottom: 8px;
-    width: calc(100% + 32px);
+  }
+  .settingUserFrom .list_mail_block ul li .num1 input {
+    width: auto;
+    order: 0;
+  }
+  .settingUserFrom .list_mail_block ul li .num1 .labelWrap {
+    order: 1;
+    margin-left: 4px;
   }
 }
 @media (max-width: 768px) {

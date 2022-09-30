@@ -45,7 +45,7 @@ public function index(Request $request)
         // $data = $this->show_list($request,'setting.user_list');
         // return $data->with('post_status', $request->old());
 
-   return view('setting.user_list');
+   return view('setting.user_list')->with('post_status', $request->old());
 
 }
 
@@ -103,7 +103,7 @@ public function ajax_user_update(Request $request) {
 }
 
 /*--------------------------------------------------- */
-/* メールアドレスの修正
+/* ユーザー情報の修正
 /*--------------------------------------------------- */
 public function update_user_information(Request $request,$users_id) {
 
@@ -151,7 +151,7 @@ public function update_user_information(Request $request,$users_id) {
     //アラート用
     $post_status = array(
         'status' => 'success',
-        'type' => 'update_mail',
+        'type' => 'update_user',
     );
     //リダイレクト
     $get_status = redirect('/setting/users')->withInput($post_status);

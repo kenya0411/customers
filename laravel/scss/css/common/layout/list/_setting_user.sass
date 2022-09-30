@@ -89,60 +89,29 @@ $border-color: #aaa
 							@include rem(12)
 							padding: 8px 
 							margin: auto
-					.test_mail_wrap
-						button
-							$bgcolor: #000
-							position: relative
-							color: #fff
-							background-color: $bgcolor
-							border: 1px solid $bgcolor
-							padding: 8px
-							line-height: 1em
-							display: flex
-							@include rem(12)
-							justify-content: center
-							align-items: center
-							@include tabup
-								&:hover
-									background-color: #fff
-									color: $bgcolor
-									border: 1px solid $bgcolor
-									transition-duration: 0.5s
+
 					
 @include tab
-	.mailFrom
+	.settingUserFrom
 		.list_mail_block
+			margin-bottom: 48px
 
 			ul
-
-				width: 100%
-				.headBlock
-					display: none
 				li
-					border: 1px solid #ddd
-					margin-bottom: 20px
-					display: flex
-					padding: 16px
-					flex-wrap: wrap
-					@include mb
-						@include rem(12)
-					&:nth-last-of-type(1)
-						margin-bottom: 0
-					>div
-						display: block
-						&:nth-of-type(2)
-							margin-bottom: 12px
-							width: 100%
-						&:nth-of-type(3),&:nth-of-type(4)
-							width: 50%
-							/* style */
-							/* style */
-						.delete_wrap 
-							button
-								margin-right: 0
-					.tab_heading
-						background-color: #eee
-						margin: -16px -16px 0
-						padding: 8px 16px
+					border-bottom: 1px solid #ddd
+					padding-bottom: 32px
+					margin-bottom: 32px
+					.num1
+						width: 100%
+						display: flex
+						align-items: center
+						justify-content: flex-start
 						margin-bottom: 8px
-						width: calc(100% + 32px)
+
+						input
+							width: auto
+							order: 0
+						.labelWrap
+							order: 1
+							margin-left: 4px
+						
