@@ -1,6 +1,7 @@
 
 let params = (new URL(document.location)).searchParams//クエリ取得用
 let params_id =params.get('userid')//ユーザーID
+let message_count =params.get('message_count')//ユーザーID
 
 
 const hoge = {
@@ -87,6 +88,7 @@ const hoge = {
 
 			axios.post(url, {
 				userid: params_id,
+				message_count: message_count,
 			})
 			.then(response => [
 				this.lines_customers = response.data.lines_customers,

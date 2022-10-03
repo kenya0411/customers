@@ -164,10 +164,7 @@ const hoge = {
 				this.current_page = all.current_page,
 				this.last_page = all.last_page,
 				this.range = this.last_page - 2 < range ?  this.last_page - 5 : range,
-
 				this.processing = false,
-				
-				
 
 				])
 			.catch(error => console.log(error))

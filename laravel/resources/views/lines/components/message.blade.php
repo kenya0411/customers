@@ -19,6 +19,16 @@
     <div class="title">
     @{{ lines_information.lines_customers_name }}
     </div>
+    <div class="select">
+
+<select name="select" onChange="location.href=value;">
+  <option value="#">表示件数を変更</option>
+  <option v-bind:value='`/lines?userid=${lines_information.lines_customers_userid}&message_count=50`'>50件</option>
+  <option v-bind:value='`/lines?userid=${lines_information.lines_customers_userid}&message_count=100`'>100件</option>
+  <option v-bind:value='`/lines?userid=${lines_information.lines_customers_userid}&message_count=200`'>200件</option>
+  <option v-bind:value='`/lines?userid=${lines_information.lines_customers_userid}&message_count=300`'>300件</option>
+</select>
+    </div>
     <div class="details">
 
         <div class="customerBtn">

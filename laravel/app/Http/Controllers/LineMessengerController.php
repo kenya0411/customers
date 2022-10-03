@@ -441,7 +441,7 @@ public function ajax_message(Request $request) {
 
     //LINEのユーザーIDを取得できる場合
     if(!empty($lines_userid )){
-        $temp = $this->ajax_get_message($request,$lines_userid);
+        $temp = $this->ajax_get_message($request,$lines_userid );
         $lines_list = $temp['lines_list'];//Lineメッセージ
         $lines_information = $temp['lines_information'];//LINEユーザーデータ
         $users = $temp['users'];//ユーザーデータ
@@ -466,7 +466,8 @@ public function ajax_message(Request $request) {
 /*--------------------------------------------------- */
 /* メッセージの受信
 /*--------------------------------------------------- */
-public function ajax_get_message(Request $request,$lines_userid) {
+public function ajax_get_message(Request $request,$lines_userid ) {
+    $message_count = !empty($request->message_count) ? $request->message_count : 50;//取得するメッセージ数
 
     //ラインのお客様情報
     $lines_customers = DB::table('lines_customers')
@@ -493,7 +494,23 @@ public function ajax_get_message(Request $request,$lines_userid) {
     $lines_messages = DB::table('lines_messages')
     ->where('lines_customers_userid','=',$lines_userid)
     ->where('is_delete','=',0)//論理削除されてないもの
-    ->get();     
+    // ->latest('lines_messages_id')//メッセージを取得する数
+    ->orderBy('lines_messages_id', 'DESC')
+    ->take($message_count)//メッセージを取得する数
+    ->get();   
+    //メッセージの最新順にソート
+
+    // $lines_messages = Line_message::query();
+    // $lines_messages=$lines_messages->where('is_delete','=',0);//論理削除
+    // $lines_messages=$lines_messages->where('lines_customers_userid','=',$lines_userid);//
+    // $lines_messages=$lines_messages->orderBy('lines_messages_id', 'DESC');
+    // $lines_messages=$lines_messages->take($message_count);//
+    // $lines_messages=$lines_messages->orderBy('lines_messages_id', 'ASC');
+    // $lines_messages=$lines_messages->orderBy('lines_messages_id', 'ASC');
+
+    // $lines_messages=$lines_messages->get();//
+
+
 
     //ラインのメッセージ情報を配列化
   $lines_list = [];
@@ -505,7 +522,6 @@ public function ajax_get_message(Request $request,$lines_userid) {
             ->where('customers_id',$customers_id)
             ->get();    
 
-    // file_put_contents("test/return.txt", var_export( $value->lines_messages_text , true));
 
             //鑑定士
             $persons_data = DB::table('persons')
@@ -521,6 +537,8 @@ public function ajax_get_message(Request $request,$lines_userid) {
             );
         }
     }
+    //配列を反対にする（takeを使う際に配列の順番を反対に取得してるから）
+    $lines_list  =  array_reverse($lines_list);
 
     $result = array(
         'lines_list' => $lines_list,

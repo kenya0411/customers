@@ -234,6 +234,7 @@ Route::post('ships/ajax_ship_finished', 'ShipController@ajax_ship_finished');//�
 Route::get('lines', 'LineMessengerController@index');
 Route::post('lines', 'LineMessengerController@post');
 Route::post('lines/ajax', 'LineMessengerController@ajax_message');
+Route::post('lines/ajax_search', 'LineMessengerController@ajax_search');
 
 //メッセージ送受信
 Route::get('lines/messages', 'LineMessengerController@message_index');
