@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Auth;
 
 //メール機能
 use Illuminate\Support\Facades\Mail;
-use App\Mail\TestMail;
+use App\Mail\SendMail;
 
 class LineMessengerController extends Controller
 {
@@ -62,6 +62,7 @@ public function index(Request $request)
 
 public function mail_index(Request $request)
 {
+
         $data = $this->show_list($request,'lines.mail_list');
 
         return $data->with('post_status', $request->old());
@@ -81,7 +82,10 @@ public function mail_index(Request $request)
 
         //メッセージを受信した場合
         if(!empty($inputs['events'])) {
+
         $data = $this->get_message($request);//受信したメッセージをDBに保存
+ // file_put_contents("test/return.txt", var_export( 'dddss', true));
+
         return $data;
         
         }else{
@@ -177,7 +181,7 @@ public function send_temporary_deta(Request $request) {
             $bot = new LINEBot($http_client, ['channelSecret' => config('services.line.messenger_secret')]);
             $user_id=$inputs['events'][0]['source']['userId'];
       // file_put_contents("test/test.txt", var_export( $user_id , true));
-
+            $send_mail = $this->send_mail($request,$user_id,$message);
             // return  $user_id;
         }else{
             return 'ok';
@@ -187,6 +191,45 @@ public function send_temporary_deta(Request $request) {
 
 
     }
+
+
+
+/*--------------------------------------------------- */
+/* メッセージ受信時にメール送信
+/*--------------------------------------------------- */
+public function send_mail(Request $request,$user_id,$message) {
+        $lines_mails = DB::table('lines_mails')
+        ->where('is_delete','=',0)//論理削除されてないもの
+        ->get();
+    $site_url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] ;
+    $page_url = $site_url."/lines?userid=".$user_id;
+foreach ($lines_mails as $key => $value) {
+            $user = DB::table('users')
+            ->where('id',$value->users_id)
+            ->first(); //一つだけ取得   
+    $data = [
+        'name' => $user->nickname."様",//宛名
+        'from_email' => "shimoda.kenya@gmail.com",//送信元メールアドレス
+        'to_email' => $value->lines_mails_mailaddress,//宛先
+        'view' => "lines.components.mail.send_mail",
+        'subject' => "新しいメッセージが届きました",//タイトル
+        'site_name' => "注文管理システム",//サイトネーム
+        'site_url' => $site_url ,//サイトネーム
+        'page_url' => $page_url ,//サイトネーム
+
+    ];
+        // Mail::send(new SendMail($data));//メール送信
+
+}
+
+     file_put_contents("test/return.txt", var_export( $message, true));
+
+
+
+    
+}
+
+
 /*--------------------------------------------------- */
 /* メッセージを受信した時にDBに保存
 /*--------------------------------------------------- */
@@ -777,7 +820,6 @@ public function ajax_mail_index(Request $request) {
 
         }
     }
- file_put_contents("test/return.txt", var_export( $lines_mails_list, true));
 
 
 
@@ -902,7 +944,7 @@ public function send_test_mail(Request $request) {
         'site_url' => $site_url ,//サイトネーム
 
     ];
-        Mail::send(new TestMail($data));//メール送信
+        Mail::send(new SendMail($data));//メール送信
 
 
     //変数を渡してリダイレクト
