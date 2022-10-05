@@ -92,6 +92,7 @@ public function mail_index(Request $request)
 
         //メッセージを送信or削除する場合
         $data = $this->send_temporary_deta($request);
+
         return $data;
 
         }
@@ -114,6 +115,7 @@ public function send_temporary_deta(Request $request) {
         $lines_messages_text = $request->lines_messages_text;//文章
         $send =$this->push_message($request,$lines_customers_userid,$lines_messages_text);//メッセージを送信
         $delete =$this->delete_temporary_deta($request);//DBから倫理削除
+
         return $send;
 
     }else{//取り消しボタンを押した場合、送信せずDBから論理削除
@@ -180,7 +182,8 @@ public function send_temporary_deta(Request $request) {
 
             $bot = new LINEBot($http_client, ['channelSecret' => config('services.line.messenger_secret')]);
             $user_id=$inputs['events'][0]['source']['userId'];
-      // file_put_contents("test/test.txt", var_export( $user_id , true));
+
+            //メッセージを受信したらメールを送信
             $send_mail = $this->send_mail($request,$user_id,$message);
             // return  $user_id;
         }else{
@@ -222,7 +225,6 @@ foreach ($lines_mails as $key => $value) {
 
 }
 
-     file_put_contents("test/return.txt", var_export( $message, true));
 
 
 
@@ -297,6 +299,8 @@ public function push_message(Request $request,$user_id,$reply) {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $message = curl_exec($ch);
     curl_close($ch);
+    
+
 
 
     //アラート用
