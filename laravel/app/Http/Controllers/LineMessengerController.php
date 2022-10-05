@@ -84,9 +84,8 @@ public function mail_index(Request $request)
         if(!empty($inputs['events'])) {
 
         $data = $this->get_message($request);//受信したメッセージをDBに保存
- // file_put_contents("test/return.txt", var_export( 'dddss', true));
-
-        return $data;
+         // file_put_contents("test/return.txt", var_export( 'dddss', true));
+        return [];
         
         }else{
 
@@ -166,14 +165,26 @@ public function send_temporary_deta(Request $request) {
         // そこからtypeをとりだし、$message_typeに代入
         $message_type=$inputs['events'][0]['type'];
 
-        $data =$this->get_message_add_database($request,$inputs);
+
+
+
 
         // メッセージが送られた場合、$message_typeは'message'となる。その場合処理実行。
         if($message_type=='message') {
-                
              $message_arr= $inputs['events'][0]["message"];
              $message= $message_arr['text'];
-      
+        
+        //受信メッセージが重複しないように
+        $lines_messages = DB::table('lines_messages')
+        ->where('is_delete','=',0)//論理削除されてないもの
+        ->where('lines_messages_number','=',$message_arr['id'])//既にメッセージがDBに保存されてるか確認
+        ->first();    
+
+        //新規のメッセージの場合
+        if(empty($lines_messages)):
+            //受信メッセージをデータベースに保存
+           $data =$this->get_message_add_database($request,$inputs);
+
             // replyTokenを取得
             $reply_token=$inputs['events'][0]['replyToken'];
  
@@ -185,7 +196,9 @@ public function send_temporary_deta(Request $request) {
 
             //メッセージを受信したらメールを送信
             $send_mail = $this->send_mail($request,$user_id,$message);
-            // return  $user_id;
+            // return 'ok';
+        endif;
+            
         }else{
             return 'ok';
             
@@ -201,30 +214,44 @@ public function send_temporary_deta(Request $request) {
 /* メッセージ受信時にメール送信
 /*--------------------------------------------------- */
 public function send_mail(Request $request,$user_id,$message) {
+        //送信するメールアドレスを取得
         $lines_mails = DB::table('lines_mails')
         ->where('is_delete','=',0)//論理削除されてないもの
         ->get();
+
+        //LINEのカスタマー情報取得
+        $lines_customers = DB::table('lines_customers')
+        ->where('is_delete','=',0)//論理削除されてないもの
+        ->where('lines_customers_userid','=',$user_id)//論理削除されてないもの
+        ->first();
+    //サイトのURL
     $site_url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] ;
+    //該当するユーザーページ
     $page_url = $site_url."/lines?userid=".$user_id;
-foreach ($lines_mails as $key => $value) {
-            $user = DB::table('users')
-            ->where('id',$value->users_id)
-            ->first(); //一つだけ取得   
-    $data = [
-        'name' => $user->nickname."様",//宛名
-        'from_email' => "shimoda.kenya@gmail.com",//送信元メールアドレス
-        'to_email' => $value->lines_mails_mailaddress,//宛先
-        'view' => "lines.components.mail.send_mail",
-        'subject' => "新しいメッセージが届きました",//タイトル
-        'site_name' => "注文管理システム",//サイトネーム
-        'site_url' => $site_url ,//サイトネーム
-        'page_url' => $page_url ,//サイトネーム
 
-    ];
-        // Mail::send(new SendMail($data));//メール送信
+     $test = [];
+    foreach ($lines_mails as $key => $value) {
+        $user = DB::table('users')
+        ->where('id',$value->users_id)
+        ->first(); //一つだけ取得   
+        $data = [
+            'name' => $user->nickname."様",//宛名
+            'from_email' => "info@customer.neobingostyle.com",//送信元メールアドレス
+            'to_email' => $value->lines_mails_mailaddress,//宛先
+            'view' => "lines.components.mail.send_mail",
+            'subject' => "新しいメッセージが届きました",//タイトル
+            'site_name' => "注文管理システム",//サイトネーム
+            'site_url' => $site_url ,//サイトネーム
+            'page_url' => $page_url ,//サイトネーム
+            'customers_name' => $lines_customers->lines_customers_name ,//カスタマーの名前
+            'date' => date( "m月d日" ) ,//日付
+            'time' => date( "H時i分s秒" ) ,//時間c
 
-}
+        ];
+        $test[] = $key;
+        Mail::send(new SendMail($data));//メール送信
 
+    }
 
 
 
@@ -256,6 +283,7 @@ foreach ($lines_mails as $key => $value) {
     $Line_message->create([
         'lines_customers_userid' => $result['user_id'],
         'lines_messages_text' => $result['text'],
+        'lines_messages_number' => $result['id'],
         'lines_messages_replytoken' => $result['replyToken'],
         'lines_messages_from_userid' => $result['user_id'],
         'lines_messages_to_userid' => $result['destination'],
@@ -323,6 +351,7 @@ public function push_message_add_database(Request $request,$user_id,$reply) {
         'lines_customers_userid' => $user_id,
         'lines_messages_text' => $reply,
         'lines_messages_from_userid' => "",
+        'lines_messages_number' => 0,
         'lines_messages_replytoken' => "",
         'lines_messages_to_userid' => $user_id,
         'lines_messages_webhook_event_id' => "",
@@ -330,50 +359,6 @@ public function push_message_add_database(Request $request,$user_id,$reply) {
 
 }
 
-
-//     public function push_message(Request $request,$massage) {
-// $raw = file_get_contents('php://input'); 
-// $receive = json_decode($raw, true); // イベントを取得 
-// $event = $receive['events'][0]; // 返信するトークンを取得 
-// $replyToken = $event['replyToken']; // 返事するメッセージを作成 // テキスト 
-// $message = [ 'type' => 'text',
-//     'text' => 'こんにちは！',
-// ];
-
-// // アクセストークン
-// $accessToken = config('services.line.messenger_secret');
-//       file_put_contents("return.txt", var_export( $accessToken , true));
-
-// // ヘッダーを設定
-// $headers = [
-//     'Content-Type: application/json',
-//     'Authorization: Bearer '.$accessToken,
-// ];
-
-// // ボディーを設定
-// $body = json_encode([
-//             'replyToken' => $replyToken,
-//             'messages'   => [
-//                 $message,
-//             ]
-//         ]);
-
-// // CURLオプションを設定
-// $options = [
-//     CURLOPT_URL            => 'https://api.line.me/v2/bot/message/reply',
-//     CURLOPT_CUSTOMREQUEST  => 'POST',
-//     CURLOPT_RETURNTRANSFER => true,
-//     CURLOPT_HTTPHEADER     => $headers,
-//     CURLOPT_POSTFIELDS     => $body,
-// ];
-
-// // 返信
-// $curl = curl_init();
-// curl_setopt_array($curl, $options);
-// curl_exec($curl);
-// curl_close($curl);
-
-//         }
 
 
 /*--------------------------------------------------- */
@@ -940,7 +925,7 @@ public function send_test_mail(Request $request) {
     $site_url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] ;
     $data = [
         'name' => $request->users_nickname."様",//宛名
-        'from_email' => "shimoda.kenya@gmail.com",//送信元メールアドレス
+        'from_email' => "info@customer.neobingostyle.com",//送信元メールアドレス
         'to_email' => $to_email,//宛先
         'view' => "lines.components.mail.test_mail",
         'subject' => "テストメールです。",//タイトル

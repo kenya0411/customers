@@ -11,6 +11,7 @@ class Line_message extends Model
   protected $fillable = [
     'lines_messages_id',
     'lines_customers_userid',
+    'lines_messages_number',
     'lines_messages_replytoken',
     'lines_messages_text',
     'lines_messages_from_userid',

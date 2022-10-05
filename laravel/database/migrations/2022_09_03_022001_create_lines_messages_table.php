@@ -19,6 +19,7 @@ return new class extends Migration
            $table->bigIncrements('lines_messages_id');
             $table->string('lines_customers_userid')->default(0);
             $table->string('lines_messages_replytoken')->nullable(0);
+            $table->string('lines_messages_number')->default(0);
             $table->text('lines_messages_text')->nullable();
             $table->string('lines_messages_from_userid')->default(0);
             $table->string('lines_messages_to_userid')->default(0);

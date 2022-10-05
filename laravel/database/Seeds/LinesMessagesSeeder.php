@@ -17,6 +17,7 @@ class LinesMessagesSeeder extends Seeder
             [
             // 'lines_messages_id'  => 0,
             'lines_customers_userid'  => 'U346ddc4e9619ed125a707dc5f690bfe7',
+            'lines_messages_number'  => '1232232',
             'lines_messages_replytoken'  => '980d7fa4b714480da3deb8a946cf8cb5',
             'lines_messages_text'  => 'testメッセージOppo',
             'lines_messages_from_userid'  => 'U346ddc4e9619ed125a707dc5f690bfe7',
@@ -27,6 +28,7 @@ class LinesMessagesSeeder extends Seeder
             // 'lines_messages_id'  => 0,
             'lines_customers_userid'  => 'Ucb7718e5d65232dca709bdbe33f600c2',
             'lines_messages_replytoken'  => 'd11134e215e44ccf92608cc2d24a5ad6',
+            'lines_messages_number'  => '24232',
             'lines_messages_text'  => 'メッセージあああだよおお',
             'lines_messages_from_userid'  => 'Ucb7718e5d65232dca709bdbe33f600c2',
             'lines_messages_to_userid'  => 'U9a6c97c1212b4fa8a5f6c76068fac1ad',
@@ -36,6 +38,7 @@ class LinesMessagesSeeder extends Seeder
             // 'lines_messages_id'  => 0,
             'lines_customers_userid'  => 'Ucb7718e5d65232dca709bdbe33f600c2',
             'lines_messages_replytoken'  => '',
+            'lines_messages_number'  => '44242',
             'lines_messages_text'  => '返信メッセージだよ',
             'lines_messages_from_userid'  => '',
             'lines_messages_to_userid'  => 'Ucb7718e5d65232dca709bdbe33f600c2',
