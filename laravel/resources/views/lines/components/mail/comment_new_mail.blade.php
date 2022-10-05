@@ -15,10 +15,9 @@
      <li>
         <div>
             <div class="pcInvi">ユーザー名</div>
-            <select name="users_id">
-                <option  v-bind:value="user.id" v-for="user in users">@{{ user.nickname }}</option>
-                {{-- <option v-bind:value="user.id"> @{{ user.nickname }}</option> --}}
-         </select>
+            <input type="hidden" name="users_id" v-bind:value="login_user.id">
+            @{{login_user.nickname}}様
+
      </div>
      <div>
             <div class="pcInvi">メールアドレス</div>

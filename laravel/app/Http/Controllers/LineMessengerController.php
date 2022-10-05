@@ -722,6 +722,14 @@ public function ajax_mail_index(Request $request) {
     $users=$users->Where('permissions_id','=',$permissions_id_comment)->orWhere('permissions_id','=',$permissions_id_admin);
     $users=$users->get();
 
+    // 現在認証しているユーザーを取得
+    $login_user = array(
+        "id" => Auth::user()->id,
+        "name" => Auth::user()->name,
+        "nickname" => Auth::user()->nickname,
+        "permissions_id" => Auth::user()->permissions_id,
+    );
+
 
     //設定されたメールアドレスを取得
     $lines_mails = DB::table('lines_mails')
@@ -732,6 +740,9 @@ public function ajax_mail_index(Request $request) {
 
   //ラインのメールアドレス情報を配列化
   $lines_mails_list = [];
+
+
+
     if(!empty($lines_mails)){
         foreach ($lines_mails as $key => $value) {
 
@@ -739,22 +750,41 @@ public function ajax_mail_index(Request $request) {
             $user = DB::table('users')
             ->where('id',$value->users_id)
             ->first(); //一つだけ取得   
- 
+
+            //ログイン者がコメント返信者のみ
+            if($login_user['permissions_id']== 4):
+            if($user->id == $login_user['id']){
             //配列にまとめる
-            $lines_mails_list[$key] =array(
+               $lines_mails_list[] =array(
+                'users_id' => $user->id,
+                'users_nickname' => $user->nickname,
+                'lines_mails_mailaddress' => $value->lines_mails_mailaddress,
+                'lines_mails_id' => $value->lines_mails_id,
+            );             
+           };
+
+            else:
+            //ログイン者が管理者
+            //配列にまとめる
+            $lines_mails_list[] =array(
                 'users_id' => $user->id,
                 'users_nickname' => $user->nickname,
                 'lines_mails_mailaddress' => $value->lines_mails_mailaddress,
                 'lines_mails_id' => $value->lines_mails_id,
             );
+            endif;
+
+
         }
     }
+ file_put_contents("test/return.txt", var_export( $lines_mails_list, true));
 
 
 
     $result = array(
         'users' => $users,
         'lines_mails' => $lines_mails_list,
+        'login_user' => $login_user,
     );
     return $result ;
 

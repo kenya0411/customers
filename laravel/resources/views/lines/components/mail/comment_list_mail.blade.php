@@ -1,4 +1,3 @@
-
 <div class="list_mail_block send_common_block" v-if="lines_mails.length">
     <div class="heading_block">
         メールアドレス一覧
@@ -21,7 +20,7 @@
 
         <div class="tab_heading">
            
-            @{{ line_mail.users_nickname }}
+            @{{ line_mail.users_nickname }}様
             <input type="hidden" name="users_id" v-bind:value="line_mail.users_id">
             <input type="hidden" name="users_nickname" v-bind:value="line_mail.users_nickname">
         </div>

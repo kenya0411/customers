@@ -4,7 +4,7 @@ const hoge = {
 	data () {
 		return {
 			lines_mails: '',
-			// lines_list: '',
+			login_user: '',
 			// lines_information: '',
 			// lines_temporaries: '',
 			// userid: '',
@@ -136,6 +136,7 @@ const hoge = {
 			.then(response => [
 				this.users = response.data.users,
 				this.lines_mails = response.data.lines_mails,
+				this.login_user = response.data.login_user,
 				// this.lines_list = response.data.lines_list,
 				// this.lines_information = response.data.lines_information,
 				// this.users = response.data.users,

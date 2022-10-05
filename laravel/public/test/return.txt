@@ -1,1 +1,9 @@
-50
+array (
+  0 => 
+  array (
+    'users_id' => 7,
+    'users_nickname' => '柏原',
+    'lines_mails_mailaddress' => 'shimoda@solution-gr.com',
+    'lines_mails_id' => 9,
+  ),
+)

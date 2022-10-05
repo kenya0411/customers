@@ -33,7 +33,7 @@
 
         <div class="customerBtn">
                 <a v-bind:href='`/customers/detail/?id=${lines_information.customers_id}`'>
-                お客様情報
+                お客様情報→
             </a>
         </div>
     </div>
