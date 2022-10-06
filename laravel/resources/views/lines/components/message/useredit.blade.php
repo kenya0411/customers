@@ -1,3 +1,4 @@
+
 <div class="customer_block send_common_block">
     <div class="heading_block">
         ユーザー情報
@@ -14,7 +15,14 @@
         </dd>
         <dt>Line名</dt>
         <dd><input type="text" name="lines_customers_name" v-bind:value="lines_information.lines_customers_name">
-    
+        </dd>
+        
+        <dt>鑑定士</dt>
+        <dd>@{{ persons.persons_name }}
+        </dd>
+          <dt>チャネルID</dt>
+        <dd>@{{ lines_persons.lines_persons_channel_id }}
+        </dd>  
     </dl>
     <div class="customerBtnWrap">
         <button>

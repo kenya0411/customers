@@ -49,6 +49,8 @@
       <ul>
         <li><a href="/lines">LINEメッセージ</a></li>
         <li><a href="/lines/mails">メール設定</a></li>
+        <li><a href="/lines/persons">公式LINE</a></li>
+        
         {{-- <li><a href="/persons/add">新規人材</a></li> --}}
       </ul>
     </div>

@@ -12,7 +12,8 @@ const hoge = {
 			lines_list: '',
 			lines_information: '',
 			lines_temporaries: '',
-			userid: '',
+			lines_persons: '',
+			persons: '',
 			customers: '',
 			users: '',
 			// get_id: '',//検索用
@@ -95,6 +96,8 @@ const hoge = {
 				this.lines_list = response.data.lines_list,
 				this.lines_information = response.data.lines_information,
 				this.users = response.data.users,
+				this.persons = response.data.persons,
+				this.lines_persons = response.data.lines_persons,
 				this.lines_temporaries = response.data.lines_temporaries,
 				this.is_loaded = true,
 				])

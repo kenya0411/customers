@@ -1,5 +1,6 @@
 array (
-  'lines_customers_userid' => 'Ucb7718e5d65232dca709bdbe33f600c2',
-  'lines_customers_name' => '新規ユーザー',
-  'persons_id' => 1,
+  'destination' => 'Uccbe740629e5f719dad108b3a36a6446',
+  'events' => 
+  array (
+  ),
 )

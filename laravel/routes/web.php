@@ -259,6 +259,23 @@ Route::post('lines/mails/ajax_new', 'LineMessengerController@ajax_mail_new');
 //メールアドレス情報の修正
 Route::post('lines/mails/ajax_update', 'LineMessengerController@ajax_mail_update');
 
+
+
+//公式LINE設定
+Route::get('lines/persons', 'LineMessengerController@person_index');
+Route::post('lines/persons', 'LineMessengerController@person_index');
+
+
+//ロード時にDBからデータを取得
+Route::post('lines/persons/ajax', 'LineMessengerController@ajax_person_index');
+
+//新規メールアドレス追加
+Route::post('lines/persons/ajax_new', 'LineMessengerController@ajax_person_new');
+//メールアドレス情報の修正
+Route::post('lines/persons/ajax_update', 'LineMessengerController@ajax_person_update');
+
+
+
 /*--------------------------------------------------- */
 /* 設定
 /*--------------------------------------------------- */

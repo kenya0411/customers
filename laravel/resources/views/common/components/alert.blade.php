@@ -23,6 +23,12 @@ LINEのユーザー情報を修正しました。
 ユーザーを削除しました。
 @elseif($post_status['type'] == 'update_user')
 ユーザー情報を修正しました。
+@elseif($post_status['type'] == 'new_person')
+公式LINEを新規追加しました。
+@elseif($post_status['type'] == 'delete_person')
+公式LINEを削除しました。
+@elseif($post_status['type'] == 'update_person')
+公式LINEを修正しました。
 @endif      
    </div>
 
