@@ -128,170 +128,29 @@ public function send_temporary_deta(Request $request) {
         $get_status = redirect('/lines?userid='.$request->lines_customers_userid)->withInput($post_status);
         return  $get_status ;
     }
-    //リダイレクト
-    // return redirect('/lines?userid='.$lines_customers_userid);
+
 
 }
 
 /*--------------------------------------------------- */
 /* 一時保存した投稿データを削除
 /*--------------------------------------------------- */
-    public function delete_temporary_deta(Request $request) {
+public function delete_temporary_deta(Request $request) {
 
-        $param = [
-        'lines_temporaries_id' => $request->lines_temporaries_id,
-        'is_delete' => 1,
-        'updated_at' => date( "Y-m-d H:i:s" , time() ),
-        ];
+    $param = [
+    'lines_temporaries_id' => $request->lines_temporaries_id,
+    'is_delete' => 1,
+    'updated_at' => date( "Y-m-d H:i:s" , time() ),
+    ];
 
-        //DB情報を倫理削除
-        DB::update('update lines_temporaries set 
-        is_delete=:is_delete,
-        updated_at=:updated_at
-        where lines_temporaries_id=:lines_temporaries_id'
-        , $param);
-
-
-
+    //DB情報を倫理削除
+    DB::update('update lines_temporaries set 
+    is_delete=:is_delete,
+    updated_at=:updated_at
+    where lines_temporaries_id=:lines_temporaries_id'
+    , $param);
 
 }
-
-
-/*--------------------------------------------------- */
-/* 
-/*--------------------------------------------------- */
-    public function get_message(Request $request) {
-        $inputs=$request->all();
-        // そこからtypeをとりだし、$message_typeに代入
-        $message_type=$inputs['events'][0]['type'];
-
-
-
-
-
-        // メッセージが送られた場合、$message_typeは'message'となる。その場合処理実行。
-        if($message_type=='message') {
-             $message_arr= $inputs['events'][0]["message"];
-             $message= $message_arr['text'];
-        
-        //受信メッセージが重複しないように
-        $lines_messages = DB::table('lines_messages')
-        ->where('is_delete','=',0)//論理削除されてないもの
-        ->where('lines_messages_number','=',$message_arr['id'])//既にメッセージがDBに保存されてるか確認
-        ->first();    
-
-        //新規のメッセージの場合
-        if(empty($lines_messages)):
-            //受信メッセージをデータベースに保存
-           $data =$this->get_message_add_database($request,$inputs);
-
-            // replyTokenを取得
-            $reply_token=$inputs['events'][0]['replyToken'];
- 
-            // LINEBOTSDKの設定
-            $http_client = new CurlHTTPClient(config('services.line.channel_token'));
-
-            $bot = new LINEBot($http_client, ['channelSecret' => config('services.line.messenger_secret')]);
-            $user_id=$inputs['events'][0]['source']['userId'];
-
-            //メッセージを受信したらメールを送信
-            $send_mail = $this->send_mail($request,$user_id,$message);
-            // return 'ok';
-        endif;
-            
-        }else{
-            return 'ok';
-            
-        }
-
-
-
-    }
-
-
-
-/*--------------------------------------------------- */
-/* メッセージ受信時にメール送信
-/*--------------------------------------------------- */
-public function send_mail(Request $request,$user_id,$message) {
-        //送信するメールアドレスを取得
-        $lines_mails = DB::table('lines_mails')
-        ->where('is_delete','=',0)//論理削除されてないもの
-        ->get();
-
-        //LINEのカスタマー情報取得
-        $lines_customers = DB::table('lines_customers')
-        ->where('is_delete','=',0)//論理削除されてないもの
-        ->where('lines_customers_userid','=',$user_id)//論理削除されてないもの
-        ->first();
-    //サイトのURL
-    $site_url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] ;
-    //該当するユーザーページ
-    $page_url = $site_url."/lines?userid=".$user_id;
-
-     $test = [];
-    foreach ($lines_mails as $key => $value) {
-        $user = DB::table('users')
-        ->where('id',$value->users_id)
-        ->first(); //一つだけ取得   
-        $data = [
-            'name' => $user->nickname."様",//宛名
-            'from_email' => "info@customer.neobingostyle.com",//送信元メールアドレス
-            'to_email' => $value->lines_mails_mailaddress,//宛先
-            'view' => "lines.components.mail.send_mail",
-            'subject' => "新しいメッセージが届きました",//タイトル
-            'site_name' => "注文管理システム",//サイトネーム
-            'site_url' => $site_url ,//サイトネーム
-            'page_url' => $page_url ,//サイトネーム
-            'customers_name' => $lines_customers->lines_customers_name ,//カスタマーの名前
-            'date' => date( "m月d日" ) ,//日付
-            'time' => date( "H時i分s秒" ) ,//時間c
-
-        ];
-        $test[] = $key;
-        Mail::send(new SendMail($data));//メール送信
-
-    }
-
-
-
-    
-}
-
-
-/*--------------------------------------------------- */
-/* メッセージを受信した時にDBに保存
-/*--------------------------------------------------- */
-    public function get_message_add_database(Request $request,$inputs) {
-      $event = $inputs['events'][0];
-
-      //配列に保存
-      $result = array(
-        'destination' => $inputs['destination'],
-        'id' => $event['message']['id'],
-        'type' => $event['message']['type'],
-        'text' => $event['message']['text'],
-        'webhookEventId' => $event['webhookEventId'],
-        'timestamp' => $event['timestamp'],
-        'user_id' => $event['source']['userId'],
-        'replyToken' => $event['replyToken'],
-      );
-
-
-    //ラインメッセージをDBに保存
-    $Line_message = new Line_message();
-    $Line_message->create([
-        'lines_customers_userid' => $result['user_id'],
-        'lines_messages_text' => $result['text'],
-        'lines_messages_number' => $result['id'],
-        'lines_messages_replytoken' => $result['replyToken'],
-        'lines_messages_from_userid' => $result['user_id'],
-        'lines_messages_to_userid' => $result['destination'],
-        'lines_messages_webhook_event_id' => $result['webhookEventId'],
-    ]);
-
-}
-
 
 
 /*--------------------------------------------------- */
@@ -341,7 +200,7 @@ public function push_message(Request $request,$user_id,$reply) {
     return  $get_status ;
 }
 /*--------------------------------------------------- */
-/* 
+/* 送信したメッセージをＤＢに保存
 /*--------------------------------------------------- */
 public function push_message_add_database(Request $request,$user_id,$reply) {
 
@@ -358,6 +217,200 @@ public function push_message_add_database(Request $request,$user_id,$reply) {
     ]);
 
 }
+
+
+
+
+
+/*--------------------------------------------------- */
+/* 受信メッセージが来た時
+/*--------------------------------------------------- */
+    public function get_message(Request $request) {
+        $inputs=$request->all();
+        // そこからtypeをとりだし、$message_typeに代入
+        $message_type=$inputs['events'][0]['type'];
+
+        //カスタマー情報が存在するか確認
+        $get_customer =$this->get_customer_add_database($request);
+
+        // メッセージが送られた場合、$message_typeは'message'となる。その場合処理実行。
+        if($message_type=='message') {
+             $message_arr= $inputs['events'][0]["message"];
+             $message= $message_arr['text'];
+        
+            //受信メッセージが重複しないように
+            $lines_messages = DB::table('lines_messages')
+            ->where('is_delete','=',0)//論理削除されてないもの
+            ->where('lines_messages_number','=',$message_arr['id'])//既にメッセージがDBに保存されてるか確認
+            ->first();    
+
+            //新規のメッセージの場合
+            if(empty($lines_messages)):
+                //受信メッセージをデータベースに保存
+               $data =$this->get_message_add_database($request,$inputs);
+
+                // replyTokenを取得
+                $reply_token=$inputs['events'][0]['replyToken'];
+     
+                // LINEBOTSDKの設定
+                $http_client = new CurlHTTPClient(config('services.line.channel_token'));
+
+                $bot = new LINEBot($http_client, ['channelSecret' => config('services.line.messenger_secret')]);
+
+                //カスタマーのLINEIDを取得
+                $user_id=$inputs['events'][0]['source']['userId'];
+
+                //メッセージを受信したらメールを送信
+                $send_mail = $this->send_mail($request,$user_id,$message);
+                // return 'ok';
+            endif;
+            
+        }else{
+            return 'ok';
+            
+        }
+
+
+
+    }
+
+
+
+
+/*--------------------------------------------------- */
+/* メッセージを受信した時にカスタマー情報のDBに保存
+/*--------------------------------------------------- */
+public function get_customer_add_database(Request $request) {
+    //受信メッセージの情報を取得
+    $inputs=$request->all();
+    
+    //カスタマーのLINEIDを取得
+    $user_id = $inputs['events'][0]['source']['userId'];
+
+    //カスタマー情報が既に存在しているか確認
+    $lines_customers = DB::table('lines_customers')
+    ->where('is_delete','=',0)//論理削除されてないもの
+    ->where('lines_customers_userid','=',$user_id)
+    ->first();  
+
+
+    //受信先（公式LINEのID取得）
+    $destination_id = $inputs["destination"];
+
+    //受信先の公式ラインの情報を取得
+    $lines_persons = DB::table('lines_persons')
+    ->where('is_delete','=',0)//論理削除されてないもの
+    ->where('lines_persons_userid','=',$destination_id)
+    ->first();  
+
+
+    //カスタマー情報が存在しない場合、新規にDBに追加
+    if(empty( $lines_customers)){
+
+        //配列に保存
+        $result = array(
+        'lines_customers_userid' => $user_id,
+        'lines_customers_name' => '新規ユーザー',
+        'persons_id' => $lines_persons->persons_id,
+        );
+        // file_put_contents("test/return.txt", var_export($result, true));
+
+        //情報をDBに保存
+        $Line_customer = new Line_customer();
+        $Line_customer->create([
+            'lines_customers_userid' => $result['lines_customers_userid'],
+            'lines_customers_name' => $result['lines_customers_name'],
+            'persons_id' => $result['persons_id'],
+        ]);
+    }
+}
+
+
+/*--------------------------------------------------- */
+/* メッセージ受信時にメール送信
+/*--------------------------------------------------- */
+public function send_mail(Request $request,$user_id,$message) {
+    //送信するメールアドレスを取得
+    $lines_mails = DB::table('lines_mails')
+    ->where('is_delete','=',0)//論理削除されてないもの
+    ->get();
+
+    //LINEのカスタマー情報取得
+    $lines_customers = DB::table('lines_customers')
+    ->where('is_delete','=',0)//論理削除されてないもの
+    ->where('lines_customers_userid','=',$user_id)//論理削除されてないもの
+    ->first();
+
+    //サイトのURL
+    $site_url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] ;
+    //該当するユーザーページ
+    $page_url = $site_url."/lines?userid=".$user_id;
+
+    //各メールアドレスに送信
+    foreach ($lines_mails as $key => $value) {
+        //ユーザー情報取得
+        $user = DB::table('users')
+        ->where('id',$value->users_id)
+        ->first(); //一つだけ取得 
+
+        $data = [
+            'name' => $user->nickname."様",//宛名
+            'from_email' => "info@customer.neobingostyle.com",//送信元メールアドレス
+            'to_email' => $value->lines_mails_mailaddress,//宛先
+            'view' => "lines.components.mail.send_mail",
+            'subject' => "新しいメッセージが届きました",//タイトル
+            'site_name' => "注文管理システム",//サイトネーム
+            'site_url' => $site_url ,//サイトURL
+            'page_url' => $page_url ,//ページURL
+            'customers_name' => $lines_customers->lines_customers_name ,//カスタマーの名前
+            'date' => date( "m月d日" ) ,//日付
+            'time' => date( "H時i分s秒" ) ,//時間
+
+        ];
+        Mail::send(new SendMail($data));//メール送信
+
+    }
+
+
+
+    
+}
+
+
+/*--------------------------------------------------- */
+/* メッセージを受信した時にDBに保存
+/*--------------------------------------------------- */
+    public function get_message_add_database(Request $request,$inputs) {
+      $event = $inputs['events'][0];
+
+      //配列に保存
+      $result = array(
+        'destination' => $inputs['destination'],
+        'id' => $event['message']['id'],
+        'type' => $event['message']['type'],
+        'text' => $event['message']['text'],
+        'webhookEventId' => $event['webhookEventId'],
+        'timestamp' => $event['timestamp'],
+        'user_id' => $event['source']['userId'],
+        'replyToken' => $event['replyToken'],
+      );
+
+
+    //ラインメッセージをDBに保存
+    $Line_message = new Line_message();
+    $Line_message->create([
+        'lines_customers_userid' => $result['user_id'],
+        'lines_messages_text' => $result['text'],
+        'lines_messages_number' => $result['id'],
+        'lines_messages_replytoken' => $result['replyToken'],
+        'lines_messages_from_userid' => $result['user_id'],
+        'lines_messages_to_userid' => $result['destination'],
+        'lines_messages_webhook_event_id' => $result['webhookEventId'],
+    ]);
+
+}
+
+
 
 
 

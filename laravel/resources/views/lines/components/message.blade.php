@@ -19,7 +19,7 @@
     <div class="title">
     @{{ lines_information.lines_customers_name }}
     </div>
-    <div class="select">
+    <div class="select tabInvi">
 
 <select name="select" onChange="location.href=value;">
   <option value="#">表示件数を変更</option>
@@ -31,7 +31,7 @@
     </div>
     <div class="details">
 
-        <div class="customerBtn">
+        <div class="customerBtn" v-if="lines_information.customers_id !== 0">
                 <a v-bind:href='`/customers/detail/?id=${lines_information.customers_id}`'>
                 お客様情報→
             </a>

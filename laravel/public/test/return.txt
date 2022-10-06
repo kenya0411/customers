@@ -1,1 +1,5 @@
-NULL
+array (
+  'lines_customers_userid' => 'Ucb7718e5d65232dca709bdbe33f600c2',
+  'lines_customers_name' => '新規ユーザー',
+  'persons_id' => 1,
+)
