@@ -5,8 +5,8 @@
  // header('Cache-Control:no-cache,no-store,must-revalidate,max-age=0');
  // header('Cache-Control:pre-check=0,post-check=0',false);
  // header('Pragma:no-cache');
-$d = '?'.now();
-// $d = '';
+// $d = '?'.now();
+$d = '?2022';
 @endphp
                         
  <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -55,6 +55,6 @@ $d = '?'.now();
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.2.2/lazysizes.min.js" async=""></script> --}}
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
+{{-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> --}}
+<script type="text/javascript" src="/js/library/axios.min.js{{ $d }}"></script>
 {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
