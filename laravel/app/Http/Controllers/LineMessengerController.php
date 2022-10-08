@@ -587,21 +587,23 @@ $test = [];
     //最終のメッセージがどちらが最後か確認（New用）
      if(!empty($lines_customers)){
         foreach ($lines_customers as $key => $value) {  
-        $lines_messages = DB::table('lines_messages')
-        ->where('is_delete','=',0)//論理削除されてないもの
-        ->where('lines_customers_userid','=',$value->lines_customers_userid)//ユーザーIDのメッセージを取得
-        ->orderBy('lines_messages_id', 'desc')//最終のデータを取得
-        ->first(); //1件のみ取得
-        $test[] =$lines_messages;
-            file_put_contents("test/return.txt", var_export($test, true));
+            if(!empty($value)):
+                $lines_messages = DB::table('lines_messages')
+                ->where('is_delete','=',0)//論理削除されてないもの
+                ->where('lines_customers_userid','=',$value->lines_customers_userid)//ユーザーIDのメッセージを取得
+                ->orderBy('lines_messages_id', 'desc')//最終のデータを取得
+                ->first(); //1件のみ取得
+                $test[] =$lines_messages;
+                    file_put_contents("test/return.txt", var_export($test, true));
 
 
-            $lines_customers_list[]= [
-                'lines_customers_name'=> $value->lines_customers_name,
-                'lines_customers_userid'=> $value->lines_customers_userid,
-                'lines_messages_to_userid'=> $lines_messages->lines_messages_to_userid,
-                'lines_messages_updated_at'=> $lines_messages->updated_at,
-            ];
+                    $lines_customers_list[]= [
+                        'lines_customers_name'=> $value->lines_customers_name,
+                        'lines_customers_userid'=> $value->lines_customers_userid,
+                        'lines_messages_to_userid'=> $lines_messages->lines_messages_to_userid,
+                        'lines_messages_updated_at'=> $lines_messages->updated_at,
+                    ];
+            endif;
         }
     }
 
