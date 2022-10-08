@@ -561,6 +561,7 @@ public function ajax_index(Request $request) {
         }
 
 
+    file_put_contents("test/return.txt", var_export($lines_customers, true));
 
         return [
             "lines_customers"=>$lines_customers,  
@@ -629,7 +630,6 @@ public function ajax_message(Request $request) {
 
     }
 
-    file_put_contents("test/return.txt", var_export($lines_customers, true));
 
         return [
             "lines_customers"=>$lines_customers_list,  
