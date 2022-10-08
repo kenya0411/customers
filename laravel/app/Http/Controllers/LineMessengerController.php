@@ -583,6 +583,7 @@ public function ajax_message(Request $request) {
     ->where('is_delete','=',0)//論理削除されてないもの
     ->get();  
     $lines_customers_list = [];
+    file_put_contents("test/return.txt", var_export($lines_customers_list, true));
 
     //最終のメッセージがどちらが最後か確認（New用）
      if(!empty($lines_customers)){
