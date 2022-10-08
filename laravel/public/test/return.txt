@@ -1,6 +1,1 @@
-array (
-  'destination' => 'Uccbe740629e5f719dad108b3a36a6446',
-  'events' => 
-  array (
-  ),
-)
+'send'

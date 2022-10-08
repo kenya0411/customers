@@ -280,14 +280,19 @@ public function push_message_add_database(Request $request,$user_id,$reply) {
                 // $http_client = new CurlHTTPClient(config('services.line.channel_token'));
                 // $bot = new LINEBot($http_client, ['channelSecret' => config('services.line.messenger_secret')]);
                 $http_client = new CurlHTTPClient($lines_persons['lines_persons_access_token']);
-                $bot = new LINEBot($http_client, $lines_persons['lines_persons_channel_secret']);
+                $bot = new LINEBot($http_client, ['channelSecret' => $lines_persons['lines_persons_channel_secret']]);
+
 
                 //カスタマーのLINEIDを取得
                 $user_id=$inputs['events'][0]['source']['userId'];
 
-                //メッセージを受信したらメールを送信
-                $send_mail = $this->send_mail($request,$user_id,$message);
-                // return 'ok';
+
+                $check_ngword_message = $this->check_ngword_message($request,$message);
+                //NGワードに含まれてない場合、メールを送信
+                if($check_ngword_message == "send"){
+                    //メッセージを受信したらメールを送信
+                    $send_mail = $this->send_mail($request,$user_id,$message);
+                }
             endif;
             
         }else{
@@ -295,6 +300,36 @@ public function push_message_add_database(Request $request,$user_id,$reply) {
            
         }
     }
+
+/*--------------------------------------------------- */
+/* NGワードのチェック
+/*--------------------------------------------------- */
+public function check_ngword_message(Request $request,$message) {
+
+    //NGワード
+    $ngword = array(
+        "[1]タロット占い",
+        "[2]タロット占い",
+        "[3]タロット占い",
+        "[4]タロット占い",
+        "[5]タロット占い",
+        "[6]タロット占い",
+    );
+
+    //通常時はメールを送る
+    $result = "send";
+
+    foreach ($ngword as $key) {
+
+        if($key == $message){
+         $result = 'unsend';//NGワードにメッセージが一緒の場合、メールを送信しない。
+        }
+    };
+
+    return $result ;
+
+}
+
 /*--------------------------------------------------- */
 /* 公式LINEの受信先を確認
 /*--------------------------------------------------- */
@@ -418,7 +453,7 @@ public function send_mail(Request $request,$user_id,$message) {
             'time' => date( "H時i分s秒" ) ,//時間
 
         ];
-        // Mail::send(new SendMail($data));//メール送信
+        Mail::send(new SendMail($data));//メール送信
 
     }
 
