@@ -592,7 +592,7 @@ public function ajax_message(Request $request) {
         ->where('lines_customers_userid','=',$value->lines_customers_userid)//ユーザーIDのメッセージを取得
         ->orderBy('lines_messages_id', 'desc')//最終のデータを取得
         ->first(); //1件のみ取得
-    file_put_contents("test/return.txt", var_export($lines_customers, true));
+    file_put_contents("test/return.txt", var_export($lines_messages, true));
 
 
             $lines_customers_list[]= [
