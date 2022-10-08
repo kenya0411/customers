@@ -86,7 +86,9 @@ const hoge = {
 		
 		async load_page() {
 			let url = '/lines/ajax';
-
+			console.log(params_id);
+			console.log(message_count);
+			
 			axios.post(url, {
 				userid: params_id,
 				message_count: message_count,
