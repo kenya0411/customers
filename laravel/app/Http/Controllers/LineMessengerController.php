@@ -577,7 +577,6 @@ public function ajax_message(Request $request) {
 
     //LINEの情報を取得
     $lines_userid = $request->userid;
-    file_put_contents("test/return.txt", var_export($lines_userid, true));
 
     //ラインに登録されたユーザーを取得
     $lines_customers = DB::table('lines_customers')
@@ -615,6 +614,7 @@ public function ajax_message(Request $request) {
     $persons = [];
     $lines_temporaries = [];
     $lines_persons = [];
+    file_put_contents("test/return.txt", var_export($lines_list, true));
 
 
     //LINEのユーザーIDを取得できる場合
