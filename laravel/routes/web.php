@@ -228,12 +228,13 @@ Route::post('ships/ajax_ship_shipped', 'ShipController@ajax_ship_shipped');//発
 Route::post('ships/ajax_ship_finished', 'ShipController@ajax_ship_finished');//発送報告確認用
 
 
+
 /*--------------------------------------------------- */
 /* Lines
 /*--------------------------------------------------- */
 Route::get('lines', 'LineMessengerController@index');
 Route::post('lines', 'LineMessengerController@post');
-Route::get('lines/ajax', 'LineMessengerController@ajax_message');
+Route::get('lines/ajax', 'LineMessengerController@ajax_message');//ここ修正
 Route::post('lines/ajax', 'LineMessengerController@ajax_message');
 Route::post('lines/ajax_search', 'LineMessengerController@ajax_search');
 
