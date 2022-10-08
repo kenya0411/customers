@@ -587,7 +587,6 @@ $test = [];
     //最終のメッセージがどちらが最後か確認（New用）
      if(!empty($lines_customers)){
         foreach ($lines_customers as $key => $value) {  
-            if(!empty($value)):
                 $lines_messages = DB::table('lines_messages')
                 ->where('is_delete','=',0)//論理削除されてないもの
                 ->where('lines_customers_userid','=',$value->lines_customers_userid)//ユーザーIDのメッセージを取得
@@ -596,6 +595,7 @@ $test = [];
                 $test[] =$lines_messages;
                     file_put_contents("test/return.txt", var_export($test, true));
 
+            if(!empty($lines_messages)):
 
                     $lines_customers_list[]= [
                         'lines_customers_name'=> $value->lines_customers_name,
