@@ -583,7 +583,7 @@ public function ajax_message(Request $request) {
     ->where('is_delete','=',0)//論理削除されてないもの
     ->get();  
     $lines_customers_list = [];
-
+$test = [];
     //最終のメッセージがどちらが最後か確認（New用）
      if(!empty($lines_customers)){
         foreach ($lines_customers as $key => $value) {  
@@ -592,7 +592,8 @@ public function ajax_message(Request $request) {
         ->where('lines_customers_userid','=',$value->lines_customers_userid)//ユーザーIDのメッセージを取得
         ->orderBy('lines_messages_id', 'desc')//最終のデータを取得
         ->first(); //1件のみ取得
-    file_put_contents("test/return.txt", var_export($lines_messages, true));
+        $test[] =$lines_messages;
+            file_put_contents("test/return.txt", var_export($test, true));
 
 
             $lines_customers_list[]= [
