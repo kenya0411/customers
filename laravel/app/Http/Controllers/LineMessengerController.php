@@ -577,13 +577,13 @@ public function ajax_message(Request $request) {
 
     //LINEの情報を取得
     $lines_userid = $request->userid;
+    file_put_contents("test/return.txt", var_export('sss', true));
 
     //ラインに登録されたユーザーを取得
     $lines_customers = DB::table('lines_customers')
     ->where('is_delete','=',0)//論理削除されてないもの
     ->get();  
     $lines_customers_list = [];
-    file_put_contents("test/return.txt", var_export('sss', true));
 
     //最終のメッセージがどちらが最後か確認（New用）
      if(!empty($lines_customers)){
