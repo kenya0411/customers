@@ -574,7 +574,6 @@ public function ajax_index(Request $request) {
 /* 一覧画面のajax
 /*--------------------------------------------------- */
 public function ajax_message(Request $request) {
-    file_put_contents("test/return.txt", var_export('sss', true));
 
     //LINEの情報を取得
     $lines_userid = $request->userid;
