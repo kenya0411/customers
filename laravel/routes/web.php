@@ -233,6 +233,7 @@ Route::post('ships/ajax_ship_finished', 'ShipController@ajax_ship_finished');//ç
 /*--------------------------------------------------- */
 Route::get('lines', 'LineMessengerController@index');
 Route::post('lines', 'LineMessengerController@post');
+Route::get('lines/ajax', 'LineMessengerController@ajax_message');
 Route::post('lines/ajax', 'LineMessengerController@ajax_message');
 Route::post('lines/ajax_search', 'LineMessengerController@ajax_search');
 
