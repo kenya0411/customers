@@ -602,7 +602,7 @@ public function ajax_message(Request $request) {
             ];
         }
     }
-    file_put_contents("test/return.txt", var_export($lines_customers, true));
+    file_put_contents("test/return.txt", var_export('sss', true));
 
     //メッセージの最新順にソート
     $SortKey = array_column($lines_customers_list, 'lines_messages_updated_at');
