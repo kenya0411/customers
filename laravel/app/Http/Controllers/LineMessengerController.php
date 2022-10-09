@@ -255,9 +255,26 @@ public function push_message_add_database(Request $request,$user_id,$reply) {
 
         //カスタマー情報が存在するか確認
         $get_customer =$this->get_customer_add_database($request);
+       file_put_contents("test/return.txt", var_export($inputs, true));
 
         // メッセージが送られた場合、$message_typeは'message'となる。その場合処理実行。
         if($message_type=='message') {
+        //メッセージの種類を確認
+        $type=$message_type=$inputs['events'][0]['message']['type'];
+
+        $get_message_type =$this->get_message_type($request,$inputs);
+
+ 
+            
+        }
+    }
+
+/*--------------------------------------------------- */
+/* メッセージの内容を確認し、DBに保存＋メールを送信
+/*--------------------------------------------------- */
+public function get_message_type(Request $request,$inputs) {
+
+
              $message_arr= $inputs['events'][0]["message"];
              $message= $message_arr['text'];
         
@@ -273,7 +290,7 @@ public function push_message_add_database(Request $request,$user_id,$reply) {
                $data =$this->get_message_add_database($request,$inputs);//メッセージをDBに保存
                $lines_persons =$this->get_message_person($request,$inputs);//公式LINEの受信先を確認
 
-                // replyTokenを取得
+                // replyTokenを取得(必要ないかも)
                 $reply_token=$inputs['events'][0]['replyToken'];
      
                 // LINEBOTSDKの設定
@@ -282,11 +299,8 @@ public function push_message_add_database(Request $request,$user_id,$reply) {
                 $http_client = new CurlHTTPClient($lines_persons['lines_persons_access_token']);
                 $bot = new LINEBot($http_client, ['channelSecret' => $lines_persons['lines_persons_channel_secret']]);
 
-
                 //カスタマーのLINEIDを取得
                 $user_id=$inputs['events'][0]['source']['userId'];
-
-
                 $check_ngword_message = $this->check_ngword_message($request,$message);
                 //NGワードに含まれてない場合、メールを送信
                 if($check_ngword_message == "send"){
@@ -294,12 +308,8 @@ public function push_message_add_database(Request $request,$user_id,$reply) {
                     $send_mail = $this->send_mail($request,$user_id,$message);
                 }
             endif;
-            
-        }else{
-            return 'ok';
-           
-        }
-    }
+
+}
 
 /*--------------------------------------------------- */
 /* NGワードのチェック
@@ -584,7 +594,6 @@ public function ajax_message(Request $request) {
     ->where('is_delete','=',0)//論理削除されてないもの
     ->get();  
     $lines_customers_list = [];
-$test = [];
     //最終のメッセージがどちらが最後か確認（New用）
      if(!empty($lines_customers)){
         foreach ($lines_customers as $key => $value) {  
@@ -593,8 +602,6 @@ $test = [];
                 ->where('lines_customers_userid','=',$value->lines_customers_userid)//ユーザーIDのメッセージを取得
                 ->orderBy('lines_messages_id', 'desc')//最終のデータを取得
                 ->first(); //1件のみ取得
-                $test[] =$lines_messages;
-                    file_put_contents("test/return.txt", var_export($test, true));
 
             if(!empty($lines_messages)):
 
