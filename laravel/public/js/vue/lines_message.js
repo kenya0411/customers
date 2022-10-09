@@ -44,15 +44,21 @@ const hoge = {
 		change_name: function (text) {
 			let textList = ['けいらん', '恵蘭','慧蘭','慧蘭','ケイラン','れんれい','レンレイ','恋霊','フェアリース'];
 			let afterName = 'Rise' ;
-				let result = text;
-				
+
+			let textList2 = ['メルカリ', 'めるかり','ここなら','ココナラ'];
+			let afterName2 = 'アプリ' ;
+
+			let result = text;
 				if(!result){
-
-
 				}else{
 					textList.forEach(function(element){
-				result = result.replace(element, afterName );
-		});
+						result = result.replace(element, afterName );
+					});
+					textList2.forEach(function(element){
+						result = result.replace(element, afterName2 );
+					});
+
+
 			return result			
 				}
 
