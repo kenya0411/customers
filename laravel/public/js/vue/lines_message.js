@@ -48,6 +48,9 @@ const hoge = {
 			let textList2 = ['メルカリ', 'めるかり','ここなら','ココナラ'];
 			let afterName2 = 'アプリ' ;
 
+			let textList3 = ['(emoji)'];
+			let afterName3 = '' ;
+
 			let result = text;
 				if(!result){
 				}else{
@@ -58,6 +61,9 @@ const hoge = {
 						result = result.replace(element, afterName2 );
 					});
 
+					textList3.forEach(function(element){
+						result = result.replace(element, afterName3 );
+					});
 
 			return result			
 				}
