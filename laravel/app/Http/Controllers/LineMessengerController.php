@@ -618,6 +618,8 @@ public function ajax_message(Request $request) {
 
                 $temp_ngword = false;
 
+
+            if(!empty($lines_messages)):
                 foreach ($ngword as $word_key => $word_value) {
 
                     if($lines_messages->lines_messages_text == $word_value){
@@ -625,8 +627,6 @@ public function ajax_message(Request $request) {
 
                     }
                 };
-            if(!empty($lines_messages)):
-
                     $lines_customers_list[]= [
                         'lines_customers_name'=> $value->lines_customers_name,
                         'lines_customers_userid'=> $value->lines_customers_userid,
