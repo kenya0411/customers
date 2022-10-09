@@ -1,1 +1,16 @@
-NULL
+array (
+  0 => 
+  (object) array(
+     'lines_messages_id' => 26,
+     'lines_customers_userid' => 'Ucb7718e5d65232dca709bdbe33f600c2',
+     'lines_messages_replytoken' => 'f5eb4305c8814f7fbd178fc781a3683d',
+     'lines_messages_number' => '16920982697306',
+     'lines_messages_text' => 'コピーはダミーです。コピーはダミーです。コピーはダミーです。コピーはダミーです。コピーはダミーです。コピーはダミーです。コピーはダミーです。コピーはダミーです。コピーはダミーです。コピーはダミーです。',
+     'lines_messages_from_userid' => 'Ucb7718e5d65232dca709bdbe33f600c2',
+     'lines_messages_to_userid' => 'U9a6c97c1212b4fa8a5f6c76068fac1ad',
+     'lines_messages_webhook_event_id' => '01GEXKP1VTMCSHVXW9XJ05T0XN',
+     'updated_at' => '2022-10-09 14:34:33',
+     'created_at' => '2022-10-09 14:34:33',
+     'is_delete' => 0,
+  ),
+)

@@ -44,12 +44,17 @@
 {{-- 受信メッセージ --}}
 @include('lines.components.message.get_message')
 
-
+@can('comment')
 {{-- 送信リクエスト用 --}}
 @include('lines.components.message.send_request')
+@endcan
+
 
 
 @can('admin')
+
+{{-- 送信メッセージ --}}
+@include('lines.components.message.send_message')
 
 {{-- リクエスト用 --}}
 @include('lines.components.message.request')

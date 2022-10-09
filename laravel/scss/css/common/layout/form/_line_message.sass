@@ -184,47 +184,6 @@ $pad: 24px
 					display: none
 
 
-	// .send_common_block
-	// 	.heading
-	// 		margin-bottom: 8px
-	// 		display: flex
-	// 		align-items: center
-	// 	.title
-	// 		font-weight: 700
-	// 		margin-right: 8px
-	// 	textarea
-	// 		height: 150px	
-
-	// 	.heading_block
-	// 		background-color: #ccc
-	// 		padding: 12px $pad
-	// 		@include rem(20)
-	// 		font-weight: 700
-	// 	.wrap
-	// 		padding: $pad
-	// 	.btnFlex
-	// 		display: flex
-	// 		justify-content: center
-	// 	.delete_wrap
-	// 		margin-left: 16px
-	// 		button
-	// 			$bgcolor: #c30000
-	// 			position: relative
-	// 			color: #fff
-	// 			background-color: $bgcolor
-	// 			border: 1px solid $bgcolor
-	// 			padding: 12px 16px
-	// 			line-height: 1em
-	// 			display: flex
-	// 			margin: 16px auto 0
-	// 			justify-content: center
-	// 			align-items: center
-	// 			@include tabup
-	// 				&:hover
-	// 					background-color: #fff
-	// 					color: $bgcolor
-	// 					border: 1px solid $bgcolor
-	// 					transition-duration: 0.5s
 		.send_wrap
 			.notice
 				text-align: center
@@ -279,5 +238,68 @@ $pad: 24px
 						color: $bgcolor
 						border: 1px solid $bgcolor
 						transition-duration: 0.5s
-		
-		
+@include tab
+
+	.line_message
+		.headingWrap
+			padding: $pad
+			.title
+				width: calc(100% - 90px)
+				@include rem(18)
+				line-height: 1.2em
+			.details
+				width: 90px
+			.customerBtn
+				a,a:visited
+					padding: 6px 8px
+					@include rem(10)
+		// .messageBlock
+			// height: 300px
+
+		.messageWrap
+			margin-bottom: 48px
+				
+			.flexMessge
+				display: flex
+				justify-content: space-between
+				width: calc(100% - 20px)
+				.imgFlex
+					display: none
+				.textFlex
+
+					width: 100%
+					width: calc(100% - 40px)
+				.headingBlock
+					display: flex
+					flex-wrap: wrap
+					@include rem(14)
+					.name
+						font-weight: 700
+						width: 100%
+					.time
+						width: 100
+						margin-left: 0px
+				.content
+	
+					@include rem(14)
+					&:before
+						border-style: solid
+						border-width: 6px 10.4px 6px 0
+						border-color: transparent #f3f3f3 transparent transparent
+						position: absolute
+						top: 10px
+						left: -10px
+						margin: auto
+			.rightMessage
+				margin-left: auto
+				justify-content: flex-end
+				.headingBlock
+					justify-content: flex-end
+					padding-right: 8px
+					.name
+						text-align: right
+				.content
+					margin-left: auto
+					&:before
+						display: none
+

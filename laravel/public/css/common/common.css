@@ -1675,6 +1675,33 @@
 .line_message .messageWrap .rightMessage .content:before {
   display: none;
 }
+.line_message .messageWrap .send_wrap .notice {
+  text-align: center;
+  margin-top: 8px;
+}
+.line_message .messageWrap .send_wrap .notice span {
+  color: red;
+}
+.line_message .messageWrap .send_wrap button {
+  position: relative;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #000;
+  padding: 12px 16px;
+  line-height: 1em;
+  display: flex;
+  margin: 16px auto 0;
+  justify-content: center;
+  align-items: center;
+}
+@media (min-width: 769px) {
+  .line_message .messageWrap .send_wrap button:hover {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+    transition-duration: 0.5s;
+  }
+}
 .line_message .send_message_request {
   border-top: 1px solid #aaa;
   padding: 24px;
@@ -1706,6 +1733,84 @@
   }
 }
 
+@media (max-width: 768px) {
+  .line_message .headingWrap {
+    padding: 24px;
+  }
+  .line_message .headingWrap .title {
+    width: calc(100% - 90px);
+    font-size: 18px;
+    font-size: 1.8rem;
+    line-height: 1.2em;
+  }
+  .line_message .headingWrap .details {
+    width: 90px;
+  }
+  .line_message .headingWrap .customerBtn a, .line_message .headingWrap .customerBtn a:visited {
+    padding: 6px 8px;
+    font-size: 10px;
+    font-size: 1rem;
+  }
+  .line_message .messageWrap {
+    margin-bottom: 48px;
+  }
+  .line_message .messageWrap .flexMessge {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 20px);
+  }
+  .line_message .messageWrap .flexMessge .imgFlex {
+    display: none;
+  }
+  .line_message .messageWrap .flexMessge .textFlex {
+    width: 100%;
+    width: calc(100% - 40px);
+  }
+  .line_message .messageWrap .flexMessge .headingBlock {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 14px;
+    font-size: 1.4rem;
+  }
+  .line_message .messageWrap .flexMessge .headingBlock .name {
+    font-weight: 700;
+    width: 100%;
+  }
+  .line_message .messageWrap .flexMessge .headingBlock .time {
+    width: 100;
+    margin-left: 0px;
+  }
+  .line_message .messageWrap .flexMessge .content {
+    font-size: 14px;
+    font-size: 1.4rem;
+  }
+  .line_message .messageWrap .flexMessge .content:before {
+    border-style: solid;
+    border-width: 6px 10.4px 6px 0;
+    border-color: transparent #f3f3f3 transparent transparent;
+    position: absolute;
+    top: 10px;
+    left: -10px;
+    margin: auto;
+  }
+  .line_message .messageWrap .rightMessage {
+    margin-left: auto;
+    justify-content: flex-end;
+  }
+  .line_message .messageWrap .rightMessage .headingBlock {
+    justify-content: flex-end;
+    padding-right: 8px;
+  }
+  .line_message .messageWrap .rightMessage .headingBlock .name {
+    text-align: right;
+  }
+  .line_message .messageWrap .rightMessage .content {
+    margin-left: auto;
+  }
+  .line_message .messageWrap .rightMessage .content:before {
+    display: none;
+  }
+}
 .formSection {
   background-color: transparent;
 }

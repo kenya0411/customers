@@ -91,7 +91,7 @@ footer a:hover {
     justify-content: space-between;
   }
   .footerNavi li {
-    width: calc(25%);
+    width: calc(20%);
     border-right: 1px dotted #ddd;
   }
   .footerNavi li:nth-last-of-type(1) {

@@ -4,6 +4,7 @@
         <ul>
             <li><a href="/orders/add"><i class="fa-solid fa-pen-to-square"></i></a></li>
             <li><a href="/orders"><i class="fa-solid fa-list"></i></a></li>
+            <li><a href="/lines/"><i class="fa-brands fa-line"></i></a></li>
             <li><a href="/reserves"><i class="fa-solid fa-file-signature"></i></a></li>
             <li><a href="/ships"><i class="fa-solid fa-paper-plane"></i></a></li>
         </ul>
