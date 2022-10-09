@@ -1,42 +1,8 @@
 array (
-  'destination' => 'U9a6c97c1212b4fa8a5f6c76068fac1ad',
-  'events' => 
-  array (
-    0 => 
-    array (
-      'type' => 'message',
-      'message' => 
-      array (
-        'type' => 'text',
-        'id' => '16921252842459',
-        'text' => 'お世話になっております(emoji)
-
-今年に入り、スーパーの店員さんとのことで相談しておりました(emoji)(emoji)
-以前はメルカリでは、ちるという名でしたが、つい先日anna＊belle（アナベル）に
-変更致しました(emoji)
-
-Rise様とのLINEでのやりとり、嬉しい限りです(emoji)
-実は10月に入り、彼との再会が近いのではないかと毎日、期待しております(emoji)
-
-以前に慧蘭様にアドバイス頂いたように先日、彼の夢も見ました(emoji)(emoji)(emoji)
-
-ただ思念伝達や縁結びもお願いした方がより彼に逢いやすくなるのかも考えたり、運命に任せた方が良いのかも迷っておりました(emoji)(emoji)
-
-もし何かアドバイスを頂けましたら、幸いです(emoji)(emoji)',
-      ),
-      'webhookEventId' => '01GEXQPZJSWP4XMKGTCXTCTPGF',
-      'deliveryContext' => 
-      array (
-        'isRedelivery' => true,
-      ),
-      'timestamp' => 1665297776109,
-      'source' => 
-      array (
-        'type' => 'user',
-        'userId' => 'Ucb7718e5d65232dca709bdbe33f600c2',
-      ),
-      'replyToken' => '3f3f2a0b84054b7ea836be8bf5af5e1c',
-      'mode' => 'active',
-    ),
-  ),
+  0 => '[1]タロット占い',
+  1 => '[2]タロット占い',
+  2 => '[3]タロット占い',
+  3 => '[4]タロット占い',
+  4 => '[5]タロット占い',
+  5 => '[6]タロット占い',
 )

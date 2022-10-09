@@ -42,13 +42,13 @@ const hoge = {
 		/* 鑑定士の名前を置換
 		/*--------------------------------------------------- */
 		change_name: function (text) {
-			let textList = ['けいらん', '恵蘭','慧蘭','慧蘭','ケイラン','れんれい','レンレイ','恋霊','フェアリース'];
+			let textList = [/けいらん/g, /恵蘭/g,/慧蘭/g,/ケイラン/g,/れんれい/g,/レンレイ/g,/恋霊/g,/フェアリース/g];
 			let afterName = 'Rise' ;
 
-			let textList2 = ['メルカリ', 'めるかり','ここなら','ココナラ'];
+			let textList2 = [/メルカリ/g, /めるかり/g,/ここなら/g,/ココナラ/g];
 			let afterName2 = 'アプリ' ;
 
-			let textList3 = ['(emoji)'];
+			let textList3 = [/\(emoji\)/g];
 			let afterName3 = '' ;
 
 			let result = text;

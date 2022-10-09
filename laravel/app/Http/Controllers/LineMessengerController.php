@@ -255,7 +255,6 @@ public function push_message_add_database(Request $request,$user_id,$reply) {
 
         //カスタマー情報が存在するか確認
         $get_customer =$this->get_customer_add_database($request);
-       file_put_contents("test/return.txt", var_export($inputs, true));
 
         // メッセージが送られた場合、$message_typeは'message'となる。その場合処理実行。
         if($message_type=='message') {
@@ -315,16 +314,9 @@ public function get_message_type(Request $request,$inputs) {
 /* NGワードのチェック
 /*--------------------------------------------------- */
 public function check_ngword_message(Request $request,$message) {
+$ngword = $this->ngword($request);
 
-    //NGワード
-    $ngword = array(
-        "[1]タロット占い",
-        "[2]タロット占い",
-        "[3]タロット占い",
-        "[4]タロット占い",
-        "[5]タロット占い",
-        "[6]タロット占い",
-    );
+
 
     //通常時はメールを送る
     $result = "send";
@@ -337,6 +329,24 @@ public function check_ngword_message(Request $request,$message) {
     };
 
     return $result ;
+
+}
+
+/*--------------------------------------------------- */
+/* NGワード
+/*--------------------------------------------------- */
+public function ngword(Request $request) {
+    //NGワード
+    $ngword = array(
+        "[1]タロット占い",
+        "[2]タロット占い",
+        "[3]タロット占い",
+        "[4]タロット占い",
+        "[5]タロット占い",
+        "[6]タロット占い",
+    );
+    return $ngword;
+
 
 }
 
@@ -594,6 +604,9 @@ public function ajax_message(Request $request) {
     ->where('is_delete','=',0)//論理削除されてないもの
     ->get();  
     $lines_customers_list = [];
+
+    $ngword = $this->ngword($request);
+
     //最終のメッセージがどちらが最後か確認（New用）
      if(!empty($lines_customers)){
         foreach ($lines_customers as $key => $value) {  
@@ -603,6 +616,15 @@ public function ajax_message(Request $request) {
                 ->orderBy('lines_messages_id', 'desc')//最終のデータを取得
                 ->first(); //1件のみ取得
 
+                $temp_ngword = false;
+
+                foreach ($ngword as $word_key => $word_value) {
+
+                    if($lines_messages->lines_messages_text == $word_value){
+                        $temp_ngword = true;
+
+                    }
+                };
             if(!empty($lines_messages)):
 
                     $lines_customers_list[]= [
@@ -610,6 +632,8 @@ public function ajax_message(Request $request) {
                         'lines_customers_userid'=> $value->lines_customers_userid,
                         'lines_messages_to_userid'=> $lines_messages->lines_messages_to_userid,
                         'lines_messages_updated_at'=> $lines_messages->updated_at,
+                        'lines_messages_text'=> $lines_messages->lines_messages_text,
+                        'lines_messages_ngword'=> $temp_ngword,
                     ];
             endif;
         }
