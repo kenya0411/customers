@@ -314,20 +314,20 @@ public function get_message_type(Request $request,$inputs) {
 /* NGワードのチェック
 /*--------------------------------------------------- */
 public function check_ngword_message(Request $request,$message) {
-$ngword = $this->ngword($request);
 
-
+    //NGワード
+    $ngword = $this->ngword($request);
 
     //通常時はメールを送る
     $result = "send";
 
-    foreach ($ngword as $key) {
-
-        if($key == $message){
-         $result = 'unsend';//NGワードにメッセージが一緒の場合、メールを送信しない。
+    //NGワードがメッセージに含まれてるか確認
+    foreach ($ngword as $value) {
+        //メッセージにNGワードが含まれてた場合、メールを送信しない。
+        if (false !== strpos($message, $value)) {
+            $result = 'unsend';
         }
     };
-
     return $result ;
 
 }
@@ -338,12 +338,10 @@ $ngword = $this->ngword($request);
 public function ngword(Request $request) {
     //NGワード
     $ngword = array(
-        "[1]タロット占い",
-        "[2]タロット占い",
-        "[3]タロット占い",
-        "[4]タロット占い",
-        "[5]タロット占い",
-        "[6]タロット占い",
+        "]タロット占い",
+        "右のタロットカード[",
+        "中央のタロットカード[",
+        "左のタロットカード[",
     );
     return $ngword;
 
@@ -621,11 +619,12 @@ public function ajax_message(Request $request) {
 
             if(!empty($lines_messages)):
                 foreach ($ngword as $word_key => $word_value) {
-
-                    if($lines_messages->lines_messages_text == $word_value){
+                    // lines_messages_textにNGワードが含まれる場合、Newを表示しない
+                  if (false !== strpos($lines_messages->lines_messages_text, $word_value)) {
                         $temp_ngword = true;
 
                     }
+
                 };
                     $lines_customers_list[]= [
                         'lines_customers_name'=> $value->lines_customers_name,
