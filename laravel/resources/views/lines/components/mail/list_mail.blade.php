@@ -28,7 +28,7 @@
         <div>
             <div class="pcInvi">メールアドレス</div>
 
-            <input type="mail" v-bind:name="`lines_mails_mailaddress[${line_mail.lines_mails_id}]`" v-bind:value="line_mail.lines_mails_mailaddress ">
+            <input type="email" v-bind:name="`lines_mails_mailaddress[${line_mail.lines_mails_id}]`" v-bind:value="line_mail.lines_mails_mailaddress ">
         </div>
         <div>
           <div class="test_mail_wrap">

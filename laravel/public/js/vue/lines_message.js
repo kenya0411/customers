@@ -16,6 +16,8 @@ const hoge = {
 			persons: '',
 			customers: '',
 			users: '',
+			search_customers_name: '',
+			search_customers_data: '',
 			// get_id: '',//検索用
 			is_loaded: false,
 		}
@@ -115,7 +117,24 @@ const hoge = {
 
 
 		},
+		/*--------------------------------------------------- */
+		/* //検索用の情報をデータベースから取得＋ページネーションの情報を取得
+		/*--------------------------------------------------- */		
+		async search_customers_page() {
+			
+			let url = '/lines/ajax_customers_search';
+			 await axios.post(url, {
+				search_customers_name: this.search_customers_name,
+				persons: this.persons,
 
+			})
+			.then(response => [
+				this.search_customers_data = response.data,
+
+				])
+			.catch(error => console.log(error))
+
+		},
 	},
 
 	//ロード時にデータベースから情報を取得
@@ -123,11 +142,27 @@ const hoge = {
 	this.load_page();
 
  },
+ 
 mounted() {
     window.onload = ()=>{
         	this.scrollToElement();
     }
-}
+},
+computed:{
+	get_search_data() {//監視用データをまとめる
+		return [
+		this.search_customers_name,
+		];
+	},
+},
+watch: {
+	get_search_data(val){//監視用
+	
+	this.search_customers_page();
+
+	},
+
+ },
 }
 
 Vue.createApp(hoge).mount('.main_content')

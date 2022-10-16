@@ -12,6 +12,8 @@ class Line_customer extends Model
     'lines_customers_id',
     'lines_customers_userid',
     'lines_customers_name',
+    'lines_customers_display_name',
+    'lines_customers_picture_url',
     'customers_id',
     'persons_id',
   ];

@@ -236,7 +236,7 @@ Route::get('lines', 'LineMessengerController@index');
 Route::post('lines', 'LineMessengerController@post');
 Route::get('lines/ajax', 'LineMessengerController@ajax_message');//ここ修正
 Route::post('lines/ajax', 'LineMessengerController@ajax_message');
-Route::post('lines/ajax_search', 'LineMessengerController@ajax_search');
+Route::post('lines/ajax_customers_search', 'LineMessengerController@ajax_customers_search');
 
 //メッセージ送受信
 Route::get('lines/messages', 'LineMessengerController@message_index');
@@ -249,20 +249,27 @@ Route::post('lines/temporaries', 'LineMessengerController@lines_temporaries_post
 // Route::post('lines/customers/ajax', 'LineMessengerController@ajax_lines_customers_update');
 
 
+/*--------------------------------------------------- */
+/* Lines_mail
+/*--------------------------------------------------- */
 //メール設定
-Route::get('lines/mails', 'LineMessengerController@mail_index');
-Route::post('lines/mails', 'LineMessengerController@mail_index');
+Route::get('lines/mails', 'LineMailController@index');
+Route::post('lines/mails', 'LineMailController@index');
 
 //ロード時にDBからデータを取得
-Route::post('lines/mails/ajax', 'LineMessengerController@ajax_mail_index');
+Route::post('lines/mails/ajax', 'LineMailController@ajax_mail_index');
 
 //新規メールアドレス追加
-Route::post('lines/mails/ajax_new', 'LineMessengerController@ajax_mail_new');
+Route::post('lines/mails/ajax_new', 'LineMailController@ajax_mail_new');
 //メールアドレス情報の修正
-Route::post('lines/mails/ajax_update', 'LineMessengerController@ajax_mail_update');
+Route::post('lines/mails/ajax_update', 'LineMailController@ajax_mail_update');
 
 
 
+
+/*--------------------------------------------------- */
+/* Lines_person
+/*--------------------------------------------------- */
 //公式LINE設定
 Route::get('lines/persons', 'LineMessengerController@person_index');
 Route::post('lines/persons', 'LineMessengerController@person_index');

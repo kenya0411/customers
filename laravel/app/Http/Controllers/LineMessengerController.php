@@ -1,14 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 //DB
-use App\Users;
-use App\User;
-use App\Customer;
+// use App\Users;
+// use App\User;
+// use App\Customer;
 use App\Line_customer;
 use App\Line_message;
-use App\Line_person;
+// use App\Line_person;
 use App\Line_temporary;
-use App\Line_mail;
+// use App\Line_mail;
 use App\Http\Controllers\Components\CommonFunction;
 
 
@@ -31,18 +31,7 @@ use App\Mail\SendMail;
 class LineMessengerController extends Controller
 {
 
-        public function show_list($request,$redirect){
-
-             $param = ['is_delete' => 0];
-             $lines_customers = DB::select('select * from lines_customers where is_delete=:is_delete', $param);
-             $lines_persons = DB::select('select * from lines_persons where is_delete=:is_delete', $param);
-             $lines_messages = DB::select('select * from lines_messages where is_delete=:is_delete', $param);
-
-             return view($redirect);
-
-             // return view($redirect)->with('lines_customers', $lines_customers)->with('lines_persons', $lines_persons)->with('lines_messages', $lines_messages);
-     }
-
+   
 
 
 /*--------------------------------------------------- */
@@ -53,34 +42,13 @@ class LineMessengerController extends Controller
 public function index(Request $request)
 {
 
+        return view('lines.message_list')->with('post_status', $request->old());
 
-        $data = $this->show_list($request,'lines.message_list');
-        return $data->with('post_status', $request->old());
-
-
-    }
-
-
-public function mail_index(Request $request)
-{
-
-        $data = $this->show_list($request,'lines.mail_list');
-
-        return $data->with('post_status', $request->old());
 
 
     }
 
 
-public function person_index(Request $request)
-{
-
-        $data = $this->show_list($request,'lines.person_list');
-
-        return $data->with('post_status', $request->old());
-
-
-    }
 
 
 /*--------------------------------------------------- */
@@ -256,6 +224,7 @@ public function push_message_add_database(Request $request,$user_id,$reply) {
         //カスタマー情報が存在するか確認
         $get_customer =$this->get_customer_add_database($request);
 
+
         // メッセージが送られた場合、$message_typeは'message'となる。その場合処理実行。
         if($message_type=='message') {
         //メッセージの種類を確認
@@ -269,10 +238,46 @@ public function push_message_add_database(Request $request,$user_id,$reply) {
     }
 
 /*--------------------------------------------------- */
+/* LINEのユーザー情報を取得
+/*--------------------------------------------------- */
+public function get_user_profile(Request $request,$inputs,$user_id) {
+
+    $lines_persons =$this->get_message_person($request,$inputs);//公式LINEの受信先を確認
+    // $user_id=$inputs['events'][0]['source']['userId'];//顧客のユーザーIDを取得
+
+
+    //LINEの情報にアクセス
+    $http_client = new CurlHTTPClient($lines_persons['lines_persons_access_token']);
+    $bot = new LINEBot($http_client, ['channelSecret' => $lines_persons['lines_persons_channel_secret']]);
+    $response = $bot->getProfile($user_id);
+
+    $result = [];
+
+    if ($response->isSucceeded()) {
+        //ユーザー情報取得
+        $profile = $response->getJSONDecodedBody();
+
+    $result = array(
+      'userId' => $profile['userId'],//ユーザーID
+      'displayName' => $profile['displayName'],//LINEの表示名
+      'pictureUrl' => $profile['pictureUrl'],//プロフィール画像
+      'persons_id' => $lines_persons['persons_id'],//担当者の番号
+      'lines_persons_id' => $lines_persons['lines_persons_id'],//担当者のLINEの番号
+      'lines_persons_userid' => $lines_persons['lines_persons_userid'],//担当者のLINEユーザーID
+    );
+
+
+}
+
+
+return $result;
+
+}
+
+/*--------------------------------------------------- */
 /* メッセージの内容を確認し、DBに保存＋メールを送信
 /*--------------------------------------------------- */
 public function get_message_type(Request $request,$inputs) {
-
 
              $message_arr= $inputs['events'][0]["message"];
              $message= $message_arr['text'];
@@ -281,7 +286,7 @@ public function get_message_type(Request $request,$inputs) {
             $lines_messages = DB::table('lines_messages')
             ->where('is_delete','=',0)//論理削除されてないもの
             ->where('lines_messages_number','=',$message_arr['id'])//既にメッセージがDBに保存されてるか確認
-            ->first();    
+            ->first(); 
 
             //新規のメッセージの場合
             if(empty($lines_messages)):
@@ -391,6 +396,10 @@ public function get_customer_add_database(Request $request) {
     //カスタマーのLINEIDを取得
     $user_id = $inputs['events'][0]['source']['userId'];
 
+    //カスタマーのユーザー情報を取得
+    $get_user_profile=$this->get_user_profile($request,$inputs,$user_id);
+
+
     //カスタマー情報が既に存在しているか確認
     $lines_customers = DB::table('lines_customers')
     ->where('is_delete','=',0)//論理削除されてないもの
@@ -401,31 +410,50 @@ public function get_customer_add_database(Request $request) {
     //受信先（公式LINEのID取得）
     $destination_id = $inputs["destination"];
 
-    //受信先の公式ラインの情報を取得
-    $lines_persons = DB::table('lines_persons')
-    ->where('is_delete','=',0)//論理削除されてないもの
-    ->where('lines_persons_userid','=',$destination_id)
-    ->first();  
-
 
     //カスタマー情報が存在しない場合、新規にDBに追加
     if(empty( $lines_customers)){
 
-        //配列に保存
-        $result = array(
-        'lines_customers_userid' => $user_id,
-        'lines_customers_name' => '新規ユーザー',
-        'persons_id' => $lines_persons->persons_id,
-        );
-        // file_put_contents("test/return.txt", var_export($result, true));
-
         //情報をDBに保存
         $Line_customer = new Line_customer();
         $Line_customer->create([
-            'lines_customers_userid' => $result['lines_customers_userid'],
-            'lines_customers_name' => $result['lines_customers_name'],
-            'persons_id' => $result['persons_id'],
+            'lines_customers_userid' => $user_id,//ユーザー
+            'lines_customers_name' => $get_user_profile['displayName'],
+            'lines_customers_display_name' => $get_user_profile['displayName'],//LINEのユーザー名
+            'lines_customers_picture_url' => $get_user_profile['pictureUrl'],//LINEの写真
+            'persons_id' => $get_user_profile['persons_id'],
+            'lines_persons_id' => $get_user_profile['lines_persons_id'],//公式LINEの番号
         ]);
+    }else{
+
+    //LINEの情報とDBの情報に差異がないか確認
+    $compare =array(
+        'display_name' => $get_user_profile['displayName'] == $lines_customers->lines_customers_display_name ? 'same' : null,
+        'picture_url' => $get_user_profile['pictureUrl'] == $lines_customers->lines_customers_picture_url ? 'same' : null,
+    );
+
+    //LINEとDBの情報に差異があればアップデート
+    if (empty($compare['display_name'])||empty($compare['picture_url'])) {
+        //配列に保存
+        $param = [
+        'lines_customers_id' => $lines_customers->lines_customers_id,//LINEのDBの番号
+        'lines_customers_display_name' => $get_user_profile['displayName'],//LINEのユーザー名
+        'lines_customers_picture_url' => $get_user_profile['pictureUrl'],//LINEの写真
+        'updated_at' => date( "Y-m-d H:i:s" , time() ),
+        ];
+
+        // //ユーザー情報をアップデート
+        DB::update('update lines_customers set 
+        lines_customers_display_name=:lines_customers_display_name,
+        lines_customers_picture_url=:lines_customers_picture_url,
+        updated_at=:updated_at
+        where lines_customers_id=:lines_customers_id'
+        , $param);
+
+    }
+    
+
+
     }
 }
 
@@ -532,7 +560,6 @@ public function send_mail(Request $request,$user_id,$message) {
 public function ajax_index(Request $request) {
 
 
-
         $lines_customers = DB::table('lines_customers')
         ->where('is_delete','=',0)//論理削除されてないもの
         ->get();     
@@ -601,8 +628,67 @@ public function ajax_message(Request $request) {
     $lines_customers = DB::table('lines_customers')
     ->where('is_delete','=',0)//論理削除されてないもの
     ->get();  
-    $lines_customers_list = [];
 
+    //最終のメッセージがどちらが最後か確認（New用）
+    $lines_customers_list = $this->check_new_message($request,$lines_customers );
+
+
+
+
+    //空の値を入力
+    // $lines_list = [];
+    // $lines_information = [];
+    // $users = [];
+    // $persons = [];
+    // $lines_temporaries = [];
+    // $lines_persons = [];
+
+
+    //LINEのユーザーIDを取得できる場合
+    if(!empty($lines_userid )){
+        $temp = $this->ajax_get_message($request,$lines_userid );
+
+        //Lineメッセージ
+        $lines_list = $temp['lines_list'];
+
+        //LINEユーザーデータ
+        $lines_information = $temp['lines_information'];
+
+        //鑑定士のデータ
+        $persons = $temp['persons'];
+
+        //ユーザーデータ
+        $users = $temp['users'];
+
+        //公式LINEの情報を取得
+        $lines_persons = $temp['lines_persons'];
+
+        //テンポラリーデータ
+        $lines_temporaries = $this->ajax_get_temporaries($request,$lines_userid);
+    }
+
+
+        return [
+            // "lines_customers"=>$lines_customers_list,  
+            "lines_customers"=>!empty($lines_customers_list) ? $lines_customers_list : [],
+            "lines_list"=>!empty($lines_list) ? $lines_list : [],
+            "lines_information"=>!empty($lines_information) ? $lines_information : [],
+            "users"=>!empty($users) ? $users : [],
+            "lines_temporaries"=>!empty($lines_temporaries) ? $lines_temporaries : [],
+            "persons"=>!empty($persons) ? $persons : [],
+            "lines_persons"=>!empty($lines_persons) ? $lines_persons : [],
+
+        ];
+
+}
+
+/*--------------------------------------------------- */
+/* メッセージの受信
+/*--------------------------------------------------- */
+public function check_new_message(Request $request,$lines_customers ) {
+
+    $lines_customers_list = [];
+    //NGワード
     $ngword = $this->ngword($request);
 
     //最終のメッセージがどちらが最後か確認（New用）
@@ -637,46 +723,15 @@ public function ajax_message(Request $request) {
             endif;
         }
     }
-
     //メッセージの最新順にソート
     $SortKey = array_column($lines_customers_list, 'lines_messages_updated_at');
     array_multisort($SortKey, SORT_DESC, $lines_customers_list);
 
-
-    //空の値を入力
-    $lines_list = [];
-    $lines_information = [];
-    $users = [];
-    $persons = [];
-    $lines_temporaries = [];
-    $lines_persons = [];
-
-
-    //LINEのユーザーIDを取得できる場合
-    if(!empty($lines_userid )){
-        $temp = $this->ajax_get_message($request,$lines_userid );
-        $lines_list = $temp['lines_list'];//Lineメッセージ
-        $lines_information = $temp['lines_information'];//LINEユーザーデータ
-        $persons = $temp['persons'];//鑑定士のデータ
-        $users = $temp['users'];//ユーザーデータ
-        $lines_persons = $temp['lines_persons'];//公式LINEの情報を取得
-        $lines_temporaries = $this->ajax_get_temporaries($request,$lines_userid);//テンポラリーデータ
-
-
-    }
-
-
-        return [
-            "lines_customers"=>$lines_customers_list,  
-            "lines_list"=> $lines_list,
-            "lines_information"=>$lines_information,
-            "users"=>$users,
-            "lines_temporaries"=>$lines_temporaries,
-            "persons"=>$persons,
-            "lines_persons"=>$lines_persons,
-        ];
+    return $lines_customers_list;
 
 }
+
+
 
 
 /*--------------------------------------------------- */
@@ -793,7 +848,6 @@ public function ajax_get_message(Request $request,$lines_userid ) {
 /*--------------------------------------------------- */
 public function ajax_get_temporaries(Request $request,$lines_userid) {
 
-
     //ラインのテンポラリーデータを取得(一時的に保存している投稿内容)
     $lines_temporaries = DB::table('lines_temporaries')
     ->where('is_delete','=',0)//論理削除されてないもの
@@ -873,7 +927,28 @@ public function lines_customers_update(Request $request) {
     // return redirect('/lines?userid='.$request->lines_customers_userid);
 
 }
+/*--------------------------------------------------- */
+/* カスタマーの名前を検索
+/*--------------------------------------------------- */
+public function ajax_customers_search(Request $request) {
 
+    $customers_name = $request->search_customers_name;
+    $persons = $request->persons;
+
+
+    file_put_contents("test/return.txt", var_export($persons, true));
+
+    //ラインに登録されたユーザーを取得
+    $customers = DB::table('customers')
+    ->where('is_delete','=',0)//論理削除されてないもの
+    ->where('persons_id','=',$persons['persons_id'])//論理削除されてないもの
+    ->where('customers_name','like','%'.$customers_name.'%')
+    ->orWhere('customers_nickname','like','%'.$customers_name.'%')
+    ->get();  
+
+    return $customers;
+
+}
 
 
 
@@ -908,415 +983,4 @@ public function lines_temporaries_post(Request $request) {
 
 
 
-
-
-
-//------------------------------------------------------------------------------------------------ 
-// ここからはLINEメール設定
-//------------------------------------------------------------------------------------------------ 
-
-
-
-/*--------------------------------------------------- */
-/* LINE用のメールアドレスを新規追加
-/*--------------------------------------------------- */
-public function ajax_mail_new(Request $request) {
-
-
-    //投稿内容を一時的にDBに保存
-    $Line_mail = new line_mail();
-    $Line_mail->create([
-        'lines_mails_mailaddress' => $request->lines_mails_mailaddress,
-        'users_id' => $request->users_id,
-    ]);
-
-
-    //アラート用
-    $post_status = array(
-        'status' => 'success',
-        'type' => 'new_mail',
-    );
-    //リダイレクト
-    $get_status = redirect('/lines/mails')->withInput($post_status);
-    return  $get_status ;
-    // return redirect('/lines/mails');
-
 }
-
-
-/*--------------------------------------------------- */
-/* メール設定を取得
-/*--------------------------------------------------- */
-public function ajax_mail_index(Request $request) {
-
-    //ラインのお客様情報
-    $permissions_id_comment = 4;//コメント専用
-    $permissions_id_admin = 1;//admin専用
-
-    //ユーザー情報を取得
-    $users = Users::query();
-    $users=$users->where('is_delete','=',0);//論理削除
-    $users=$users->Where('permissions_id','=',$permissions_id_comment)->orWhere('permissions_id','=',$permissions_id_admin);
-    $users=$users->get();
-
-    // 現在認証しているユーザーを取得
-    $login_user = array(
-        "id" => Auth::user()->id,
-        "name" => Auth::user()->name,
-        "nickname" => Auth::user()->nickname,
-        "permissions_id" => Auth::user()->permissions_id,
-    );
-
-
-    //設定されたメールアドレスを取得
-    $lines_mails = DB::table('lines_mails')
-    ->where('is_delete','=',0)//論理削除されてないもの
-    ->get();  
-
-
-
-  //ラインのメールアドレス情報を配列化
-  $lines_mails_list = [];
-
-
-
-    if(!empty($lines_mails)){
-        foreach ($lines_mails as $key => $value) {
-
-            //ユーザー情報
-            $user = DB::table('users')
-            ->where('id',$value->users_id)
-            ->first(); //一つだけ取得   
-
-            //ログイン者がコメント返信者のみ
-            if($login_user['permissions_id']== 4):
-            if($user->id == $login_user['id']){
-            //配列にまとめる
-               $lines_mails_list[] =array(
-                'users_id' => $user->id,
-                'users_nickname' => $user->nickname,
-                'lines_mails_mailaddress' => $value->lines_mails_mailaddress,
-                'lines_mails_id' => $value->lines_mails_id,
-            );             
-           };
-
-            else:
-            //ログイン者が管理者
-            //配列にまとめる
-            $lines_mails_list[] =array(
-                'users_id' => $user->id,
-                'users_nickname' => $user->nickname,
-                'lines_mails_mailaddress' => $value->lines_mails_mailaddress,
-                'lines_mails_id' => $value->lines_mails_id,
-            );
-            endif;
-
-
-        }
-    }
-
-
-
-    $result = array(
-        'users' => $users,
-        'lines_mails' => $lines_mails_list,
-        'login_user' => $login_user,
-    );
-    return $result ;
-
-}
-
-
-
-
-/*--------------------------------------------------- */
-/* メール設定の修正・削除
-/*--------------------------------------------------- */
-public function ajax_mail_update(Request $request) {
-
-    $submit_name = $request->submit;//押したボタンの種類
-    $lines_mails_id = $request->lines_mails_id;//lines_mails_mailaddress
-    $lines_mails_mailaddress = $request->lines_mails_mailaddress;//ID
-
-    
-    if( $submit_name == 'update'){//メールアドレスの修正
-    $data =$this->update_mail_address($request,$lines_mails_mailaddress);
-    return $data;
-
-    }elseif(!empty($request->send_mail)){//テストメールの送信
-    $data =$this->send_test_mail($request);
-    return $data;
-
-    }else{//メールアドレスの削除
-    $data =$this->delete_mail_address($request);
-    return $data;
-
-
-}
-
-
-
-
-
-}
-
-/*--------------------------------------------------- */
-/* メールアドレスの修正
-/*--------------------------------------------------- */
-public function update_mail_address(Request $request,$lines_mails_mailaddress) {
-
-    foreach ((array)$lines_mails_mailaddress as $key => $value) {
-        $param = [
-        'lines_mails_id' => $key,
-        'lines_mails_mailaddress' => $value,
-        'updated_at' => date( "Y-m-d H:i:s" , time() ),
-        ];
-        //ユーザー情報をアップデート
-        DB::update('update lines_mails set 
-        lines_mails_mailaddress=:lines_mails_mailaddress,
-        updated_at=:updated_at
-        where lines_mails_id=:lines_mails_id'
-        , $param);
-    }
-
-    //アラート用
-    $post_status = array(
-        'status' => 'success',
-        'type' => 'update_mail',
-    );
-    //リダイレクト
-    $get_status = redirect('/lines/mails')->withInput($post_status);
-    return  $get_status ;
-
-}
-/*--------------------------------------------------- */
-/* メールアドレスの削除
-/*--------------------------------------------------- */
-public function delete_mail_address(Request $request) {
-    $delete_id = $request->delete;//削除するID
-    
-    $param = [
-    'lines_mails_id' => $delete_id,
-    'is_delete' => 1,
-    'updated_at' => date( "Y-m-d H:i:s" , time() ),
-    ];
-    //ユーザー情報を倫理削除
-    DB::update('update lines_mails set 
-    is_delete=:is_delete,
-    updated_at=:updated_at
-    where lines_mails_id=:lines_mails_id'
-    , $param);
-
-    // //アップデート後はリダイレクト
-    $post_status = array(
-        'status' => 'delete',
-        'type' => 'delete_mail',
-    );
-    $get_status = redirect('/lines/mails')->withInput($post_status);
-    return  $get_status ;
-
-}
-
-
-
-
-
-/*--------------------------------------------------- */
-/* テストメール送信
-/*--------------------------------------------------- */
-public function send_test_mail(Request $request) {
-    $send_mail_id = $request->send_mail;
-    $to_email = $request->lines_mails_mailaddress[$send_mail_id];
-    $site_url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] ;
-    $data = [
-        'name' => $request->users_nickname."様",//宛名
-        'from_email' => "info@customer.neobingostyle.com",//送信元メールアドレス
-        'to_email' => $to_email,//宛先
-        'view' => "lines.components.mail.test_mail",
-        'subject' => "テストメールです。",//タイトル
-        'site_name' => "注文管理システム",//サイトネーム
-        'site_url' => $site_url ,//サイトネーム
-
-    ];
-        Mail::send(new SendMail($data));//メール送信
-
-
-    //変数を渡してリダイレクト
-    $post_status = array(
-        'status' => 'success',
-        'type' => 'testmail',
-    );
-    $get_status = redirect('/lines/mails')->withInput($post_status);
-    return  $get_status ;
-    
-}
-
-
-
-
-
-/*--------------------------------------------------- */
-/* 公式LINEの情報を取得
-/*--------------------------------------------------- */
-public function ajax_person_index(Request $request) {
-    //公式LINE一覧
-   $lines_persons = DB::table('lines_persons')
-    ->where('is_delete','=',0)//論理削除されてないもの
-    ->get(); 
-
-    //鑑定士一覧
-   $persons_list = DB::table('persons')
-    ->where('is_delete','=',0)//論理削除されてないもの
-    ->get(); 
-
-    // file_put_contents("test/return.txt", var_export($lines_persons_id, true));
-
-    $line_person_list =[];
-    //配列化
-    foreach ($lines_persons as $key => $value) {
-        //占い師の情報を取得
-       $persons = DB::table('persons')
-        ->where('is_delete','=',0)//論理削除されてないもの
-        ->where('persons_id','=',$value->persons_id)//論理削除されてないもの
-        ->first(); 
-
-        //配列化
-        $line_person_list[] = array(
-                'lines_persons' => $value,
-                'persons' => $persons,
-
-        );
-    };
-
-    $result = array(
-     'lines_persons' => $line_person_list,
-     'persons' => $persons_list,
-
-    );
-
-
-    return $result ;
-
-}
-
-
-/*--------------------------------------------------- */
-/* 
-/*--------------------------------------------------- */
-public function ajax_person_update(Request $request) {
-
-    $submit_name = $request->submit;//押したボタンの種類
-    $lines_persons_id = $request->lines_persons_id;//lines_mails_mailaddress
-
-    
-    if( $submit_name == 'update'){//メールアドレスの修正
-    $data =$this->update_person_address($request);
-    return $data;
-
-    }else{//メールアドレスの削除
-    $data =$this->delete_person_address($request);
-    return $data;
-
-
-}
-}
-
-
-/*--------------------------------------------------- */
-/* メールアドレスの修正
-/*--------------------------------------------------- */
-public function update_person_address(Request $request) {
-
-  $lines_persons_id =  $request->lines_persons_id;
-
-    foreach ((array)$lines_persons_id as $key => $value) {
-        $param = [
-        'lines_persons_id' => $value,
-        'lines_persons_userid' => $request->lines_persons_userid[$value],
-        'lines_persons_channel_id' => $request->lines_persons_channel_id[$value],
-        'lines_persons_channel_secret' => $request->lines_persons_channel_secret[$value],
-        'lines_persons_access_token' => $request->lines_persons_access_token[$value],
-        'updated_at' => date( "Y-m-d H:i:s" , time() ),
-        ];
-        //ユーザー情報をアップデート
-        DB::update('update lines_persons set 
-        lines_persons_userid=:lines_persons_userid,
-        lines_persons_channel_id=:lines_persons_channel_id,
-        lines_persons_channel_secret=:lines_persons_channel_secret,
-        lines_persons_access_token=:lines_persons_access_token,
-        updated_at=:updated_at
-        where lines_persons_id=:lines_persons_id'
-        , $param);
-    }
-
-    //アラート用
-    $post_status = array(
-        'status' => 'success',
-        'type' => 'update_person',
-    );
-    //リダイレクト
-    $get_status = redirect('/lines/persons')->withInput($post_status);
-    return  $get_status ;
-
-}
-
-
-/*--------------------------------------------------- */
-/* 公式LINEの新規追加
-/*--------------------------------------------------- */
-public function ajax_person_new(Request $request) {
-
-
-    //投稿内容を一時的にDBに保存
-    $line_person = new line_person();
-    $line_person->create([
-        'persons_id' => $request->persons_id,
-        'lines_persons_channel_id' => $request->lines_persons_channel_id,
-        'lines_persons_channel_secret' => $request->lines_persons_channel_secret,
-        'lines_persons_access_token' => $request->lines_persons_access_token,
-    ]);
-
-
-    //アラート用
-    $post_status = array(
-        'status' => 'success',
-        'type' => 'new_person',
-    );
-    //リダイレクト
-    $get_status = redirect('/lines/persons')->withInput($post_status);
-    return  $get_status ;
-
-}
-
-/*--------------------------------------------------- */
-/* メールアドレスの削除
-/*--------------------------------------------------- */
-public function delete_person_address(Request $request) {
-    $delete_id = $request->delete;//削除するID
-    
-    $param = [
-    'lines_persons_id' => $delete_id,
-    'is_delete' => 1,
-    'updated_at' => date( "Y-m-d H:i:s" , time() ),
-    ];
-    //ユーザー情報を倫理削除
-    DB::update('update lines_persons set 
-    is_delete=:is_delete,
-    updated_at=:updated_at
-    where lines_persons_id=:lines_persons_id'
-    , $param);
-
-    // //アップデート後はリダイレクト
-    $post_status = array(
-        'status' => 'delete',
-        'type' => 'delete_person',
-    );
-    $get_status = redirect('/lines/persons')->withInput($post_status);
-    return  $get_status ;
-
-}
-
-
-
-}
-

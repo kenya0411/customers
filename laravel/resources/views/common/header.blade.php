@@ -6,7 +6,7 @@
  // header('Cache-Control:pre-check=0,post-check=0',false);
  // header('Pragma:no-cache');
 // $d = '?'.now();
-$d = '?2022';
+$d = '?20223';
 @endphp
                         
  <meta name="csrf-token" content="{{ csrf_token() }}">

@@ -23,7 +23,7 @@
      <div>
             <div class="pcInvi">メールアドレス</div>
         
-         <input type="mail" name="lines_mails_mailaddress" required >
+         <input type="email" name="lines_mails_mailaddress" required >
      </div>
          
      </li>
