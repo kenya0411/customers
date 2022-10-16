@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 
-class LineMailController extends Controller
+class LinePersonController extends Controller
 {
 
 
