@@ -18,7 +18,10 @@
         <button disabled class="disabled">
             メッセージの送信は出来ません
         </button>
-        <div class="notice"><span>※既にメッセージが送信されています。</span><br>管理者がメッセージを送信or取り消す事で再度メッセージが送信出来ます。</div>
+        <div class="notice"><span>※既にメッセージが送信されています。</span><br>管理者がメッセージを送信or取り消す事で再度メッセージが送信出来ます。
+                   
+        送信時間： @{{ moment(lines_temporaries.lines_temporaries.created_at ) }}
+        </div>
     </div>
     <div class="send_wrap"  v-else>
 
