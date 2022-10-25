@@ -1706,6 +1706,20 @@
   border-top: 1px solid #aaa;
   padding: 24px;
 }
+.line_message .send_message_request .heading {
+  display: flex;
+  justify-content: space-between;
+}
+.line_message .send_message_request .heading .check {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  font-size: 1.3rem;
+  line-height: 1.1em;
+}
+.line_message .send_message_request .heading .check label, .line_message .send_message_request .heading .check input {
+  cursor: pointer;
+}
 .line_message .send_message_block {
   margin-top: 48px;
 }

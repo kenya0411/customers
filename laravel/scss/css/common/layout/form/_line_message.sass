@@ -212,8 +212,17 @@ $pad: 24px
 	.send_message_request
 		border-top: 1px solid #aaa
 		padding: $pad
+		.heading
+			display: flex
+			justify-content: space-between
+			.check
+				display: flex
+				align-items: center
+				@include rem(13)
+				line-height: 1.1em
+				label,input
+					cursor: pointer	
 
-			
 	.send_message_block
 		margin-top: 48px
 	.customer_block
