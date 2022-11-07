@@ -936,7 +936,7 @@ public function ajax_customers_search(Request $request) {
     $persons = $request->persons;
 
 
-    file_put_contents("test/return.txt", var_export($persons, true));
+    // file_put_contents("test/return.txt", var_export($persons, true));
 
     //ラインに登録されたユーザーを取得
     $customers = DB::table('customers')
