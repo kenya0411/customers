@@ -106,7 +106,7 @@ if($inputs['destination']){
         'site_url' => $site_url ,//サイトネーム
 
     ];
-        // Mail::send(new SendMail($data));//メール送信
+        Mail::send(new SendMail($data));//メール送信
 
 
 
