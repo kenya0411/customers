@@ -95,15 +95,15 @@ if($inputs['destination']){
 
         // file_put_contents("test/return.txt", var_export($inputs['destination'], true));
 
-    $site_url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] ;
+    // $site_url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] ;
     $data = [
         'from_email' => "info@customer.neobingostyle.com",//送信元メールアドレス
         'to_email' => "shimoda.kenya@gmail.com",//宛先
-        'destination' => $inputs['destination'],
-        'view' => "lines.components.mail.userid_mail",
-        'subject' => "LINEのユーザーIDです。",//タイトル
-        'site_name' => "注文管理システム",//サイトネーム
-        'site_url' => $site_url ,//サイトネーム
+        // 'destination' => $inputs['destination'],
+        // 'view' => "lines.components.mail.userid_mail",
+        // 'subject' => "LINEのユーザーIDです。",//タイトル
+        // 'site_name' => "注文管理システム",//サイトネーム
+        // 'site_url' => $site_url ,//サイトネーム
 
     ];
         Mail::send(new SendMail($data));//メール送信
