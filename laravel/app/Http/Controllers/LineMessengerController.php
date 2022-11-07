@@ -74,7 +74,7 @@ public function index(Request $request)
             return $data;  
         }else{
         //公式LINEのユーザーIDを取得
-        // file_put_contents("test/return.txt", var_export($inputs, true));
+        file_put_contents("test/return.txt", var_export($inputs, true));
         }
         
 
