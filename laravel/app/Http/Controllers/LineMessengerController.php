@@ -74,7 +74,9 @@ public function index(Request $request)
             return $data;  
         }else{
         //公式LINEのユーザーIDを取得
-        file_put_contents("test/return.txt", var_export($inputs, true));
+        $data = $this->get_oficial_lineid($request);
+        return $data;  
+
         }
         
 
@@ -83,6 +85,20 @@ public function index(Request $request)
     }
 
 
+/*--------------------------------------------------- */
+/* webhook
+/*--------------------------------------------------- */
+
+public function get_oficial_lineid(Request $request,$inputs) {
+
+if($inputs['destination']){
+
+        file_put_contents("test/return.txt", var_export($inputs['destination'], true));
+
+}
+
+
+}
 
 /*--------------------------------------------------- */
 /* メッセージの送信or削除
