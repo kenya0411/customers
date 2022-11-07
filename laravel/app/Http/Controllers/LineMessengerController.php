@@ -75,7 +75,7 @@ public function index(Request $request)
         }else{
         //公式LINEのユーザーIDを取得
         $data = $this->get_oficial_lineid($request,$inputs);
-        return $data;  
+        // return $data;  
 
         }
         
