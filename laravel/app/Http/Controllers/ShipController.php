@@ -146,7 +146,7 @@ public function ajax_index(Request $request) {
         //外注用
         $persons = DB::table('persons')
         ->where('is_delete','=',0)//論理削除されてないもの
-        ->whereIn('persons_id',[1,3])//論理削除されてないもの
+        ->whereIn('persons_id',[1,3,5])//占い師のID
         ->get(); 
 
 
