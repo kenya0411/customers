@@ -35,10 +35,10 @@ const hoge = {
 		  	//ロード直後だと取得できない場合があるので、時間差で取得
 		  	// setTimeout(function() {
 		  	//メッセージの一番下のセレクタを取得
+
+	    this.$nextTick(function() {
 			let element = document.getElementsByClassName('end_message')[0];
 			element.scrollIntoView(false);  
-	    this.$nextTick(function() {
-      // nextTickを使用してコンソールにログを出力します。
       console.log(this.is_loaded);
     });
 		  				 // }, 200);
