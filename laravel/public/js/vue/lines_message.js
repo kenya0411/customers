@@ -33,18 +33,22 @@ const hoge = {
 		/*--------------------------------------------------- */
 		  scrollToElement() {
 		  	//ロード直後だと取得できない場合があるので、時間差で取得
-		  	setTimeout(function() {
+		  	// setTimeout(function() {
 		  	//メッセージの一番下のセレクタを取得
 			let element = document.getElementsByClassName('end_message')[0];
-			element.scrollIntoView(false);
-		  				 }, 200);
+			element.scrollIntoView(false);  
+	    this.$nextTick(function() {
+      // nextTickを使用してコンソールにログを出力します。
+      console.log(this.is_loaded);
+    });
+		  				 // }, 200);
 
 		  },
 		/*--------------------------------------------------- */
 		/* 鑑定士の名前を置換
 		/*--------------------------------------------------- */
 		change_name: function (text) {
-			let textList = [/けいらん/g, /恵蘭/g,/慧蘭/g,/ケイラン/g,/れんれい/g,/レンレイ/g,/恋霊/g,/フェアリース/g];
+			let textList = [/けいらん/g, /恵蘭/g,/慧蘭/g,/ケイラン/g,/れんれい/g,/レンレイ/g,/恋霊/g,/フェアリース/g,/零/g];
 			let afterName = 'Rise' ;
 
 			let textList2 = [/メルカリ/g, /めるかり/g,/ここなら/g,/ココナラ/g];
