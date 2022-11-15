@@ -155,6 +155,11 @@ computed:{
 		this.search_customers_name,
 		];
 	},
+		test() {//監視用データをまとめる
+		return [
+		this.is_loaded,
+		];
+	},
 },
 watch: {
 	get_search_data(val){//監視用
@@ -162,7 +167,11 @@ watch: {
 	this.search_customers_page();
 
 	},
+	test(val){//監視用
+	
+	this.scrollToElement();
 
+	},
  },
 }
 
