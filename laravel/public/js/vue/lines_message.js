@@ -155,7 +155,7 @@ computed:{
 		this.search_customers_name,
 		];
 	},
-		test() {//監視用データをまとめる
+		load() {//監視用データをまとめる
 		return [
 		this.is_loaded,
 		];
@@ -167,7 +167,7 @@ watch: {
 	this.search_customers_page();
 
 	},
-	test(val){//監視用
+	load(val){//監視用
 	
 	this.scrollToElement();
 
