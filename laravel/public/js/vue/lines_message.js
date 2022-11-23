@@ -48,7 +48,7 @@ const hoge = {
 			let textList = [/けいらん/g, /恵蘭/g,/慧蘭/g,/ケイラン/g,/れんれい/g,/レンレイ/g,/恋霊/g,/フェアリース/g,/零/g];
 			let afterName = 'Rise' ;
 
-			let textList2 = [/メルカリ/g, /めるかり/g,/ここなら/g,/ココナラ/g];
+			let textList2 = [/メルカリ/g, /めるかり/g,/ここなら/g,/ココナラ/g,/Twitter/g,/ツイッター/g];
 			let afterName2 = 'アプリ' ;
 
 			let textList3 = [/\(emoji\)/g];
