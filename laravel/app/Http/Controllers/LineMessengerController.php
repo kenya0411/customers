@@ -60,7 +60,7 @@ public function index(Request $request)
 
         $inputs=$request->all();
     // file_put_contents("test/return.txt", var_export($inputs, true));
-        
+
         $post_type = !empty($request->post_type) ? $request->post_type : null;
         //メッセージを受信した場合
         if(!empty($inputs['events'])) {
@@ -92,6 +92,9 @@ public function index(Request $request)
 /*--------------------------------------------------- */
 
 public function get_oficial_lineid(Request $request,$inputs) {
+
+    file_put_contents("test/return.txt", var_export($inputs, true));
+
 
 if($inputs['destination']){
 
