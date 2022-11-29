@@ -59,7 +59,7 @@ public function index(Request $request)
         // LINEから送られた内容を$inputsに代入
 
         $inputs=$request->all();
-    file_put_contents("test/return.txt", var_export($inputs, true));
+    // file_put_contents("test/return.txt", var_export($inputs, true));
         
         $post_type = !empty($request->post_type) ? $request->post_type : null;
         //メッセージを受信した場合
