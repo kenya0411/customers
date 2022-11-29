@@ -384,6 +384,7 @@ public function ngword(Request $request) {
         "右のタロットカード[",
         "中央のタロットカード[",
         "左のタロットカード[",
+        "[●]",
     );
     return $ngword;
 
