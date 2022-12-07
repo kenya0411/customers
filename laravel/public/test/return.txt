@@ -1,6 +1,1 @@
-array (
-  'destination' => 'U7aca3ef18697876e149252335dc49205',
-  'events' => 
-  array (
-  ),
-)
+'ee'

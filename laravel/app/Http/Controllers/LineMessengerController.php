@@ -56,10 +56,10 @@ public function index(Request $request)
 /*--------------------------------------------------- */
 
     public function webhook(Request $request) {
-        // LINEから送られた内容を$inputsに代入
+        $lstep = $this->push_lstep($request);//受信したメッセージをLステップに送信
 
+        // LINEから送られた内容を$inputsに代入
         $inputs=$request->all();
-    // file_put_contents("test/return.txt", var_export($inputs, true));
 
         $post_type = !empty($request->post_type) ? $request->post_type : null;
         //メッセージを受信した場合
@@ -85,6 +85,33 @@ public function index(Request $request)
         }
 
     }
+
+
+public function push_lstep(Request $request) {
+
+    // Webhooks送信用URLの作成
+    $url = "https://rcv.linestep.net/v2/1657628128" ;
+    
+    // URLセッションの初期化を実施
+    $curl = curl_init($url);
+    // HTTPでのPOST設定を行います
+    curl_setopt($curl, CURLOPT_POST, 1);
+    // 通信実施後の戻り値を、文字列に設定する
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    // POSTパラメーターを設定します
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $request);
+    // 通信の実行
+    $response = curl_exec($curl);
+    if($response){
+      return true;
+    }else{
+      return false;
+    }
+    // URLセッションを閉じる
+    curl_close($curl);
+
+    return;
+}
 
 
 /*--------------------------------------------------- */
