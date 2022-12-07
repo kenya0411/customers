@@ -95,7 +95,8 @@ public function push_lstep(Request $request) {
     // file_put_contents("test/return.txt", var_export($inputs, true));
 
     // Webhooks送信用URLの作成
-    $url = "https://rcv.linestep.net/v2/1657628128" ;
+    // $url = "https://rcv.linestep.net/v2/1657628128" ;
+    $url = "https://webhook.site/aa9f4cd9-ae5d-4b96-98d7-f1e79d5aee86" ;
     
     // URLセッションの初期化を実施
     // $curl = curl_init($url);
