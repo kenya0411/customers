@@ -88,18 +88,25 @@ public function index(Request $request)
 
 
 public function push_lstep(Request $request) {
+        $inputs=$request->all();
+    $inputs = json_encode($inputs);
+        
+
+    // file_put_contents("test/return.txt", var_export($inputs, true));
 
     // Webhooks送信用URLの作成
     $url = "https://rcv.linestep.net/v2/1657628128" ;
     
     // URLセッションの初期化を実施
-    $curl = curl_init($url);
+    // $curl = curl_init($url);
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
     // HTTPでのPOST設定を行います
     curl_setopt($curl, CURLOPT_POST, 1);
     // 通信実施後の戻り値を、文字列に設定する
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     // POSTパラメーターを設定します
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $request);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $inputs);
     // 通信の実行
     $response = curl_exec($curl);
     if($response){
@@ -111,6 +118,13 @@ public function push_lstep(Request $request) {
     curl_close($curl);
 
     return;
+
+
+    // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $accessToken, 'Content-Type: application/json'));
+    // curl_setopt($ch, CURLOPT_URL, 'https://api.line.me/v2/bot/message/push');
+    // curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+    // curl_setopt($ch, CURLOPT_POSTFIELDS, $message);
+    // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 }
 
 
