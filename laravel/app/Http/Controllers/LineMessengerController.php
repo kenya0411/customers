@@ -97,13 +97,15 @@ public function push_lstep(Request $request) {
     // Webhooks送信用URLの作成
     $url = "https://rcv.linestep.net/v2/1657628128" ;
     $accessToken = "OnGkg+/VDypGzfiA2UDepij1Id7QWTJysF7QhrzGSa/P8h4C8K+5kU1SaA86IgLCpm5rfSK507E7ToJn/R8yp4t0XDdcytwT9kMmcFibEWyd+P4SggWHrX7mUXvUoHuRCaDa39If0JDg1xUvyz0Q0QdB04t89/1O/w1cDnyilFU=";
-    $url = "https://webhook.site/aa9f4cd9-ae5d-4b96-98d7-f1e79d5aee86" ;
+    // $url = "https://webhook.site/aa9f4cd9-ae5d-4b96-98d7-f1e79d5aee86" ;
     
     // URLセッションの初期化を実施
     // $curl = curl_init($url);
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $accessToken, 'Content-Type: application/json'));
     curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
+    
     // HTTPでのPOST設定を行います
     curl_setopt($curl, CURLOPT_POST, 1);
     // 通信実施後の戻り値を、文字列に設定する
