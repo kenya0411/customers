@@ -1,1 +1,6 @@
-'{"destination":"U9a6c97c1212b4fa8a5f6c76068fac1ad","events":[{"type":"message","message":{"type":"text","id":"17255047668844","text":"dsdada"},"webhookEventId":"01GKPH5JB8P9NJ7BCVSA5Y3DX5","deliveryContext":{"isRedelivery":true},"timestamp":1670424742039,"source":{"type":"user","userId":"Ucb7718e5d65232dca709bdbe33f600c2"},"replyToken":"486e25b38234444bbb56ac2a1f596d67","mode":"active"}]}'
+array (
+  'destination' => 'U9a6c97c1212b4fa8a5f6c76068fac1ad',
+  'events' => 
+  array (
+  ),
+)
