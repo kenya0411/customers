@@ -126,15 +126,15 @@ $signature = base64_encode($hash);
     // 通信の実行
     $response = curl_exec($curl);
     if($response){
-      return $response;
+      return true;
     }else{
-      return $response;
+      return false;
     }
 
     // URLセッションを閉じる
     curl_close($curl);
 
-    return $response;
+    return;
 
 
 
