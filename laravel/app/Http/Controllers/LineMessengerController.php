@@ -92,11 +92,9 @@ public function push_lstep(Request $request) {
             file_put_contents("test/return.txt", var_export($inputs, true));
 
     $inputs = json_encode($inputs);
-///↓署名の検証
-// $headers = getallheaders_not();
-// $xLineSignature = $headers["X-Line-Signature"];
 
-$channelSecret = '845191daab69d06ed2aeb5d086335460';
+$channelSecret = 'ece0b2e527723fa0afe948179bd700ea';
+// $channelSecret = '845191daab69d06ed2aeb5d086335460';
 $httpRequestBody = file_get_contents('php://input');
 $json_object = json_decode($httpRequestBody);
 
@@ -104,9 +102,9 @@ $hash  = hash_hmac('sha256', $httpRequestBody, $channelSecret, true);
 $signature = base64_encode($hash);
 
     // Webhooks送信用URLの作成
-    // $url = "https://rcv.linestep.net/v2/1657628128" ;
+    $url = "https://rcv.linestep.net/v2/1657628128" ;
     $accessToken = "xdK4psB3g40LlSAHsycfDsaRvA8//bFRrB0XnFNiRGd2R/dUN02YH+Q5GwHAxpCRERnxoGnb8p3Y0KAKEAEtb9ZQn0RG+jI5lA8IDY7crY+A/7UonUkWiZku0O3Va/BZLt8mcAbOt4mDrh6d8R4xMwdB04t89/1O/w1cDnyilFU=";
-    $url = "http://webhook.site/06f08d84-a8a8-4c9f-9d7f-1df3eda80094" ;
+    // $url = "http://webhook.site/06f08d84-a8a8-4c9f-9d7f-1df3eda80094" ;
     
     //URLセッションの初期化を実施
     // $curl = curl_init($url);
@@ -133,7 +131,6 @@ $signature = base64_encode($hash);
     }else{
       return false;
     }
-    return;
 
     // URLセッションを閉じる
     curl_close($curl);
