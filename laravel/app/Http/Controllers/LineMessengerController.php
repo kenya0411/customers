@@ -103,18 +103,19 @@ $signature = base64_encode($hash);
     // Webhooks送信用URLの作成
     $url = "https://rcv.linestep.net/v2/1657628128" ;
     $accessToken = "xdK4psB3g40LlSAHsycfDsaRvA8//bFRrB0XnFNiRGd2R/dUN02YH+Q5GwHAxpCRERnxoGnb8p3Y0KAKEAEtb9ZQn0RG+jI5lA8IDY7crY+A/7UonUkWiZku0O3Va/BZLt8mcAbOt4mDrh6d8R4xMwdB04t89/1O/w1cDnyilFU=";
-    $url = "https://webhook.site/aa9f4cd9-ae5d-4b96-98d7-f1e79d5aee86" ;
+    // $url = "https://webhook.site/aa9f4cd9-ae5d-4b96-98d7-f1e79d5aee86" ;
     
     //URLセッションの初期化を実施
     // $curl = curl_init($url);
     $curl = curl_init();
+    $user_agent = "LineBotWebhook/2.0";
     $head1 = 'Authorization: Bearer ' . $accessToken;
-    $head2 = 'Content-Type: application/json';
+    $head2 = 'Content-Type: application/json; charset=utf-8';
     $head3 = 'x-line-signature: '.$signature;
     curl_setopt($curl, CURLOPT_HTTPHEADER, array( $head2,$head3));
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
-
+    curl_setopt($curl, CURLOPT_USERAGENT, $user_agent);
     // HTTPでのPOST設定を行います
     curl_setopt($curl, CURLOPT_POST, 1);
     // 通信実施後の戻り値を、文字列に設定する
@@ -124,7 +125,6 @@ $signature = base64_encode($hash);
 
     // 通信の実行
     $response = curl_exec($curl);
-      var_dump($response);
     if($response){
       return true;
     }else{
