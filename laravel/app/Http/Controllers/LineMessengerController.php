@@ -119,22 +119,22 @@ $signature = base64_encode($hash);
     // HTTPでのPOST設定を行います
     curl_setopt($curl, CURLOPT_POST, 1);
     // 通信実施後の戻り値を、文字列に設定する
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, false);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     // POSTパラメーターを設定します
     curl_setopt($curl, CURLOPT_POSTFIELDS, $inputs);
 
     // 通信の実行
     $response = curl_exec($curl);
     if($response){
-      return true;
+      return $response;
     }else{
-      return false;
+      return $response;
     }
 
     // URLセッションを閉じる
     curl_close($curl);
 
-    return;
+    return $response;
 
 
 
