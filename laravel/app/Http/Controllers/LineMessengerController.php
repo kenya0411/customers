@@ -126,7 +126,7 @@ $signature = base64_encode($hash);
     // 通信の実行
     $response = curl_exec($curl);
     if($response){
-      return true;
+      return $response;
     }else{
       return false;
     }
