@@ -121,12 +121,12 @@ $signature = base64_encode($hash);
     // 通信実施後の戻り値を、文字列に設定する
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     // POSTパラメーターを設定します
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $inputs);
+    // curl_setopt($curl, CURLOPT_POSTFIELDS, $inputs);
 
     // 通信の実行
     $response = curl_exec($curl);
     if($response){
-      return $response;
+      return true;
     }else{
       return false;
     }
