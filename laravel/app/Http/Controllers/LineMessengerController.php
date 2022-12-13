@@ -89,7 +89,6 @@ public function index(Request $request)
 
 public function push_lstep(Request $request) {
         $inputs=$request->all();
-            file_put_contents("test/return.txt", var_export($inputs, true));
 
     $inputs = json_encode($inputs);
 
