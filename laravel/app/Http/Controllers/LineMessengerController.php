@@ -112,14 +112,14 @@ $signature = base64_encode($hash);
     $head1 = 'Authorization: Bearer ' . $accessToken;
     $head2 = 'Content-Type: application/json; charset=utf-8';
     $head3 = 'x-line-signature: '.$signature;
-    curl_setopt($curl, CURLOPT_HTTPHEADER, array( $head2,$head3));
     curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($curl, CURLOPT_USERAGENT, $user_agent);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array( $head2,$head3));
+    curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
     // HTTPでのPOST設定を行います
     curl_setopt($curl, CURLOPT_POST, 1);
     // 通信実施後の戻り値を、文字列に設定する
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     // POSTパラメーターを設定します
     curl_setopt($curl, CURLOPT_POSTFIELDS, $inputs);
 
