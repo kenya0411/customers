@@ -90,7 +90,7 @@ public function index(Request $request)
 public function push_lstep(Request $request) {
         $inputs=$request->all();
 
-    $inputs = json_encode($inputs);
+    $inputs = json_encode($request);
 
 $channelSecret = 'ece0b2e527723fa0afe948179bd700ea';
 // $channelSecret = '845191daab69d06ed2aeb5d086335460';
@@ -121,7 +121,7 @@ $signature = base64_encode($hash);
     // 通信実施後の戻り値を、文字列に設定する
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     // POSTパラメーターを設定します
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $request);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $inputs);
 
     // 通信の実行
     $response = curl_exec($curl);
