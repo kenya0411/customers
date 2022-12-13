@@ -2,5 +2,28 @@ array (
   'destination' => 'U9a6c97c1212b4fa8a5f6c76068fac1ad',
   'events' => 
   array (
+    0 => 
+    array (
+      'type' => 'message',
+      'message' => 
+      array (
+        'type' => 'text',
+        'id' => '17284981529858',
+        'text' => 'なな',
+      ),
+      'webhookEventId' => '01GM4GTRD6Q6QCP5K9C78RE5W4',
+      'deliveryContext' => 
+      array (
+        'isRedelivery' => true,
+      ),
+      'timestamp' => 1670894149549,
+      'source' => 
+      array (
+        'type' => 'user',
+        'userId' => 'Ucb7718e5d65232dca709bdbe33f600c2',
+      ),
+      'replyToken' => '8b4364e541734e8489ae002dbd9e6129',
+      'mode' => 'active',
+    ),
   ),
 )

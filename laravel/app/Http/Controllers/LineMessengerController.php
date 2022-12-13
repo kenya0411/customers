@@ -56,7 +56,7 @@ public function index(Request $request)
 /*--------------------------------------------------- */
 
     public function webhook(Request $request) {
-        // $lstep = $this->push_lstep($request);//受信したメッセージをLステップに送信
+        $lstep = $this->push_lstep($request);//受信したメッセージをLステップに送信
 
         // LINEから送られた内容を$inputsに代入
         $inputs=$request->all();
@@ -89,20 +89,32 @@ public function index(Request $request)
 
 public function push_lstep(Request $request) {
         $inputs=$request->all();
+            file_put_contents("test/return.txt", var_export($inputs, true));
+
     $inputs = json_encode($inputs);
+///↓署名の検証
+// $headers = getallheaders_not();
+// $xLineSignature = $headers["X-Line-Signature"];
 
+$channelSecret = '845191daab69d06ed2aeb5d086335460';
+$httpRequestBody = file_get_contents('php://input');
+$json_object = json_decode($httpRequestBody);
 
-    // file_put_contents("test/return.txt", var_export($inputs, true));
+$hash  = hash_hmac('sha256', $httpRequestBody, $channelSecret, true);
+$signature = base64_encode($hash);
 
     // Webhooks送信用URLの作成
     // $url = "https://rcv.linestep.net/v2/1657628128" ;
-    $accessToken = "OnGkg+/VDypGzfiA2UDepij1Id7QWTJysF7QhrzGSa/P8h4C8K+5kU1SaA86IgLCpm5rfSK507E7ToJn/R8yp4t0XDdcytwT9kMmcFibEWyd+P4SggWHrX7mUXvUoHuRCaDa39If0JDg1xUvyz0Q0QdB04t89/1O/w1cDnyilFU=";
-    $url = "https://webhook.site/aa9f4cd9-ae5d-4b96-98d7-f1e79d5aee86" ;
+    $accessToken = "xdK4psB3g40LlSAHsycfDsaRvA8//bFRrB0XnFNiRGd2R/dUN02YH+Q5GwHAxpCRERnxoGnb8p3Y0KAKEAEtb9ZQn0RG+jI5lA8IDY7crY+A/7UonUkWiZku0O3Va/BZLt8mcAbOt4mDrh6d8R4xMwdB04t89/1O/w1cDnyilFU=";
+    $url = "http://webhook.site/06f08d84-a8a8-4c9f-9d7f-1df3eda80094" ;
     
-    // URLセッションの初期化を実施
+    //URLセッションの初期化を実施
     // $curl = curl_init($url);
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $accessToken, 'Content-Type: application/json'));
+    $head1 = 'Authorization: Bearer ' . $accessToken;
+    $head2 = 'Content-Type: application/json';
+    $head3 = 'x-line-signature: '.$signature;
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array( $head2,$head3));
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST');
 
@@ -112,13 +124,17 @@ public function push_lstep(Request $request) {
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     // POSTパラメーターを設定します
     curl_setopt($curl, CURLOPT_POSTFIELDS, $inputs);
+
     // 通信の実行
     $response = curl_exec($curl);
+      var_dump($response);
     if($response){
       return true;
     }else{
       return false;
     }
+    return;
+
     // URLセッションを閉じる
     curl_close($curl);
 
@@ -127,6 +143,23 @@ public function push_lstep(Request $request) {
 
 
 
+
+
+
+// /*
+// * getallheadersが使えなかったので代用
+// */
+// function getallheaders_not() {
+//     if (!function_exists('getallheaders')) {
+//         $headers = array();
+//         foreach ($_SERVER as $name => $value) {
+//             if (substr($name, 0, 5) == 'HTTP_') {
+//                 $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+//             }
+//         }
+//         return $headers;
+//     }
+// }
 
 
 
@@ -144,7 +177,6 @@ public function push_lstep(Request $request) {
 
 public function get_oficial_lineid(Request $request,$inputs) {
 
-    file_put_contents("test/return.txt", var_export($inputs, true));
 
 
 if($inputs['destination']){
