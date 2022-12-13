@@ -90,7 +90,7 @@ public function index(Request $request)
 public function push_lstep(Request $request) {
         $inputs=$request->all();
 
-    $inputs = json_encode($request);
+    $inputs = json_encode($inputs);
 
 $channelSecret = 'ece0b2e527723fa0afe948179bd700ea';
 // $channelSecret = '845191daab69d06ed2aeb5d086335460';
