@@ -108,7 +108,7 @@ public function push_lstep(Request $request) {
     $http_client = new CurlHTTPClient($accessToken);
     $bot = new LINEBot($http_client, ['channelSecret' => $channelSecret]);
     $getMessageContent = $bot->getMessageContent($id);
-    file_put_contents("test/return.txt", var_export($id, true));
+    file_put_contents("test/return.txt", var_export($getMessageContent, true));
 
     $curl = curl_init();
     $user_agent = "LineBotWebhook/2.0";
