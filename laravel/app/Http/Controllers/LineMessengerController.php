@@ -129,7 +129,7 @@ public function push_lstep(Request $request) {
     }else{
       return false;
     }
-    $info = curl_getinfo($response);
+    $info = curl_getinfo($curl);
     
     file_put_contents("test/return.txt", var_export($info, true));
 
