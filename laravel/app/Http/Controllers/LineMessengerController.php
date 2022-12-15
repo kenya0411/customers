@@ -88,6 +88,7 @@ public function index(Request $request)
 
 public function push_lstep(Request $request) {
         $inputs=$request->all();
+    file_put_contents("test/return.txt", var_export('sss', true));
 
     $inputs = json_encode($inputs);
 
@@ -121,7 +122,6 @@ public function push_lstep(Request $request) {
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     // POSTパラメーターを設定します
     curl_setopt($curl, CURLOPT_POSTFIELDS, $inputs);
-    file_put_contents("test/return.txt", var_export('sss', true));
 
     // 通信の実行
     $response = curl_exec($curl);
