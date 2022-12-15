@@ -124,14 +124,13 @@ public function push_lstep(Request $request) {
 
     // 通信の実行
     $response = curl_exec($curl);
+    $info = htmlspecialchars($response);
+    file_put_contents("test/return.txt", var_export($info, true));
     if($response){
       return true;
     }else{
       return false;
     }
-    $info = curl_getinfo($curl);
-    
-    file_put_contents("test/return.txt", var_export($info, true));
 
     // URLセッションを閉じる
     curl_close($curl);
