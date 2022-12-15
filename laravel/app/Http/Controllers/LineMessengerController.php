@@ -107,7 +107,7 @@ public function push_lstep(Request $request) {
 
     $http_client = new CurlHTTPClient($accessToken);
     $bot = new LINEBot($http_client, ['channelSecret' => $channelSecret]);
-    $getMessageContent = $bot->getMessageContent($id);
+    // $getMessageContent = $bot->getMessageContent($id);
     file_put_contents("test/return.txt", var_export($id, true));
 
     $curl = curl_init();
