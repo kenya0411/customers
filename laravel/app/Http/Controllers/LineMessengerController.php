@@ -103,7 +103,6 @@ public function push_lstep(Request $request) {
     $url = "https://rcv.linestep.net/v2/1657628128" ;
     $accessToken = "xdK4psB3g40LlSAHsycfDsaRvA8//bFRrB0XnFNiRGd2R/dUN02YH+Q5GwHAxpCRERnxoGnb8p3Y0KAKEAEtb9ZQn0RG+jI5lA8IDY7crY+A/7UonUkWiZku0O3Va/BZLt8mcAbOt4mDrh6d8R4xMwdB04t89/1O/w1cDnyilFU=";
     // $url = "https://webhook.site/aa9f4cd9-ae5d-4b96-98d7-f1e79d5aee86" ;
-    
     //URLセッションの初期化を実施
     // $curl = curl_init($url);
     $curl = curl_init();
@@ -124,19 +123,19 @@ public function push_lstep(Request $request) {
 
     // 通信の実行
     $response = curl_exec($curl);
-    $info = curl_error($curl);
+    // $info = curl_error($curl);
     
-    file_put_contents("test/return.txt", var_export($response, true));
-    if($response){
-      return true;
-    }else{
-      return false;
-    }
+    // file_put_contents("test/return.txt", var_export($response, true));
+    // if($response){
+    //   return true;
+    // }else{
+    //   return false;
+    // }
 
     // URLセッションを閉じる
     curl_close($curl);
 
-    return;
+    return $response;
 
 
 
