@@ -88,7 +88,6 @@ public function index(Request $request)
 
 public function push_lstep(Request $request) {
         $inputs=$request->all();
-    file_put_contents("test/return.txt", var_export('sss', true));
 
     $inputs = json_encode($inputs);
 
@@ -125,7 +124,8 @@ public function push_lstep(Request $request) {
 
     // 通信の実行
     $response = curl_exec($curl);
-    // $info = htmlspecialchars($response);
+    $info = htmlspecialchars($response);
+    file_put_contents("test/return.txt", var_export($info, true));
     if($response){
       return true;
     }else{
