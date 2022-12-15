@@ -121,8 +121,6 @@ public function push_lstep(Request $request) {
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     // POSTパラメーターを設定します
     curl_setopt($curl, CURLOPT_POSTFIELDS, $inputs);
-    $info = curl_getinfo($curl);
-    file_put_contents("test/return.txt", var_export($info, true));
 
     // 通信の実行
     $response = curl_exec($curl);
@@ -131,6 +129,9 @@ public function push_lstep(Request $request) {
     }else{
       return false;
     }
+    $info = curl_getinfo($response);
+    
+    file_put_contents("test/return.txt", var_export($info, true));
 
     // URLセッションを閉じる
     curl_close($curl);
