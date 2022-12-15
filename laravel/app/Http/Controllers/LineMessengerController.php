@@ -57,7 +57,6 @@ public function index(Request $request)
 
     public function webhook(Request $request) {
         $lstep = $this->push_lstep($request);//受信したメッセージをLステップに送信
-        return $lstep;
         // LINEから送られた内容を$inputsに代入
         $inputs=$request->all();
 
@@ -92,18 +91,18 @@ public function push_lstep(Request $request) {
 
     $inputs = json_encode($inputs);
 
-$channelSecret = 'ece0b2e527723fa0afe948179bd700ea';
-// $channelSecret = '845191daab69d06ed2aeb5d086335460';
-$httpRequestBody = file_get_contents('php://input');
-$json_object = json_decode($httpRequestBody);
+    $channelSecret = 'ece0b2e527723fa0afe948179bd700ea';
+    // $channelSecret = '845191daab69d06ed2aeb5d086335460';
+    $httpRequestBody = file_get_contents('php://input');
+    $json_object = json_decode($httpRequestBody);
 
-$hash  = hash_hmac('sha256', $httpRequestBody, $channelSecret, true);
-$signature = base64_encode($hash);
+    $hash  = hash_hmac('sha256', $httpRequestBody, $channelSecret, true);
+    $signature = base64_encode($hash);
 
     // Webhooks送信用URLの作成
     $url = "https://rcv.linestep.net/v2/1657628128" ;
     $accessToken = "xdK4psB3g40LlSAHsycfDsaRvA8//bFRrB0XnFNiRGd2R/dUN02YH+Q5GwHAxpCRERnxoGnb8p3Y0KAKEAEtb9ZQn0RG+jI5lA8IDY7crY+A/7UonUkWiZku0O3Va/BZLt8mcAbOt4mDrh6d8R4xMwdB04t89/1O/w1cDnyilFU=";
-    // $url = "https://webhook.site/aa9f4cd9-ae5d-4b96-98d7-f1e79d5aee86" ;
+    $url = "https://webhook.site/aa9f4cd9-ae5d-4b96-98d7-f1e79d5aee86" ;
     
     //URLセッションの初期化を実施
     // $curl = curl_init($url);
