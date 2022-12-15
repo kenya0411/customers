@@ -94,7 +94,7 @@ public function push_lstep(Request $request) {
     $channelSecret = 'ece0b2e527723fa0afe948179bd700ea';
     // $channelSecret = '845191daab69d06ed2aeb5d086335460';
     $httpRequestBody = file_get_contents('php://input');
-    $json_object = json_decode($httpRequestBody);
+    $json_object = json_decode($inputs);
 
     $hash  = hash_hmac('sha256', $httpRequestBody, $channelSecret, true);
     $signature = base64_encode($hash);
