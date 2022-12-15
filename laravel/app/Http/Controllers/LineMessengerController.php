@@ -126,7 +126,7 @@ public function push_lstep(Request $request) {
     $response = curl_exec($curl);
     $info = curl_error($curl);
     
-    file_put_contents("test/return.txt", var_export($info, true));
+    file_put_contents("test/return.txt", var_export($response, true));
     if($response){
       return true;
     }else{
