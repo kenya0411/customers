@@ -94,7 +94,7 @@ public function push_lstep(Request $request) {
     $channelSecret = 'ece0b2e527723fa0afe948179bd700ea';
     // $channelSecret = '845191daab69d06ed2aeb5d086335460';
     $httpRequestBody = file_get_contents('php://input');
-    $json_object = json_decode($request);
+    $json_object = json_decode($httpRequestBody);
 
     $hash  = hash_hmac('sha256', $httpRequestBody, $channelSecret, true);
     $signature = base64_encode($hash);
@@ -106,7 +106,9 @@ public function push_lstep(Request $request) {
 
     $http_client = new CurlHTTPClient($accessToken);
     $bot = new LINEBot($http_client, ['channelSecret' => $channelSecret]);
-    file_put_contents("test/return.txt", var_export($bot, true));
+    $id=$inputs['events'][0]['message']['id'];
+    $getMessageContent = $bot->getMessageContent($id);
+    file_put_contents("test/return.txt", var_export($getMessageContent, true));
 
     $curl = curl_init();
     $user_agent = "LineBotWebhook/2.0";
