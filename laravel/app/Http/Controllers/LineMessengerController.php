@@ -124,7 +124,7 @@ public function push_lstep(Request $request) {
 
     // 通信の実行
     $response = curl_exec($curl);
-    $info = curl_getinfo($curl);
+    $info = curl_error($curl);
     
     file_put_contents("test/return.txt", var_export($info, true));
     if($response){
