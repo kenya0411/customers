@@ -57,7 +57,7 @@ public function index(Request $request)
 
     public function webhook(Request $request) {
         $lstep = $this->push_lstep($request);//受信したメッセージをLステップに送信
-
+        return $lstep;
         // LINEから送られた内容を$inputsに代入
         $inputs=$request->all();
 
