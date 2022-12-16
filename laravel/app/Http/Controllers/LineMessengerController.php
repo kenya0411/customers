@@ -108,7 +108,7 @@ public function push_lstep(Request $request) {
     $accessToken = "OnGkg+/VDypGzfiA2UDepij1Id7QWTJysF7QhrzGSa/P8h4C8K+5kU1SaA86IgLCpm5rfSK507E7ToJn/R8yp4t0XDdcytwT9kMmcFibEWyd+P4SggWHrX7mUXvUoHuRCaDa39If0JDg1xUvyz0Q0QdB04t89/1O/w1cDnyilFU=";//零
     $accessToken = "xdK4psB3g40LlSAHsycfDsaRvA8//bFRrB0XnFNiRGd2R/dUN02YH+Q5GwHAxpCRERnxoGnb8p3Y0KAKEAEtb9ZQn0RG+jI5lA8IDY7crY+A/7UonUkWiZku0O3Va/BZLt8mcAbOt4mDrh6d8R4xMwdB04t89/1O/w1cDnyilFU=";//test
     // $url = "https://webhook.site/aa9f4cd9-ae5d-4b96-98d7-f1e79d5aee86" ;
-    $url = "http://webhook.site/8325f84b-87e6-40d1-b58c-59eb37cdabb1" ;
+    // $url = "http://webhook.site/8325f84b-87e6-40d1-b58c-59eb37cdabb1" ;
 
     // $http_client = new CurlHTTPClient($accessToken);
     // $bot = new LINEBot($http_client, ['channelSecret' => $channelSecret]);
