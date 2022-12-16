@@ -3,3 +3,4 @@ laravel/vendor/
 laravel/.env
 laravel/composer.lock
 laravel/ngrok.bat
+laravel/public/test/return.txt
