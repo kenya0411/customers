@@ -137,7 +137,7 @@ public function push_lstep(Request $request) {
     // HTTPでのPOST設定を行います
     curl_setopt($curl, CURLOPT_POST, 1);
     // 通信実施後の戻り値を、文字列に設定する
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, false);
     // POSTパラメーターを設定します
     curl_setopt($curl, CURLOPT_POSTFIELDS, $inputs);
 
