@@ -58,30 +58,30 @@ public function index(Request $request)
     public function webhook(Request $request) {
         $lstep = $this->push_lstep($request);//受信したメッセージをLステップに送信
         // LINEから送られた内容を$inputsに代入
-        // $inputs=$request->all();
+        $inputs=$request->all();
 
-        // $post_type = !empty($request->post_type) ? $request->post_type : null;
-        // //メッセージを受信した場合
-        // if(!empty($inputs['events'])) {
+        $post_type = !empty($request->post_type) ? $request->post_type : null;
+        //メッセージを受信した場合
+        if(!empty($inputs['events'])) {
 
-        // $data = $this->get_message($request);//受信したメッセージをDBに保存
-        // return [];
+        $data = $this->get_message($request);//受信したメッセージをDBに保存
+        return [];
         
-        // }else{
+        }else{
 
-        // if(!empty($post_type)){
-        //     //メッセージを送信or削除する場合
-        //     $data = $this->send_temporary_deta($request);
-        //     return $data;  
-        // }else{
-        // //公式LINEのユーザーIDを取得
-        // $data = $this->get_oficial_lineid($request,$inputs);
-        // // return $data;  
+        if(!empty($post_type)){
+            //メッセージを送信or削除する場合
+            $data = $this->send_temporary_deta($request);
+            return $data;  
+        }else{
+        //公式LINEのユーザーIDを取得
+        $data = $this->get_oficial_lineid($request,$inputs);
+        // return $data;  
 
-        // }
+        }
         
 
-        // }
+        }
 
     }
 
