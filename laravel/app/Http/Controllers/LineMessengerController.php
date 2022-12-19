@@ -91,7 +91,6 @@ public function push_lstep(Request $request) {
         $headers=$request->headers;
         // $test=$request;
     // $id=$inputs['events'];
-    file_put_contents("test/return.txt", var_export($request, true));
 
     $inputs = json_encode($inputs);
 
@@ -137,9 +136,10 @@ public function push_lstep(Request $request) {
     // HTTPでのPOST設定を行います
     curl_setopt($curl, CURLOPT_POST, 1);
     // 通信実施後の戻り値を、文字列に設定する
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, false);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     // POSTパラメーターを設定します
     curl_setopt($curl, CURLOPT_POSTFIELDS, $inputs);
+    file_put_contents("test/return.txt", var_export('sss', true));
 
     // 通信の実行
     $response = curl_exec($curl);
