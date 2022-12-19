@@ -91,7 +91,7 @@ public function push_lstep(Request $request) {
         $headers=$request->headers;
         // $test=$request;
     // $id=$inputs['events'];
-    file_put_contents("test/return.txt", var_export($request, true));
+    file_put_contents("test/return.txt", var_export($inputs, true));
 
     $inputs = json_encode($inputs);
 
