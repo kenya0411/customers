@@ -54,6 +54,9 @@ const hoge = {
 			let textList3 = [/\(emoji\)/g];
 			let afterName3 = '' ;
 
+			let textList4 = [/shop.keiran-fortune.com/g,/shop.zero-fortune.com/g];
+			let afterName4 = '' ;
+
 			let result = text;
 				if(!result){
 				}else{
@@ -68,6 +71,9 @@ const hoge = {
 						result = result.replace(element, afterName3 );
 					});
 
+					textList4.forEach(function(element){
+						result = result.replace(element, afterName4 );
+					});
 			return result			
 				}
 
