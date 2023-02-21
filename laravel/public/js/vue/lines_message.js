@@ -54,7 +54,7 @@ const hoge = {
 			let textList3 = [/\(emoji\)/g];
 			let afterName3 = '' ;
 
-			let textList4 = [/shop.keiran-fortune.com/g,/shop.zero-fortune.com/g];
+			let textList4 = [/keiran-fortune.com/g,/zero-fortune.com/g];
 			let afterName4 = '' ;
 
 			let result = text;
