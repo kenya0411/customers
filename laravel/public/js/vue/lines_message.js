@@ -16,6 +16,7 @@ const hoge = {
 			persons: '',
 			customers: '',
 			users: '',
+			users_list: '',
 			search_customers_name: '',
 			search_customers_data: '',
 			// get_id: '',//検索用
@@ -114,7 +115,9 @@ const hoge = {
 				this.lines_customers = response.data.lines_customers,
 				this.lines_list = response.data.lines_list,
 				this.lines_information = response.data.lines_information,
+				this.lines_information.lines_customers_reply_available = JSON.parse(response.data.lines_information.lines_customers_reply_available),
 				this.users = response.data.users,
+				this.users_list = response.data.users_list,
 				this.persons = response.data.persons,
 				this.lines_persons = response.data.lines_persons,
 				this.lines_temporaries = response.data.lines_temporaries,

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('persons_id')->default(0);
             $table->string('lines_customers_display_name')->default(0);
             $table->text('lines_customers_picture_url')->nullable();
+            $table->integer('lines_customers_reply_available')->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->boolean('is_delete')->default(0);

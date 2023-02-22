@@ -36,6 +36,25 @@
           <dt>チャネルID</dt>
         <dd>@{{ lines_persons.lines_persons_channel_id }}
         </dd>  
+
+          <dt>確認不要の返信者</dt>
+        <dd>
+            <span v-for="t in lines_information.lines_customers_reply_available">
+                @{{t}}
+            </span>
+
+            <div v-for="user in users_list">
+                <div class="checkbox_wrap">
+                <label v-bind:for="user.name">@{{user.nickname}}</label>
+                <input type="checkbox" v-bind:id="user.name" 
+                name="lines_customers_reply_available[]" 
+                v-bind:value="user.id"
+                > 
+                </div>
+
+            </div>
+
+        </dd>  
     </dl>
     <div class="customerBtnWrap">
         <button>

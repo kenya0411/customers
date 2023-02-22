@@ -770,6 +770,11 @@ public function ajax_message(Request $request) {
     $lines_customers_list = $this->check_new_message($request,$lines_customers );
 
 
+    //コメント返信者の情報を取得
+    $users_list = DB::table('users')
+    ->where('is_delete','=',0)//論理削除されてないもの
+    ->where('permissions_id','=',4)//コメント返信者
+    ->get();  
 
 
     //空の値を入力
@@ -811,6 +816,7 @@ public function ajax_message(Request $request) {
             "lines_list"=>!empty($lines_list) ? $lines_list : [],
             "lines_information"=>!empty($lines_information) ? $lines_information : [],
             "users"=>!empty($users) ? $users : [],
+            "users_list"=>!empty($users_list) ? $users_list : [],
             "lines_temporaries"=>!empty($lines_temporaries) ? $lines_temporaries : [],
             "persons"=>!empty($persons) ? $persons : [],
             "lines_persons"=>!empty($lines_persons) ? $lines_persons : [],
@@ -1040,6 +1046,7 @@ public function lines_customers_update(Request $request) {
     'lines_customers_userid' => $request->lines_customers_userid,
     'lines_customers_name' => $request->lines_customers_name,
     'customers_id' => $request->customers_id,
+    'lines_customers_reply_available' => json_encode($request->lines_customers_reply_available),
     // 'persons_id' => $request->products_options_id,
     'updated_at' => date( "Y-m-d H:i:s" , time() ),
     ];
@@ -1049,6 +1056,7 @@ public function lines_customers_update(Request $request) {
     lines_customers_userid=:lines_customers_userid,
     lines_customers_name=:lines_customers_name,
     customers_id=:customers_id,
+    lines_customers_reply_available=:lines_customers_reply_available,
     updated_at=:updated_at
     where lines_customers_id=:lines_customers_id'
     , $param);
