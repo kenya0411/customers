@@ -21,6 +21,7 @@ const hoge = {
 			search_customers_data: '',
 			// get_id: '',//検索用
 			is_loaded: false,
+			reply_available_list:[],//チェックボックス用
 		}
 	},
 	methods: {	
@@ -28,6 +29,17 @@ const hoge = {
 			let result = moment(date).format("MM/DD H:mm");
 			return result
 		},
+		aaaa: function (user_id,reply_available_id) {
+			var check = "";
+			for (let i = 0 ; i < reply_available_id.length ; i++){
+				if(user_id == reply_available_id[i]){
+			var check = "checked";
+
+			  console.log(check);
+				}
+			}
+			return check;
+		  },
 
 		/*--------------------------------------------------- */
 		/* スクロールを一番下にする
@@ -115,7 +127,7 @@ const hoge = {
 				this.lines_customers = response.data.lines_customers,
 				this.lines_list = response.data.lines_list,
 				this.lines_information = response.data.lines_information,
-				this.lines_information.lines_customers_reply_available = JSON.parse(response.data.lines_information.lines_customers_reply_available),
+				this.reply_available_list = JSON.parse(response.data.lines_information.lines_customers_reply_available),
 				this.users = response.data.users,
 				this.users_list = response.data.users_list,
 				this.persons = response.data.persons,
