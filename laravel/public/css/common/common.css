@@ -1461,6 +1461,22 @@
     transition-duration: 0.5s;
   }
 }
+.formSection .send_common_block .reply_available_list .checkbox_wrap {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 4px;
+}
+.formSection .send_common_block .reply_available_list .checkbox_wrap label {
+  margin-left: 2px;
+}
+.formSection .send_common_block .reply_available_list .checkbox_wrap label, .formSection .send_common_block .reply_available_list .checkbox_wrap input {
+  cursor: pointer;
+  line-height: 1.2em;
+}
+.formSection .send_common_block .reply_available_list .checkbox_wrap [type="checkbox"] {
+  width: auto;
+}
 
 /*--------------------------------------------------- */
 /* ベースのレイアウト */
