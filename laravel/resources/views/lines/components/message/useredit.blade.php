@@ -41,14 +41,14 @@
         <dd>
 
             <ul class="reply_available_list" v-for="user in users_list">
-
+                
                 <li class="checkbox_wrap">
                 <input type="checkbox" v-bind:id="user.name" 
                 name="lines_customers_reply_available[]" 
                 v-bind:value="user.id"
-               v-model="reply_available_list"
+               v-model="lines_information_reply"
                 > 
-                <label v-bind:for="user.name">@{{user.nickname}}</label>
+                <label v-bind:for="user.name">@{{user.nickname}}-@{{user.id}}</label>
                 
                 </li>
 

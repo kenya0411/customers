@@ -1763,6 +1763,37 @@
   }
 }
 
+/*--------------------------------------------------- */
+/* commentMessage(コメント用) */
+/*--------------------------------------------------- */
+.line_message.formSection .commentMessage .comment_send .send_message_request {
+  border-top: 60px solid #EFF3F6;
+}
+.line_message.formSection .commentMessage .comment_send .send_message_request .send_wrap button {
+  color: #fff;
+  background-color: #c50000;
+  border: 1px solid #c50000;
+}
+@media (min-width: 769px) {
+  .line_message.formSection .commentMessage .comment_send .send_message_request .send_wrap button:hover {
+    background-color: #fff;
+    color: #c50000;
+    border: 1px solid #c50000;
+  }
+}
+@media (max-width: 768px) {
+  .line_message.formSection .commentMessage .comment_send .send_message_request .notice br {
+    display: none;
+  }
+}
+.line_message.formSection .commentMessage .comment_send .send_message_request .heading_block {
+  margin: -24px;
+  margin-bottom: 24px;
+}
+
+/*--------------------------------------------------- */
+/* レスポンシブ */
+/*--------------------------------------------------- */
 @media (max-width: 768px) {
   .line_message .headingWrap {
     padding: 24px;

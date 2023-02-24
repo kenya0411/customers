@@ -21,7 +21,8 @@ const hoge = {
 			search_customers_data: '',
 			// get_id: '',//検索用
 			is_loaded: false,
-			reply_available_list:[],//チェックボックス用
+			lines_information_reply:[],//チェックボックス用
+			send_direct:false,//直接送信できるかどうかの条件分岐
 		}
 	},
 	methods: {	
@@ -29,17 +30,20 @@ const hoge = {
 			let result = moment(date).format("MM/DD H:mm");
 			return result
 		},
-		aaaa: function (user_id,reply_available_id) {
-			var check = "";
-			for (let i = 0 ; i < reply_available_id.length ; i++){
-				if(user_id == reply_available_id[i]){
-			var check = "checked";
-
-			  console.log(check);
+		/*--------------------------------------------------- */
+		/* 直接返信用のブロックの条件分岐
+		/*--------------------------------------------------- */
+		send_direct_check: function(user_id,reply_available_id) {
+			//bladeに直接記載してます。
+			//load直後に発動させても取得できない場合があるので
+			if(reply_available_id){
+				for (let i = 0 ; i < reply_available_id.length ; i++){
+					if(user_id == reply_available_id[i]){
+						this.send_direct = true
+					}
 				}
 			}
-			return check;
-		  },
+		},
 
 		/*--------------------------------------------------- */
 		/* スクロールを一番下にする
@@ -58,7 +62,7 @@ const hoge = {
 		/* 鑑定士の名前を置換
 		/*--------------------------------------------------- */
 		change_name: function (text) {
-			let textList = [/けいらん/g, /恵蘭/g,/慧蘭/g,/ケイラン/g,/れんれい/g,/レンレイ/g,/恋霊/g,/フェアリース/g,/零/g];
+			let textList = [/けいらん/g, /恵蘭/g,/慧蘭/g,/ケイラン/g,/れんれい/g,/レンレイ/g,/恋霊/g,/フェアリース/g,/零/g,/ぜろさん/g];
 			let afterName = 'Rise' ;
 
 			let textList2 = [/メルカリ/g, /めるかり/g,/ここなら/g,/ココナラ/g,/Twitter/g,/ツイッター/g];
@@ -114,6 +118,17 @@ const hoge = {
 
 		},
 		/*--------------------------------------------------- */
+		/*アラート
+		/*--------------------------------------------------- */
+		send_confirm_direct: function(e) {
+		// delete_confirm: function(e) {
+			if(!confirm('メッセージを依頼せず、直接送信しますか？')){
+		  	  e.preventDefault();
+				return false;
+			}
+
+		},
+		/*--------------------------------------------------- */
 		/* //ロード時に各種情報をデータベースから取得
 		/*--------------------------------------------------- */
 		
@@ -127,13 +142,14 @@ const hoge = {
 				this.lines_customers = response.data.lines_customers,
 				this.lines_list = response.data.lines_list,
 				this.lines_information = response.data.lines_information,
-				this.reply_available_list = JSON.parse(response.data.lines_information.lines_customers_reply_available),
+				this.lines_information_reply = response.data.lines_information_reply,
 				this.users = response.data.users,
 				this.users_list = response.data.users_list,
 				this.persons = response.data.persons,
 				this.lines_persons = response.data.lines_persons,
 				this.lines_temporaries = response.data.lines_temporaries,
 				this.is_loaded = true,
+
 				])
 			.catch(error => console.log(error)) 
 
@@ -167,7 +183,8 @@ const hoge = {
  
 mounted() {
     window.onload = ()=>{
-        	this.scrollToElement();
+        this.scrollToElement();
+
     }
 },
 computed:{

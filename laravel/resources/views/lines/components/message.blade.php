@@ -45,8 +45,30 @@
 @include('lines.components.message.get_message')
 
 @can('comment')
+<div class="commentMessage">
+
 {{-- 送信リクエスト用 --}}
+<div class="comment_request">    
 @include('lines.components.message.send_request')
+</div>    
+
+
+{{-- 送信メッセージ --}}
+<div class="comment_send" >
+<div v-if="lines_temporaries.lines_temporaries ">
+</div>
+<div v-else> 
+        
+@{{send_direct_check(users.id,lines_information_reply)}}
+@include('lines.components.message.send_message_comment')
+
+</div>
+
+</div>
+
+</div>
+
+
 @endcan
 
 

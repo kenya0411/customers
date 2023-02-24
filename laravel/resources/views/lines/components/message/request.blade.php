@@ -13,7 +13,7 @@
         @{{ lines_temporaries.user_info.nickname}}様
     </div>
     <div class="time">
-                    @{{ moment(lines_temporaries.lines_temporaries.created_at ) }}
+    @{{ moment(lines_temporaries.lines_temporaries.created_at ) }}
 
     </div>
       </div>

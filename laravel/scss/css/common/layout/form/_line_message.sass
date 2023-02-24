@@ -247,6 +247,38 @@ $pad: 24px
 						color: $bgcolor
 						border: 1px solid $bgcolor
 						transition-duration: 0.5s
+/*--------------------------------------------------- */
+/* commentMessage(コメント用)
+/*--------------------------------------------------- */
+.line_message.formSection
+	.commentMessage
+		.comment_send
+			.send_message_request
+				border-top: 60px solid #EFF3F6
+
+				.send_wrap button
+					$bgcolor: #c50000
+					color: #fff
+					background-color: $bgcolor
+					border: 1px solid $bgcolor
+					@include tabup
+						&:hover
+							background-color: #fff
+							color: $bgcolor
+							border: 1px solid $bgcolor
+				.notice
+					@include tab
+						br
+							display: none
+				.heading_block
+					margin: -24px
+					margin-bottom: 24px
+				
+					
+
+/*--------------------------------------------------- */
+/* レスポンシブ
+/*--------------------------------------------------- */
 @include tab
 
 	.line_message

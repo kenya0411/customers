@@ -815,6 +815,7 @@ public function ajax_message(Request $request) {
             "lines_customers"=>!empty($lines_customers_list) ? $lines_customers_list : [],
             "lines_list"=>!empty($lines_list) ? $lines_list : [],
             "lines_information"=>!empty($lines_information) ? $lines_information : [],
+            "lines_information_reply"=>!empty($lines_information->lines_customers_reply_available) ? json_decode($lines_information->lines_customers_reply_available) : [],//デコード
             "users"=>!empty($users) ? $users : [],
             "users_list"=>!empty($users_list) ? $users_list : [],
             "lines_temporaries"=>!empty($lines_temporaries) ? $lines_temporaries : [],
