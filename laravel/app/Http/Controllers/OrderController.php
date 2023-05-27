@@ -69,8 +69,16 @@ public function ajax_index(Request $request) {
 		->get(); 
 		$products_options = DB::table('products_options')
 		->get();
-		$fortunes_reply = DB::table('fortunes')
-		->pluck('fortunes_reply1');
+		$get_fortunes_reply = DB::table('fortunes')
+		->where('fortunes_reply1','!=',"")//論理削除されてないもの
+		->pluck('id');
+		$fortunes_reply = [];
+		foreach ($get_fortunes_reply as $key => $value) {
+			$fortunes_reply[$value]= array(
+				"id" => $value,
+			);
+		}
+
 				// $orders = DB::table('orders')
 				// ->where('is_delete','=',0)//論理削除されてないもの
 				// ->whereYear('created_at','=',date("Y"))//今年
@@ -111,6 +119,7 @@ public function ajax_search(Request $request) {
 	$orders = Order::orderBy('created_at', 'desc');//購入順
 	$orders=$orders->where('is_delete','=',0);//論理削除
 	$orders=$orders->where('orders_id','like','%'.$request->orders_id.'%');//商品ID
+ 	// file_put_contents("test/return.txt", var_export( $orders , true));
 	
 	//顧客名で検索
 	if(!empty($request->customers_name)){
@@ -188,10 +197,12 @@ public function ajax_search(Request $request) {
 // $test = $orders->last_page();
 
 
-	//index用の配列
+	// index用の配列
     $get_id=[];
+    // $test = [];
     if(!empty($orders)){
         foreach ($orders as $key => $value) {
+        	// array_push($test,$value->id);
             $get_id[] = array(
                 'index' => $key,
                 'id' => !empty($value->id) ? $value->id - 1 : 0,
@@ -205,6 +216,7 @@ public function ajax_search(Request $request) {
         }
     };
 
+    // file_put_contents("test/return.txt", var_export( $test , true));
 
 	return [
 		"orders"=>$orders,

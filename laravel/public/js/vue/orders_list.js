@@ -49,7 +49,6 @@ const hoge = {
 				let result = text;
 				
 				if(!result){
-				console.log(text)
 
 
 				}else{
