@@ -278,14 +278,27 @@ public function delete_temporary_deta(Request $request) {
 /*--------------------------------------------------- */
 public function push_message(Request $request,$user_id,$reply) {
     // $accessToken = config('services.line.messenger_secret');
-    // 
+    
+    //公式LINEの管理者の情報取得
     $lines_persons = DB::table('lines_persons')
     ->where('is_delete','=',0)//論理削除されてないもの
     ->where('lines_persons_id','=',$request->lines_persons_id)//既にメッセージがDBに保存されてるか確認
     ->first(); 
 
+    //一番最後の取得からのメッセージを取得
+    $lines_messages = DB::table('lines_messages')
+    ->where('is_delete','=',0)//論理削除されてないもの
+    ->where('lines_customers_userid','=',$user_id)//既にメッセージがDBに保存されてるか確認
+    ->where('lines_messages_replytoken', '!=', '')//replytokenに値があるもの
+    ->orderBy('lines_messages_id', 'desc')  // IDで降順にソート
+    ->first();
+    
+    //返信用のリプライトークンを取得
+    $replyToken = $lines_messages->lines_messages_replytoken;
+
+
+    //アクセストークン
     $accessToken = $lines_persons->lines_persons_access_token;
-    $user_id = $user_id;
 
     $text = [
         [
@@ -295,10 +308,8 @@ public function push_message(Request $request,$user_id,$reply) {
     ];
 
     $message = [
-        'to' => $user_id,
+        'replyToken' => $replyToken,
         'messages' => $text,
-        // 'client_id'     => $client_id,
-        // 'client_secret' => $client_secret
     ];
 
     $message = json_encode($message);
@@ -307,7 +318,7 @@ public function push_message(Request $request,$user_id,$reply) {
 
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $accessToken, 'Content-Type: application/json'));
-    curl_setopt($ch, CURLOPT_URL, 'https://api.line.me/v2/bot/message/push');
+    curl_setopt($ch, CURLOPT_URL, 'https://api.line.me/v2/bot/message/reply');
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
     curl_setopt($ch, CURLOPT_POSTFIELDS, $message);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
