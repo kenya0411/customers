@@ -1,7 +1,6 @@
 laravel/node_modules/
 laravel/vendor/
 laravel/.env
-laravel/composer.lock
 laravel/ngrok.bat
 laravel/public/test/return.txt
 laravel/public/test/return.txt
