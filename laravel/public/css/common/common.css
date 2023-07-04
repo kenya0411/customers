@@ -1523,9 +1523,15 @@
 }
 .line_customer ul li .link {
   position: relative;
-  padding-left: 0.8em;
+  display: flex;
+  align-items: center;
+  line-height: 1.2em;
 }
-.line_customer ul li .link:before {
+.line_customer ul li .arrow {
+  position: relative;
+  padding-right: 0.8em;
+}
+.line_customer ul li .arrow:before {
   content: "";
   width: 0;
   height: 0;
@@ -1539,10 +1545,15 @@
   margin: auto;
 }
 .line_customer ul li .new_message {
-  font-size: 12px;
-  font-size: 1.2rem;
-  color: red;
-  margin-left: 4px;
+  margin-right: 6px;
+}
+.line_customer ul li .new_message span {
+  background-color: red;
+  color: #fff;
+  font-size: 11px;
+  font-size: 1.1rem;
+  padding: 6px;
+  white-space: nowrap;
 }
 
 /*--------------------------------------------------- */
