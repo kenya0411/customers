@@ -323,17 +323,16 @@ public function push_message(Request $request,$user_id,$reply) {
     curl_setopt($ch, CURLOPT_POSTFIELDS, $message);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $message = curl_exec($ch);
+    $response = curl_exec($ch);
     $err = curl_error($ch);//追記・エラーログ
     curl_close($ch);
 
-
-    // Check if there is an error and if the error message is "Invalid reply token"
-    if ($err && strpos($err, 'Invalid reply token') !== false) {
+    $decodedResponse = json_decode($response, true);
+    if ($err || (isset($decodedResponse['message']) && $decodedResponse['message'] === 'Invalid reply token')) {
+        // Log the error
         error_log("cURL Error: " . $err);
         $this->second_push_message($accessToken,$user_id,$reply);
         file_put_contents("return.txt", var_export( "error",true ));
-
-        // return;
     }
 
 
