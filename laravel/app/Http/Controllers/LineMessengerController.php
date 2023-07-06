@@ -314,6 +314,7 @@ public function push_message(Request $request,$user_id,$reply) {
 
     $message = json_encode($message);
 
+    //データベースにメッセージを追加
     $data =$this->push_message_add_database($request,$user_id,$reply);
 
     $ch = curl_init();
@@ -323,16 +324,19 @@ public function push_message(Request $request,$user_id,$reply) {
     curl_setopt($ch, CURLOPT_POSTFIELDS, $message);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $message = curl_exec($ch);
-    $response = curl_exec($ch);
     $err = curl_error($ch);//追記・エラーログ
     curl_close($ch);
 
-    $decodedResponse = json_decode($response, true);
+    //リプライトークンの応答時間が過ぎてた場合、プッシュメッセージで代用する
+    $decodedResponse = json_decode($message, true);
     if ($err || (isset($decodedResponse['message']) && $decodedResponse['message'] === 'Invalid reply token')) {
         // Log the error
         error_log("cURL Error: " . $err);
         $this->second_push_message($accessToken,$user_id,$reply);
-        file_put_contents("return.txt", var_export( "error",true ));
+        $type_message = "push_mail"
+
+    }else{
+        $type_message = "send_mail"
     }
 
 
@@ -340,7 +344,7 @@ public function push_message(Request $request,$user_id,$reply) {
     //アラート用
     $post_status = array(
         'status' => 'success',
-        'type' => 'send_mail',
+        'type' => $type_message,
     );
     //リダイレクト
     $get_status = redirect('/lines?userid='.$request->lines_customers_userid)->withInput($post_status);
@@ -348,7 +352,7 @@ public function push_message(Request $request,$user_id,$reply) {
 }
 
 
-// リプライトークンが使えない場合
+// リプライトークンが使えない場合プッシュメッセージで代用
 public function second_push_message($accessToken,$user_id,$reply) {
     $text = [
         [
