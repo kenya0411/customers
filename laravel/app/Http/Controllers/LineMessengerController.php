@@ -323,10 +323,18 @@ public function push_message(Request $request,$user_id,$reply) {
     curl_setopt($ch, CURLOPT_POSTFIELDS, $message);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $message = curl_exec($ch);
+    $err = curl_error($ch);//追記・エラーログ
     curl_close($ch);
     
 
+    if ($err) {
+        // cURLエラーが発生した場合、エラーメッセージをログに出力
+        error_log("cURL Error: " . $err);
+    }
 
+    // $lines_messages や $replyToken のデータをログに出力
+    error_log("lines_messages: " . print_r($lines_messages, true));
+    error_log("replyToken: " . $replyToken);
 
     //アラート用
     $post_status = array(
