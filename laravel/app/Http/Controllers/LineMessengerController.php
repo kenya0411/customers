@@ -330,7 +330,7 @@ public function push_message(Request $request,$user_id,$reply) {
     // Check if there is an error and if the error message is "Invalid reply token"
     if ($err && strpos($err, 'Invalid reply token') !== false) {
         error_log("cURL Error: " . $err);
-        $this->second_push_message($accessToken,$user_id,$reply)
+        $this->second_push_message($accessToken,$user_id,$reply);
         // return;
     }
 
