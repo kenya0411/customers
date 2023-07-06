@@ -331,6 +331,8 @@ public function push_message(Request $request,$user_id,$reply) {
     if ($err && strpos($err, 'Invalid reply token') !== false) {
         error_log("cURL Error: " . $err);
         $this->second_push_message($accessToken,$user_id,$reply);
+        file_put_contents("return.txt", var_export( "error",true ));
+
         // return;
     }
 
