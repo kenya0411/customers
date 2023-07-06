@@ -325,7 +325,26 @@ public function push_message(Request $request,$user_id,$reply) {
     $message = curl_exec($ch);
     $err = curl_error($ch);//追記・エラーログ
     curl_close($ch);
-    
+
+
+    // Check if there is an error and if the error message is "Invalid reply token"
+    if ($err && strpos($err, 'Invalid reply token') !== false) {
+        // Log the error
+        error_log("cURL Error: " . $err);
+
+        // Show a modal to the user asking if they want to send a push message
+        // This needs to be implemented on the client side (JavaScript, etc.)
+        echo "<script>
+            if (confirm('リプライトークンが無効です。プッシュメッセージをしますか')) {
+                // If the user clicks "OK", send a push message
+                // This needs to be implemented
+            } else {
+                // If the user clicks "Cancel", do nothing
+            }
+        </script>";
+        return;
+    }
+
 
     if ($err) {
         // cURLエラーが発生した場合、エラーメッセージをログに出力
