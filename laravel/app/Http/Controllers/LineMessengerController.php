@@ -329,30 +329,13 @@ public function push_message(Request $request,$user_id,$reply) {
 
     // Check if there is an error and if the error message is "Invalid reply token"
     if ($err && strpos($err, 'Invalid reply token') !== false) {
-        // Log the error
         error_log("cURL Error: " . $err);
-
-        // Show a modal to the user asking if they want to send a push message
-        // This needs to be implemented on the client side (JavaScript, etc.)
-        echo "<script>
-            if (confirm('リプライトークンが無効です。プッシュメッセージをしますか')) {
-            } else {
-            }
-        </script>";
-        return;
+        $this->second_push_message($accessToken,$user_id,$reply)
+        // return;
     }
 
 
-    if ($err) {
-        // cURLエラーが発生した場合、エラーメッセージをログに出力
-        error_log("cURL Error: " . $err);
-    }
 
-    // $lines_messages や $replyToken のデータをログに出力
-    error_log("lines_messages: " . print_r($lines_messages, true));
-    error_log("replyToken: " . $replyToken);
-
- file_put_contents("return.txt", var_export( $lines_messages,true ));
     //アラート用
     $post_status = array(
         'status' => 'success',
@@ -362,6 +345,36 @@ public function push_message(Request $request,$user_id,$reply) {
     $get_status = redirect('/lines?userid='.$request->lines_customers_userid)->withInput($post_status);
     return  $get_status ;
 }
+
+
+// リプライトークンが使えない場合
+public function second_push_message($accessToken,$user_id,$reply) {
+    $text = [
+        [
+        'type' => 'text',
+        'text' => $reply
+        ],
+    ];
+    $message = [
+        'to' => $user_id,
+        'messages' => $text,
+        // 'client_id'     => $client_id,
+        // 'client_secret' => $client_secret
+    ];
+
+    $message = json_encode($message);
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $accessToken, 'Content-Type: application/json'));
+    curl_setopt($ch, CURLOPT_URL, 'https://api.line.me/v2/bot/message/push');
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $message);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $message = curl_exec($ch);
+    curl_close($ch);
+}
+
+
 /*--------------------------------------------------- */
 /* 送信したメッセージをＤＢに保存
 /*--------------------------------------------------- */
