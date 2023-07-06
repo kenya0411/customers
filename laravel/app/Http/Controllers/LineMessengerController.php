@@ -333,10 +333,10 @@ public function push_message(Request $request,$user_id,$reply) {
         // Log the error
         error_log("cURL Error: " . $err);
         $this->second_push_message($accessToken,$user_id,$reply);
-        $type_message = "push_mail"
+        $type_message = "push_mail";
 
     }else{
-        $type_message = "send_mail"
+        $type_message = "send_mail";
     }
 
 
