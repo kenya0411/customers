@@ -336,6 +336,7 @@ public function push_message(Request $request,$user_id,$reply) {
     error_log("lines_messages: " . print_r($lines_messages, true));
     error_log("replyToken: " . $replyToken);
 
+ file_put_contents("return.txt", var_export( $lines_messages,true ));
     //アラート用
     $post_status = array(
         'status' => 'success',
