@@ -336,10 +336,7 @@ public function push_message(Request $request,$user_id,$reply) {
         // This needs to be implemented on the client side (JavaScript, etc.)
         echo "<script>
             if (confirm('リプライトークンが無効です。プッシュメッセージをしますか')) {
-                // If the user clicks "OK", send a push message
-                // This needs to be implemented
             } else {
-                // If the user clicks "Cancel", do nothing
             }
         </script>";
         return;
