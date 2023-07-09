@@ -10,7 +10,7 @@
     {{-- @csrf --}}
     <dl>
         <dt>名前</dt>
-        <dd><input type="text" v-model="gpt.name"></dd>
+        <dd><input type="text" v-model="gpt.name" ></dd>
         <dt>悩み</dt>
         <dd><textarea v-model="gpt.worry"></textarea>
 </dd>

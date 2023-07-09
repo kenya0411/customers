@@ -517,7 +517,7 @@ $prompt ="# 命令書：
     $fortune = $request->gpt['fortune'];
     $message = $request->gpt['message'];
 
-if(!empty($rule)){
+if(!empty($name)){
     $prompt .= "# 相手の名前：
     ".$name."様";
     };

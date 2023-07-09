@@ -164,7 +164,7 @@ const hoge = {
 				this.lines_persons = response.data.lines_persons,
 				this.lines_temporaries = response.data.lines_temporaries,
 				this.is_loaded = true,
-
+				this.gpt.name = response.data.lines_information.lines_customers_name, // ここで名前を設定
 				])
 			.catch(error => console.log(error)) 
 
@@ -213,8 +213,10 @@ const hoge = {
 
 	//ロード時にデータベースから情報を取得
 	created:function(){
-	this.load_page();
-
+	// this.load_page();
+    this.load_page().then(() => {
+        this.gpt.name = this.lines_information.lines_customers_name;
+    });
  },
  
 mounted() {
