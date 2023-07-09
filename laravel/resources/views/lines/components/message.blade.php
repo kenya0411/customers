@@ -81,6 +81,9 @@
 {{-- リクエスト用 --}}
 @include('lines.components.message.request')
 
+{{-- リクエスト用 --}}
+@include('lines.components.message.gpt_create')
+
 {{-- ユーザー編集用 --}}
 @include('lines.components.message.useredit')
 @endcan

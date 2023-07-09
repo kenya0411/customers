@@ -505,6 +505,122 @@ public function get_message_type(Request $request,$inputs) {
 
 }
 
+public function create_reply(Request $request) {
+$prompt ="# 命令書：
+あなたは、プロの占い師です。
+以下の制約条件をもとに、文章を作成をしてください
+";
+
+    $name = $request->gpt['name'];
+    $worry = $request->gpt['worry'];
+    $rule = $request->gpt['rule'];
+    $fortune = $request->gpt['fortune'];
+    $message = $request->gpt['message'];
+
+if(!empty($rule)){
+    $prompt .= "# 相手の名前：
+    ".$name."様";
+    };
+
+if(!empty($rule)){
+$prompt .= "# 制約条件：
+
+";
+};
+
+if(!empty($worry)){
+$prompt .= "# 悩み：
+".$worry;
+}
+
+if(!empty($fortune)){
+$prompt .= "＃鑑定結果：
+".$fortune;
+};
+
+
+if(!empty($message)){
+$prompt .= "＃メッセージ：
+".$message;
+};
+
+
+$prompt .= "
+
+＃出力文 :";
+
+$gpt_create = $this->gpt_create($prompt);
+
+}
+
+public function gpt_create($prompt) {
+$input_json = file_get_contents('php://input');
+$post = json_decode( $input_json, true );
+// $req_question = $post['prompt'];
+$req_question = $prompt;
+
+$result = array();
+
+// APIキー
+$apiKey = env('API_KEY');
+
+//openAI APIエンドポイント
+$endpoint = 'https://api.openai.com/v1/chat/completions';
+
+$headers = array(
+  'Content-Type: application/json',
+  'Authorization: Bearer ' . $apiKey
+);
+
+
+// リクエストのペイロード
+$data = array(
+  "model"=> "gpt-4", 
+  "temperature"=> 1, //defalutは1
+  // "maxTokens"=> "1024", //defalutは1024?
+  // "type"=> "object",
+  'messages' => [
+    [
+    "role" => "system",
+    "content" => "日本語で応答してください"
+    ],
+    [
+    "role" => "user",
+    "content" => $req_question
+    ]
+  ]
+);
+
+// cURLリクエストを初期化
+$ch = curl_init();
+
+// cURLオプションを設定
+curl_setopt($ch, CURLOPT_URL, $endpoint);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+// APIにリクエストを送信
+$response = curl_exec($ch);
+
+// cURLリクエストを閉じる
+curl_close($ch);
+
+// 応答を解析
+$result = json_decode($response, true);
+
+// 生成されたテキストを取得
+// $text = $result;
+
+$text = $result['choices'][0]['message']['content'];
+// file_put_contents("test/return.txt", var_export($result, true));
+
+echo json_encode($text, JSON_PRETTY_PRINT);
+
+}
+
 /*--------------------------------------------------- */
 /* NGワードのチェック
 /*--------------------------------------------------- */

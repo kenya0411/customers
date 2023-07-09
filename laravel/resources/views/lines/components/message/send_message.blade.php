@@ -12,7 +12,7 @@
 
     <div class="textare">
         <input type="hidden" name="lines_persons_id" v-bind:value="lines_persons.lines_persons_id">
-        <textarea name="lines_messages_text" ></textarea>
+        <textarea name="lines_messages_text" v-model="gpt.result"></textarea>
     </div>
 
     <div class="send_wrap" >

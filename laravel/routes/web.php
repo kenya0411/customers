@@ -249,6 +249,10 @@ Route::post('lines/temporaries', 'LineMessengerController@lines_temporaries_post
 // Route::post('lines/customers/ajax', 'LineMessengerController@ajax_lines_customers_update');
 
 
+//返信文作成
+Route::get('lines/ajax/create_reply', 'LineMessengerController@create_reply');
+Route::post('lines/ajax/create_reply', 'LineMessengerController@create_reply');
+
 /*--------------------------------------------------- */
 /* Lines_mail
 /*--------------------------------------------------- */
@@ -282,6 +286,7 @@ Route::post('lines/persons/ajax', 'LinePersonController@ajax_person_index');
 Route::post('lines/persons/ajax_new', 'LinePersonController@ajax_person_new');
 //メールアドレス情報の修正
 Route::post('lines/persons/ajax_update', 'LinePersonController@ajax_person_update');
+
 
 
 

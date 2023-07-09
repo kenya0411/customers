@@ -1,8 +1,13 @@
 
-let params = (new URL(document.location)).searchParams//クエリ取得用
-let params_id =params.get('userid')//ユーザーID
-let message_count =params.get('message_count')//ユーザーID
+// 現在のURLからクエリパラメータを取得
+let params = (new URL(document.location)).searchParams;
 
+// 'userid'クエリパラメータを取得
+let params_id =params.get('userid');
+
+// 'message_count'クエリパラメータを取得
+let message_count =params.get('message_count');
+let rule="・メッセージに対する返信文を作成してください。\n・相手とはメッセージでのやりとりです。\n・丁寧な文章で作成してください。\n・ですます調の丁寧語で作成してください。\n・冒頭は「ご連絡ありがとうございます」から始めてください。\n・文字数は300文字以内で作成してください。"
 
 const hoge = {
 	el: '.main_content',
@@ -23,9 +28,19 @@ const hoge = {
 			is_loaded: false,
 			lines_information_reply:[],//チェックボックス用
 			send_direct:false,//直接送信できるかどうかの条件分岐
+			gpt:{
+				name:"",
+				worry:"",
+				fortune:"",
+				rule:rule,
+				message:"",
+				result:"",
+			},
+			editedMessage: '',
 		}
 	},
 	methods: {	
+		 // 日付を特定の形式に変換するメソッド
 		moment: function (date) {
 			let result = moment(date).format("MM/DD H:mm");
 			return result
@@ -156,6 +171,26 @@ const hoge = {
 
 		},
 		/*--------------------------------------------------- */
+		/* // 返信を作成するメソッド
+		/*--------------------------------------------------- */		
+		async create_reply(gpt) {
+			
+			let url = '/lines/ajax/create_reply';
+			 await axios.post(url, {
+				gpt: this.gpt,
+
+			})
+			.then(response => [
+				this.gpt.result = response.data,
+				
+
+				])
+			.catch(error => console.log(error))
+
+		},
+
+
+		/*--------------------------------------------------- */
 		/* //検索用の情報をデータベースから取得＋ページネーションの情報を取得
 		/*--------------------------------------------------- */		
 		async search_customers_page() {
@@ -184,8 +219,9 @@ const hoge = {
 mounted() {
     window.onload = ()=>{
         this.scrollToElement();
-
     }
+
+
 },
 computed:{
 	get_search_data() {//監視用データをまとめる
@@ -198,6 +234,30 @@ computed:{
 		this.is_loaded,
 		];
 	},
+    // 最後に送信されたメッセージのタイムスタンプを取得する算出プロパティ
+    lastSentMessageTimestamp() {
+        // メッセージリストを逆順にループ
+        for (let i = this.lines_list.length - 1; i >= 0; i--) {
+            // 現在のメッセージが送信者からのものであれば、そのメッセージの作成日時を返す
+            if (this.lines_list[i].lines_messages.lines_customers_userid !== this.lines_list[i].lines_messages.lines_messages_from_userid) {
+                return this.lines_list[i].lines_messages.created_at;
+            }
+        }
+        // 送信者からのメッセージがなければnullを返す
+        return null;
+    },
+    // 最後に送信されたメッセージ以降に受信したメッセージを取得する算出プロパティ
+    receivedMessagesAfterLastSent() {
+        // 最後に送信されたメッセージがなければ空の配列を返す
+        if (this.lastSentMessageTimestamp === null) {
+            return [];
+        }
+        // メッセージリストをフィルタリングして、受信者からのメッセージで、かつ最後に送信されたメッセージ以降のものだけを返す
+        return this.lines_list.filter(line_list =>
+            line_list.lines_messages.lines_customers_userid === line_list.lines_messages.lines_messages_from_userid &&
+            line_list.lines_messages.created_at > this.lastSentMessageTimestamp
+        );
+    },
 },
 watch: {
 	get_search_data(val){//監視用
@@ -210,6 +270,10 @@ watch: {
 	this.scrollToElement();
 
 	},
+    // receivedMessagesAfterLastSentが変更されたときにgpt.messageを更新
+    receivedMessagesAfterLastSent(newVal) {
+        this.gpt.message = newVal.map(line_list => line_list.lines_messages.lines_messages_text).join('\n');
+    },
  },
 }
 
