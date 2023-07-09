@@ -174,7 +174,7 @@ const hoge = {
 		/* // 返信を作成するメソッド
 		/*--------------------------------------------------- */		
 		async create_reply(gpt) {
-			
+			 window.alert('GPTで返信文を作成します。'); // メソッドが呼び出されたときのアラート
 			let url = '/lines/ajax/create_reply';
 			 await axios.post(url, {
 				gpt: this.gpt,
@@ -182,6 +182,7 @@ const hoge = {
 			})
 			.then(response => [
 				this.gpt.result = response.data,
+			 window.alert('返信文生成しました'),// メソッドが呼び出されたときのアラート
 				
 
 				])
