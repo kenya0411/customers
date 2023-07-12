@@ -187,7 +187,6 @@ const hoge = {
 				})
 				.then(response => [
 					this.fortunes = response.data,
-					console.log(response.data)
 
 
 				])
@@ -307,7 +306,6 @@ watch: {
     },
 
          selectedFortune: function (newFortune) {
-         	console.log(newFortune.fortunes_answer)
          	
             // 選択されたfortuneが変更された時にgptの値を更新
             this.gpt.worry = newFortune.fortunes_worry;
