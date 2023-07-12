@@ -253,6 +253,12 @@ Route::post('lines/temporaries', 'LineMessengerController@lines_temporaries_post
 Route::get('lines/ajax/create_reply', 'LineMessengerController@create_reply');
 Route::post('lines/ajax/create_reply', 'LineMessengerController@create_reply');
 
+//鑑定結果を取得
+Route::get('lines/ajax/fetch_fortune_result', 'LineMessengerController@fetch_fortune_result');
+Route::post('lines/ajax/fetch_fortune_result', 'LineMessengerController@fetch_fortune_result');
+
+
+
 /*--------------------------------------------------- */
 /* Lines_mail
 /*--------------------------------------------------- */

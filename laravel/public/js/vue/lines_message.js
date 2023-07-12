@@ -18,6 +18,7 @@ const hoge = {
 			lines_information: '',
 			lines_temporaries: '',
 			lines_persons: '',
+
 			persons: '',
 			customers: '',
 			users: '',
@@ -37,6 +38,9 @@ const hoge = {
 				result:"",
 			},
 			editedMessage: '',
+            selectedFortune: null, // 選択されたfortuneのIDを保持します
+            fortunes: [] // APIから取得したfortunesデータを保持します
+
 		}
 	},
 	methods: {	
@@ -171,6 +175,27 @@ const hoge = {
 
 		},
 		/*--------------------------------------------------- */
+		/* // 鑑定結果を取得
+		/*--------------------------------------------------- */		
+		async fetch_fortune(lines_information) {
+			let url = '/lines/ajax/fetch_fortune_result';
+			if(this.lines_information.customers_id){
+
+				axios.post(url, {
+					customers_id: this.lines_information.customers_id,
+
+				})
+				.then(response => [
+					this.fortunes = response.data,
+					console.log(response.data)
+
+
+				])
+				.catch(error => console.log(error))
+			}
+
+		},
+		/*--------------------------------------------------- */
 		/* // 返信を作成するメソッド
 		/*--------------------------------------------------- */		
 		async create_reply(gpt) {
@@ -215,13 +240,16 @@ const hoge = {
 	created:function(){
 	// this.load_page();
     this.load_page().then(() => {
-        this.gpt.name = this.lines_information.lines_customers_name;
+        this.gpt.name = this.lines_information.lines_customers_name;//名前を取得
+
     });
  },
  
 mounted() {
     window.onload = ()=>{
         this.scrollToElement();
+        this.fetch_fortune();//鑑定結果をフェッチ
+
     }
 
 
@@ -277,6 +305,14 @@ watch: {
     receivedMessagesAfterLastSent(newVal) {
         this.gpt.message = newVal.map(line_list => line_list.lines_messages.lines_messages_text).join('\n');
     },
+
+         selectedFortune: function (newFortune) {
+         	console.log(newFortune.fortunes_answer)
+         	
+            // 選択されたfortuneが変更された時にgptの値を更新
+            this.gpt.worry = newFortune.fortunes_worry;
+            this.gpt.fortune = newFortune.fortunes_answer;
+        }
  },
 }
 

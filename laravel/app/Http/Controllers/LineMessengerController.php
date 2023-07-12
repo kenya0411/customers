@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 // use App\Customer;
 use App\Line_customer;
 use App\Line_message;
+// use App\Fortune;
 // use App\Line_person;
 use App\Line_temporary;
 // use App\Line_mail;
@@ -509,11 +510,35 @@ public function get_message_type(Request $request,$inputs) {
 /*--------------------------------------------------- */
 /* 
 /*--------------------------------------------------- */
-public function feach_fortune_result(Request $request) {
+public function fetch_fortune_result(Request $request) {
 
+    $customers_id = $request->customers_id;
 
+    // 顧客IDに一致するすべての注文を取得
+    $orders = DB::table('orders')
+    ->where('customers_id','=',$customers_id)
+    ->get();    
 
+    // fortunesテーブルから取得するIDの配列を初期化
+    $fortune_ids = [];
+
+    // 各注文のIDを配列に追加
+    foreach ($orders as $order) {
+        $fortune_ids[] = $order->id;
+    }
+
+    // fortunesテーブルから注文のIDに一致し、fortunes_worryが空でない最新の3つのレコードを取得
+    $fortunes = DB::table('fortunes')
+        ->whereIn('id', $fortune_ids) // 先ほど取得したIDに一致するレコードを検索
+        ->whereNotNull('fortunes_worry') // 'fortunes_worry'がNULLでないレコードのみを検索
+        ->latest() // 'created_at'で降順に並べ替え
+        ->take(3) // 最新の3つのレコードのみを取得
+        ->get(); // 複数のレコードを取得するためにget()を使用
+
+    return $fortunes;
 }
+
+
 
 
 /*--------------------------------------------------- */
