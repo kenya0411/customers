@@ -505,6 +505,20 @@ public function get_message_type(Request $request,$inputs) {
 
 }
 
+
+/*--------------------------------------------------- */
+/* 
+/*--------------------------------------------------- */
+public function feach_fortune_result(Request $request) {
+
+
+
+}
+
+
+/*--------------------------------------------------- */
+/* //プロンプト生成
+/*--------------------------------------------------- */
 public function create_reply(Request $request) {
 $prompt ="# 命令書：
 あなたは、プロの占い師です。
@@ -552,7 +566,9 @@ $prompt .= "
 $gpt_create = $this->gpt_create($prompt);
 
 }
-
+/*--------------------------------------------------- */
+/* //GPTの出力を返す
+/*--------------------------------------------------- */
 public function gpt_create($prompt) {
 $input_json = file_get_contents('php://input');
 $post = json_decode( $input_json, true );
@@ -656,8 +672,6 @@ public function ngword(Request $request) {
         "[●]",
     );
     return $ngword;
-
-
 }
 
 /*--------------------------------------------------- */

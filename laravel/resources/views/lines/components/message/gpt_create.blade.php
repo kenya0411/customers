@@ -11,6 +11,11 @@
     <dl>
         <dt>名前</dt>
         <dd><input type="text" v-model="gpt.name" ></dd>
+        <dt>鑑定結果の出力</dt>
+        <dd><select name="" id="">aaa</select>
+@{{ lines_list }}
+        </dd>
+
         <dt>悩み</dt>
         <dd><textarea v-model="gpt.worry"></textarea>
 </dd>
