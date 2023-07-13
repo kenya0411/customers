@@ -187,6 +187,7 @@ const hoge = {
 				})
 				.then(response => [
 					this.fortunes = response.data,
+					console.log(response.data)
 
 
 				])
