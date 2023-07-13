@@ -17,7 +17,7 @@
 
     <div class="send_wrap" >
 
-        <button  name="submit" value="send">
+        <button  name="submit" value="send" v-on:click="send_confirm">
             メッセージの送信
         </button>
     </div>
