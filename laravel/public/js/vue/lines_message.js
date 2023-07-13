@@ -177,9 +177,11 @@ const hoge = {
 		/*--------------------------------------------------- */
 		/* // 鑑定結果を取得
 		/*--------------------------------------------------- */		
-		async fetch_fortune(lines_information) {
+		async fetch_fortune() {
 			let url = '/lines/ajax/fetch_fortune_result';
-			if(this.lines_information.customers_id){
+					console.log(this.response.data)
+
+			// if(this.lines_information.customers_id){
 
 				axios.post(url, {
 					customers_id: this.lines_information.customers_id,
@@ -192,7 +194,7 @@ const hoge = {
 
 				])
 				.catch(error => console.log(error))
-			}
+			// }
 
 		},
 		/*--------------------------------------------------- */
