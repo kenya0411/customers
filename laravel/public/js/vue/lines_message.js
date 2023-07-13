@@ -158,38 +158,40 @@ const hoge = {
 		/*--------------------------------------------------- */
 		/* //ロード時に各種情報をデータベースから取得
 		/*--------------------------------------------------- */
-		
+
 		async load_page() {
 			let url = '/lines/ajax';
-			axios.post(url, {
-				userid: params_id,
-				message_count: message_count,
-			})
-			.then(response => [
-				this.lines_customers = response.data.lines_customers,
-				this.lines_list = response.data.lines_list,
-				this.lines_information = response.data.lines_information,
-				this.lines_information_reply = response.data.lines_information_reply,
-				this.users = response.data.users,
-				this.users_list = response.data.users_list,
-				this.persons = response.data.persons,
-				this.lines_persons = response.data.lines_persons,
-				this.lines_temporaries = response.data.lines_temporaries,
-				this.is_loaded = true,
-				this.gpt.name = response.data.lines_information.lines_customers_name, // ここで名前を設定
-				console.log(this.lines_information),
-				
-				])
-			.catch(error => console.log(error)) 
-
-
+			return new Promise((resolve, reject) => { // Promiseを生成
+				axios.post(url, {
+					userid: params_id,
+					message_count: message_count,
+				})
+				.then(response => {
+					this.lines_customers = response.data.lines_customers;
+					this.lines_list = response.data.lines_list;
+					this.lines_information = response.data.lines_information;
+					this.lines_information_reply = response.data.lines_information_reply;
+					this.users = response.data.users;
+					this.users_list = response.data.users_list;
+					this.persons = response.data.persons;
+					this.lines_persons = response.data.lines_persons;
+					this.lines_temporaries = response.data.lines_temporaries;
+					this.is_loaded = true;
+					this.gpt.name = response.data.lines_information.lines_customers_name;
+					resolve(); // 全ての処理が終了したらresolveを呼び出す
+				})
+				.catch(error => {
+					console.log(error);
+					reject(error); // エラーが発生した場合はrejectを呼び出す
+				});
+			});
 		},
+
 		/*--------------------------------------------------- */
 		/* // 鑑定結果を取得
 		/*--------------------------------------------------- */		
 		async fetch_fortune() {
 			let url = '/lines/ajax/fetch_fortune_result';
-			console.log(this.lines_information)
 			if(this.lines_information.customers_id){
 
 				axios.post(url, {
@@ -250,11 +252,17 @@ const hoge = {
 	//ロード時にデータベースから情報を取得
 	created:function(){
 	// this.load_page();
-    this.load_page().then(() => {
-        this.gpt.name = this.lines_information.lines_customers_name;//名前を取得
-        this.fetch_fortune();//鑑定結果をフェッチ
+    // this.load_page().then(() => {
+    //     this.gpt.name = this.lines_information.lines_customers_name;//名前を取得
+    //     this.fetch_fortune();//鑑定結果をフェッチ
 
-    });
+    // });
+	this.load_page().then(() => {
+		this.fetch_fortune();
+		this.gpt.name = this.lines_information.lines_customers_name;//名前を取得
+	}).catch(error => {
+		console.error('load_pageでエラーが発生しました: ', error);
+	});
  },
  
 mounted() {
