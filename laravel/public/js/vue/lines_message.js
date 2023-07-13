@@ -67,16 +67,24 @@ const hoge = {
 		/*--------------------------------------------------- */
 		/* スクロールを一番下にする
 		/*--------------------------------------------------- */
-		  scrollToElement() {
-		  	//ロード直後だと取得できない場合があるので、時間差で取得
-		  	//メッセージの一番下のセレクタを取得
+	// 	  scrollToElement() {
+	// 	  	//ロード直後だと取得できない場合があるので、時間差で取得
+	// 	  	//メッセージの一番下のセレクタを取得
 
-	    this.$nextTick(function() {
-			let element = document.getElementsByClassName('end_message')[0];
-			element.scrollIntoView(false);  
-    });
+	//     this.$nextTick(function() {
+	// 		let element = document.getElementsByClassName('end_message')[0];
+	// 		element.scrollIntoView(false);  
+    // });
 
-		  },
+	// 	  },
+		scrollToElement() {
+		    this.$nextTick(function() {
+		        let element = document.getElementsByClassName('end_message')[0];
+		        if(element) {
+		            element.scrollIntoView(false); 
+		        }
+		    });
+		},
 		/*--------------------------------------------------- */
 		/* 鑑定士の名前を置換
 		/*--------------------------------------------------- */
@@ -250,7 +258,7 @@ const hoge = {
 mounted() {
     window.onload = ()=>{
         this.scrollToElement();
-        // this.fetch_fortune();//鑑定結果をフェッチ
+        this.fetch_fortune();//鑑定結果をフェッチ
 
     }
 
