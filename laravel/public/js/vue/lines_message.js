@@ -177,6 +177,8 @@ const hoge = {
 				this.lines_temporaries = response.data.lines_temporaries,
 				this.is_loaded = true,
 				this.gpt.name = response.data.lines_information.lines_customers_name, // ここで名前を設定
+				console.log(this.lines_information),
+				
 				])
 			.catch(error => console.log(error)) 
 
