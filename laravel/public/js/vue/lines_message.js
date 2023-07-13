@@ -250,6 +250,7 @@ const hoge = {
 	// this.load_page();
     this.load_page().then(() => {
         this.gpt.name = this.lines_information.lines_customers_name;//名前を取得
+        this.fetch_fortune();//鑑定結果をフェッチ
 
     });
  },
@@ -257,7 +258,6 @@ const hoge = {
 mounted() {
     window.onload = ()=>{
         this.scrollToElement();
-        this.fetch_fortune();//鑑定結果をフェッチ
 
     }
 
