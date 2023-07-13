@@ -188,7 +188,7 @@ const hoge = {
 		async fetch_fortune() {
 			let url = '/lines/ajax/fetch_fortune_result';
 
-			// if(this.lines_information.customers_id){
+			if(this.lines_information.customers_id){
 
 				axios.post(url, {
 					customers_id: this.lines_information.customers_id,
