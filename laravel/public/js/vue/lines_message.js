@@ -250,7 +250,7 @@ const hoge = {
 mounted() {
     window.onload = ()=>{
         this.scrollToElement();
-        this.fetch_fortune();//鑑定結果をフェッチ
+        // this.fetch_fortune();//鑑定結果をフェッチ
 
     }
 
