@@ -17,6 +17,7 @@ let rules = [
     "・相手の事は名前で呼んでください。"
 ];
 
+
 // rulesを改行で結合して一つの文字列にする
 let rule = rules.join("\n");
 const hoge = {
