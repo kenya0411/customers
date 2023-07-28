@@ -18,6 +18,19 @@ let rules = [
 ];
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+let test = 'test'
 // rulesを改行で結合して一つの文字列にする
 let rule = rules.join("\n");
 const hoge = {
