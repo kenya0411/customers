@@ -1,4 +1,9 @@
 
+
+
+
+
+
 const hoge = {
 	el: '.main_content',
 	data () {
