@@ -16,11 +16,7 @@ let rules = [
     "・文字数は300文字以内で作成してください。"
     "・相手の事は名前で呼んでください。"
 ];
-<<<<<<< Updated upstream
-		
-=======
 	
->>>>>>> Stashed changes
 // rulesを改行で結合して一つの文字列にする
 let rule = rules.join("\n");
 const hoge = {
