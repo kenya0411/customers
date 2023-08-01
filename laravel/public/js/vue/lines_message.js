@@ -7,8 +7,20 @@ let params_id =params.get('userid');
 
 // 'message_count'クエリパラメータを取得
 let message_count =params.get('message_count');
-let rule="・メッセージに対する返信文を作成してください。\n・相手とはメッセージでのやりとりです。\n・丁寧な文章で作成してください。\n・ですます調の丁寧語で作成してください。\n・冒頭は「ご連絡ありがとうございます」から始めてください。\n・文字数は300文字以内で作成してください。\n・相手の事は名前で呼んでください。"
 
+let rules = [
+    "・メッセージに対する返信文を作成してください。",
+    "・相手とはメッセージでのやりとりです。",
+    "・丁寧な文章で作成してください。",
+    "・ですます調の丁寧語で作成してください。",
+    "・冒頭は「ご連絡ありがとうございます」から始めてください。",
+    "・文字数は300文字以内で作成してください。",
+    "・相手の事は名前で呼んでください。",
+];
+
+
+// rulesを改行で結合して一つの文字列にする
+let rule = rules.join("\n");
 const hoge = {
 	el: '.main_content',
 	data () {
@@ -18,6 +30,7 @@ const hoge = {
 			lines_information: '',
 			lines_temporaries: '',
 			lines_persons: '',
+
 			persons: '',
 			customers: '',
 			users: '',
@@ -37,6 +50,9 @@ const hoge = {
 				result:"",
 			},
 			editedMessage: '',
+            selectedFortune: null, // 選択されたfortuneのIDを保持します
+            fortunes: [] // APIから取得したfortunesデータを保持します
+
 		}
 	},
 	methods: {	
@@ -63,16 +79,24 @@ const hoge = {
 		/*--------------------------------------------------- */
 		/* スクロールを一番下にする
 		/*--------------------------------------------------- */
-		  scrollToElement() {
-		  	//ロード直後だと取得できない場合があるので、時間差で取得
-		  	//メッセージの一番下のセレクタを取得
+	// 	  scrollToElement() {
+	// 	  	//ロード直後だと取得できない場合があるので、時間差で取得
+	// 	  	//メッセージの一番下のセレクタを取得
 
-	    this.$nextTick(function() {
-			let element = document.getElementsByClassName('end_message')[0];
-			element.scrollIntoView(false);  
-    });
+	//     this.$nextTick(function() {
+	// 		let element = document.getElementsByClassName('end_message')[0];
+	// 		element.scrollIntoView(false);  
+    // });
 
-		  },
+	// 	  },
+		scrollToElement() {
+		    this.$nextTick(function() {
+		        let element = document.getElementsByClassName('end_message')[0];
+		        if(element) {
+		            element.scrollIntoView(false); 
+		        }
+		    });
+		},
 		/*--------------------------------------------------- */
 		/* 鑑定士の名前を置換
 		/*--------------------------------------------------- */
@@ -146,28 +170,53 @@ const hoge = {
 		/*--------------------------------------------------- */
 		/* //ロード時に各種情報をデータベースから取得
 		/*--------------------------------------------------- */
-		
+
 		async load_page() {
 			let url = '/lines/ajax';
-			axios.post(url, {
-				userid: params_id,
-				message_count: message_count,
-			})
-			.then(response => [
-				this.lines_customers = response.data.lines_customers,
-				this.lines_list = response.data.lines_list,
-				this.lines_information = response.data.lines_information,
-				this.lines_information_reply = response.data.lines_information_reply,
-				this.users = response.data.users,
-				this.users_list = response.data.users_list,
-				this.persons = response.data.persons,
-				this.lines_persons = response.data.lines_persons,
-				this.lines_temporaries = response.data.lines_temporaries,
-				this.is_loaded = true,
-				this.gpt.name = response.data.lines_information.lines_customers_name, // ここで名前を設定
-				])
-			.catch(error => console.log(error)) 
+			return new Promise((resolve, reject) => { // Promiseを生成
+				axios.post(url, {
+					userid: params_id,
+					message_count: message_count,
+				})
+				.then(response => {
+					this.lines_customers = response.data.lines_customers;
+					this.lines_list = response.data.lines_list;
+					this.lines_information = response.data.lines_information;
+					this.lines_information_reply = response.data.lines_information_reply;
+					this.users = response.data.users;
+					this.users_list = response.data.users_list;
+					this.persons = response.data.persons;
+					this.lines_persons = response.data.lines_persons;
+					this.lines_temporaries = response.data.lines_temporaries;
+					this.is_loaded = true;
+					this.gpt.name = response.data.lines_information.lines_customers_name;
+					resolve(); // 全ての処理が終了したらresolveを呼び出す
+				})
+				.catch(error => {
+					console.log(error);
+					reject(error); // エラーが発生した場合はrejectを呼び出す
+				});
+			});
+		},
 
+		/*--------------------------------------------------- */
+		/* // 鑑定結果を取得
+		/*--------------------------------------------------- */		
+		async fetch_fortune() {
+			let url = '/lines/ajax/fetch_fortune_result';
+			if(this.lines_information.customers_id){
+
+				axios.post(url, {
+					customers_id: this.lines_information.customers_id,
+
+				})
+				.then(response => [
+					this.fortunes = response.data,
+
+
+				])
+				.catch(error => console.log(error))
+			}
 
 		},
 		/*--------------------------------------------------- */
@@ -214,14 +263,23 @@ const hoge = {
 	//ロード時にデータベースから情報を取得
 	created:function(){
 	// this.load_page();
-    this.load_page().then(() => {
-        this.gpt.name = this.lines_information.lines_customers_name;
-    });
+    // this.load_page().then(() => {
+    //     this.gpt.name = this.lines_information.lines_customers_name;//名前を取得
+    //     this.fetch_fortune();//鑑定結果をフェッチ
+
+    // });
+	this.load_page().then(() => {
+		this.fetch_fortune();
+		this.gpt.name = this.lines_information.lines_customers_name;//名前を取得
+	}).catch(error => {
+		console.error('load_pageでエラーが発生しました: ', error);
+	});
  },
  
 mounted() {
     window.onload = ()=>{
         this.scrollToElement();
+
     }
 
 
@@ -277,6 +335,13 @@ watch: {
     receivedMessagesAfterLastSent(newVal) {
         this.gpt.message = newVal.map(line_list => line_list.lines_messages.lines_messages_text).join('\n');
     },
+
+         selectedFortune: function (newFortune) {
+         	
+            // 選択されたfortuneが変更された時にgptの値を更新
+            this.gpt.worry = newFortune.fortunes_worry;
+            this.gpt.fortune = newFortune.fortunes_answer;
+        }
  },
 }
 

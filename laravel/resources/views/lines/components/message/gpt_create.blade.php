@@ -12,7 +12,6 @@
         <dt>名前</dt>
         <dd><input type="text" v-model="gpt.name" ></dd>
         <dt v-if="lines_information.customers_id">鑑定結果の出力</dt>
-
         <dd v-if="lines_information.customers_id">
             <select v-model="selectedFortune" v-if="fortunes">
                <option v-for="fortune in fortunes" :key="fortune.id" :value="fortune">@{{ fortune.created_at }}
