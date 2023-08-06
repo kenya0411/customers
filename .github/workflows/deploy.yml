@@ -16,5 +16,4 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -t rsa ${{ secrets.MIXHOST_HOSTNAME }} >> ~/.ssh/known_hosts
       - name: SSH and run
-        run: |
-          ssh ${{ secrets.MIXHOST_USERNAME }}@${{ secrets.MIXHOST_HOSTNAME }} "echo 'Hello, World!'"
+        run: ssh ${{ secrets.MIXHOST_USERNAME }}@${{ secrets.MIXHOST_HOSTNAME }} "echo 'Hello, World!'"
