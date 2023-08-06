@@ -1,27 +1,20 @@
-name: deploy to mixhost
+name: SSH Connection Test
 on:
   push:
     branches:
       - main
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          repository: 'kenya0411/customers'
-      - name: ssh key generate
-        run: echo "$SSH_PRIVATE_KEY" > key && chmod 600 key
+      - name: Setup SSH
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.MIXHOST_SECRET_KEY }} #githubに登録したmixhostへの秘密鍵を指定
-      - name: rsync deployments
-        uses: burnett01/rsync-deployments@5.1
-        with:
-          switches: -avz --delete
-          path: ./ #mixhostに送りたいファイルのあるパスを指定
-          remote_path: /home/${{ secrets.MIXHOST_USERNAME }}/public_html/site/customers #mixhostのどこに同期させるか
-          remote_host: ${{ secrets.MIXHOST_HOSTNAME }}
-          remote_user: ${{ secrets.MIXHOST_USERNAME }}
-          remote_port: 22
-          remote_key: ${{ secrets.MIXHOST_SECRET_KEY }}
- 
+          SSH_PRIVATE_KEY: ${{ secrets.MIXHOST_SECRET_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -t rsa ${{ secrets.MIXHOST_HOSTNAME }} >> ~/.ssh/known_hosts
+      - name: SSH and run
+        run: |
+          ssh ${{ secrets.MIXHOST_USERNAME }}@${{ secrets.MIXHOST_HOSTNAME }} "echo 'Hello, World!'"
