@@ -24,3 +24,4 @@ jobs:
           remote_user: ${{ secrets.MIXHOST_USERNAME }}
           remote_port: 22
           remote_key: ${{ secrets.MIXHOST_SECRET_KEY }}
+ 
