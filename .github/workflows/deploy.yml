@@ -7,13 +7,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup SSH
+      - name: Print SSH key
+        run: echo "$SSH_PRIVATE_KEY"
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.MIXHOST_SECRET_KEY }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -t rsa ${{ secrets.MIXHOST_HOSTNAME }} >> ~/.ssh/known_hosts
-      - name: SSH and run
-        run: ssh ${{ secrets.MIXHOST_USERNAME }}@${{ secrets.MIXHOST_HOSTNAME }} "echo 'Hello, World!'"
+          SSH_PRIVATE_KEY: ${{ secrets.MIXHOST_SECRET_KEY }} 
