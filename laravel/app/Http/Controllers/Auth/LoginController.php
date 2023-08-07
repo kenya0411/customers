@@ -60,4 +60,10 @@ class LoginController extends Controller
 
         }
     }
+protected function credentials(\Illuminate\Http\Request $request)
+{
+    return array_merge($request->only($this->username(), 'password'), ['is_delete' => 0]);
+}
+
+    
 }
