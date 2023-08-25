@@ -7,10 +7,10 @@
 @section('content')
 
 
-{{-- <div id="loading" v-bind:class=' {close:is_loaded}'>
+<div id="loading" v-bind:class=' {close:is_loaded}'>
   <img src="/img/common/loading.gif" >
 </div>
- --}}
+
 
 
 
