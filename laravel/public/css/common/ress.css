@@ -1,5 +1,4 @@
 html {
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   overflow-y: scroll;
   -webkit-text-size-adjust: 100%;
@@ -7,7 +6,6 @@ html {
 
 *, ::before, ::after {
   background-repeat: no-repeat;
-  -webkit-box-sizing: inherit;
   box-sizing: inherit;
 }
 
@@ -96,7 +94,7 @@ input {
   border-radius: 0;
 }
 
-button, [type="button"], [type="reset"], [type="submit"], [role="button"] {
+button, [type=button], [type=reset], [type=submit], [role=button] {
   cursor: pointer;
 }
 
@@ -104,14 +102,14 @@ button, [type="button"], [type="reset"], [type="submit"], [role="button"] {
   cursor: default;
 }
 
-[type="number"] {
+[type=number] {
   width: auto;
 }
 
-[type="search"] {
+[type=search] {
   -webkit-appearance: textfield;
 }
-[type="search"]::-webkit-search-cancel-button, [type="search"]::-webkit-search-decoration {
+[type=search]::-webkit-search-cancel-button, [type=search]::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 
@@ -136,16 +134,16 @@ button::-moz-focus-inner {
   padding: 0;
 }
 
-[type="button"]::-moz-focus-inner, [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner {
+[type=button]::-moz-focus-inner, [type=reset]::-moz-focus-inner, [type=submit]::-moz-focus-inner {
   border-style: 0;
   padding: 0;
 }
 
-button:-moz-focusring, [type="button"]::-moz-focus-inner, [type="reset"]::-moz-focus-inner, [type="submit"]::-moz-focus-inner {
+button:-moz-focusring, [type=button]::-moz-focus-inner, [type=reset]::-moz-focus-inner, [type=submit]::-moz-focus-inner {
   outline: 1px dotted ButtonText;
 }
 
-button, html [type="button"], [type="reset"], [type="submit"] {
+button, html [type=button], [type=reset], [type=submit] {
   -webkit-appearance: button;
 }
 
@@ -179,7 +177,7 @@ legend {
   font: inherit;
 }
 
-[type="search"] {
+[type=search] {
   -webkit-appearance: textfield;
   outline-offset: -2px;
 }
@@ -201,15 +199,15 @@ audio, canvas, progress, video {
 }
 
 @media screen {
-  [hidden~="screen"] {
+  [hidden~=screen] {
     display: inherit;
   }
-  [hidden~="screen"]:not(:active):not(:focus):not(:target) {
+  [hidden~=screen]:not(:active):not(:focus):not(:target) {
     position: absolute !important;
     clip: rect(0 0 0 0) !important;
   }
 }
-[aria-busy="true"] {
+[aria-busy=true] {
   cursor: progress;
 }
 
@@ -219,6 +217,12 @@ audio, canvas, progress, video {
 
 [aria-disabled] {
   cursor: default;
+}
+
+::-moz-selection {
+  background-color: #b3d4fc;
+  color: #000;
+  text-shadow: none;
 }
 
 ::selection {
@@ -237,7 +241,6 @@ ul {
 }
 
 .formError * {
-  -webkit-box-sizing: initial;
   box-sizing: initial;
 }
 

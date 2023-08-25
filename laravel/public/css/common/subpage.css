@@ -240,10 +240,12 @@ section .heading h3 {
 }
 .btnGroup .btnFlex .btn a > span > span:after, .btnGroup .btnFlex .btn a:visited > span > span:after {
   top: -9px;
+  -webkit-transform: rotate(30deg);
   transform: rotate(30deg);
 }
 .btnGroup .btnFlex .btn a > span > span:before, .btnGroup .btnFlex .btn a:visited > span > span:before {
   top: 8px;
+  -webkit-transform: rotate(-30deg);
   transform: rotate(-30deg);
 }
 
@@ -253,7 +255,7 @@ section .heading h3 {
     flex-wrap: wrap;
   }
   .btnGroup .btnFlex .flex2 {
-    width: calc(100%);
+    width: 100%;
   }
   .btnGroup .btnFlex .btn2 {
     margin-top: 20px;

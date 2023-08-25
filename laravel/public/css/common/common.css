@@ -25,7 +25,7 @@
 .listSection > ul > li {
   line-height: 1.3em;
 }
-.listSection [type="text"] {
+.listSection [type=text] {
   height: 100%;
 }
 .listSection .flexWrap .pcBlock {
@@ -58,7 +58,11 @@
   border: 1px solid #1B8EE4;
   color: #fff;
   transition: all 0.5s ease;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
   max-width: fit-content;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   padding: 8px 12px;
   line-height: 1em;
@@ -86,6 +90,8 @@
   border: 1px solid #aaa;
   color: #fff;
   transition: all 0.5s ease;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
   max-width: fit-content;
   width: 100%;
   max-width: initial;
@@ -144,10 +150,10 @@
 }
 
 @media (max-width: 768px) {
-  .listSection .flexWrap .pcBlock [type="text"], .listSection .flexWrap .pcBlock textarea {
+  .listSection .flexWrap .pcBlock [type=text], .listSection .flexWrap .pcBlock textarea {
     background-color: #fff;
   }
-  .listSection .flexWrap .pcBlock [type="submit"] {
+  .listSection .flexWrap .pcBlock [type=submit] {
     width: auto;
   }
 }
@@ -358,14 +364,14 @@
 }
 
 @media (max-width: 768px) {
-  .personList .flexWrap .pcBlock [type="text"] {
+  .personList .flexWrap .pcBlock [type=text] {
     background-color: #fff;
   }
-  .personList .flexWrap .pcBlock [type="submit"] {
+  .personList .flexWrap .pcBlock [type=submit] {
     width: auto;
   }
 }
-.reserveList [name="users_id"] {
+.reserveList [name=users_id] {
   color: red;
 }
 .reserveList .pcBlock .btnFlex {
@@ -914,7 +920,7 @@
 
 /*--------------------------------------------------- */
 /* orderList */
-/*--------------------------------------------------- */
+/*--------------------------------------------------- */	
 .orderList .modalWindow .inner {
   max-width: calc(80% - 50px);
   max-height: calc(80% - 50px);
@@ -935,8 +941,8 @@
 
 @media (max-width: 768px) {
   .orderList .modalWindow .inner {
-    max-width: calc(90%);
-    max-height: calc(90%);
+    max-width: 90%;
+    max-height: 90%;
   }
   .orderList .modalWindow .flex {
     flex-wrap: wrap;
@@ -944,7 +950,7 @@
     align-content: space-between;
   }
   .orderList .modalWindow .flex2 {
-    width: calc(100%);
+    width: 100%;
     height: calc(50% - 8px);
   }
   .orderList .modalWindow .show_area {
@@ -960,8 +966,7 @@
 }
 
 /*--------------------------------------------------- */
-/* */
-/*--------------------------------------------------- */
+/* /*--------------------------------------------------- */
 .settingUserFrom ul {
   width: 100%;
 }
@@ -990,13 +995,12 @@
 }
 
 /*--------------------------------------------------- */
-/* */
-/*--------------------------------------------------- */
+/* /*--------------------------------------------------- */
 .settingUserFrom ul li > div:nth-of-type(1) {
   width: 40%;
 }
 .settingUserFrom ul li > div:nth-of-type(2) {
-  width: calc(60%);
+  width: 60%;
 }
 
 @media (max-width: 768px) {
@@ -1027,10 +1031,10 @@
     width: calc(25% - 30px);
   }
   .settingUserFrom .list_mail_block ul li > div:nth-of-type(5) {
-    width: calc(25%);
+    width: 25%;
   }
   .settingUserFrom .list_mail_block ul li > div:nth-of-type(6) {
-    width: calc(80px);
+    width: 80px;
   }
   .settingUserFrom .list_mail_block ul li > div select {
     width: 100%;
@@ -1154,7 +1158,7 @@
 .formSection > .inner {
   padding: 0px 20px 40px;
 }
-.formSection [type="text"], .formSection select, .formSection [type="number"], .formSection textarea {
+.formSection [type=text], .formSection select, .formSection [type=number], .formSection textarea {
   background-color: #f5f5f5;
   border: 1px solid #aaa;
   padding: 8px;
@@ -1198,6 +1202,8 @@
   border: 1px solid #1B8EE4;
   color: #fff;
   transition: all 0.5s ease;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
   max-width: fit-content;
   margin: auto;
   width: 200px;
@@ -1229,16 +1235,16 @@
 .formSection .checkBoxWrap input, .formSection .checkBoxWrap label {
   cursor: pointer;
 }
-.formSection .dateBlock [name="date_year"] {
+.formSection .dateBlock [name=date_year] {
   max-width: 100px;
   margin-right: 4px;
 }
-.formSection .dateBlock [name="date_month"] {
+.formSection .dateBlock [name=date_month] {
   max-width: 80px;
   margin-right: 4px;
   margin-left: 16px;
 }
-.formSection .dateBlock [name="date_day"] {
+.formSection .dateBlock [name=date_day] {
   margin-right: 4px;
   margin-left: 16px;
   max-width: 80px;
@@ -1279,7 +1285,7 @@
   }
   .formSection dd {
     border-bottom: 1px solid #ddd;
-    width: calc(100%);
+    width: 100%;
     padding-top: 8px;
   }
 }
@@ -1355,7 +1361,7 @@
     width: 100%;
   }
   .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(1), .addFrom.formSection .price_dd .flex .flex4:nth-of-type(1) {
-    width: calc(50%);
+    width: 50%;
   }
   .detailFrom.formSection .price_dd .flex .flex4:nth-of-type(1) input, .addFrom.formSection .price_dd .flex .flex4:nth-of-type(1) input {
     width: 100%;
@@ -1474,7 +1480,7 @@
   cursor: pointer;
   line-height: 1.2em;
 }
-.formSection .send_common_block .reply_available_list .checkbox_wrap [type="checkbox"] {
+.formSection .send_common_block .reply_available_list .checkbox_wrap [type=checkbox] {
   width: auto;
 }
 
@@ -1507,8 +1513,7 @@
   }
 }
 /*--------------------------------------------------- */
-/* */
-/*--------------------------------------------------- */
+/* /*--------------------------------------------------- */
 .line_customer .heading {
   padding-bottom: 16px;
   padding-top: 16px;
@@ -1557,8 +1562,7 @@
 }
 
 /*--------------------------------------------------- */
-/* */
-/*--------------------------------------------------- */
+/* /*--------------------------------------------------- */
 .line_message {
   background-color: transparent;
 }
@@ -1576,7 +1580,7 @@
   content: "";
   content: "";
   border-bottom: 1px solid #cecece;
-  width: calc(100%);
+  width: 100%;
   height: 1px;
   position: absolute;
   left: 0;
@@ -1606,6 +1610,8 @@
   font-size: 1.2rem;
   line-height: 1em;
   display: flex;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
   max-width: fit-content;
   justify-content: center;
   align-items: center;
@@ -1670,6 +1676,8 @@
   border-radius: 10px;
   padding: 12px 16px;
   line-height: 1.5em;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   font-size: 16px;
   font-size: 1.6rem;
@@ -1891,8 +1899,7 @@
 }
 
 /*--------------------------------------------------- */
-/* */
-/*--------------------------------------------------- */
+/* /*--------------------------------------------------- */
 .mailFrom ul {
   width: 100%;
 }
@@ -1921,13 +1928,12 @@
 }
 
 /*--------------------------------------------------- */
-/* */
-/*--------------------------------------------------- */
+/* /*--------------------------------------------------- */
 .new_mail_block ul li > div:nth-of-type(1) {
   width: 40%;
 }
 .new_mail_block ul li > div:nth-of-type(2) {
-  width: calc(60%);
+  width: 60%;
 }
 
 @media (max-width: 768px) {
@@ -1952,10 +1958,10 @@
     width: calc(65% - 120px);
   }
   .mailFrom .list_mail_block ul li > div:nth-of-type(3) {
-    width: calc(160px);
+    width: 160px;
   }
   .mailFrom .list_mail_block ul li > div:nth-of-type(4) {
-    width: calc(80px);
+    width: 80px;
   }
 }
 .mailFrom .list_mail_block ul li > div .delete_wrap button {
@@ -2042,8 +2048,7 @@
 }
 
 /*--------------------------------------------------- */
-/* */
-/*--------------------------------------------------- */
+/* /*--------------------------------------------------- */
 .mailFrom ul {
   width: 100%;
 }
@@ -2072,8 +2077,7 @@
 }
 
 /*--------------------------------------------------- */
-/* */
-/*--------------------------------------------------- */
+/* /*--------------------------------------------------- */
 .new_person_block ul li > div {
   width: 25%;
 }
@@ -2196,6 +2200,8 @@ main .editBtn {
   border: 1px solid #1B8EE4;
   color: #fff;
   transition: all 0.5s ease;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
   max-width: fit-content;
   width: 100%;
   max-width: initial;
@@ -2219,6 +2225,8 @@ main .deleteBtn {
   border: 1px solid #aaa;
   color: #fff;
   transition: all 0.5s ease;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
   max-width: fit-content;
   width: 100%;
   max-width: initial;
@@ -2242,6 +2250,8 @@ main .searchBtn {
   border: 1px solid #71BB15;
   color: #fff;
   transition: all 0.5s ease;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
   max-width: fit-content;
   width: 100%;
   height: 100%;
@@ -2266,6 +2276,8 @@ main .cloneBtn {
   border: 1px solid #000;
   color: #fff;
   transition: all 0.5s ease;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
   max-width: fit-content;
   width: 100%;
   max-width: 200px;
@@ -2290,6 +2302,8 @@ main .detailBtn {
   border: 1px solid #fff;
   color: #1B8EE4;
   transition: all 0.5s ease;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
   max-width: fit-content;
   width: 100%;
 }
@@ -2321,6 +2335,8 @@ main .backListBtn a {
   justify-content: center;
   align-items: center;
   word-break: break-all;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   text-decoration: none;
   background: #fff;
@@ -2347,6 +2363,8 @@ main .backBtn a {
   justify-content: center;
   align-items: center;
   word-break: break-all;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   text-decoration: none;
   background: #888;
@@ -2371,7 +2389,7 @@ main .backBtn a {
 main .backBtn a:before {
   content: "";
   font-family: "Font Awesome 5 Free";
-  content: "";
+  content: "\f0d9";
   font-weight: 700;
   margin-right: 4px;
   /* style */
@@ -2387,6 +2405,8 @@ main .addbtn a, main .commonBtn a {
   justify-content: center;
   align-items: center;
   word-break: break-all;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   text-decoration: none;
   background: #fff;
@@ -2421,16 +2441,28 @@ main .addbtn a, main .commonBtn a {
 .searchBlock ul .li {
   margin-right: 8px;
 }
-.searchBlock select, .searchBlock [type="text"] {
+.searchBlock select, .searchBlock [type=text] {
   width: auto;
   background-color: #fff;
   height: 36px;
   padding: 8px;
 }
-.searchBlock .search_input [type="text"] {
+.searchBlock .search_input [type=text] {
   width: 200px;
 }
-.searchBlock .search_input [type="text"]::placeholder {
+.searchBlock .search_input [type=text]::-webkit-input-placeholder {
+  color: #949494;
+  text-align: right;
+}
+.searchBlock .search_input [type=text]::-moz-placeholder {
+  color: #949494;
+  text-align: right;
+}
+.searchBlock .search_input [type=text]::-ms-input-placeholder {
+  color: #949494;
+  text-align: right;
+}
+.searchBlock .search_input [type=text]::placeholder {
   color: #949494;
   text-align: right;
 }
@@ -2551,23 +2583,43 @@ main .addbtn a, main .commonBtn a {
 }
 #loading.close {
   opacity: 0;
+  -webkit-animation: sk-scaleout 1s infinite ease-in-out;
   animation: sk-scaleout 1s infinite ease-in-out;
+  max-width: 100%;
 }
-@keyframes sk-scaleout {
+@-webkit-keyframes sk-scaleout {
   0% {
+    -webkit-transform: scale(0);
     transform: scale(0);
   }
   100% {
+    -webkit-transform: scale(1);
     transform: scale(1);
     opacity: 0;
     display: none;
   }
 }
+@keyframes sk-scaleout {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 0;
+    display: none;
+  }
+}
+
 .opacity0 {
   opacity: 0;
 }
 
 .user-select {
+  -webkit-user-select: all;
+  -moz-user-select: all;
+  -ms-user-select: all;
   user-select: all;
 }
 
@@ -2597,7 +2649,7 @@ main .addbtn a, main .commonBtn a {
   padding: 8px 16px;
 }
 
-[disabled="true"] {
+[disabled=true] {
   pointer-events: none;
 }
 
@@ -2637,6 +2689,10 @@ main input, main textarea, main .textBox {
   line-height: 1.5em;
   padding: 4px 8px;
   background-color: #eee;
+}
+main input:-moz-read-only, main textarea:-moz-read-only, main .textBox:-moz-read-only {
+  background-color: #fff;
+  cursor: default;
 }
 main input:read-only, main textarea:read-only, main .textBox:read-only {
   background-color: #fff;

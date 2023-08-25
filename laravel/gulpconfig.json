@@ -1,13 +1,11 @@
 {
-
-
-
-
-   "url" : "http://localhost/index.php",
-   "img" : "./**/img/*.{jpg,jpeg,png,gif,svg}",
-   "imgdest" : "./img-min/"
-
-
-
-
+  "url" : "http://127.0.0.1:8000/",
+  "img" : "./**/img/*.{jpg,jpeg,png,gif,svg}",
+  "imgdest" : "./img-min/",
+  "paths" : {
+    "work" : "src",
+    "sass" : ["./scss/**/*.sass", "!./scss/**/_*.sass"],
+    "partials" : "./scss/**/_*.sass",
+    "dist" : "./public"
+  }
 }

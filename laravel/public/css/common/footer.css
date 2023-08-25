@@ -26,7 +26,7 @@
 }
 #footGoto a:before {
   font-family: "Font Awesome 5 Free";
-  content: "";
+  content: "\f102";
   font-weight: 700;
   position: absolute;
   top: 0.8em;
@@ -36,6 +36,7 @@
 @media all and (-ms-high-contrast: none) {
   #footGoto a:before {
     left: 50%;
+    -webkit-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
   }
 }
@@ -91,7 +92,7 @@ footer a:hover {
     justify-content: space-between;
   }
   .footerNavi li {
-    width: calc(20%);
+    width: 20%;
     border-right: 1px dotted #ddd;
   }
   .footerNavi li:nth-last-of-type(1) {
