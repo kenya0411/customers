@@ -153,6 +153,7 @@ public function ajax_index(Request $request) {
 
 		//外注用
 		$users = DB::table('users')
+		->where('is_delete','=',0)//論理削除されてないもの
 		->where('permissions_id','=',2)//論理削除されてないもの
 		->get(); 
 
