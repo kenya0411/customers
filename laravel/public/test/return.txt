@@ -1,0 +1,13 @@
+(object) array(
+   'lines_customers_id' => 142,
+   'lines_customers_userid' => 'Ucb7718e5d65232dca709bdbe33f600c2',
+   'lines_customers_name' => 'ken',
+   'customers_id' => 0,
+   'persons_id' => 1,
+   'updated_at' => '2023-09-27 03:30:06',
+   'created_at' => '2023-09-27 03:30:06',
+   'is_delete' => 0,
+   'lines_customers_display_name' => 'ken',
+   'lines_customers_picture_url' => 'https://profile.line-scdn.net/0m0228838c72518280fa90a95e1d70985a3921baafb511',
+   'lines_customers_reply_available' => NULL,
+)

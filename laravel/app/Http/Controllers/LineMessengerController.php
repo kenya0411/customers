@@ -29,6 +29,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
 
+
+//エラーログ用
+use Illuminate\Support\Facades\Log;
+
 class LineMessengerController extends Controller
 {
 
@@ -52,39 +56,79 @@ public function index(Request $request)
 
 
 
+
+/*--------------------------------------------------- */
+/* エラーメール
+/*--------------------------------------------------- */
+
+
+// private function sendErrorMail($error_name,\Exception $e) {
+private function sendErrorMail($error_name,$e) {
+    $to = 'line@keiran-fortune.com'; // 管理者のメールアドレスを設定
+    $message = $error_name.': ' . $e->getMessage();
+
+        $data = [
+            'name' => "管理者",//宛先
+
+            'from_email' => "info@customer.neobingostyle.com",//送信元メールアドレス
+            'to_email' => $to,//宛先
+            'view' => "lines.components.mail.error_mail",
+            'site_name' => "注文管理システム",//サイトネーム
+            'subject' => "customersでエラーが発生しました。",//タイトル
+            'message' => $message  ,
+            'date' => date( "m月d日" ) ,//日付
+            'time' => date( "H時i分s秒" ) ,//時間
+
+        ];
+        Mail::send(new SendMail($data));//メール送信
+}
+
 /*--------------------------------------------------- */
 /* webhook
 /*--------------------------------------------------- */
 
-    public function webhook(Request $request) {
-        // $lstep = $this->push_lstep($request);//受信したメッセージをLステップに送信
+
+public function webhook(Request $request) {
+
+
+    try {
+
         // LINEから送られた内容を$inputsに代入
-        $inputs=$request->all();
+        $inputs = $request->all();
 
         $post_type = !empty($request->post_type) ? $request->post_type : null;
         //メッセージを受信した場合
-        if(!empty($inputs['events'])) {
+        if (!empty($inputs['events'])) {
 
-        $data = $this->get_message($request);//受信したメッセージをDBに保存
-        return [];
-        
-        }else{
+            $data = $this->get_message($request);//受信したメッセージをDBに保存
 
-        if(!empty($post_type)){
-            //メッセージを送信or削除する場合
-            $data = $this->send_temporary_deta($request);
-            return $data;  
-        }else{
-        //公式LINEのユーザーIDを取得
-        $data = $this->get_oficial_lineid($request,$inputs);
-        // return $data;  
+            return [];
+        } else {
+            if (!empty($post_type)) {
+                //メッセージを送信or削除する場合
+                $data = $this->send_temporary_deta($request);
+                return $data;
+            } else {
+                //公式LINEのユーザーIDを取得
+                //
+                $data = $this->get_oficial_lineid($request, $inputs);
 
+                // return $data;
+            }
         }
-        
+    } catch (\Exception $e) {
+        // エラーメッセージをログに記録
+        Log::error('Webhook Error: ' . $e->getMessage());
 
-        }
+        //エラーメール
+        $this->sendErrorMail("Webhook Error",$e);
 
+        // エラーが発生した場合、適切なレスポンスを返すか、エラーを再スロー
+        return response()->json(['error' => 'An error occurred'], 500);
     }
+}
+
+
 
 
 public function push_lstep(Request $request) {
@@ -92,7 +136,7 @@ public function push_lstep(Request $request) {
         $headers=$request->headers;
         // $test=$request;
     // $id=$inputs['events'];
-    file_put_contents("test/return.txt", var_export($inputs, true));
+    // file_put_contents("test/return.txt", var_export($inputs, true));
 
     $inputs = json_encode($inputs);
 
@@ -192,34 +236,33 @@ public function push_lstep(Request $request) {
 /* webhook
 /*--------------------------------------------------- */
 
-public function get_oficial_lineid(Request $request,$inputs) {
 
 
-
-if($inputs['destination']){
-
-
-    $site_url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'] ;
-    $data = [
-        'name' => "ken",//送信元メールアドレス
-        'from_email' => "info@customer.neobingostyle.com",//送信元メールアドレス
-        'to_email' => "shimoda.kenya@gmail.com",//宛先
-        'destination' => $inputs['destination'],
-        'view' => "lines.components.mail.userid_mail",
-        'subject' => "LINEのユーザーIDです。",//タイトル
-        'site_name' => "注文管理システム",//サイトネーム
-        'site_url' => $site_url ,//サイトネーム
-
-    ];
-        Mail::send(new SendMail($data));//メール送信
-
-
-
-
+public function get_oficial_lineid(Request $request, $inputs) {
+    try {
+        if ($inputs['destination']) {
+            $site_url = (empty($_SERVER['HTTPS']) ? 'http://' : 'https://') . $_SERVER['HTTP_HOST'];
+            $data = [
+                'name' => "ken", // 送信元メールアドレス
+                'from_email' => "info@customer.neobingostyle.com", // 送信元メールアドレス
+                'to_email' => "shimoda.kenya@gmail.com", // 宛先
+                'destination' => $inputs['destination'],
+                'view' => "lines.components.mail.userid_mail",
+                'subject' => "LINEのユーザーIDです。", // タイトル
+                'site_name' => "注文管理システム", // サイトネーム
+                'site_url' => $site_url, // サイトネーム
+            ];
+            Mail::send(new SendMail($data)); // メール送信
+        }
+    } catch (\Exception $e) {
+        // エラーメッセージをログに記録
+        Log::error('get_oficial_lineidエラー: ' . $e->getMessage());
+        // エラーが発生した場合、適切なレスポンスを返すか、エラーを再スロー
+        throw $e;
+    }
 }
 
 
-}
 
 /*--------------------------------------------------- */
 /* メッセージの送信or削除
@@ -407,106 +450,121 @@ public function push_message_add_database(Request $request,$user_id,$reply) {
 /*--------------------------------------------------- */
 /* 受信メッセージが来た時
 /*--------------------------------------------------- */
-    public function get_message(Request $request) {
-        $inputs=$request->all();
-        // そこからtypeをとりだし、$message_typeに代入
-        $message_type=$inputs['events'][0]['type'];
 
-        //カスタマー情報が存在するか確認
-        $get_customer =$this->get_customer_add_database($request);
 
+public function get_message(Request $request) {
+    try {
+        $inputs = $request->all();
+        // そこからtypeを取り出し、$message_typeに代入
+        $message_type = $inputs['events'][0]['type'];
+
+        // カスタマー情報が存在するか確認
+        $get_customer = $this->get_customer_add_database($request);
 
         // メッセージが送られた場合、$message_typeは'message'となる。その場合処理実行。
-        if($message_type=='message') {
-        //メッセージの種類を確認
-        $type=$message_type=$inputs['events'][0]['message']['type'];
+        if ($message_type == 'message') {
 
-        $get_message_type =$this->get_message_type($request,$inputs);
+            // メッセージの種類を確認
+            $type = $message_type = $inputs['events'][0]['message']['type'];
 
- 
-            
+            $get_message_type = $this->get_message_type($request, $inputs);
+
         }
+    } catch (\Exception $e) {
+        // エラーメッセージをログに記録
+        Log::error('get_messageエラー: ' . $e->getMessage());
+        // エラーが発生した場合、適切なレスポンスを返すか、エラーを再スロー
+        throw $e;
     }
+}
+
 
 /*--------------------------------------------------- */
 /* LINEのユーザー情報を取得
 /*--------------------------------------------------- */
-public function get_user_profile(Request $request,$inputs,$user_id) {
-
-    $lines_persons =$this->get_message_person($request,$inputs);//公式LINEの受信先を確認
-    // $user_id=$inputs['events'][0]['source']['userId'];//顧客のユーザーIDを取得
 
 
-    //LINEの情報にアクセス
-    $http_client = new CurlHTTPClient($lines_persons['lines_persons_access_token']);
-    $bot = new LINEBot($http_client, ['channelSecret' => $lines_persons['lines_persons_channel_secret']]);
-    $response = $bot->getProfile($user_id);
+public function get_user_profile(Request $request, $inputs, $user_id) {
+    try {
+        // 公式LINEの受信先を確認
+        $lines_persons = $this->get_message_person($request, $inputs);
 
-    $result = [];
+        // LINEの情報にアクセス
+        $http_client = new CurlHTTPClient($lines_persons['lines_persons_access_token']);
+        $bot = new LINEBot($http_client, ['channelSecret' => $lines_persons['lines_persons_channel_secret']]);
+        $response = $bot->getProfile($user_id);
 
-    if ($response->isSucceeded()) {
-        //ユーザー情報取得
-        $profile = $response->getJSONDecodedBody();
+        $result = [];
 
-    $result = array(
-      'userId' => $profile['userId'],//ユーザーID
-      'displayName' => $profile['displayName'],//LINEの表示名
-      'pictureUrl' => $profile['pictureUrl'],//プロフィール画像
-      'persons_id' => $lines_persons['persons_id'],//担当者の番号
-      'lines_persons_id' => $lines_persons['lines_persons_id'],//担当者のLINEの番号
-      'lines_persons_userid' => $lines_persons['lines_persons_userid'],//担当者のLINEユーザーID
-    );
+        if ($response->isSucceeded()) {
+            // ユーザー情報取得
+            $profile = $response->getJSONDecodedBody();
 
+            $result = array(
+                'userId' => $profile['userId'], // ユーザーID
+                'displayName' => $profile['displayName'], // LINEの表示名
+                'pictureUrl' => $profile['pictureUrl'], // プロフィール画像
+                'persons_id' => $lines_persons['persons_id'], // 担当者の番号
+                'lines_persons_id' => $lines_persons['lines_persons_id'], // 担当者のLINEの番号
+                'lines_persons_userid' => $lines_persons['lines_persons_userid'], // 担当者のLINEユーザーID
+            );
+        }
 
+        return $result;
+    } catch (\Exception $e) {
+        // エラーメッセージをログに記録
+        Log::error('get_user_profileエラー: ' . $e->getMessage());
+        // エラーが発生した場合、適切なレスポンスを返すか、エラーを再スロー
+        throw $e;
+    }
 }
 
-
-return $result;
-
-}
 
 /*--------------------------------------------------- */
 /* メッセージの内容を確認し、DBに保存＋メールを送信
 /*--------------------------------------------------- */
-public function get_message_type(Request $request,$inputs) {
 
-             $message_arr= $inputs['events'][0]["message"];
-             $message= $message_arr['text'];
-        
-            //受信メッセージが重複しないように
-            $lines_messages = DB::table('lines_messages')
-            ->where('is_delete','=',0)//論理削除されてないもの
-            ->where('lines_messages_number','=',$message_arr['id'])//既にメッセージがDBに保存されてるか確認
-            ->first(); 
 
-            //新規のメッセージの場合
-            if(empty($lines_messages)):
-                //受信メッセージをデータベースに保存
-               $data =$this->get_message_add_database($request,$inputs);//メッセージをDBに保存
-               $lines_persons =$this->get_message_person($request,$inputs);//公式LINEの受信先を確認
+public function get_message_type(Request $request, $inputs) {
+    try {
+        $message_arr = $inputs['events'][0]["message"];
+        $message = $message_arr['text'];
 
-                // replyTokenを取得(必要ないかも)
-                $reply_token=$inputs['events'][0]['replyToken'];
-     
-                // LINEBOTSDKの設定
-                // $http_client = new CurlHTTPClient(config('services.line.channel_token'));
-                // $bot = new LINEBot($http_client, ['channelSecret' => config('services.line.messenger_secret')]);
-                $http_client = new CurlHTTPClient($lines_persons['lines_persons_access_token']);
-                $bot = new LINEBot($http_client, ['channelSecret' => $lines_persons['lines_persons_channel_secret']]);
+        // 受信メッセージが重複しないように
+        $lines_messages = DB::table('lines_messages')
+            ->where('is_delete', '=', 0) // 論理削除されてないもの
+            ->where('lines_messages_number', '=', $message_arr['id']) // 既にメッセージがDBに保存されてるか確認
+            ->first();
 
-                //カスタマーのLINEIDを取得
-                $user_id=$inputs['events'][0]['source']['userId'];
-                $check_ngword_message = $this->check_ngword_message($request,$message);
-                //NGワードに含まれてない場合、メールを送信
-                if($check_ngword_message == "send"){
-                    //メッセージを受信したらメールを送信
-                    $send_mail = $this->send_mail($request,$user_id,$message);
-                }
-            endif;
+        // 新規のメッセージの場合
+        if (empty($lines_messages)) {
+            // 受信メッセージをデータベースに保存
+            $data = $this->get_message_add_database($request, $inputs); // メッセージをDBに保存
+            $lines_persons = $this->get_message_person($request, $inputs); // 公式LINEの受信先を確認
 
+            // replyTokenを取得(必要ないかも)
+            $reply_token = $inputs['events'][0]['replyToken'];
+
+            // LINEBOTSDKの設定
+            $http_client = new CurlHTTPClient($lines_persons['lines_persons_access_token']);
+            $bot = new LINEBot($http_client, ['channelSecret' => $lines_persons['lines_persons_channel_secret']]);
+
+            // カスタマーのLINEIDを取得
+            $user_id = $inputs['events'][0]['source']['userId'];
+            $check_ngword_message = $this->check_ngword_message($request, $message);
+            // NGワードに含まれてない場合、メールを送信
+            if ($check_ngword_message == "send") {
+                // メッセージを受信したらメールを送信
+                $send_mail = $this->send_mail($request, $user_id, $message);
+            }
+        }
+    } catch (\Exception $e) {
+        // エラーメッセージをログに記録
+        Log::error('get_message_typeエラー: ' . $e->getMessage());
+        // エラーが発生した場合、適切なレスポンスを返すか、エラーを再スロー
+        throw $e;
+    }
 }
-
-
 /*--------------------------------------------------- */
 /* 
 /*--------------------------------------------------- */
@@ -702,108 +760,115 @@ public function ngword(Request $request) {
 /*--------------------------------------------------- */
 /* 公式LINEの受信先を確認
 /*--------------------------------------------------- */
-public function get_message_person(Request $request,$inputs) {
-    //受信先の鑑定士を取得
-    $lines_persons = DB::table('lines_persons')
-    ->where('is_delete','=',0)//論理削除されてないもの
-    ->where('lines_persons_userid','=',$inputs['destination'])//既にメッセージがDBに保存されてるか確認
-    ->first(); 
 
-    if(!empty($lines_persons)){
+public function get_message_person(Request $request, $inputs) {
+    try {
+        // 受信先の鑑定士を取得
+        $lines_persons = DB::table('lines_persons')
+            ->where('is_delete', '=', 0) // 論理削除されてないもの
+            ->where('lines_persons_userid', '=', $inputs['destination']) // 既にメッセージがDBに保存されてるか確認
+            ->first();
 
-    // 配列に格納
-    $result = array(
-        'persons_id' =>$lines_persons->persons_id,
-        'lines_persons_id' =>$lines_persons->lines_persons_id,
-        'lines_persons_userid' =>$lines_persons->lines_persons_userid,
-        'lines_persons_channel_id' =>$lines_persons->lines_persons_channel_id,
-        'lines_persons_channel_secret' =>$lines_persons->lines_persons_channel_secret,
-        'lines_persons_access_token' =>$lines_persons->lines_persons_access_token,
-    );
-    }else{
-      $result =[];  
-    };
+        $result = [];
 
+        if (!empty($lines_persons)) {
+            // 配列に格納
+            $result = array(
+                'persons_id' => $lines_persons->persons_id,
+                'lines_persons_id' => $lines_persons->lines_persons_id,
+                'lines_persons_userid' => $lines_persons->lines_persons_userid,
+                'lines_persons_channel_id' => $lines_persons->lines_persons_channel_id,
+                'lines_persons_channel_secret' => $lines_persons->lines_persons_channel_secret,
+                'lines_persons_access_token' => $lines_persons->lines_persons_access_token,
+            );
+        }
 
-    return $result;
-
+        return $result;
+    } catch (\Exception $e) {
+        // エラーメッセージをログに記録
+        Log::error('get_message_personエラー: ' . $e->getMessage());
+        // エラーが発生した場合、適切なレスポンスを返すか、エラーを再スロー
+        throw $e;
+    }
 }
-
 
 
 
 /*--------------------------------------------------- */
 /* メッセージを受信した時にカスタマー情報のDBに保存
 /*--------------------------------------------------- */
+
+
 public function get_customer_add_database(Request $request) {
-    //受信メッセージの情報を取得
-    $inputs=$request->all();
-    
-    //カスタマーのLINEIDを取得
-    $user_id = $inputs['events'][0]['source']['userId'];
 
-    //カスタマーのユーザー情報を取得
-    $get_user_profile=$this->get_user_profile($request,$inputs,$user_id);
+    try {
+        // 受信メッセージの情報を取得
+        $inputs = $request->all();
 
+        // カスタマーのLINEIDを取得
+        $user_id = $inputs['events'][0]['source']['userId'];
 
-    //カスタマー情報が既に存在しているか確認
-    $lines_customers = DB::table('lines_customers')
-    ->where('is_delete','=',0)//論理削除されてないもの
-    ->where('lines_customers_userid','=',$user_id)
-    ->first();  
+        // カスタマーのユーザー情報を取得
+        $get_user_profile = $this->get_user_profile($request, $inputs, $user_id);
 
+        // カスタマー情報が既に存在しているか確認
+        $lines_customers = DB::table('lines_customers')
+            ->where('is_delete', '=', 0) // 論理削除されてないもの
+            ->where('lines_customers_userid', '=', $user_id)
+            ->first();
 
-    //受信先（公式LINEのID取得）
-    $destination_id = $inputs["destination"];
+        // 受信先（公式LINEのID取得）
+        $destination_id = $inputs["destination"];
 
-
-    //カスタマー情報が存在しない場合、新規にDBに追加
-    if(empty( $lines_customers)){
-
-        //情報をDBに保存
-        $Line_customer = new Line_customer();
-        $Line_customer->create([
-            'lines_customers_userid' => $user_id,//ユーザー
-            'lines_customers_name' => $get_user_profile['displayName'],
-            'lines_customers_display_name' => $get_user_profile['displayName'],//LINEのユーザー名
-            'lines_customers_picture_url' => $get_user_profile['pictureUrl'],//LINEの写真
-            'persons_id' => $get_user_profile['persons_id'],
-            'lines_persons_id' => $get_user_profile['lines_persons_id'],//公式LINEの番号
-        ]);
-    }else{
-
-    //LINEの情報とDBの情報に差異がないか確認
-    $compare =array(
-        'display_name' => $get_user_profile['displayName'] == $lines_customers->lines_customers_display_name ? 'same' : null,
-        'picture_url' => $get_user_profile['pictureUrl'] == $lines_customers->lines_customers_picture_url ? 'same' : null,
-    );
-
-    //LINEとDBの情報に差異があればアップデート
-    if (empty($compare['display_name'])||empty($compare['picture_url'])) {
-        //配列に保存
-        $param = [
-        'lines_customers_id' => $lines_customers->lines_customers_id,//LINEのDBの番号
-        'lines_customers_display_name' => $get_user_profile['displayName'],//LINEのユーザー名
-        'lines_customers_picture_url' => $get_user_profile['pictureUrl'],//LINEの写真
-        'updated_at' => date( "Y-m-d H:i:s" , time() ),
-        ];
-
-        // //ユーザー情報をアップデート
-        DB::update('update lines_customers set 
-        lines_customers_display_name=:lines_customers_display_name,
-        lines_customers_picture_url=:lines_customers_picture_url,
-        updated_at=:updated_at
-        where lines_customers_id=:lines_customers_id'
-        , $param);
-
-    }
-    
+        // カスタマー情報が存在しない場合、新規にDBに追加
+        if (empty($lines_customers)) {
 
 
+            // 情報をDBに保存
+            $Line_customer = new Line_customer();
+            $Line_customer->create([
+                'lines_customers_userid' => $user_id, // ユーザー
+                'lines_customers_name' => $get_user_profile['displayName'],
+                'lines_customers_display_name' => $get_user_profile['displayName'], // LINEのユーザー名
+                'lines_customers_picture_url' => $get_user_profile['pictureUrl'], // LINEの写真
+                'persons_id' => $get_user_profile['persons_id'],
+                'lines_persons_id' => $get_user_profile['lines_persons_id'], // 公式LINEの番号
+            ]);
+        } else {
+
+            // LINEの情報とDBの情報に差異がないか確認
+            $compare = array(
+                'display_name' => $get_user_profile['displayName'] == $lines_customers->lines_customers_display_name ? 'same' : null,
+                'picture_url' => $get_user_profile['pictureUrl'] == $lines_customers->lines_customers_picture_url ? 'same' : null,
+            );
+
+            // LINEとDBの情報に差異があればアップデート
+            if (empty($compare['display_name']) || empty($compare['picture_url'])) {
+                // 配列に保存
+                $param = [
+                    'lines_customers_id' => $lines_customers->lines_customers_id, // LINEのDBの番号
+                    'lines_customers_display_name' => $get_user_profile['displayName'], // LINEのユーザー名
+                    'lines_customers_picture_url' => $get_user_profile['pictureUrl'], // LINEの写真
+                    'updated_at' => date("Y-m-d H:i:s", time()),
+                ];
+
+                // ユーザー情報をアップデート
+                DB::update('update lines_customers set 
+                lines_customers_display_name=:lines_customers_display_name,
+                lines_customers_picture_url=:lines_customers_picture_url,
+                updated_at=:updated_at
+                where lines_customers_id=:lines_customers_id'
+                    , $param);
+            }
+        }
+
+    } catch (\Exception $e) {
+        // エラーメッセージをログに記録
+        Log::error('get_customer_add_databaseエラー: ' . $e->getMessage());
+        // エラーが発生した場合、適切なレスポンスを返すか、エラーを再スロー
+        throw $e;
     }
 }
-
-
 
 /*--------------------------------------------------- */
 /* メッセージ受信時にメール送信
