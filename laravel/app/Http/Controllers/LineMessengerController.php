@@ -496,19 +496,20 @@ public function get_user_profile(Request $request, $inputs, $user_id) {
 
         $result = [];
 
-        if ($response->isSucceeded()) {
-            // ユーザー情報取得
-            $profile = $response->getJSONDecodedBody();
+if ($response->isSucceeded()) {
+    // ユーザー情報取得
+    $profile = $response->getJSONDecodedBody();
 
-            $result = array(
-                'userId' => $profile['userId'], // ユーザーID
-                'displayName' => $profile['displayName'], // LINEの表示名
-                'pictureUrl' => $profile['pictureUrl'], // プロフィール画像
-                'persons_id' => $lines_persons['persons_id'], // 担当者の番号
-                'lines_persons_id' => $lines_persons['lines_persons_id'], // 担当者のLINEの番号
-                'lines_persons_userid' => $lines_persons['lines_persons_userid'], // 担当者のLINEユーザーID
-            );
-        }
+    $result = array(
+        'userId' => isset($profile['userId']) ? $profile['userId'] : '', // ユーザーID
+        'displayName' => isset($profile['displayName']) ? $profile['displayName'] : '', // LINEの表示名
+        'pictureUrl' => isset($profile['pictureUrl']) ? $profile['pictureUrl'] : '', // プロフィール画像
+        'persons_id' => isset($lines_persons['persons_id']) ? $lines_persons['persons_id'] : '', // 担当者の番号
+        'lines_persons_id' => isset($lines_persons['lines_persons_id']) ? $lines_persons['lines_persons_id'] : '', // 担当者のLINEの番号
+        'lines_persons_userid' => isset($lines_persons['lines_persons_userid']) ? $lines_persons['lines_persons_userid'] : '', // 担当者のLINEユーザーID
+    );
+}
+
 
         return $result;
     } catch (\Exception $e) {
