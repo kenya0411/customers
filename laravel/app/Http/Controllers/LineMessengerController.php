@@ -63,10 +63,15 @@ public function index(Request $request)
 
 
 // private function sendErrorMail($error_name,\Exception $e) {
-private function sendErrorMail($error_name,$e) {
+private function sendErrorMail($error_name,$e,$request) {
     $to = 'line@keiran-fortune.com'; // 管理者のメールアドレスを設定
     $message = $error_name.': ' . $e->getMessage();
+     if(){
+        $inputs = $request->all();
 
+    }else{
+        $inputs = "";  
+    }
         $data = [
             'name' => "管理者",//宛先
 
@@ -76,6 +81,7 @@ private function sendErrorMail($error_name,$e) {
             'site_name' => "注文管理システム",//サイトネーム
             'subject' => "customersでエラーが発生しました。",//タイトル
             'message' => $message  ,
+            'inputs' => $inputs  ,
             'date' => date( "m月d日" ) ,//日付
             'time' => date( "H時i分s秒" ) ,//時間
 
@@ -121,7 +127,7 @@ public function webhook(Request $request) {
         Log::error('Webhook Error: ' . $e->getMessage());
 
         //エラーメール
-        $this->sendErrorMail("Webhook Error",$e);
+        $this->sendErrorMail("Webhook Error",$e,$request);
 
         // エラーが発生した場合、適切なレスポンスを返すか、エラーを再スロー
         return response()->json(['error' => 'An error occurred'], 500);
