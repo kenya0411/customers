@@ -66,7 +66,7 @@ public function index(Request $request)
 private function sendErrorMail($error_name,$e,$request) {
     $to = 'line@keiran-fortune.com'; // 管理者のメールアドレスを設定
     $message = $error_name.': ' . $e->getMessage();
-     if(){
+     if($request){
         $inputs = $request->all();
 
     }else{
