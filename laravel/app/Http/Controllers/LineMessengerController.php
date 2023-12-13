@@ -681,7 +681,7 @@ $headers = array(
 
 // リクエストのペイロード
 $data = array(
-  "model"=> "gpt-4", 
+  "model"=> "gpt-4-1106-preview", 
   "temperature"=> 1, //defalutは1
   // "maxTokens"=> "1024", //defalutは1024?
   // "type"=> "object",
