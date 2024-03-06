@@ -622,29 +622,38 @@ $prompt ="# 命令書：
     $message = $request->gpt['message'];
 
 if(!empty($name)){
-    $prompt .= "# 相手の名前：
-    ".$name."様";
-    };
+$prompt .= "
+# 相手の名前：
+".$name."様";
+};
 
 if(!empty($rule)){
-$prompt .= "# 制約条件：
+$prompt .= "
 
-";
+# 制約条件：
+".$rule;
+
 };
 
 if(!empty($worry)){
-$prompt .= "# 悩み：
+$prompt .= "
+
+# 悩み：
 ".$worry;
 }
 
 if(!empty($fortune)){
-$prompt .= "＃鑑定結果：
+$prompt .= "
+
+＃鑑定結果：
 ".$fortune;
 };
 
 
 if(!empty($message)){
-$prompt .= "＃メッセージ：
+$prompt .= "
+
+＃メッセージ：
 ".$message;
 };
 
@@ -653,8 +662,10 @@ $prompt .= "
 
 ＃出力文 :";
 
-$gpt_create = $this->gpt_create($prompt);
-
+// $gpt_create = $this->gpt_create($prompt);
+// 
+//プロンプトを返す
+return $prompt;
 }
 /*--------------------------------------------------- */
 /* //GPTの出力を返す

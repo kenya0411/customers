@@ -37,7 +37,7 @@
     </dl>
     <div class="customerBtnWrap">
         <button v-on:click="create_reply(gpt)">
-            返信文作成
+            プロンプト作成
         </button>
     </div>
     {{-- <input type="hidden" name="lines_customers_id" v-bind:value="lines_information.lines_customers_id"> --}}

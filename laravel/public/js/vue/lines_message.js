@@ -11,10 +11,10 @@ let message_count =params.get('message_count');
 let rules = [
     "・メッセージに対する返信文を作成してください。",
     "・相手とはメッセージでのやりとりです。",
+    "・口語体で作成してください。",
     "・丁寧な文章で作成してください。",
     "・ですます調の丁寧語で作成してください。",
     "・冒頭は「ご連絡ありがとうございます」から始めてください。",
-    "・文字数は300文字以内で作成してください。",
     "・相手の事は名前で呼んでください。",
 ];
 
@@ -223,7 +223,6 @@ const hoge = {
 		/* // 返信を作成するメソッド
 		/*--------------------------------------------------- */		
 		async create_reply(gpt) {
-			 window.alert('GPTで返信文を作成します。'); // メソッドが呼び出されたときのアラート
 			let url = '/lines/ajax/create_reply';
 			 await axios.post(url, {
 				gpt: this.gpt,
@@ -231,8 +230,9 @@ const hoge = {
 			})
 			.then(response => [
 				this.gpt.result = response.data,
-			 window.alert('返信文生成しました'),// メソッドが呼び出されたときのアラート
-				
+			 window.alert('プロンプトコピーしました'),// メソッドが呼び出されたときのアラート
+			 navigator.clipboard.writeText(this.gpt.result),
+			 
 
 				])
 			.catch(error => console.log(error))
