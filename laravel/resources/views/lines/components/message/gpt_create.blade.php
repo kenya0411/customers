@@ -46,3 +46,4 @@
     </div>         
         </div>
 
+                                <textarea class="opacity0 copyText" id="copyText"  v-model="copy_textarea"></textarea>

@@ -16,6 +16,7 @@ let rules = [
     "・ですます調の丁寧語で作成してください。",
     "・冒頭は「ご連絡ありがとうございます」から始めてください。",
     "・相手の事は名前で呼んでください。",
+    "・メッセージに対して返信してください",
 ];
 
 
@@ -30,7 +31,7 @@ const hoge = {
 			lines_information: '',
 			lines_temporaries: '',
 			lines_persons: '',
-
+			copy_textarea: "",//クリップボード用
 			persons: '',
 			customers: '',
 			users: '',
@@ -229,14 +230,20 @@ const hoge = {
 
 			})
 			.then(response => [
-				this.gpt.result = response.data,
-			 window.alert('プロンプトコピーしました'),// メソッドが呼び出されたときのアラート
-			 navigator.clipboard.writeText(this.gpt.result),
+				// this.gpt.result = response.data,
+			this.copy_textarea = response.data,
+
+			 // window.alert('プロンプトコピーしました'),// メソッドが呼び出されたときのアラート
 			 
 
 				])
 			.catch(error => console.log(error))
-
+					setTimeout(function () {
+					copytext = document.getElementById('copyText');
+					copytext.select();
+					document.execCommand("copy");
+					alert('コピーしました')
+					}, 200);
 		},
 
 
